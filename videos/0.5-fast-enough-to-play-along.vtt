@@ -1,0 +1,554 @@
+WEBVTT
+
+1
+00:00:00.080 --> 00:00:01.550
+Fast enough to play along.
+
+2
+00:00:01.890 --> 00:00:03.982
+The last of five short videos on how
+
+3
+00:00:03.982 --> 00:00:04.831
+Continuo works.
+
+4
+00:00:08.763 --> 00:00:09.447
+The last question.
+
+5
+00:00:09.674 --> 00:00:11.079
+By the time a machine knows what you
+
+6
+00:00:11.079 --> 00:00:12.560
+played, has the moment to play along
+
+7
+00:00:12.560 --> 00:00:13.053
+already gone?
+
+8
+00:00:13.281 --> 00:00:13.737
+Let's count.
+
+9
+00:00:13.965 --> 00:00:15.521
+A sixteenth note at a hundred and twenty
+
+10
+00:00:15.521 --> 00:00:16.926
+beats per minute lasts a hundred and
+
+11
+00:00:16.926 --> 00:00:17.875
+twenty-five milliseconds.
+
+12
+00:00:18.103 --> 00:00:19.659
+That is the smallest step the band plays.
+
+13
+00:00:19.887 --> 00:00:21.520
+Here it is, drawn as one bar, with the
+
+14
+00:00:21.520 --> 00:00:22.355
+pluck at its left end.
+
+15
+00:00:22.583 --> 00:00:24.253
+Everything that happens to one note, from
+
+16
+00:00:24.253 --> 00:00:25.924
+the string to the speakers, is laid along
+
+17
+00:00:25.924 --> 00:00:27.556
+it, and each step carries a label saying
+
+18
+00:00:27.556 --> 00:00:28.126
+how we know it.
+
+19
+00:00:28.507 --> 00:00:29.379
+Start at the pluck.
+
+20
+00:00:29.654 --> 00:00:31.674
+The chip has to notice the note, and wait
+
+21
+00:00:31.674 --> 00:00:33.097
+to hear how hard it was played.
+
+22
+00:00:33.373 --> 00:00:35.347
+By the chip's design, the note leaves it
+
+23
+00:00:35.347 --> 00:00:37.183
+about forty-five milliseconds after the
+
+24
+00:00:37.183 --> 00:00:37.963
+string is struck.
+
+25
+00:00:38.239 --> 00:00:40.258
+That is a design value: the number the
+
+26
+00:00:40.258 --> 00:00:41.085
+chip was built to.
+
+27
+00:00:41.360 --> 00:00:43.334
+Nobody has yet measured it on the hardware
+
+28
+00:00:43.334 --> 00:00:45.492
+itself, so it is drawn pale, with a dashed
+
+29
+00:00:45.492 --> 00:00:45.721
+edge.
+
+30
+00:00:46.147 --> 00:00:48.596
+Down the cable to the laptop: about one
+
+31
+00:00:48.596 --> 00:00:49.249
+millisecond.
+
+32
+00:00:49.575 --> 00:00:51.371
+Measured, so it is drawn solid.
+
+33
+00:00:51.698 --> 00:00:53.929
+It is so thin on this bar you can barely
+
+34
+00:00:53.929 --> 00:00:54.310
+see it.
+
+35
+00:00:54.778 --> 00:00:55.854
+Then the band decides.
+
+36
+00:00:56.148 --> 00:00:58.006
+The drummer typically takes under two
+
+37
+00:00:58.006 --> 00:00:59.963
+milliseconds for a sixteenth, and the
+
+38
+00:00:59.963 --> 00:01:01.968
+bassist about one more: about three
+
+39
+00:01:01.968 --> 00:01:02.408
+together.
+
+40
+00:01:02.702 --> 00:01:04.903
+Measured, on the seventeenth of October,
+
+41
+00:01:04.903 --> 00:01:05.588
+and solid too.
+
+42
+00:01:05.881 --> 00:01:07.838
+The band's own thinking is the cheapest
+
+43
+00:01:07.838 --> 00:01:08.425
+step of all.
+
+44
+00:01:08.921 --> 00:01:11.110
+Getting a sound out of the laptop and into
+
+45
+00:01:11.110 --> 00:01:13.044
+the speakers takes about twenty-three
+
+46
+00:01:13.044 --> 00:01:13.706
+milliseconds.
+
+47
+00:01:14.012 --> 00:01:16.150
+That one is reported: it is what the
+
+48
+00:01:16.150 --> 00:01:18.186
+laptop's audio driver says about itself.
+
+49
+00:01:18.492 --> 00:01:20.121
+We checked it together with the
+
+50
+00:01:20.121 --> 00:01:22.513
+microphone, but never on its own, so it is
+
+51
+00:01:22.513 --> 00:01:23.735
+pale and dashed as well.
+
+52
+00:01:24.208 --> 00:01:26.335
+And the whole thing, from the pluck to the
+
+53
+00:01:26.335 --> 00:01:28.321
+sound you hear, has never been measured
+
+54
+00:01:28.321 --> 00:01:28.841
+end to end.
+
+55
+00:01:29.125 --> 00:01:30.968
+Nobody has yet put a microphone by the
+
+56
+00:01:30.968 --> 00:01:32.812
+guitar and another by the speakers and
+
+57
+00:01:32.812 --> 00:01:33.474
+timed the gap.
+
+58
+00:01:33.758 --> 00:01:35.838
+So there is no total on this bar, and you
+
+59
+00:01:35.838 --> 00:01:37.351
+will not hear one in this video.
+
+60
+00:01:37.634 --> 00:01:39.431
+We would rather show you the gap than
+
+61
+00:01:39.431 --> 00:01:39.714
+guess.
+
+62
+00:01:43.297 --> 00:01:44.896
+Imagine a band that listened, and then
+
+63
+00:01:44.896 --> 00:01:45.208
+reacted.
+
+64
+00:01:45.442 --> 00:01:47.274
+Here are two sixteenths, side by side, and
+
+65
+00:01:47.274 --> 00:01:48.678
+you pluck at the start of the first.
+
+66
+00:01:48.912 --> 00:01:50.472
+That band hears the note only after the
+
+67
+00:01:50.472 --> 00:01:51.993
+chip has reported it and the cable has
+
+68
+00:01:51.993 --> 00:01:53.748
+carried it, and it decides, and by those
+
+69
+00:01:53.748 --> 00:01:55.464
+numbers, by the time its own sound is out
+
+70
+00:01:55.464 --> 00:01:57.219
+of the laptop, most of the sixteenth would
+
+71
+00:01:57.219 --> 00:01:57.843
+already be gone.
+
+72
+00:01:58.077 --> 00:01:59.793
+Its drums and bass would land late, every
+
+73
+00:01:59.793 --> 00:02:00.651
+time, on every note.
+
+74
+00:02:00.885 --> 00:02:02.523
+You would hear a band dragging behind you.
+
+75
+00:02:02.943 --> 00:02:04.104
+Continuo's band does not react.
+
+76
+00:02:04.328 --> 00:02:05.601
+Same two sixteenths, same pluck.
+
+77
+00:02:05.826 --> 00:02:07.473
+Before each sixteenth, it decides what to
+
+78
+00:02:07.473 --> 00:02:08.933
+play in it, from everything you have
+
+79
+00:02:08.933 --> 00:02:10.280
+played so far, this note included.
+
+80
+00:02:10.505 --> 00:02:12.152
+The decision is made before the slot, and
+
+81
+00:02:12.152 --> 00:02:13.762
+the drums and bass are placed right on the
+
+82
+00:02:13.762 --> 00:02:15.072
+line, where the sixteenth begins.
+
+83
+00:02:15.296 --> 00:02:16.943
+It never plays instantly, because nothing
+
+84
+00:02:16.943 --> 00:02:17.168
+could.
+
+85
+00:02:17.393 --> 00:02:18.179
+It plays on the beat.
+
+86
+00:02:18.403 --> 00:02:20.163
+So it is always one note ahead of you: by
+
+87
+00:02:20.163 --> 00:02:21.623
+the time you hear it, it has already
+
+88
+00:02:21.623 --> 00:02:22.409
+decided the next one.
+
+89
+00:02:25.963 --> 00:02:26.607
+Does it work?
+
+90
+00:02:26.904 --> 00:02:29.131
+On the seventeenth of October, Sena played
+
+91
+00:02:29.131 --> 00:02:31.210
+eight takes through the whole chain:
+
+92
+00:02:31.210 --> 00:02:33.536
+guitar, pickup, board, chip, laptop,
+
+93
+00:02:33.536 --> 00:02:33.982
+speakers.
+
+94
+00:02:34.279 --> 00:02:36.506
+Drums in every take, and bass as well from
+
+95
+00:02:36.506 --> 00:02:37.050
+the fourth.
+
+96
+00:02:37.347 --> 00:02:39.327
+This is the laptop's page during one of
+
+97
+00:02:39.327 --> 00:02:39.575
+them.
+
+98
+00:02:39.872 --> 00:02:41.802
+Ninety-nine point eight percent of his
+
+99
+00:02:41.802 --> 00:02:43.485
+notes reached the band before the
+
+100
+00:02:43.485 --> 00:02:45.415
+sixteenth they belonged to was decided.
+
+101
+00:02:45.712 --> 00:02:46.999
+In time, in other words.
+
+102
+00:02:47.296 --> 00:02:49.523
+Thirty-one notes, out of thirteen thousand
+
+103
+00:02:49.523 --> 00:02:51.602
+one hundred and nineteen, arrived after
+
+104
+00:02:51.602 --> 00:02:52.741
+their slot was decided.
+
+105
+00:02:53.038 --> 00:02:54.225
+That number is measured.
+
+106
+00:02:54.522 --> 00:02:56.502
+The laptop logs when every note arrives
+
+107
+00:02:56.502 --> 00:02:58.631
+and when every sixteenth is decided, and
+
+108
+00:02:58.631 --> 00:03:00.709
+this is what those logs say for the eight
+
+109
+00:03:00.709 --> 00:03:01.006
+takes.
+
+110
+00:03:02.502 --> 00:03:04.041
+And the thirty-one that were late?
+
+111
+00:03:04.312 --> 00:03:06.122
+When a note arrives after its sixteenth
+
+112
+00:03:06.122 --> 00:03:08.113
+has already been decided, it simply waits
+
+113
+00:03:08.113 --> 00:03:09.833
+for the next slot, and counts there.
+
+114
+00:03:10.104 --> 00:03:12.005
+The band does not stop, and it does not
+
+115
+00:03:12.005 --> 00:03:12.774
+rush to catch up.
+
+116
+00:03:13.046 --> 00:03:14.222
+The band never plays late.
+
+117
+00:03:14.494 --> 00:03:16.349
+A sound that would be late is not played
+
+118
+00:03:16.349 --> 00:03:18.340
+at all; the next one lands on its beat.
+
+119
+00:03:20.057 --> 00:03:22.158
+One last thing, to be clear about what
+
+120
+00:03:22.158 --> 00:03:23.081
+these numbers are.
+
+121
+00:03:23.388 --> 00:03:25.080
+Three kinds went into this video.
+
+122
+00:03:25.387 --> 00:03:27.796
+The cable and the decision were measured:
+
+123
+00:03:27.796 --> 00:03:30.051
+timed, on the real system, with logs to
+
+124
+00:03:30.051 --> 00:03:30.666
+show for it.
+
+125
+00:03:30.974 --> 00:03:33.024
+The sound out of the laptop is a number
+
+126
+00:03:33.024 --> 00:03:34.972
+the audio driver reports about itself.
+
+127
+00:03:35.279 --> 00:03:37.329
+The chip's forty-five milliseconds is a
+
+128
+00:03:37.329 --> 00:03:39.226
+design number, and it has not been
+
+129
+00:03:39.226 --> 00:03:40.712
+measured on the hardware yet.
+
+130
+00:03:41.020 --> 00:03:43.224
+And the time from a pluck to the sound you
+
+131
+00:03:43.224 --> 00:03:45.274
+hear has never been measured end to end.
+
+132
+00:03:45.581 --> 00:03:47.478
+That is still owed, and when it is
+
+133
+00:03:47.478 --> 00:03:49.169
+measured, it will be said here.
+
+134
+00:03:50.840 --> 00:03:53.339
+That is Continuo: a band that hears every
+
+135
+00:03:53.339 --> 00:03:55.785
+string, finds each note as it starts, and
+
+136
+00:03:55.785 --> 00:03:57.752
+decides the next sixteenth before it
+
+137
+00:03:57.752 --> 00:03:58.178
+happens.
+
+138
+00:03:58.497 --> 00:03:59.241
+Come and play.
+

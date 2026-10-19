@@ -1,0 +1,362 @@
+WEBVTT
+
+1
+00:00:00.070 --> 00:00:01.072
+Hearing each string.
+
+2
+00:00:01.372 --> 00:00:03.375
+Part two of Continuo: how it works.
+
+3
+00:00:03.676 --> 00:00:05.779
+How the band gets to hear every string on
+
+4
+00:00:05.779 --> 00:00:06.180
+its own.
+
+5
+00:00:08.232 --> 00:00:10.570
+A guitar has six strings, and a microphone
+
+6
+00:00:10.570 --> 00:00:11.765
+hears them all at once.
+
+7
+00:00:12.076 --> 00:00:14.258
+Every note from every string lands in the
+
+8
+00:00:14.258 --> 00:00:15.193
+same mixed signal.
+
+9
+00:00:15.505 --> 00:00:17.635
+This video is about the first two stages
+
+10
+00:00:17.635 --> 00:00:19.973
+after the guitar: the pickup that hears
+
+11
+00:00:19.973 --> 00:00:22.311
+each string on its own, and the board that
+
+12
+00:00:22.311 --> 00:00:24.285
+turns six strings into six streams of
+
+13
+00:00:24.285 --> 00:00:24.700
+numbers.
+
+14
+00:00:28.327 --> 00:00:29.283
+Here is the catch.
+
+15
+00:00:29.602 --> 00:00:31.886
+Two strings can sound almost the same note
+
+16
+00:00:31.886 --> 00:00:32.790
+at the same time.
+
+17
+00:00:33.108 --> 00:00:34.968
+A microphone hears the sum of both.
+
+18
+00:00:35.463 --> 00:00:38.084
+On its own, each string is a clean, narrow
+
+19
+00:00:38.084 --> 00:00:39.088
+peak at its pitch.
+
+20
+00:00:39.423 --> 00:00:41.988
+On a guitar this happens often: a string
+
+21
+00:00:41.988 --> 00:00:44.107
+sounds its note and fainter overtones
+
+22
+00:00:44.107 --> 00:00:46.449
+above it, and one string's overtone can
+
+23
+00:00:46.449 --> 00:00:48.680
+land almost exactly on another string's
+
+24
+00:00:48.680 --> 00:00:48.959
+note.
+
+25
+00:00:49.837 --> 00:00:51.920
+Mixed together, the two peaks blur into
+
+26
+00:00:51.920 --> 00:00:52.119
+one.
+
+27
+00:00:52.416 --> 00:00:54.549
+The microphone cannot tell that there were
+
+28
+00:00:54.549 --> 00:00:56.633
+two notes, let alone which strings they
+
+29
+00:00:56.633 --> 00:00:57.129
+came from.
+
+30
+00:00:58.072 --> 00:00:59.724
+So we did not solve that problem.
+
+31
+00:01:00.025 --> 00:01:00.726
+We removed it.
+
+32
+00:01:01.026 --> 00:01:03.079
+If every string had its own ear, there
+
+33
+00:01:03.079 --> 00:01:04.532
+would be nothing to untangle.
+
+34
+00:01:08.707 --> 00:01:11.493
+The pickup is a Roland GK-3, a hexaphonic
+
+35
+00:01:11.493 --> 00:01:11.937
+pickup.
+
+36
+00:01:12.317 --> 00:01:15.167
+It has six small magnetic coils, one under
+
+37
+00:01:15.167 --> 00:01:15.927
+each string.
+
+38
+00:01:16.452 --> 00:01:18.612
+Pluck one string, and mostly its coil
+
+39
+00:01:18.612 --> 00:01:20.718
+answers: one string, one signal.
+
+40
+00:01:21.042 --> 00:01:23.148
+The other five lanes stay almost quiet.
+
+41
+00:01:23.877 --> 00:01:26.484
+Play a chord, all six strings at once, and
+
+42
+00:01:26.484 --> 00:01:28.757
+the pickup still hands over six separate
+
+43
+00:01:28.757 --> 00:01:30.199
+signals, one per string.
+
+44
+00:01:30.532 --> 00:01:32.806
+A chord becomes six single notes, kept
+
+45
+00:01:32.806 --> 00:01:34.525
+apart all the way to the board.
+
+46
+00:01:35.481 --> 00:01:37.716
+And the two strings from before, on nearly
+
+47
+00:01:37.716 --> 00:01:38.412
+the same note?
+
+48
+00:01:38.710 --> 00:01:40.647
+They now arrive on two different lanes.
+
+49
+00:01:40.945 --> 00:01:42.633
+There is nothing left to untangle.
+
+50
+00:01:44.187 --> 00:01:45.272
+Here is the real one.
+
+51
+00:01:45.582 --> 00:01:47.750
+The thin bar under the strings, just in
+
+52
+00:01:47.750 --> 00:01:49.661
+front of the bridge, is the pickup.
+
+53
+00:01:49.971 --> 00:01:52.037
+Its cable runs to this board resting on
+
+54
+00:01:52.037 --> 00:01:54.464
+the guitar's body: Sena's front-end board.
+
+55
+00:01:54.774 --> 00:01:56.684
+The six small blue trimmers are gain
+
+56
+00:01:56.684 --> 00:01:59.111
+controls, one per string, so Sena can even
+
+57
+00:01:59.111 --> 00:01:59.937
+the strings out.
+
+58
+00:02:00.669 --> 00:02:02.819
+Each of the pickup's six coils sits right
+
+59
+00:02:02.819 --> 00:02:05.071
+under its own string, and the six signals
+
+60
+00:02:05.071 --> 00:02:07.322
+leave down that one cable, still separate.
+
+61
+00:02:08.783 --> 00:02:10.791
+On the guitar it looks like this: the
+
+62
+00:02:10.791 --> 00:02:12.799
+board on the body, and the cable running
+
+63
+00:02:12.799 --> 00:02:14.293
+to the pickup under the strings.
+
+64
+00:02:20.200 --> 00:02:22.474
+Six signals come into the board, one wire
+
+65
+00:02:22.474 --> 00:02:23.043
+per string.
+
+66
+00:02:23.353 --> 00:02:25.783
+Each one first gets its own gain: a quiet
+
+67
+00:02:25.783 --> 00:02:27.799
+string can be turned up and a loud one
+
+68
+00:02:27.799 --> 00:02:29.918
+down, so all six sit at the same level.
+
+69
+00:02:30.228 --> 00:02:31.521
+Then a filter smooths it.
+
+70
+00:02:31.831 --> 00:02:34.002
+Then a converter measures the smooth wave
+
+71
+00:02:34.002 --> 00:02:36.121
+over and over and turns it into a stream
+
+72
+00:02:36.121 --> 00:02:36.690
+of numbers.
+
+73
+00:02:37.417 --> 00:02:37.935
+How often?
+
+74
+00:02:38.246 --> 00:02:40.525
+Ninety-six thousand numbers a second, for
+
+75
+00:02:40.525 --> 00:02:41.198
+every string.
+
+76
+00:02:41.509 --> 00:02:43.788
+Each number is twenty-four bits deep, and
+
+77
+00:02:43.788 --> 00:02:45.860
+all six strings are sampled at the same
+
+78
+00:02:45.860 --> 00:02:48.087
+instant, so the six streams stay in step.
+
+79
+00:02:48.822 --> 00:02:50.886
+Out of the board come three data wires,
+
+80
+00:02:50.886 --> 00:02:52.951
+two strings on each, and a shared clock
+
+81
+00:02:52.951 --> 00:02:54.327
+wire, running to the chip.
+
+82
+00:02:55.893 --> 00:02:57.888
+This is the board's clock wire on an
+
+83
+00:02:57.888 --> 00:03:00.153
+oscilloscope, one tick for every sample.
+
+84
+00:03:00.477 --> 00:03:02.903
+The voltage is either high or low, nothing
+
+85
+00:03:02.903 --> 00:03:05.492
+in between: ones and zeros, and the chip
+
+86
+00:03:05.492 --> 00:03:06.678
+reads them as numbers.
+
+87
+00:03:07.002 --> 00:03:09.159
+Six streams of numbers, into the chip.
+
+88
+00:03:10.803 --> 00:03:13.253
+So: six strings, six coils, six streams of
+
+89
+00:03:13.253 --> 00:03:13.630
+numbers.
+
+90
+00:03:13.913 --> 00:03:15.610
+Next: the chip finds the notes.
+

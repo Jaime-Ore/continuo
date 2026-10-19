@@ -1,1 +1,509 @@
-<h1>Continuo</h1><p>Videos coming soon.</p>
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Continuo: how it works</title>
+<meta name="description" content="Five short videos on Continuo: play guitar, and a band of drums and bass plays along, live.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;650&display=swap" rel="stylesheet">
+<script>
+  // theme before first paint: dark by default to match the videos
+  try { const t = localStorage.getItem("hiw.theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<style>
+/* jaime-brand-v1 "Forest & Ochre (warmer)", copied from SecondBrain hq/templates/brand/brand.css */
+:root {
+  --bg: #f5f2e6; --surface-2: #ece8d6; --ink: #17150e; --ink-muted: #6b675c; --line: rgba(107, 103, 92, .28);
+  --lead: #3f6032; --blue: #5b7a99; --ochre: #96690f; --plum: #8a4f7d;
+  --on-lead: #ffffff;
+  --font-display: 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --track-display: -0.015em;
+  --radius: 12px;
+  --wrap: 1180px;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #201d18; --surface-2: #2a2620; --ink: #f2efe8; --ink-muted: #b3ada0; --line: rgba(179, 173, 160, .24);
+  --lead: #8fb47c; --blue: #8fb6d9; --ochre: #c99a3f; --plum: #b57ba6;
+  --on-lead: #17150e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 16px/1.55 var(--font-body);
+  overflow-x: hidden;
+}
+a { color: var(--blue); }
+button { font: inherit; color: inherit; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+/* top bar */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
+.brand { font: 600 15px/1 var(--font-body); letter-spacing: .01em; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.brand i { width: 10px; height: 10px; border-radius: 50%; background: var(--lead); display: inline-block; }
+.iconbtn {
+  border: 1px solid var(--line); background: transparent; border-radius: 9px; padding: 7px 11px;
+  cursor: pointer; color: var(--ink-muted); font-size: 13px; font-weight: 500; white-space: nowrap;
+}
+.iconbtn:hover { color: var(--ink); border-color: var(--ink-muted); }
+.iconbtn[aria-pressed="true"] { color: var(--ink); background: var(--surface-2); }
+
+/* hero */
+.hero { padding: 40px 0 8px; border-top: 2px solid var(--lead); }
+.eyebrow { font-size: 13px; font-weight: 500; color: var(--ink-muted); letter-spacing: .02em; margin: 0 0 14px; }
+h1 {
+  font: 600 clamp(40px, 8vw, 72px)/1.02 var(--font-display); letter-spacing: var(--track-display);
+  margin: 0 0 18px;
+}
+.lede { font-size: clamp(17px, 2.2vw, 20px); line-height: 1.5; max-width: 62ch; margin: 0 0 22px; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 0 0 22px; padding: 0; list-style: none; }
+.stats b { font: 600 26px/1 var(--font-display); color: var(--lead); display: block; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 13px; color: var(--ink-muted); }
+.team { font-size: 14px; color: var(--ink-muted); max-width: 70ch; margin: 0; }
+.team strong { color: var(--ink); font-weight: 500; }
+
+/* start here */
+.start { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 36px 0 8px; }
+@media (min-width: 720px) { .start { grid-template-columns: repeat(3, 1fr); } }
+.start a {
+  display: block; text-decoration: none; color: var(--ink); background: var(--surface-2);
+  border-radius: 16px; padding: 16px 18px; border: 1px solid transparent;
+}
+.start a:hover { border-color: var(--lead); }
+.start .k { font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--lead); }
+.start .t { font: 600 20px/1.25 var(--font-display); margin: 6px 0 2px; }
+.start .m { font-size: 13px; color: var(--ink-muted); }
+
+/* the featured playlist (topic 0): the first thing a visitor sees */
+.feat { padding: 44px 0 0; }
+.feat-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 6px; }
+.feat h2 { font: 600 clamp(26px, 3.8vw, 34px)/1.12 var(--font-display); letter-spacing: var(--track-display); margin: 0; }
+.feat-meta { font-size: 13px; color: var(--ink-muted); }
+.feat-lede { font-size: 15px; color: var(--ink-muted); max-width: 70ch; margin: 0 0 18px; }
+.feat .grid { grid-template-columns: 1fr; }
+@media (min-width: 560px) { .feat .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .feat .grid { grid-template-columns: repeat(5, 1fr); } }
+.card.feat-card { padding: 0 0 14px; }
+.card.feat-card .poster { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #201d18; border-bottom: 1px solid var(--line); }
+.card.feat-card .card-top, .card.feat-card h4, .card.feat-card p { padding: 0 14px; }
+.card.feat-card .card-top { padding-top: 10px; }
+.card.feat-card .play { position: absolute; left: 10px; top: 10px; width: 34px; height: 34px; border-radius: 50%; background: rgba(32, 29, 24, .8); border: 1px solid rgba(179, 173, 160, .4); }
+.card.feat-card .play::after { content: ""; position: absolute; left: 13px; top: 10px; border-style: solid; border-width: 7px 0 7px 11px; border-color: transparent transparent transparent #f2efe8; }
+.study-head { margin: 64px 0 0; padding-top: 28px; border-top: 2px solid var(--line); }
+.study-head h2 { font: 600 clamp(22px, 3vw, 28px)/1.15 var(--font-display); margin: 0 0 6px; }
+.study-head p { font-size: 15px; color: var(--ink-muted); max-width: 70ch; margin: 0; }
+
+/* topics */
+.topic { padding: 56px 0 0; }
+.topic-head { display: grid; grid-template-columns: auto 1fr; gap: 0 16px; align-items: baseline; margin-bottom: 18px; }
+.topic-n { font: 600 44px/1 var(--font-display); color: var(--lead); grid-row: span 2; }
+.topic h2 { font: 600 clamp(24px, 3.4vw, 30px)/1.15 var(--font-display); letter-spacing: var(--track-display); margin: 0; }
+.topic-meta { font-size: 13px; color: var(--ink-muted); }
+h3.sub { font: 650 12px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); margin: 24px 0 12px; }
+
+.grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0;
+  text-decoration: none; color: var(--ink); background: var(--surface-2);
+  border: 1px solid transparent; border-radius: var(--radius); padding: 14px 16px 16px; overflow: hidden;
+}
+a.card:hover { border-color: var(--lead); }
+a.card:focus-visible, .start a:focus-visible, .row:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.card-id { font-weight: 650; color: var(--lead); }
+.card h4 { font: 650 16px/1.3 var(--font-body); margin: 0; }
+.card p { font-size: 14px; line-height: 1.45; color: var(--ink-muted); margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card .prog { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--lead); }
+.card.joined { background: transparent; border-color: var(--blue); }
+.card.joined .card-id { color: var(--blue); }
+.card.planned { background: transparent; border: 1px dashed var(--line); }
+.card.planned .card-id, .card.planned h4 { color: var(--ink-muted); }
+.tick { display: inline-flex; align-items: center; gap: 4px; color: var(--lead); font-weight: 650; }
+.tick::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--lead)
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 7.2l2.3 2.3 4.7-4.9' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
+:root[data-theme="dark"] .tick::before { background-image:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 7.2l2.3 2.3 4.7-4.9' fill='none' stroke='%2317150e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.soon { font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
+
+footer { margin: 72px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-muted); }
+
+/* player */
+.player { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); padding: 8px 0 24px; }
+@media (min-width: 980px) { .player { grid-template-columns: minmax(0, 1fr) 330px; } }
+.back { font-size: 14px; font-weight: 500; color: var(--ink-muted); text-decoration: none; display: inline-block; margin: 0 0 12px; }
+.back:hover { color: var(--ink); }
+.screen { position: relative; background: #201d18; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 9; }
+.screen video { display: block; width: 100%; height: 100%; background: #201d18; }
+.screen video::cue { font-family: var(--font-body); font-size: .9em; background: rgba(23, 21, 14, .78); color: #f2efe8; }
+.upnext {
+  position: absolute; right: 12px; bottom: 56px; max-width: calc(100% - 24px);
+  background: rgba(32, 29, 24, .94); color: #f2efe8; border: 1px solid rgba(179, 173, 160, .3);
+  border-radius: 12px; padding: 12px 14px; font-size: 14px; display: none;
+}
+.upnext.on { display: block; }
+.upnext b { display: block; font: 600 17px/1.25 var(--font-display); margin: 2px 0 10px; }
+.upnext .k { font-size: 12px; color: #b3ada0; }
+.upnext button { border: 0; border-radius: 9px; padding: 7px 12px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.upnext .go { background: #8fb47c; color: #17150e; }
+.upnext .no { background: transparent; color: #b3ada0; border: 1px solid rgba(179, 173, 160, .3); margin-left: 6px; }
+
+.now-id { font-size: 13px; font-weight: 650; color: var(--lead); margin: 18px 0 4px; font-variant-numeric: tabular-nums; }
+.now h1 { font-size: clamp(28px, 4.4vw, 40px); margin: 0 0 8px; }
+.now .teaches { color: var(--ink-muted); margin: 0 0 16px; max-width: 70ch; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+.seg button { border: 0; background: transparent; padding: 7px 10px; font-size: 13px; font-weight: 500; color: var(--ink-muted); cursor: pointer; font-variant-numeric: tabular-nums; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--lead); color: var(--on-lead); }
+.spacer { flex: 1; }
+.navbtn { border: 1px solid var(--line); background: transparent; border-radius: 9px; padding: 7px 12px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--ink); text-decoration: none; }
+.navbtn:hover { border-color: var(--lead); }
+.navbtn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+
+.side { min-width: 0; }
+.side h2 { font: 650 12px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); margin: 0 0 10px; }
+@media (min-width: 980px) { .side { padding-top: 34px; } }
+.list { display: flex; flex-direction: column; gap: 2px; max-height: 70vh; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
+@media (max-width: 979px) { .list { max-height: none; } }
+.row { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; align-items: baseline;
+  padding: 9px 10px; border-radius: 9px; text-decoration: none; color: var(--ink); font-size: 14px; }
+.row:hover { background: var(--surface-2); }
+.row.cur { background: var(--surface-2); box-shadow: inset 3px 0 0 var(--lead); }
+.row .rid { color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: 13px; }
+.row .rt { overflow-wrap: anywhere; }
+.row .rd { color: var(--ink-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.row.done .rid { color: var(--lead); }
+.row.joined .rid { color: var(--blue); }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <a class="brand" href="#"><i></i>Continuo</a>
+    <button class="iconbtn" id="theme" type="button" aria-label="Switch colour theme">Light</button>
+  </div>
+</div>
+
+<main id="library" class="wrap">
+  <section class="hero">
+    <p class="eyebrow">ENGR90037 Engineering Capstone, University of Melbourne, 2026</p>
+    <h1>Continuo</h1>
+    <p class="lede">Play guitar, and a band plays along: drums and bass that decide each 16th note before it happens. Five short videos follow the signal from the string to the speakers.</p>
+    <ul class="stats hidden" id="stats"></ul>
+    <p class="team">A University of Melbourne engineering capstone, 2026. Team E-12-MJON-040: Jaime Orelowitz, Sena Fukushima, Ravindi Gamage, Felix Liu. Supervisor: Prof. Jonathan Manton.</p>
+  </section>
+  <nav class="start" id="start" aria-label="Start here"></nav>
+  <section class="feat" id="featured"></section>
+  <div class="study-head" id="study-head"><h2>The study lessons</h2>
+    <p>Longer narrated lessons made for the team while writing the report: the data, how the models learn, the
+      three architectures, and the battery of tests. Every number comes from the project's own code and runs.</p></div>
+  <div id="topics"></div>
+  <footer>Animated with ManimGX and narrated with Kokoro text to speech. Every number on screen comes from the
+    project's own code and runs. Subtitles are under CC in the player.</footer>
+</main>
+
+<main id="watch" class="wrap hidden">
+  <div class="player">
+    <div class="now">
+      <a class="back" href="#">&larr; All videos</a>
+      <div class="screen">
+        <video id="video" controls playsinline preload="metadata"></video>
+        <div class="upnext" id="upnext" role="status">
+          <span class="k" id="upnext-k">Up next</span>
+          <b id="upnext-t"></b>
+          <button class="go" id="upnext-go" type="button">Play now</button><button class="no" id="upnext-no" type="button">Cancel</button>
+        </div>
+      </div>
+      <div class="now-id" id="now-id"></div>
+      <h1 id="now-title"></h1>
+      <p class="teaches" id="now-teaches"></p>
+      <div class="controls">
+        <a class="navbtn" id="prev" href="#">&larr; Previous</a>
+        <a class="navbtn" id="next" href="#">Next &rarr;</a>
+        <span class="spacer"></span>
+        <div class="seg" id="speed" role="group" aria-label="Playback speed"></div>
+        <button class="iconbtn" id="cc" type="button" aria-pressed="false">CC</button>
+        <button class="iconbtn" id="auto" type="button" aria-pressed="true">Autoplay next</button>
+      </div>
+    </div>
+    <aside class="side">
+      <h2 id="side-h"></h2>
+      <nav class="list" id="list"></nav>
+    </aside>
+  </div>
+</main>
+
+<script src="videos.js"></script>
+<script>
+(() => {
+  const TOPICS = window.TOPICS || [];
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // per-viewer state, all optional: the page works without storage
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem("hiw." + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem("hiw." + k, JSON.stringify(v)); } catch (e) {} },
+  };
+  const prog = store.get("progress", {});     // id -> {t: seconds, done: bool}
+  const saveProg = () => store.set("progress", prog);
+
+  // every lesson in order, with its topic; joined cuts are skipped by prev, next and autoplay
+  const ALL = [];
+  TOPICS.forEach(t => t.lessons.forEach(l => ALL.push({ ...l, topic: t })));
+  const BY = Object.fromEntries(ALL.map(l => [l.id, l]));
+  const SEQ = ALL.filter(l => !l.joined);
+
+  const mins = s => Math.max(1, Math.round(s / 60));
+  const clock = x => {
+    const s = Math.round(x), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, p = n => String(n).padStart(2, "0");
+    return h ? `${h}:${p(m)}:${p(s % 60)}` : `${m}:${p(s % 60)}`;
+  };
+  const span = s => { const m = Math.round(s / 60); return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${m % 60} min`; };
+  const frac = l => { const p = prog[l.id]; return p ? (p.done ? 1 : Math.min(1, p.t / l.seconds)) : 0; };
+
+  // theme
+  const themeBtn = $("theme");
+  const paintTheme = () => { themeBtn.textContent = document.documentElement.dataset.theme === "dark" ? "Light" : "Dark"; };
+  themeBtn.onclick = () => {
+    const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem("hiw.theme", t); } catch (e) {}
+    paintTheme();
+  };
+  paintTheme();
+
+  // library
+  function renderLibrary() {
+    const secs = SEQ.reduce((a, l) => a + l.seconds, 0);
+    const built = TOPICS.filter(t => t.lessons.length).length;
+    $("stats").innerHTML = [
+      [SEQ.length, "lessons"], [(secs / 3600).toFixed(1), "hours"], [built, "topics so far"],
+      [SEQ.filter(l => prog[l.id]?.done).length, "watched"],
+    ].map(([b, s]) => `<li><b>${b}</b><span>${s}</span></li>`).join("");
+
+    const last = store.get("last", null);
+    const picks = [];
+    if (last && BY[last] && !prog[last]?.done) picks.push(["Continue", BY[last]]);
+    picks.push(["Start here", BY["0.1"] || BY["1.1"]], ["Go deeper", BY["1.1"]], ["The main model", BY["4.7.0"]]);
+    $("start").innerHTML = picks.filter(p => p[1]).slice(0, 3).map(([k, l]) =>
+      `<a href="#${esc(l.id)}"><div class="k">${k}</div><div class="t">${esc(l.id)} ${esc(l.title)}</div>
+       <div class="m">${mins(l.seconds)} min, ${esc(l.topic.name)}</div></a>`).join("");
+
+    // topic 0 is the featured playlist, on top; the study topics follow under their own heading
+    const feat = TOPICS.find(t => t.n === "0" && t.lessons.length);
+    $("featured").innerHTML = feat ? `
+      <div class="feat-head"><h2>${esc(feat.name)}</h2>
+        <div class="feat-meta">${feat.lessons.length} videos, ${span(feat.lessons.reduce((a, l) => a + l.seconds, 0))}</div></div>
+      <p class="feat-lede">One story in five short videos, for visitors: the pickup, the chip, the band on the laptop,
+        and why it has to decide one note ahead.</p>
+      <div class="grid">${feat.lessons.map(featCard).join("")}</div>` : "";
+    $("featured").classList.toggle("hidden", !feat);
+    $("study-head").classList.toggle("hidden", !feat || TOPICS.length < 2);
+
+    $("topics").innerHTML = TOPICS.filter(t => t !== feat).map(t => {
+      const own = t.lessons.filter(l => !l.joined);
+      const tot = own.reduce((a, l) => a + l.seconds, 0);
+      const seen = own.filter(l => prog[l.id]?.done).length;
+      const meta = own.length ? `${own.length} lessons, ${span(tot)}${seen ? `, ${seen} watched` : ""}` : "Coming";
+      // topic 4's transformer parts get their own subheading
+      const main = t.lessons.filter(l => !/^\d+\.\d+\./.test(l.id));
+      const deep = t.lessons.filter(l => /^\d+\.\d+\./.test(l.id));
+      let body = "";
+      if (deep.length) {
+        const pre = main.filter(l => parseFloat(l.id.split(".")[1]) < 7);
+        const post = main.filter(l => parseFloat(l.id.split(".")[1]) >= 7);
+        const dsecs = deep.filter(l => !l.joined).reduce((a, l) => a + l.seconds, 0);
+        body = `<div class="grid">${pre.map(card).join("")}</div>
+          <h3 class="sub">The transformer module, ${deep.filter(l => !l.joined).length} parts, ${span(dsecs)}</h3>
+          <div class="grid">${deep.map(card).join("")}</div>
+          ${post.length ? `<h3 class="sub">After the transformer</h3><div class="grid">${post.map(card).join("")}</div>` : ""}`;
+      } else {
+        body = `<div class="grid">${t.lessons.map(card).join("")}${t.planned.map(planned).join("")}</div>`;
+      }
+      return `<section class="topic" id="topic-${t.n}">
+        <div class="topic-head"><div class="topic-n">${t.n}</div><h2>${esc(t.name)}</h2><div class="topic-meta">${meta}</div></div>
+        ${body}</section>`;
+    }).join("");
+  }
+
+  function card(l) {
+    const f = frac(l), done = prog[l.id]?.done;
+    const right = done ? `<span class="tick">Watched</span>` : `<span>${mins(l.seconds)} min</span>`;
+    return `<a class="card${l.joined ? " joined" : ""}" href="#${esc(l.id)}">
+      <div class="card-top"><span class="card-id">${l.joined ? "Joined cut" : esc(l.id)}</span>${right}</div>
+      <h4>${esc(l.title)}</h4><p>${esc(l.teaches)}</p>
+      ${f > 0 && !done ? `<span class="prog" style="width:${(f * 100).toFixed(1)}%"></span>` : ""}</a>`;
+  }
+  function featCard(l) {
+    const f = frac(l), done = prog[l.id]?.done;
+    const right = done ? `<span class="tick">Watched</span>` : `<span>${mins(l.seconds)} min</span>`;
+    return `<a class="card feat-card" href="#${esc(l.id)}">
+      <img class="poster" src="${esc(l.poster)}" alt="" loading="lazy"><span class="play" aria-hidden="true"></span>
+      <div class="card-top"><span class="card-id">${esc(l.id)}</span>${right}</div>
+      <h4>${esc(l.title)}</h4><p>${esc(l.teaches)}</p>
+      ${f > 0 && !done ? `<span class="prog" style="width:${(f * 100).toFixed(1)}%"></span>` : ""}</a>`;
+  }
+  function planned(l) {
+    return `<div class="card planned"><div class="card-top"><span class="card-id">${esc(l.id)}</span><span class="soon">Coming</span></div>
+      <h4>${esc(l.title)}</h4><p>${esc(l.teaches)}</p></div>`;
+  }
+
+  // player
+  const video = $("video");
+  let cur = null, timer = null, lastSave = 0;
+  const SPEEDS = [1, 1.25, 1.5, 2];
+  let speed = store.get("speed", 1);
+  let captions = store.get("cc", false);
+  let auto = store.get("auto", true);
+
+  $("speed").innerHTML = SPEEDS.map(s => `<button type="button" data-s="${s}">${s}&times;</button>`).join("");
+  $("speed").onclick = e => { const b = e.target.closest("button"); if (!b) return; speed = +b.dataset.s; store.set("speed", speed); applySpeed(); };
+  const applySpeed = () => {
+    video.playbackRate = speed;
+    $("speed").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.s === speed));
+  };
+  const applyCC = () => {
+    for (const tr of video.textTracks) tr.mode = captions ? "showing" : "hidden";
+    $("cc").setAttribute("aria-pressed", captions);
+  };
+  $("cc").onclick = () => { captions = !captions; store.set("cc", captions); applyCC(); };
+  video.textTracks.addEventListener("change", () => {   // the native menu can toggle captions too
+    const on = [...video.textTracks].some(t => t.mode === "showing");
+    if (on !== captions) { captions = on; store.set("cc", captions); $("cc").setAttribute("aria-pressed", on); }
+  });
+  const applyAuto = () => $("auto").setAttribute("aria-pressed", auto);
+  $("auto").onclick = () => { auto = !auto; store.set("auto", auto); applyAuto(); if (!auto) hideUpNext(); };
+
+  function neighbours(l) {
+    const i = SEQ.findIndex(x => x.id === l.id);
+    if (i < 0) {   // a joined cut: neighbours are around the parts it joins
+      const parts = SEQ.filter(x => x.id.startsWith(l.id.replace(".all", ".")));
+      const a = SEQ.indexOf(parts[0]), b = SEQ.indexOf(parts[parts.length - 1]);
+      return [SEQ[a - 1], SEQ[b + 1]];
+    }
+    return [SEQ[i - 1], SEQ[i + 1]];
+  }
+
+  function play(id) {
+    const l = BY[id];
+    if (!l) { location.hash = ""; return; }
+    hideUpNext();
+    cur = l;
+    store.set("last", l.id);
+    document.title = `${l.id} ${l.title} | Continuo: how it works`;
+    $("now-id").textContent = l.joined ? `${l.topic.n}. ${l.topic.name}, joined cut, ${span(l.seconds)}`
+      : l.topic.n === "0" ? `${l.topic.name}, ${l.id.split(".")[1]} of ${l.topic.lessons.length}, ${clock(l.seconds)}`
+      : `Lesson ${l.id}, ${l.topic.name}, ${clock(l.seconds)}`;
+    $("now-title").textContent = l.title;
+    $("now-teaches").textContent = l.teaches;
+
+    video.pause();
+    video.innerHTML = "";
+    video.poster = l.poster;
+    video.src = l.video;
+    if (l.subs) {
+      const tr = document.createElement("track");
+      Object.assign(tr, { kind: "captions", srclang: "en", label: "English", src: l.subs });
+      video.appendChild(tr);
+    }
+    video.load();
+    $("cc").classList.toggle("hidden", !l.subs);
+
+    const [p, n] = neighbours(l);
+    for (const [el, x] of [[$("prev"), p], [$("next"), n]]) {
+      el.href = x ? "#" + x.id : "#";
+      el.setAttribute("aria-disabled", !x);
+      el.title = x ? `${x.id} ${x.title}` : "";
+    }
+
+    $("side-h").textContent = l.topic.n === "0" ? l.topic.name : `${l.topic.n}. ${l.topic.name}`;
+    $("list").innerHTML = l.topic.lessons.map(x => {
+      const done = prog[x.id]?.done;
+      return `<a class="row${x.id === l.id ? " cur" : ""}${done ? " done" : ""}${x.joined ? " joined" : ""}" href="#${esc(x.id)}"
+        ${x.id === l.id ? 'aria-current="true"' : ""}><span class="rid">${x.joined ? "all" : esc(x.id)}</span>
+        <span class="rt">${esc(x.title)}</span><span class="rd">${done ? "&#10003;" : clock(x.seconds)}</span></a>`;
+    }).join("");
+  }
+  function scrollList() {   // only once the player is visible, or the list has no layout to scroll
+    const list = $("list"), row = list.querySelector(".cur");
+    if (row) list.scrollTop += row.getBoundingClientRect().top - list.getBoundingClientRect().top - 80;
+  }
+
+  video.addEventListener("loadedmetadata", () => {
+    applySpeed();
+    applyCC();
+    const p = cur && prog[cur.id];
+    if (p && !p.done && p.t > 5 && p.t < video.duration - 10) video.currentTime = p.t;
+  });
+  video.addEventListener("ratechange", () => {
+    if (video.playbackRate !== speed && SPEEDS.includes(video.playbackRate)) { speed = video.playbackRate; store.set("speed", speed); applySpeed(); }
+  });
+  const record = force => {
+    if (!cur || !video.duration) return;
+    const now = Date.now();
+    if (!force && now - lastSave < 4000) return;
+    lastSave = now;
+    const p = prog[cur.id] || {};
+    p.t = video.currentTime;
+    if (video.currentTime / video.duration > 0.92) p.done = true;
+    prog[cur.id] = p;
+    saveProg();
+  };
+  video.addEventListener("timeupdate", () => record(false));
+  video.addEventListener("pause", () => record(true));
+  video.addEventListener("ended", () => {
+    record(true);
+    const n = neighbours(cur)[1];
+    if (auto && n && !cur.joined) showUpNext(n);
+  });
+  window.addEventListener("pagehide", () => record(true));
+
+  function showUpNext(n) {
+    let left = 8;
+    $("upnext-t").textContent = `${n.id} ${n.title}`;
+    const tick = () => { $("upnext-k").textContent = `Up next in ${left} s`; };
+    tick();
+    $("upnext").classList.add("on");
+    timer = setInterval(() => { left -= 1; if (left <= 0) { location.hash = n.id; } else tick(); }, 1000);
+    $("upnext-go").onclick = () => { location.hash = n.id; };
+  }
+  function hideUpNext() { clearInterval(timer); timer = null; $("upnext").classList.remove("on"); }
+  $("upnext-no").onclick = hideUpNext;
+
+  // routing: #3.2 opens lesson 3.2, an empty hash shows the library
+  function route() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const watching = !!id && !!BY[id];
+    if (!watching) {
+      record(true);
+      video.pause();
+      hideUpNext();
+      cur = null;
+      document.title = "Continuo: how it works";
+      renderLibrary();
+    } else {
+      play(id);
+    }
+    $("library").classList.toggle("hidden", watching);
+    $("watch").classList.toggle("hidden", !watching);
+    if (watching) { window.scrollTo({ top: 0 }); scrollList(); }
+  }
+  window.addEventListener("hashchange", () => { record(true); route(); });
+  route();
+})();
+</script>
+</body>
+</html>

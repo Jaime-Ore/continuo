@@ -1,0 +1,498 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.065
+Continuo, part three.
+
+2
+00:00:01.335 --> 00:00:02.730
+Finding the notes on the board.
+
+3
+00:00:04.757 --> 00:00:06.590
+Six streams of numbers, one per string,
+
+4
+00:00:06.590 --> 00:00:08.466
+arrive at one chip, on an AMD Z C U one oh
+
+5
+00:00:08.466 --> 00:00:08.882
+two board.
+
+6
+00:00:09.132 --> 00:00:11.049
+Here it is on the bench: the green board
+
+7
+00:00:11.049 --> 00:00:11.633
+in the centre.
+
+8
+00:00:11.883 --> 00:00:13.758
+The small board on the left, with the blue
+
+9
+00:00:13.758 --> 00:00:15.633
+trimmers, is Sena's, from the last video.
+
+10
+00:00:15.883 --> 00:00:17.800
+The chip is two things in one package: a
+
+11
+00:00:17.800 --> 00:00:19.384
+field of logic that the team wires up
+
+12
+00:00:19.384 --> 00:00:21.093
+itself, and a small ordinary processor
+
+13
+00:00:21.093 --> 00:00:21.509
+beside it.
+
+14
+00:00:21.759 --> 00:00:23.676
+The logic does the work on every sample;
+
+15
+00:00:23.676 --> 00:00:25.427
+the processor does the work on every note.
+
+16
+00:00:28.997 --> 00:00:31.036
+The chip does two jobs for every string,
+
+17
+00:00:31.036 --> 00:00:33.123
+side by side, and both listen to the same
+
+18
+00:00:33.123 --> 00:00:33.455
+string.
+
+19
+00:00:33.740 --> 00:00:36.064
+The first asks when: is there a note, and
+
+20
+00:00:36.064 --> 00:00:36.490
+how hard?
+
+21
+00:00:36.775 --> 00:00:38.150
+That is Dini's note detector.
+
+22
+00:00:38.435 --> 00:00:40.522
+The second asks what: which note is it?
+
+23
+00:00:40.806 --> 00:00:42.087
+That is Felix's pitch core.
+
+24
+00:00:42.372 --> 00:00:44.364
+They are built differently, because the
+
+25
+00:00:44.364 --> 00:00:45.502
+questions are different.
+
+26
+00:00:45.786 --> 00:00:47.589
+A start can be spotted almost at once.
+
+27
+00:00:47.873 --> 00:00:49.960
+Naming the note takes a little longer, as
+
+28
+00:00:49.960 --> 00:00:50.529
+we will see.
+
+29
+00:00:50.814 --> 00:00:52.948
+Six strings, so six of each, all working
+
+30
+00:00:52.948 --> 00:00:53.754
+at the same time.
+
+31
+00:00:54.039 --> 00:00:56.126
+The small processor on the same chip, the
+
+32
+00:00:56.126 --> 00:00:58.165
+ARM, joins the answers into one note for
+
+33
+00:00:58.165 --> 00:00:58.687
+the laptop.
+
+34
+00:00:58.972 --> 00:01:00.916
+Every block was built in Python first,
+
+35
+00:01:00.916 --> 00:01:03.003
+then the hardware was checked against it,
+
+36
+00:01:03.003 --> 00:01:03.572
+bit for bit.
+
+37
+00:01:07.263 --> 00:01:09.508
+Dini's detector watches one thing: the
+
+38
+00:01:09.508 --> 00:01:11.600
+attack energy of the string, moment to
+
+39
+00:01:11.600 --> 00:01:11.957
+moment.
+
+40
+00:01:12.263 --> 00:01:13.793
+The trick is what it measures.
+
+41
+00:01:14.100 --> 00:01:16.344
+Not the loudness itself, but how fast the
+
+42
+00:01:16.344 --> 00:01:18.487
+sound changes from one number to the next.
+
+43
+00:01:18.793 --> 00:01:21.191
+A pick striking a string changes it fast;
+
+44
+00:01:21.191 --> 00:01:22.976
+a string ringing on changes slowly.
+
+45
+00:01:23.282 --> 00:01:25.476
+So the pluck stands out, and the ringing
+
+46
+00:01:25.476 --> 00:01:25.935
+does not.
+
+47
+00:01:26.241 --> 00:01:27.109
+Here is one note.
+
+48
+00:01:27.415 --> 00:01:29.660
+Think of a real D three, as on the poster.
+
+49
+00:01:29.966 --> 00:01:31.700
+A jump in the energy is the start.
+
+50
+00:01:32.006 --> 00:01:34.098
+The loudest point of the sound, in the
+
+51
+00:01:34.098 --> 00:01:36.292
+first forty milliseconds or so, says how
+
+52
+00:01:36.292 --> 00:01:37.669
+hard the string was played.
+
+53
+00:01:37.975 --> 00:01:40.118
+And when the energy fades below a line,
+
+54
+00:01:40.118 --> 00:01:41.087
+the note has ended.
+
+55
+00:01:43.021 --> 00:01:45.047
+Six of these run at once, one for each
+
+56
+00:01:45.047 --> 00:01:47.123
+string, and the settings can be changed
+
+57
+00:01:47.123 --> 00:01:49.099
+while it runs, without rebuilding the
+
+58
+00:01:49.099 --> 00:01:49.346
+chip.
+
+59
+00:01:49.643 --> 00:01:51.421
+On the processor, two more checks.
+
+60
+00:01:51.718 --> 00:01:53.793
+A second start a blink after the first is
+
+61
+00:01:53.793 --> 00:01:55.127
+a bounce, and is dropped.
+
+62
+00:01:55.424 --> 00:01:57.499
+And a start with nothing ringing after it
+
+63
+00:01:57.499 --> 00:01:59.525
+was a finger on the string, not a note.
+
+64
+00:02:03.213 --> 00:02:05.384
+Felix's pitch core asks which note it is.
+
+65
+00:02:05.702 --> 00:02:08.032
+It takes the string's wave, and a copy of
+
+66
+00:02:08.032 --> 00:02:09.568
+it, shifted along a little.
+
+67
+00:02:09.885 --> 00:02:12.162
+Slide the copy, and measure the mismatch
+
+68
+00:02:12.162 --> 00:02:12.956
+at every shift.
+
+69
+00:02:13.274 --> 00:02:15.551
+At one shift the copy sits right on top of
+
+70
+00:02:15.551 --> 00:02:18.146
+the wave again: that shift is one period,
+
+71
+00:02:18.146 --> 00:02:19.893
+and the mismatch dips to nothing.
+
+72
+00:02:20.211 --> 00:02:21.429
+The period is the note.
+
+73
+00:02:21.747 --> 00:02:23.653
+Why not read the frequency directly?
+
+74
+00:02:23.970 --> 00:02:26.194
+A frequency analysis needs far more sound
+
+75
+00:02:26.194 --> 00:02:28.154
+to tell neighbouring low notes apart.
+
+76
+00:02:28.471 --> 00:02:29.954
+This needs only a few waves.
+
+77
+00:02:30.272 --> 00:02:32.496
+And each core searches only the notes its
+
+78
+00:02:32.496 --> 00:02:34.826
+own string can play, which keeps it small.
+
+79
+00:02:36.885 --> 00:02:38.638
+A low string's wave is longer, so the core
+
+80
+00:02:38.638 --> 00:02:40.274
+has to hear more of it before it can name
+
+81
+00:02:40.274 --> 00:02:40.624
+the note.
+
+82
+00:02:40.858 --> 00:02:42.455
+It needs about forty-one milliseconds of
+
+83
+00:02:42.455 --> 00:02:44.130
+sound on the low E, and about ten on the
+
+84
+00:02:44.130 --> 00:02:44.403
+high E.
+
+85
+00:02:44.636 --> 00:02:46.350
+Those are design values: how the cores
+
+86
+00:02:46.350 --> 00:02:46.779
+were sized.
+
+87
+00:02:47.012 --> 00:02:48.531
+That is physics, not computing power.
+
+88
+00:02:48.765 --> 00:02:50.440
+A core cannot name a wave it has not heard
+
+89
+00:02:50.440 --> 00:02:50.907
+a few times.
+
+90
+00:02:51.141 --> 00:02:52.738
+And each core gives a fresh answer about
+
+91
+00:02:52.738 --> 00:02:54.413
+every five milliseconds, all the time,
+
+92
+00:02:54.413 --> 00:02:55.932
+whether or not a note has just started.
+
+93
+00:02:59.540 --> 00:03:00.975
+Now the pieces come together.
+
+94
+00:03:01.272 --> 00:03:03.646
+From Dini's detector: the start, and how
+
+95
+00:03:03.646 --> 00:03:03.894
+hard.
+
+96
+00:03:04.191 --> 00:03:05.922
+From Felix's core: which note.
+
+97
+00:03:06.219 --> 00:03:08.297
+And from the detector again: the end.
+
+98
+00:03:08.594 --> 00:03:10.227
+The ARM joins them into one note.
+
+99
+00:03:10.523 --> 00:03:12.700
+The start is known first; the pitch is
+
+100
+00:03:12.700 --> 00:03:15.075
+attached when the core is confident of it;
+
+101
+00:03:15.075 --> 00:03:17.103
+the end comes when the string goes quiet.
+
+102
+00:03:17.400 --> 00:03:19.627
+Each piece goes down the cable in turn:
+
+103
+00:03:19.627 --> 00:03:21.853
+three small messages per note, one for the
+
+104
+00:03:21.853 --> 00:03:24.129
+start, one for the pitch, one for the end.
+
+105
+00:03:24.426 --> 00:03:26.553
+All three carry the same note number, so
+
+106
+00:03:26.553 --> 00:03:28.433
+the laptop knows they belong together.
+
+107
+00:03:28.857 --> 00:03:30.719
+By design, the note's start leaves the
+
+108
+00:03:30.719 --> 00:03:32.581
+chip about forty-five milliseconds after
+
+109
+00:03:32.581 --> 00:03:33.035
+the pluck.
+
+110
+00:03:33.308 --> 00:03:35.306
+That is a design value, not a measurement.
+
+111
+00:03:35.579 --> 00:03:36.941
+Most of that is not detection.
+
+112
+00:03:37.213 --> 00:03:39.030
+It is waiting to hear how hard the note
+
+113
+00:03:39.030 --> 00:03:40.847
+was played, because the loudest point
+
+114
+00:03:40.847 --> 00:03:42.754
+comes a little after the start, and the
+
+115
+00:03:42.754 --> 00:03:43.708
+message carries both.
+
+116
+00:03:43.980 --> 00:03:45.842
+The pitch usually follows, and the end
+
+117
+00:03:45.842 --> 00:03:46.705
+when the note ends.
+
+118
+00:03:48.390 --> 00:03:50.809
+So the board hears each string on its own,
+
+119
+00:03:50.809 --> 00:03:53.175
+finds each note as it starts, how hard,
+
+120
+00:03:53.175 --> 00:03:55.540
+which note and when it ends, and sends it
+
+121
+00:03:55.540 --> 00:03:56.992
+on as three small messages.
+
+122
+00:03:57.315 --> 00:03:59.842
+Dini's detectors, Felix's pitch cores, and
+
+123
+00:03:59.842 --> 00:04:01.347
+the join, all on one chip.
+
+124
+00:04:01.669 --> 00:04:03.497
+Next: the band on the laptop.
+
