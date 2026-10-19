@@ -1,0 +1,1102 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.343
+Lesson three point four.
+
+2
+00:00:01.669 --> 00:00:03.840
+How a model with a memory is trained on
+
+3
+00:00:03.840 --> 00:00:05.034
+songs cut into chunks.
+
+4
+00:00:08.990 --> 00:00:11.239
+Lesson one point three: live, the drums
+
+5
+00:00:11.239 --> 00:00:13.105
+for slot t are decided before slot t's
+
+6
+00:00:13.105 --> 00:00:14.158
+guitar has been heard.
+
+7
+00:00:14.445 --> 00:00:15.880
+There is no future to look at.
+
+8
+00:00:16.167 --> 00:00:18.416
+So the model has to be causal: its output
+
+9
+00:00:18.416 --> 00:00:20.474
+at slot t may use its inputs at slot t and
+
+10
+00:00:20.474 --> 00:00:21.527
+before, never after.
+
+11
+00:00:21.814 --> 00:00:23.680
+And its input at slot t is already the
+
+12
+00:00:23.680 --> 00:00:25.737
+guitar of slot t minus one, the one-slot
+
+13
+00:00:25.737 --> 00:00:27.173
+shift of lesson one point two.
+
+14
+00:00:27.614 --> 00:00:29.445
+The slots after t are simply not there
+
+15
+00:00:29.445 --> 00:00:29.632
+yet.
+
+16
+00:00:31.121 --> 00:00:33.329
+The recurrent models, the LSTM and S4D,
+
+17
+00:00:33.329 --> 00:00:35.185
+don't re-read the past at every slot.
+
+18
+00:00:35.486 --> 00:00:37.744
+They carry a summary of it forward: the
+
+19
+00:00:37.744 --> 00:00:38.647
+hidden state, h.
+
+20
+00:00:38.948 --> 00:00:41.106
+At each slot it takes the old state, h t
+
+21
+00:00:41.106 --> 00:00:43.414
+minus one, mixes in the new input, x t,
+
+22
+00:00:43.414 --> 00:00:45.370
+and the result is the new state, h t.
+
+23
+00:00:45.671 --> 00:00:47.779
+The nine drum outputs for slot t are read
+
+24
+00:00:47.779 --> 00:00:48.230
+from h t.
+
+25
+00:00:48.719 --> 00:00:50.791
+What f and g are is each model's own
+
+26
+00:00:50.791 --> 00:00:52.975
+machinery, which topic four opens up.
+
+27
+00:00:53.311 --> 00:00:55.719
+The transformer works differently: it
+
+28
+00:00:55.719 --> 00:00:58.351
+keeps the past itself, up to a window, and
+
+29
+00:00:58.351 --> 00:01:00.423
+looks back over all of it every slot.
+
+30
+00:01:01.955 --> 00:01:04.315
+Each of our three model families carries a
+
+31
+00:01:04.315 --> 00:01:05.193
+different state.
+
+32
+00:01:05.522 --> 00:01:08.046
+Topic four opens the boxes; here, only
+
+33
+00:01:08.046 --> 00:01:08.705
+their sizes.
+
+34
+00:01:09.034 --> 00:01:11.558
+The LSTM carries two vectors, h and c, of
+
+35
+00:01:11.558 --> 00:01:13.698
+a hundred and twenty-eight numbers for
+
+36
+00:01:13.698 --> 00:01:16.222
+each of its two layers: five hundred and
+
+37
+00:01:16.222 --> 00:01:17.045
+twelve numbers.
+
+38
+00:01:17.374 --> 00:01:19.844
+S4D carries, in each of its four layers,
+
+39
+00:01:19.844 --> 00:01:22.094
+thirty-two complex numbers for each of a
+
+40
+00:01:22.094 --> 00:01:24.727
+hundred and twenty-eight channels: sixteen
+
+41
+00:01:24.727 --> 00:01:26.867
+thousand three hundred and eighty-four
+
+42
+00:01:26.867 --> 00:01:29.172
+complex numbers, so thirty-two thousand
+
+43
+00:01:29.172 --> 00:01:31.532
+seven hundred and sixty-eight real ones,
+
+44
+00:01:31.532 --> 00:01:33.342
+since each complex number is two.
+
+45
+00:01:33.672 --> 00:01:35.921
+The transformer's state is its key-value
+
+46
+00:01:35.921 --> 00:01:38.665
+cache: for each of two layers, a key and a
+
+47
+00:01:38.665 --> 00:01:40.860
+value for each of the last two thousand
+
+48
+00:01:40.860 --> 00:01:43.000
+and forty-seven slots, four heads of
+
+49
+00:01:43.000 --> 00:01:44.372
+twenty-four numbers each.
+
+50
+00:01:44.701 --> 00:01:47.115
+Full, that's seven hundred and eighty-six
+
+51
+00:01:47.115 --> 00:01:48.926
+thousand and forty-eight numbers.
+
+52
+00:01:49.397 --> 00:01:52.141
+The LSTM's and S4D's states keep one size
+
+53
+00:01:52.141 --> 00:01:52.729
+all song.
+
+54
+00:01:53.120 --> 00:01:55.994
+The cache grows by one slot each slot, up
+
+55
+00:01:55.994 --> 00:01:58.868
+to two thousand and forty-seven, then the
+
+56
+00:01:58.868 --> 00:02:00.305
+oldest slot drops off.
+
+57
+00:02:03.933 --> 00:02:06.362
+Lesson two point eight cut every song into
+
+58
+00:02:06.362 --> 00:02:08.790
+chunks of five hundred and twelve slots,
+
+59
+00:02:08.790 --> 00:02:10.089
+one training step each.
+
+60
+00:02:10.428 --> 00:02:12.687
+The median Lakh song is sixteen hundred
+
+61
+00:02:12.687 --> 00:02:15.229
+slots long, so it spans four chunks, the
+
+62
+00:02:15.229 --> 00:02:16.584
+last one mostly padding.
+
+63
+00:02:17.079 --> 00:02:19.218
+The state at the end of chunk zero isn't
+
+64
+00:02:19.218 --> 00:02:19.845
+thrown away.
+
+65
+00:02:20.158 --> 00:02:21.984
+It's carried into chunk one as its
+
+66
+00:02:21.984 --> 00:02:24.541
+starting state, and on, chunk to chunk, to
+
+67
+00:02:24.541 --> 00:02:25.585
+the end of the song.
+
+68
+00:02:25.898 --> 00:02:27.829
+It starts fresh only when a new song
+
+69
+00:02:27.829 --> 00:02:30.386
+starts, at the batch's first chunk: zeros
+
+70
+00:02:30.386 --> 00:02:32.631
+for the LSTM and S4D, an empty cache for
+
+71
+00:02:32.631 --> 00:02:33.466
+the transformer.
+
+72
+00:02:33.901 --> 00:02:36.160
+In the training loop: on a song's first
+
+73
+00:02:36.160 --> 00:02:37.315
+chunk, a fresh state.
+
+74
+00:02:37.616 --> 00:02:39.624
+Otherwise the model is handed the state
+
+75
+00:02:39.624 --> 00:02:40.829
+the last chunk returned.
+
+76
+00:02:42.436 --> 00:02:44.136
+Does memory really cross the edge?
+
+77
+00:02:44.436 --> 00:02:46.386
+Take a real song from lesson two point
+
+78
+00:02:46.386 --> 00:02:48.836
+eight: seven hundred and four slots, so a
+
+79
+00:02:48.836 --> 00:02:50.736
+full chunk zero and a short chunk one.
+
+80
+00:02:51.036 --> 00:02:52.986
+Zero the onset flag at input slot five
+
+81
+00:02:52.986 --> 00:02:55.036
+hundred, in chunk zero, which is the
+
+82
+00:02:55.036 --> 00:02:56.636
+guitar of slot four hundred and
+
+83
+00:02:56.636 --> 00:02:58.986
+ninety-nine, and run the song again, state
+
+84
+00:02:58.986 --> 00:03:00.136
+carried as in training.
+
+85
+00:03:00.588 --> 00:03:02.504
+The drum probabilities in chunk one
+
+86
+00:03:02.504 --> 00:03:04.952
+change: by up to six thousandths for the
+
+87
+00:03:04.952 --> 00:03:07.348
+LSTM, L thirty-two, and three hundredths
+
+88
+00:03:07.348 --> 00:03:09.583
+for the transformer, T one twenty-eight.
+
+89
+00:03:09.902 --> 00:03:12.510
+Small, but not zero: what it heard before
+
+90
+00:03:12.510 --> 00:03:14.799
+the edge still changes what it plays after
+
+91
+00:03:14.799 --> 00:03:14.959
+it.
+
+92
+00:03:18.423 --> 00:03:20.474
+Lesson three point three: training needs
+
+93
+00:03:20.474 --> 00:03:22.347
+the gradient, how the loss changes with
+
+94
+00:03:22.347 --> 00:03:24.308
+each weight, and backpropagation finds it
+
+95
+00:03:24.308 --> 00:03:25.913
+by running the chain rule backwards.
+
+96
+00:03:26.181 --> 00:03:28.098
+With a carried state, the loss at slot t
+
+97
+00:03:28.098 --> 00:03:30.104
+depends on h t, which depends on h t minus
+
+98
+00:03:30.104 --> 00:03:32.111
+one, and so on, back to the start of the
+
+99
+00:03:32.111 --> 00:03:32.334
+song.
+
+100
+00:03:32.601 --> 00:03:34.429
+So the gradient flows back through every
+
+101
+00:03:34.429 --> 00:03:35.053
+earlier state.
+
+102
+00:03:35.321 --> 00:03:36.926
+That's backpropagation through time.
+
+103
+00:03:37.997 --> 00:03:40.364
+How much does the loss at slot t blame the
+
+104
+00:03:40.364 --> 00:03:42.015
+state at an earlier slot, k?
+
+105
+00:03:42.346 --> 00:03:44.492
+Start from how the loss depends on the
+
+106
+00:03:44.492 --> 00:03:45.648
+current state, h t.
+
+107
+00:03:45.978 --> 00:03:48.290
+Then multiply by one factor for each step
+
+108
+00:03:48.290 --> 00:03:50.767
+back: how each state depends on the one
+
+109
+00:03:50.767 --> 00:03:51.317
+before it.
+
+110
+00:03:51.791 --> 00:03:53.767
+From the last slot of a median song back
+
+111
+00:03:53.767 --> 00:03:55.743
+to slot zero, that's one thousand five
+
+112
+00:03:55.743 --> 00:03:57.815
+hundred and ninety-nine factors, and all
+
+113
+00:03:57.815 --> 00:03:59.839
+sixteen hundred states have to be kept in
+
+114
+00:03:59.839 --> 00:04:01.237
+memory for the backward pass.
+
+115
+00:04:01.526 --> 00:04:03.502
+The team estimated that whole songs at a
+
+116
+00:04:03.502 --> 00:04:05.285
+batch of thirty-two would need about
+
+117
+00:04:05.285 --> 00:04:07.309
+eighteen gigabytes for the LSTM and sixty
+
+118
+00:04:07.309 --> 00:04:09.092
+for S4D, on a sixteen-gigabyte Mac.
+
+119
+00:04:09.381 --> 00:04:10.682
+Too long, and too costly.
+
+120
+00:04:12.088 --> 00:04:14.234
+So after each step the trainer detaches
+
+121
+00:04:14.234 --> 00:04:14.770
+the state.
+
+122
+00:04:15.092 --> 00:04:17.291
+Detach keeps the numbers but forgets how
+
+123
+00:04:17.291 --> 00:04:18.096
+they were made.
+
+124
+00:04:18.418 --> 00:04:20.456
+The values flow forward into the next
+
+125
+00:04:20.456 --> 00:04:22.763
+chunk; the gradient stops at the edge.
+
+126
+00:04:23.085 --> 00:04:25.338
+This is truncated backpropagation through
+
+127
+00:04:25.338 --> 00:04:25.606
+time.
+
+128
+00:04:26.871 --> 00:04:27.889
+Draw the song again.
+
+129
+00:04:28.194 --> 00:04:29.618
+The values cross every edge.
+
+130
+00:04:29.924 --> 00:04:32.010
+The gradients run back only to the start
+
+131
+00:04:32.010 --> 00:04:32.976
+of their own chunk.
+
+132
+00:04:33.411 --> 00:04:35.737
+Checked on the same real song: the
+
+133
+00:04:35.737 --> 00:04:37.947
+gradient of chunk one's loss on chunk
+
+134
+00:04:37.947 --> 00:04:40.216
+zero's inputs is exactly zero with the
+
+135
+00:04:40.216 --> 00:04:41.437
+detach, as trained.
+
+136
+00:04:41.786 --> 00:04:44.229
+Without it, about a half, summed over
+
+137
+00:04:44.229 --> 00:04:46.032
+chunk zero, for L thirty-two.
+
+138
+00:04:47.509 --> 00:04:49.758
+To put reach into music, the slot length.
+
+139
+00:04:50.072 --> 00:04:52.531
+A slot is a sixteenth note: sixty seconds
+
+140
+00:04:52.531 --> 00:04:53.890
+over four times the tempo.
+
+141
+00:04:54.204 --> 00:04:56.506
+At a hundred and twenty beats per minute,
+
+142
+00:04:56.506 --> 00:04:58.546
+a hundred and twenty-five milliseconds.
+
+143
+00:04:59.167 --> 00:05:01.081
+So gradients reach at most five hundred
+
+144
+00:05:01.081 --> 00:05:03.091
+and twelve slots: thirty-two bars,
+
+145
+00:05:03.091 --> 00:05:04.000
+sixty-four seconds.
+
+146
+00:05:04.287 --> 00:05:05.388
+Memory reaches further.
+
+147
+00:05:05.675 --> 00:05:07.636
+The transformer's window is two thousand
+
+148
+00:05:07.636 --> 00:05:09.646
+and forty-eight slots: a hundred and
+
+149
+00:05:09.646 --> 00:05:11.656
+twenty-eight bars, four minutes sixteen.
+
+150
+00:05:11.943 --> 00:05:13.809
+The LSTM and S4D carry from the song's
+
+151
+00:05:13.809 --> 00:05:15.531
+first slot, with no window at all.
+
+152
+00:05:15.818 --> 00:05:17.780
+How fast that memory fades is topic four.
+
+153
+00:05:18.177 --> 00:05:20.329
+The price, in the contract's words: short
+
+154
+00:05:20.329 --> 00:05:22.350
+chunks teach matching; long chunks teach
+
+155
+00:05:22.350 --> 00:05:23.448
+matching and persistence.
+
+156
+00:05:23.712 --> 00:05:25.337
+The contract measured sections about
+
+157
+00:05:25.337 --> 00:05:27.182
+fourteen windows apart, so a chorus and
+
+158
+00:05:27.182 --> 00:05:29.159
+its return sit roughly twenty-eight apart,
+
+159
+00:05:29.159 --> 00:05:31.092
+eight hundred and ninety-six slots, so no
+
+160
+00:05:31.092 --> 00:05:32.190
+gradient ever links them.
+
+161
+00:05:32.453 --> 00:05:34.430
+The model can carry a chorus that far, but
+
+162
+00:05:34.430 --> 00:05:36.231
+nothing in training rewards it for doing
+
+163
+00:05:36.231 --> 00:05:36.363
+so.
+
+164
+00:05:39.730 --> 00:05:41.509
+The trainer has a second mode, set by one
+
+165
+00:05:41.509 --> 00:05:43.167
+flag, horizon slots: horizon mode.
+
+166
+00:05:43.409 --> 00:05:45.310
+Chunk mode is what we've seen: thirty-two
+
+167
+00:05:45.310 --> 00:05:46.968
+songs by five hundred and twelve slots a
+
+168
+00:05:46.968 --> 00:05:47.170
+step.
+
+169
+00:05:47.412 --> 00:05:48.949
+Horizon mode keeps the same budget,
+
+170
+00:05:48.949 --> 00:05:50.364
+sixteen thousand three hundred and
+
+171
+00:05:50.364 --> 00:05:52.103
+eighty-four slots a step, but walks each
+
+172
+00:05:52.103 --> 00:05:53.518
+song in pieces of two thousand and
+
+173
+00:05:53.518 --> 00:05:55.216
+forty-eight, with the state carried and
+
+174
+00:05:55.216 --> 00:05:56.429
+detached at each piece's edge.
+
+175
+00:05:56.672 --> 00:05:58.370
+Fewer songs a step, and gradients reach
+
+176
+00:05:58.370 --> 00:05:59.987
+two thousand and forty-eight slots back.
+
+177
+00:06:00.838 --> 00:06:03.332
+What changes, from the runs' own records:
+
+178
+00:06:03.332 --> 00:06:05.571
+about nine songs still playing in a step,
+
+179
+00:06:05.571 --> 00:06:07.607
+against about twenty-five in chunk mode.
+
+180
+00:06:07.912 --> 00:06:09.083
+Each step takes longer.
+
+181
+00:06:09.388 --> 00:06:11.475
+The timing pass measured L thirty-two at
+
+182
+00:06:11.475 --> 00:06:13.562
+forty-nine milliseconds a step against L
+
+183
+00:06:13.562 --> 00:06:15.292
+one twenty-eight at a hundred and
+
+184
+00:06:15.292 --> 00:06:17.532
+twenty-one, and S thirty-two at a hundred
+
+185
+00:06:17.532 --> 00:06:19.669
+and forty-four against S one twenty-eight
+
+186
+00:06:19.669 --> 00:06:21.298
+at two hundred and seventy-nine.
+
+187
+00:06:21.603 --> 00:06:23.537
+And the gradient clip of lesson three
+
+188
+00:06:23.537 --> 00:06:25.573
+point three cut fifty-four percent of S
+
+189
+00:06:25.573 --> 00:06:27.405
+one twenty-eight's steps, against
+
+190
+00:06:27.405 --> 00:06:29.390
+twenty-three percent of S thirty-two's.
+
+191
+00:06:29.695 --> 00:06:31.884
+The LSTMs almost never clipped: L one
+
+192
+00:06:31.884 --> 00:06:32.953
+twenty-eight, once.
+
+193
+00:06:33.365 --> 00:06:34.634
+Which reported runs used it?
+
+194
+00:06:34.906 --> 00:06:36.945
+L one twenty-eight, S one twenty-eight and
+
+195
+00:06:36.945 --> 00:06:38.033
+S one twenty-eight full.
+
+196
+00:06:38.305 --> 00:06:40.072
+The numbers in those names are bars of
+
+197
+00:06:40.072 --> 00:06:40.752
+gradient reach.
+
+198
+00:06:41.023 --> 00:06:43.063
+T one twenty-eight, the genre drummers and
+
+199
+00:06:43.063 --> 00:06:44.966
+the feedback drummer all trained in chunk
+
+200
+00:06:44.966 --> 00:06:45.192
+mode.
+
+201
+00:06:45.464 --> 00:06:47.367
+Careful with T one twenty-eight: its
+
+202
+00:06:47.367 --> 00:06:49.271
+hundred and twenty-eight is its attention
+
+203
+00:06:49.271 --> 00:06:49.588
+window.
+
+204
+00:06:49.860 --> 00:06:51.536
+Its gradients reach five hundred and
+
+205
+00:06:51.536 --> 00:06:51.853
+twelve.
+
+206
+00:06:55.377 --> 00:06:57.841
+One drummer so far was built with option
+
+207
+00:06:57.841 --> 00:07:00.606
+C: besides the five guitar numbers, it
+
+208
+00:07:00.606 --> 00:07:03.131
+also reads the nine drum hits of the slot
+
+209
+00:07:03.131 --> 00:07:03.552
+before.
+
+210
+00:07:03.912 --> 00:07:05.836
+Fourteen inputs instead of five.
+
+211
+00:07:06.363 --> 00:07:08.530
+In training, whose drums does it read?
+
+212
+00:07:08.855 --> 00:07:09.506
+Not its own.
+
+213
+00:07:09.831 --> 00:07:12.106
+It is handed the real drummer's hits from
+
+214
+00:07:12.106 --> 00:07:13.027
+slot t minus one.
+
+215
+00:07:13.352 --> 00:07:14.598
+That's teacher forcing.
+
+216
+00:07:15.090 --> 00:07:17.161
+In the code, each slot is handed the real
+
+217
+00:07:17.161 --> 00:07:18.337
+drums of the slot before.
+
+218
+00:07:18.619 --> 00:07:20.314
+The last real slot of each chunk is
+
+219
+00:07:20.314 --> 00:07:22.525
+carried across the edge, beside the state,
+
+220
+00:07:22.525 --> 00:07:24.361
+and a song's first slot hears no drums.
+
+221
+00:07:24.643 --> 00:07:26.666
+Then, in training passes only, each of
+
+222
+00:07:26.666 --> 00:07:28.502
+those bits is flipped with probability
+
+223
+00:07:28.502 --> 00:07:30.525
+point one, the default setting, so the
+
+224
+00:07:30.525 --> 00:07:32.549
+model learns to cope with mistakes in what
+
+225
+00:07:32.549 --> 00:07:33.208
+it hears back.
+
+226
+00:07:34.704 --> 00:07:36.737
+Picture a made-up slot where the real
+
+227
+00:07:36.737 --> 00:07:38.289
+drummer played a snare alone.
+
+228
+00:07:38.610 --> 00:07:40.644
+With the noise it might arrive with a
+
+229
+00:07:40.644 --> 00:07:41.393
+stray mid tom.
+
+230
+00:07:41.933 --> 00:07:44.647
+Nine bits, each flipped one time in ten:
+
+231
+00:07:44.647 --> 00:07:46.908
+on average nine tenths of a bit flipped
+
+232
+00:07:46.908 --> 00:07:47.530
+every slot.
+
+233
+00:07:47.869 --> 00:07:50.187
+A slot arrives exactly as played only if
+
+234
+00:07:50.187 --> 00:07:52.787
+all nine bits survive: point nine to the
+
+235
+00:07:52.787 --> 00:07:55.161
+ninth, about thirty-nine percent of the
+
+236
+00:07:55.161 --> 00:07:55.444
+time.
+
+237
+00:07:55.961 --> 00:07:57.986
+The validation loss, though, is
+
+238
+00:07:57.986 --> 00:08:00.012
+teacher-forced with no noise at all.
+
+239
+00:08:00.349 --> 00:08:02.712
+So the feedback Rock drummer's validation
+
+240
+00:08:02.712 --> 00:08:05.019
+loss, point zero eight six, can't be
+
+241
+00:08:05.019 --> 00:08:07.213
+compared with the plain Rock drummer's
+
+242
+00:08:07.213 --> 00:08:08.564
+point two zero six five.
+
+243
+00:08:08.901 --> 00:08:10.983
+It was handed the real previous slot.
+
+244
+00:08:12.480 --> 00:08:14.702
+When it is scored, and live once it is
+
+245
+00:08:14.702 --> 00:08:16.869
+wired in, there is no real drummer to
+
+246
+00:08:16.869 --> 00:08:17.140
+copy.
+
+247
+00:08:17.465 --> 00:08:19.795
+It reads the hits it decoded itself at the
+
+248
+00:08:19.795 --> 00:08:21.800
+slot before, starting from silence.
+
+249
+00:08:22.125 --> 00:08:23.155
+That's closed loop.
+
+250
+00:08:23.629 --> 00:08:25.635
+Training on the real drums and running on
+
+251
+00:08:25.635 --> 00:08:27.593
+its own is a mismatch, called exposure
+
+252
+00:08:27.593 --> 00:08:27.832
+bias.
+
+253
+00:08:28.118 --> 00:08:29.885
+For our feedback drummer it bit hard.
+
+254
+00:08:30.172 --> 00:08:32.130
+Closed loop from silence, on the three
+
+255
+00:08:32.130 --> 00:08:34.231
+songs checked, its kick never got above a
+
+256
+00:08:34.231 --> 00:08:36.142
+probability of point zero nine, below
+
+257
+00:08:36.142 --> 00:08:38.052
+every threshold, so it never played a
+
+258
+00:08:38.052 --> 00:08:39.772
+first hit, and never got one back.
+
+259
+00:08:40.058 --> 00:08:41.682
+Lesson four point eight goes deep.
+
+260
+00:08:43.079 --> 00:08:45.815
+Only that one drummer, Rock C, is option
+
+261
+00:08:45.815 --> 00:08:45.936
+C.
+
+262
+00:08:46.301 --> 00:08:48.855
+Every other drummer we've reported, the
+
+263
+00:08:48.855 --> 00:08:51.530
+LSTMs, the S4Ds, T one twenty-eight and
+
+264
+00:08:51.530 --> 00:08:54.206
+the three genre drummers, never reads its
+
+265
+00:08:54.206 --> 00:08:54.814
+own drums.
+
+266
+00:08:56.391 --> 00:08:58.474
+So: memory crosses the chunk edge,
+
+267
+00:08:58.474 --> 00:09:00.507
+gradients stop at it, five hundred and
+
+268
+00:09:00.507 --> 00:09:02.392
+twelve slots in chunk mode, and the
+
+269
+00:09:02.392 --> 00:09:04.276
+feedback drummer learns from the real
+
+270
+00:09:04.276 --> 00:09:05.814
+drums but is scored on its own.
+
+271
+00:09:06.111 --> 00:09:08.194
+This sits beside item two of the training
+
+272
+00:09:08.194 --> 00:09:09.831
+recipe in part two of the course
+
+273
+00:09:09.831 --> 00:09:10.326
+explainer.
+
+274
+00:09:10.624 --> 00:09:13.203
+Next, lesson three point five: validation,
+
+275
+00:09:13.203 --> 00:09:14.294
+and the epoch lottery.
+

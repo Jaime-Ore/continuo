@@ -1,0 +1,858 @@
+WEBVTT
+
+1
+00:00:00.070 --> 00:00:01.679
+Four point seven point twelve.
+
+2
+00:00:02.000 --> 00:00:04.413
+How the transformer runs live, one slot at
+
+3
+00:00:04.413 --> 00:00:04.788
+a time.
+
+4
+00:00:08.757 --> 00:00:10.998
+In training, the transformer reads a chunk
+
+5
+00:00:10.998 --> 00:00:12.990
+of five hundred and twelve slots in one
+
+6
+00:00:12.990 --> 00:00:13.239
+call.
+
+7
+00:00:13.537 --> 00:00:15.529
+Live, the next slot doesn't exist yet.
+
+8
+00:00:15.828 --> 00:00:18.119
+Recap from lesson one point three: every
+
+9
+00:00:18.119 --> 00:00:20.360
+slot, the loop builds the five numbers and
+
+10
+00:00:20.360 --> 00:00:22.451
+steps the model once, every hundred and
+
+11
+00:00:22.451 --> 00:00:24.543
+twenty-five milliseconds at a hundred and
+
+12
+00:00:24.543 --> 00:00:25.738
+twenty beats per minute.
+
+13
+00:00:26.175 --> 00:00:28.268
+That one call, on one new slot, with the
+
+14
+00:00:28.268 --> 00:00:30.268
+weights fixed and nothing learned, is an
+
+15
+00:00:30.268 --> 00:00:30.966
+inference step.
+
+16
+00:00:31.370 --> 00:00:33.790
+At the worked slot, slot five seventy-six,
+
+17
+00:00:33.790 --> 00:00:36.004
+attention looks back over five hundred and
+
+18
+00:00:36.004 --> 00:00:37.034
+seventy-seven slots.
+
+19
+00:00:37.343 --> 00:00:39.248
+The plain way would push all of them
+
+20
+00:00:39.248 --> 00:00:41.204
+through the model again, every step.
+
+21
+00:00:41.513 --> 00:00:43.573
+But almost all of that work was already
+
+22
+00:00:43.573 --> 00:00:45.890
+done: keep each earlier slot's keys and
+
+23
+00:00:45.890 --> 00:00:47.846
+values, and only the new slot needs
+
+24
+00:00:47.846 --> 00:00:48.361
+computing.
+
+25
+00:00:48.841 --> 00:00:49.918
+Why is that allowed?
+
+26
+00:00:50.242 --> 00:00:52.559
+A slot's key and value depend only on that
+
+27
+00:00:52.559 --> 00:00:54.822
+slot and the ones before it, because of
+
+28
+00:00:54.822 --> 00:00:56.978
+the causal mask, and live the weights
+
+29
+00:00:56.978 --> 00:00:57.678
+never change.
+
+30
+00:00:58.002 --> 00:01:00.157
+So slot five seventy-three's key is the
+
+31
+00:01:00.157 --> 00:01:02.421
+same number whether it's computed at slot
+
+32
+00:01:02.421 --> 00:01:04.361
+five seventy-three or again at five
+
+33
+00:01:04.361 --> 00:01:05.007
+seventy-six.
+
+34
+00:01:08.560 --> 00:01:09.992
+Here's what the model keeps.
+
+35
+00:01:10.299 --> 00:01:12.396
+For each of its two layers, a shelf of
+
+36
+00:01:12.396 --> 00:01:14.647
+keys and a shelf of values, one entry per
+
+37
+00:01:14.647 --> 00:01:15.312
+earlier slot.
+
+38
+00:01:15.619 --> 00:01:17.767
+Just before slot five seventy-six, each
+
+39
+00:01:17.767 --> 00:01:19.814
+holds slots nought to five seventy-five.
+
+40
+00:01:20.121 --> 00:01:22.422
+Its shape is one song, by four heads, by
+
+41
+00:01:22.422 --> 00:01:24.520
+five hundred and seventy-six slots, by
+
+42
+00:01:24.520 --> 00:01:26.003
+twenty-four numbers per head.
+
+43
+00:01:26.469 --> 00:01:28.511
+The code's own docstring says it in
+
+44
+00:01:28.511 --> 00:01:30.666
+capitals: the cache is the state.
+
+45
+00:01:31.006 --> 00:01:33.445
+It's what this model carries from one slot
+
+46
+00:01:33.445 --> 00:01:35.941
+to the next, the way the LSTM carries its
+
+47
+00:01:35.941 --> 00:01:36.678
+hidden state.
+
+48
+00:01:38.306 --> 00:01:39.049
+Now one step.
+
+49
+00:01:39.392 --> 00:01:41.165
+Slot five seventy-six comes in.
+
+50
+00:01:41.508 --> 00:01:44.138
+Layer one makes its query, key and value,
+
+51
+00:01:44.138 --> 00:01:46.081
+the ninety-six to two hundred and
+
+52
+00:01:46.081 --> 00:01:48.597
+eighty-eight layer, but for this one slot
+
+53
+00:01:48.597 --> 00:01:48.883
+only.
+
+54
+00:01:49.476 --> 00:01:51.799
+Its query is scored against every key on
+
+55
+00:01:51.799 --> 00:01:54.406
+the shelf plus its own: five hundred and
+
+56
+00:01:54.406 --> 00:01:56.559
+seventy-seven keys, and the softmax
+
+57
+00:01:56.559 --> 00:01:58.429
+weights mix the five hundred and
+
+58
+00:01:58.429 --> 00:01:59.619
+seventy-seven values.
+
+59
+00:01:59.959 --> 00:02:02.283
+That's the attention of four point seven
+
+60
+00:02:02.283 --> 00:02:04.379
+point four to four point seven point
+
+61
+00:02:04.379 --> 00:02:05.456
+eight, unchanged.
+
+62
+00:02:05.903 --> 00:02:08.328
+Then the new key and value go onto the end
+
+63
+00:02:08.328 --> 00:02:09.061
+of the shelf.
+
+64
+00:02:09.399 --> 00:02:11.316
+Its shape is now five hundred and
+
+65
+00:02:11.316 --> 00:02:12.444
+seventy-seven slots.
+
+66
+00:02:12.879 --> 00:02:15.132
+Layer two does the same, but its query,
+
+67
+00:02:15.132 --> 00:02:17.335
+key and value come from layer one's output
+
+68
+00:02:17.335 --> 00:02:19.384
+for the new slot, so the layers go in
+
+69
+00:02:19.384 --> 00:02:19.691
+order.
+
+70
+00:02:20.122 --> 00:02:22.451
+Attend, append: layer two's shelf holds
+
+71
+00:02:22.451 --> 00:02:24.185
+five hundred and seventy-seven too.
+
+72
+00:02:25.853 --> 00:02:27.385
+The shelf can't grow forever.
+
+73
+00:02:27.702 --> 00:02:29.550
+It keeps the last two thousand and
+
+74
+00:02:29.550 --> 00:02:31.768
+forty-seven slots: the window, two
+
+75
+00:02:31.768 --> 00:02:33.986
+thousand and forty-eight, minus the new
+
+76
+00:02:33.986 --> 00:02:34.197
+one.
+
+77
+00:02:34.514 --> 00:02:36.573
+When slot two thousand and forty-seven
+
+78
+00:02:36.573 --> 00:02:38.527
+comes in, it sees two thousand and
+
+79
+00:02:38.527 --> 00:02:39.425
+forty-eight keys,
+
+80
+00:02:39.908 --> 00:02:42.302
+and then the oldest, slot nought, drops
+
+81
+00:02:42.302 --> 00:02:44.586
+off the front while the new one joins the
+
+82
+00:02:44.586 --> 00:02:44.804
+end.
+
+83
+00:02:45.130 --> 00:02:46.599
+Now slot one is the oldest.
+
+84
+00:02:46.926 --> 00:02:49.482
+Every step after that rolls the same way:
+
+85
+00:02:49.482 --> 00:02:50.462
+one in, one out.
+
+86
+00:02:50.930 --> 00:02:53.287
+From then on the shelf stays exactly two
+
+87
+00:02:53.287 --> 00:02:55.011
+thousand and forty-seven long.
+
+88
+00:02:55.356 --> 00:02:57.597
+Stepping T one twenty-eight itself two
+
+89
+00:02:57.597 --> 00:03:00.126
+thousand and fifty times shows it: the
+
+90
+00:03:00.126 --> 00:03:02.425
+shelf stops growing at two thousand and
+
+91
+00:03:02.425 --> 00:03:03.115
+forty-seven.
+
+92
+00:03:04.695 --> 00:03:07.236
+In the code, line seventy: the query, key
+
+93
+00:03:07.236 --> 00:03:08.531
+and value of the new slot.
+
+94
+00:03:08.830 --> 00:03:11.022
+Lines seventy-one and seventy-two: the
+
+95
+00:03:11.022 --> 00:03:13.264
+shelf, k nought, with the new key joined
+
+96
+00:03:13.264 --> 00:03:13.813
+on the end.
+
+97
+00:03:14.112 --> 00:03:16.304
+Lines eighty-five and eighty-six: hand
+
+98
+00:03:16.304 --> 00:03:18.496
+back only the last keep entries, and keep
+
+99
+00:03:18.496 --> 00:03:20.838
+is the window minus one: two thousand and
+
+100
+00:03:20.838 --> 00:03:21.436
+forty-seven.
+
+101
+00:03:23.288 --> 00:03:25.240
+And here's where the live loop calls it.
+
+102
+00:03:25.533 --> 00:03:27.485
+In core dot p y, each slot's decision
+
+103
+00:03:27.485 --> 00:03:29.340
+builds the five numbers and calls the
+
+104
+00:03:29.340 --> 00:03:29.974
+stepper once.
+
+105
+00:03:30.267 --> 00:03:32.463
+Inside the stepper, the model gets the one
+
+106
+00:03:32.463 --> 00:03:34.513
+slot and the state, and hands back nine
+
+107
+00:03:34.513 --> 00:03:36.563
+logits and the new state, shelf and all.
+
+108
+00:03:36.856 --> 00:03:38.808
+When a take starts, or the drummer is
+
+109
+00:03:38.808 --> 00:03:40.565
+switched, reset empties the shelf.
+
+110
+00:03:44.133 --> 00:03:46.198
+How many numbers are on the shelf at the
+
+111
+00:03:46.198 --> 00:03:46.802
+worked slot?
+
+112
+00:03:47.104 --> 00:03:47.709
+Build it up.
+
+113
+00:03:48.011 --> 00:03:50.176
+Two layers, each with keys and values,
+
+114
+00:03:50.176 --> 00:03:52.442
+four heads, five hundred and seventy-seven
+
+115
+00:03:52.442 --> 00:03:54.155
+slots, twenty-four numbers each.
+
+116
+00:03:54.457 --> 00:03:56.673
+Two hundred and twenty-one thousand, five
+
+117
+00:03:56.673 --> 00:03:57.881
+hundred and sixty-eight.
+
+118
+00:03:58.360 --> 00:04:00.937
+Four heads of twenty-four are ninety-six,
+
+119
+00:04:00.937 --> 00:04:03.397
+so each new slot adds two times two times
+
+120
+00:04:03.397 --> 00:04:06.150
+ninety-six: three hundred and eighty-four
+
+121
+00:04:06.150 --> 00:04:06.619
+numbers.
+
+122
+00:04:07.118 --> 00:04:09.221
+Full, at two thousand and forty-seven
+
+123
+00:04:09.221 --> 00:04:11.901
+slots: two times two is four; four times
+
+124
+00:04:11.901 --> 00:04:13.899
+two thousand and forty-seven is eight
+
+125
+00:04:13.899 --> 00:04:16.211
+thousand one hundred and eighty-eight;
+
+126
+00:04:16.211 --> 00:04:18.366
+times ninety-six: seven hundred and
+
+127
+00:04:18.366 --> 00:04:20.259
+eighty-six thousand and forty-eight
+
+128
+00:04:20.259 --> 00:04:20.679
+numbers.
+
+129
+00:04:20.995 --> 00:04:23.255
+That's the state size the code reports for
+
+130
+00:04:23.255 --> 00:04:23.623
+itself.
+
+131
+00:04:24.082 --> 00:04:25.829
+At the worked slot the shelf is
+
+132
+00:04:25.829 --> 00:04:27.249
+twenty-eight percent full.
+
+133
+00:04:27.577 --> 00:04:29.597
+The model keeps its numbers as float
+
+134
+00:04:29.597 --> 00:04:31.945
+thirty-two, four bytes each, so a full
+
+135
+00:04:31.945 --> 00:04:34.184
+shelf is about three point one megabytes.
+
+136
+00:04:37.757 --> 00:04:39.106
+How much work is one step?
+
+137
+00:04:39.418 --> 00:04:41.442
+The attention part depends on how many
+
+138
+00:04:41.442 --> 00:04:44.037
+keys are in view: one more each slot, five
+
+139
+00:04:44.037 --> 00:04:46.113
+hundred and seventy-seven at the worked
+
+140
+00:04:46.113 --> 00:04:48.397
+slot, until the shelf is full at slot two
+
+141
+00:04:48.397 --> 00:04:49.695
+thousand and forty-seven.
+
+142
+00:04:50.006 --> 00:04:52.082
+From then on, always two thousand and
+
+143
+00:04:52.082 --> 00:04:52.705
+forty-eight.
+
+144
+00:04:53.128 --> 00:04:55.158
+Count the multiplications, straight from
+
+145
+00:04:55.158 --> 00:04:57.423
+the shapes; this is counting, not timing.
+
+146
+00:04:57.706 --> 00:04:59.925
+The weights cost the same every step: two
+
+147
+00:04:59.925 --> 00:05:01.813
+hundred and twenty-two thousand, five
+
+148
+00:05:01.813 --> 00:05:03.748
+hundred and twenty-eight, for one slot.
+
+149
+00:05:04.031 --> 00:05:05.588
+Attention adds three hundred and
+
+150
+00:05:05.588 --> 00:05:07.618
+eighty-four for each key in view: two
+
+151
+00:05:07.618 --> 00:05:09.459
+hundred and twenty-one thousand at the
+
+152
+00:05:09.459 --> 00:05:11.536
+worked slot, seven hundred and eighty-six
+
+153
+00:05:11.536 --> 00:05:12.432
+thousand once full.
+
+154
+00:05:12.715 --> 00:05:14.651
+So the work grows with the shelf, then
+
+155
+00:05:14.651 --> 00:05:15.217
+stays fixed.
+
+156
+00:05:15.500 --> 00:05:17.530
+Without the cache, slot five seventy-six
+
+157
+00:05:17.530 --> 00:05:19.276
+would re-run the weights on all five
+
+158
+00:05:19.276 --> 00:05:21.447
+hundred and seventy-seven slots: about a
+
+159
+00:05:21.447 --> 00:05:23.005
+hundred and twenty-eight million.
+
+160
+00:05:26.540 --> 00:05:28.486
+Now time, and only measured time.
+
+161
+00:05:28.820 --> 00:05:30.655
+Here's a scale from a tenth of a
+
+162
+00:05:30.655 --> 00:05:33.102
+millisecond to two hundred, each mark ten
+
+163
+00:05:33.102 --> 00:05:33.936
+times the last.
+
+164
+00:05:34.431 --> 00:05:36.933
+First, the live stepper's own code, run
+
+165
+00:05:36.933 --> 00:05:39.151
+warm, slot after slot, on two Lakh
+
+166
+00:05:39.151 --> 00:05:41.653
+validation songs, one long enough to fill
+
+167
+00:05:41.653 --> 00:05:44.212
+the shelf and roll it: a median of zero
+
+168
+00:05:44.212 --> 00:05:46.543
+point two seven nine milliseconds, and
+
+169
+00:05:46.543 --> 00:05:48.932
+ninety-nine steps in a hundred take about
+
+170
+00:05:48.932 --> 00:05:50.239
+zero point three eight.
+
+171
+00:05:50.701 --> 00:05:52.974
+An earlier drill measured zero point three
+
+172
+00:05:52.974 --> 00:05:54.825
+five six, but on an epoch nought
+
+173
+00:05:54.825 --> 00:05:57.257
+checkpoint, beside a training job, with a
+
+174
+00:05:57.257 --> 00:05:59.319
+loop that copied the whole cache every
+
+175
+00:05:59.319 --> 00:06:00.693
+slot: an upper bound.
+
+176
+00:06:01.154 --> 00:06:03.199
+The three genre drummers are the same
+
+177
+00:06:03.199 --> 00:06:03.468
+size.
+
+178
+00:06:03.791 --> 00:06:06.212
+Measured the same way while a trainer ran,
+
+179
+00:06:06.212 --> 00:06:08.472
+their medians are zero point two eight to
+
+180
+00:06:08.472 --> 00:06:11.001
+zero point three nine; the slowest one in
+
+181
+00:06:11.001 --> 00:06:13.530
+a hundred, up to three point one nine, the
+
+182
+00:06:13.530 --> 00:06:15.521
+record puts down to the busy machine.
+
+183
+00:06:16.001 --> 00:06:18.189
+And in the real loop, where the model
+
+184
+00:06:18.189 --> 00:06:20.487
+waits over a hundred milliseconds between
+
+185
+00:06:20.487 --> 00:06:22.840
+steps and the core goes cold, the logged
+
+186
+00:06:22.840 --> 00:06:25.029
+steps of nineteen sessions, recounted
+
+187
+00:06:25.029 --> 00:06:27.327
+today, give a median of one point seven
+
+188
+00:06:27.327 --> 00:06:29.679
+four, and ninety-nine in a hundred under
+
+189
+00:06:29.679 --> 00:06:30.992
+about three point seven.
+
+190
+00:06:31.457 --> 00:06:33.653
+Against the budget: a whole slot is a
+
+191
+00:06:33.653 --> 00:06:35.798
+hundred and twenty-five milliseconds at a
+
+192
+00:06:35.798 --> 00:06:37.994
+hundred and twenty beats per minute, and
+
+193
+00:06:37.994 --> 00:06:40.191
+lesson one point four's decision window,
+
+194
+00:06:40.191 --> 00:06:41.416
+thirty-seven and a half.
+
+195
+00:06:41.723 --> 00:06:43.817
+The slowest in-loop step in a hundred is
+
+196
+00:06:43.817 --> 00:06:45.451
+under three percent of the slot.
+
+197
+00:06:45.879 --> 00:06:48.470
+One gap, said plainly: no live take has
+
+198
+00:06:48.470 --> 00:06:50.786
+yet run T one twenty-eight long enough to
+
+199
+00:06:50.786 --> 00:06:51.613
+fill the shelf.
+
+200
+00:06:51.944 --> 00:06:53.818
+The longest was eight hundred and
+
+201
+00:06:53.818 --> 00:06:55.913
+thirty-two slots, so the full-shelf
+
+202
+00:06:55.913 --> 00:06:57.788
+numbers are the warm offline ones.
+
+203
+00:06:59.550 --> 00:07:01.372
+So live, the shelf remembers, and each
+
+204
+00:07:01.372 --> 00:07:02.559
+step computes just one slot.
+
+205
+00:07:02.813 --> 00:07:04.762
+In one breath: each layer keeps the last
+
+206
+00:07:04.762 --> 00:07:06.499
+two thousand and forty-seven slots' keys
+
+207
+00:07:06.499 --> 00:07:08.279
+and values, so a step computes only the
+
+208
+00:07:08.279 --> 00:07:10.143
+new slot, reads the rest off the shelf,
+
+209
+00:07:10.143 --> 00:07:11.499
+appends, and drops the oldest.
+
+210
+00:07:11.754 --> 00:07:13.406
+This pairs with the course explainer's
+
+211
+00:07:13.406 --> 00:07:15.313
+note on the cache and its cap, and lessons
+
+212
+00:07:15.313 --> 00:07:16.796
+one point three and one point four.
+
+213
+00:07:17.050 --> 00:07:19.169
+Next: how training uses the same cache, in
+
+214
+00:07:19.169 --> 00:07:19.466
+chunks.
+

@@ -1,0 +1,666 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.168
+Lesson five point one.
+
+2
+00:00:01.476 --> 00:00:03.732
+Why the measuring came before the models,
+
+3
+00:00:03.732 --> 00:00:05.322
+and how the measure was tested.
+
+4
+00:00:09.280 --> 00:00:11.245
+Before any drum model was trained, the
+
+5
+00:00:11.245 --> 00:00:13.211
+team built the thing that would judge it.
+
+6
+00:00:13.498 --> 00:00:15.128
+The project plan gave two reasons.
+
+7
+00:00:15.416 --> 00:00:17.094
+First, this kind of system fails
+
+8
+00:00:17.094 --> 00:00:17.573
+gradually.
+
+9
+00:00:17.861 --> 00:00:19.970
+Every published live accompanist runs;
+
+10
+00:00:19.970 --> 00:00:22.079
+what goes wrong is the music, a little at
+
+11
+00:00:22.079 --> 00:00:22.415
+a time.
+
+12
+00:00:22.702 --> 00:00:24.908
+Second, music has no single right answer,
+
+13
+00:00:24.908 --> 00:00:26.969
+so there's no answer key to count mistakes
+
+14
+00:00:26.969 --> 00:00:27.352
+against.
+
+15
+00:00:27.755 --> 00:00:30.303
+A program that crashes fails like a cliff:
+
+16
+00:00:30.303 --> 00:00:31.312
+you see it at once.
+
+17
+00:00:31.631 --> 00:00:33.967
+A drummer that drifts just keeps playing,
+
+18
+00:00:33.967 --> 00:00:35.879
+a bit less like a drummer each time.
+
+19
+00:00:36.198 --> 00:00:38.056
+Only a measurement sees that slope.
+
+20
+00:00:39.193 --> 00:00:41.227
+Both point the same way: build the
+
+21
+00:00:41.227 --> 00:00:43.362
+measurement first, and let tests, not
+
+22
+00:00:43.362 --> 00:00:45.243
+arguments, settle the architecture.
+
+23
+00:00:45.548 --> 00:00:47.684
+A metric is a rule that turns a drum part
+
+24
+00:00:47.684 --> 00:00:48.395
+into a number.
+
+25
+00:00:48.700 --> 00:00:50.581
+The list of metrics was fixed on the
+
+26
+00:00:50.581 --> 00:00:52.818
+twenty-first of August, as decision eight.
+
+27
+00:00:56.247 --> 00:00:57.980
+The battery asks two questions, called
+
+28
+00:00:57.980 --> 00:00:58.192
+axes.
+
+29
+00:00:58.446 --> 00:01:00.306
+Axis one: does it sound like a drummer?
+
+30
+00:01:00.560 --> 00:01:01.363
+It needs no guitar.
+
+31
+00:01:01.617 --> 00:01:03.308
+The model's windows are compared with a
+
+32
+00:01:03.308 --> 00:01:05.211
+reference population: two thousand four
+
+33
+00:01:05.211 --> 00:01:06.945
+hundred and forty-one two-bar windows of
+
+34
+00:01:06.945 --> 00:01:08.763
+real rock drummers, from the Groove MIDI
+
+35
+00:01:08.763 --> 00:01:09.102
+dataset.
+
+36
+00:01:09.355 --> 00:01:11.301
+Axis two: is it in conversation with the
+
+37
+00:01:11.301 --> 00:01:11.597
+guitar?
+
+38
+00:01:11.850 --> 00:01:12.781
+It needs no reference.
+
+39
+00:01:13.034 --> 00:01:14.726
+The drums are scored against the guitar
+
+40
+00:01:14.726 --> 00:01:15.783
+they were generated from.
+
+41
+00:01:16.603 --> 00:01:19.124
+On axis one, every window is a point, and
+
+42
+00:01:19.124 --> 00:01:20.439
+the humans make a cloud.
+
+43
+00:01:20.768 --> 00:01:22.795
+A good model's cloud overlaps theirs.
+
+44
+00:01:23.124 --> 00:01:25.480
+A model that plays the human average every
+
+45
+00:01:25.480 --> 00:01:28.220
+time is a single point: right on the mean,
+
+46
+00:01:28.220 --> 00:01:29.700
+and nothing like a drummer.
+
+47
+00:01:30.029 --> 00:01:32.056
+Lesson five point three measures the
+
+48
+00:01:32.056 --> 00:01:32.495
+overlap.
+
+49
+00:01:33.465 --> 00:01:34.686
+Why never average them?
+
+50
+00:01:35.005 --> 00:01:36.386
+Take two made-up drummers.
+
+51
+00:01:36.705 --> 00:01:38.882
+A sounds like a real drummer but ignores
+
+52
+00:01:38.882 --> 00:01:39.467
+the guitar.
+
+53
+00:01:39.785 --> 00:01:41.751
+B follows the guitar but sounds like
+
+54
+00:01:41.751 --> 00:01:42.122
+nobody.
+
+55
+00:01:42.441 --> 00:01:44.884
+Average each, and both get a half: the
+
+56
+00:01:44.884 --> 00:01:46.956
+number hides which way each one failed.
+
+57
+00:01:47.417 --> 00:01:49.428
+The decision's recorded reason goes
+
+58
+00:01:49.428 --> 00:01:52.053
+further: pushing fit to the player up can
+
+59
+00:01:52.053 --> 00:01:53.059
+pull quality down.
+
+60
+00:01:53.394 --> 00:01:55.685
+So the two axes are always reported side
+
+61
+00:01:55.685 --> 00:01:56.131
+by side.
+
+62
+00:01:59.653 --> 00:02:01.907
+Here's the idea this whole topic rests on.
+
+63
+00:02:02.229 --> 00:02:04.483
+A metric can measure something other than
+
+64
+00:02:04.483 --> 00:02:04.966
+its name.
+
+65
+00:02:05.288 --> 00:02:07.596
+So before a metric ranks any model, it's
+
+66
+00:02:07.596 --> 00:02:09.904
+tested on drum parts whose right answer we
+
+67
+00:02:09.904 --> 00:02:10.601
+already know.
+
+68
+00:02:11.314 --> 00:02:13.127
+Every axis-two metric is scored on the
+
+69
+00:02:13.127 --> 00:02:14.708
+same guitar under four drum parts.
+
+70
+00:02:14.987 --> 00:02:15.963
+The song's own drums.
+
+71
+00:02:16.242 --> 00:02:18.241
+A stranger's: another song's drums,
+
+72
+00:02:18.241 --> 00:02:20.101
+competent, but never written for this
+
+73
+00:02:20.101 --> 00:02:20.426
+guitar.
+
+74
+00:02:20.705 --> 00:02:23.030
+A fixed loop: kick on one and three, snare
+
+75
+00:02:23.030 --> 00:02:24.983
+on two and four, hats on the eighths,
+
+76
+00:02:24.983 --> 00:02:26.656
+repeated forever, never listening.
+
+77
+00:02:26.935 --> 00:02:29.074
+And the song's own bars, shuffled: the
+
+78
+00:02:29.074 --> 00:02:30.515
+same habits in the wrong order.
+
+79
+00:02:30.961 --> 00:02:33.198
+For each song i, take the metric on the
+
+80
+00:02:33.198 --> 00:02:35.489
+own drums, minus the metric on a control.
+
+81
+00:02:35.808 --> 00:02:37.034
+That difference is d i.
+
+82
+00:02:37.353 --> 00:02:39.484
+A metric is adopted only if the typical
+
+83
+00:02:39.484 --> 00:02:41.668
+song's own drums beat the control, and
+
+84
+00:02:41.668 --> 00:02:43.799
+beat all three, with a paired test,
+
+85
+00:02:43.799 --> 00:02:46.090
+Wilcoxon's, saying the lean isn't chance.
+
+86
+00:02:46.410 --> 00:02:48.221
+Lesson five point seven covers it.
+
+87
+00:02:51.750 --> 00:02:53.732
+The first axis-two metric was NOC:
+
+88
+00:02:53.732 --> 00:02:55.169
+normalised onset coincidence.
+
+89
+00:02:55.466 --> 00:02:57.497
+It counts the slots where the guitar and
+
+90
+00:02:57.497 --> 00:02:59.430
+the drums start a note together, and
+
+91
+00:02:59.430 --> 00:03:01.065
+subtracts what chance would give.
+
+92
+00:03:01.362 --> 00:03:03.245
+Lesson five point four does the maths.
+
+93
+00:03:03.542 --> 00:03:05.524
+Here it is on seven hundred and seventy
+
+94
+00:03:05.524 --> 00:03:07.209
+rock songs, counted only on the
+
+95
+00:03:07.209 --> 00:03:09.141
+twenty-four off-beat slots, the ones
+
+96
+00:03:09.141 --> 00:03:10.033
+between the beats.
+
+97
+00:03:10.418 --> 00:03:12.517
+The song's own drums: plus nought point
+
+98
+00:03:12.517 --> 00:03:13.030
+nine three.
+
+99
+00:03:13.310 --> 00:03:15.316
+A stranger's: nought point five eight.
+
+100
+00:03:15.596 --> 00:03:17.415
+Random hits read zero, so the chance
+
+101
+00:03:17.415 --> 00:03:19.281
+correction works; and rotating the
+
+102
+00:03:19.281 --> 00:03:21.287
+stranger off the bar also reads zero, so
+
+103
+00:03:21.287 --> 00:03:22.873
+its score came from bar alignment.
+
+104
+00:03:23.153 --> 00:03:25.206
+But the fixed loop, which never hears the
+
+105
+00:03:25.206 --> 00:03:26.839
+guitar: nought point nine six.
+
+106
+00:03:27.118 --> 00:03:28.098
+Above the real drums.
+
+107
+00:03:28.486 --> 00:03:30.295
+Paired song by song, own minus loop is
+
+108
+00:03:30.295 --> 00:03:31.708
+zero: no difference at all.
+
+109
+00:03:31.973 --> 00:03:33.870
+NOC rewards hits in conventional places,
+
+110
+00:03:33.870 --> 00:03:35.724
+and a loop is as conventional as drumming
+
+111
+00:03:35.724 --> 00:03:37.224
+gets, while real drummers spend
+
+112
+00:03:37.224 --> 00:03:38.769
+coincidences on fills and silences.
+
+113
+00:03:39.034 --> 00:03:40.976
+Two things survived: random drums read
+
+114
+00:03:40.976 --> 00:03:43.094
+zero, so the chance correction is sound;
+
+115
+00:03:43.094 --> 00:03:44.815
+and the stranger's score is real genre
+
+116
+00:03:44.815 --> 00:03:46.801
+habit, since rotating it off the bar wipes
+
+117
+00:03:46.801 --> 00:03:47.110
+it out.
+
+118
+00:03:47.375 --> 00:03:49.008
+On the eleventh of September NOC was
+
+119
+00:03:49.008 --> 00:03:50.111
+demoted to a floor check.
+
+120
+00:03:51.382 --> 00:03:53.700
+Its replacement, section following, asks
+
+121
+00:03:53.700 --> 00:03:55.864
+whether the drums change where the guitar
+
+122
+00:03:55.864 --> 00:03:56.276
+changes.
+
+123
+00:03:56.585 --> 00:03:58.749
+Own drums: plus nought point two two.
+
+124
+00:03:59.058 --> 00:04:01.428
+Stranger, loop and shuffled: all about
+
+125
+00:04:01.428 --> 00:04:01.686
+zero.
+
+126
+00:04:01.995 --> 00:04:04.313
+A loop never changes, so it scores exactly
+
+127
+00:04:04.313 --> 00:04:04.571
+zero.
+
+128
+00:04:04.880 --> 00:04:05.910
+It passes all three.
+
+129
+00:04:06.219 --> 00:04:08.280
+That one is lessons five point five and
+
+130
+00:04:08.280 --> 00:04:09.053
+five point six.
+
+131
+00:04:12.463 --> 00:04:14.364
+Decision eight also said: every metric
+
+132
+00:04:14.364 --> 00:04:15.314
+ships with unit tests.
+
+133
+00:04:15.574 --> 00:04:17.258
+A unit test is a small automatic check
+
+134
+00:04:17.258 --> 00:04:18.813
+that code gives a known answer on a
+
+135
+00:04:18.813 --> 00:04:19.548
+hand-built input.
+
+136
+00:04:19.807 --> 00:04:20.585
+Here's a real one.
+
+137
+00:04:20.844 --> 00:04:22.485
+We may not know the right value for a
+
+138
+00:04:22.485 --> 00:04:24.516
+pattern, but we know the right order: a
+
+139
+00:04:24.516 --> 00:04:26.244
+straight rock beat must score higher on
+
+140
+00:04:26.244 --> 00:04:27.842
+backbeat presence than the same hits
+
+141
+00:04:27.842 --> 00:04:28.706
+scattered at random.
+
+142
+00:04:28.965 --> 00:04:31.039
+It scores one; the random pattern scores a
+
+143
+00:04:31.039 --> 00:04:31.384
+quarter.
+
+144
+00:04:31.801 --> 00:04:33.751
+The battery shipped with a hundred and
+
+145
+00:04:33.751 --> 00:04:35.951
+eighty-eight tests, and had three hundred
+
+146
+00:04:35.951 --> 00:04:37.601
+and forty-one by the eleventh of
+
+147
+00:04:37.601 --> 00:04:38.101
+September.
+
+148
+00:04:38.401 --> 00:04:40.701
+The checking earned its keep on day one:
+
+149
+00:04:40.701 --> 00:04:42.901
+it found a bug in the battery's own core,
+
+150
+00:04:42.901 --> 00:04:44.851
+where a note just before time zero was
+
+151
+00:04:44.851 --> 00:04:46.951
+written into the last window as a phantom
+
+152
+00:04:46.951 --> 00:04:47.251
+snare.
+
+153
+00:04:47.551 --> 00:04:48.601
+A test now guards it.
+
+154
+00:04:49.691 --> 00:04:52.048
+But a passing test only says the code does
+
+155
+00:04:52.048 --> 00:04:53.582
+what the specification says.
+
+156
+00:04:53.911 --> 00:04:56.103
+It can't say the specification measures
+
+157
+00:04:56.103 --> 00:04:56.815
+musicianship.
+
+158
+00:04:57.144 --> 00:04:58.952
+That's what the controls are for.
+
+159
+00:04:59.281 --> 00:05:01.583
+NOC passed every one of its unit tests,
+
+160
+00:05:01.583 --> 00:05:02.953
+and a loop still tied it.
+
+161
+00:05:04.610 --> 00:05:07.202
+So: build the measure before the models,
+
+162
+00:05:07.202 --> 00:05:09.579
+keep its two questions apart, and trust a
+
+163
+00:05:09.579 --> 00:05:11.469
+metric only after its controls and
+
+164
+00:05:11.469 --> 00:05:13.197
+adversaries have had a go at it.
+
+165
+00:05:13.521 --> 00:05:16.114
+Next: the nine numbers axis one reads from
+
+166
+00:05:16.114 --> 00:05:16.816
+every window.
+

@@ -1,0 +1,982 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.292
+Lesson four point zero.
+
+2
+00:00:01.619 --> 00:00:04.124
+Before any architecture: the rules every
+
+3
+00:00:04.124 --> 00:00:05.213
+candidate must obey.
+
+4
+00:00:09.213 --> 00:00:10.986
+Topic four compares three kinds of learned
+
+5
+00:00:10.986 --> 00:00:12.842
+drummer: an LSTM, a state-space model
+
+6
+00:00:12.842 --> 00:00:14.161
+called S4D, and a transformer.
+
+7
+00:00:14.409 --> 00:00:16.264
+Before any of them was built, one document
+
+8
+00:00:16.264 --> 00:00:17.831
+fixed what every candidate must do,
+
+9
+00:00:17.831 --> 00:00:19.810
+learned or not: the drum-stage contract,
+
+10
+00:00:19.810 --> 00:00:21.294
+settled on the twelfth of September.
+
+11
+00:00:21.542 --> 00:00:23.315
+If two candidates solve slightly different
+
+12
+00:00:23.315 --> 00:00:25.129
+problems, the results table means nothing.
+
+13
+00:00:25.376 --> 00:00:26.984
+So the contract fixes the shape of the
+
+14
+00:00:26.984 --> 00:00:28.634
+function, and the rules that keep the
+
+15
+00:00:28.634 --> 00:00:29.376
+comparison honest.
+
+16
+00:00:31.005 --> 00:00:33.653
+In the contract's symbols: y hat t, the
+
+17
+00:00:33.653 --> 00:00:36.188
+nine drum probabilities at slot t, is some
+
+18
+00:00:36.188 --> 00:00:38.723
+function, f, of the guitar features from
+
+19
+00:00:38.723 --> 00:00:41.033
+the start of the song up to slot t minus
+
+20
+00:00:41.033 --> 00:00:43.512
+h, the model's own outputs up to the slot
+
+21
+00:00:43.512 --> 00:00:45.935
+before, and c, what is known about the
+
+22
+00:00:45.935 --> 00:00:46.217
+song.
+
+23
+00:00:46.705 --> 00:00:49.012
+So three things may feed slot t: the
+
+24
+00:00:49.012 --> 00:00:51.209
+guitar heard so far, the drums it has
+
+25
+00:00:51.209 --> 00:00:53.680
+already given, and what is known about the
+
+26
+00:00:53.680 --> 00:00:53.955
+song.
+
+27
+00:00:54.285 --> 00:00:56.921
+In the code there is no separate c: things
+
+28
+00:00:56.921 --> 00:00:59.173
+like whether the song's velocity is real
+
+29
+00:00:59.173 --> 00:01:01.260
+ride in with the five inputs at every
+
+30
+00:01:01.260 --> 00:01:01.535
+slot.
+
+31
+00:01:01.991 --> 00:01:04.184
+The horizon, h, is fixed at one: the drums
+
+32
+00:01:04.184 --> 00:01:05.870
+for slot t are decided having heard the
+
+33
+00:01:05.870 --> 00:01:07.431
+guitar only through slot t minus one.
+
+34
+00:01:07.684 --> 00:01:09.413
+One slot lasts sixty over four times the
+
+35
+00:01:09.413 --> 00:01:10.256
+tempo, in seconds.
+
+36
+00:01:10.509 --> 00:01:12.365
+At a hundred and twenty beats per minute,
+
+37
+00:01:12.365 --> 00:01:13.757
+that's a hundred and twenty-five
+
+38
+00:01:13.757 --> 00:01:14.811
+milliseconds of headroom.
+
+39
+00:01:15.064 --> 00:01:16.456
+At two hundred it's seventy-five.
+
+40
+00:01:16.709 --> 00:01:18.480
+The budget is a slot, so it tightens as
+
+41
+00:01:18.480 --> 00:01:19.281
+the song speeds up.
+
+42
+00:01:19.534 --> 00:01:21.137
+And h must be the same in training as
+
+43
+00:01:21.137 --> 00:01:21.348
+live.
+
+44
+00:01:21.808 --> 00:01:24.456
+One small difference from the document: in
+
+45
+00:01:24.456 --> 00:01:26.938
+the code, f hands out nine logits, and a
+
+46
+00:01:26.938 --> 00:01:29.144
+sigmoid turns each into the probability
+
+47
+00:01:29.144 --> 00:01:30.247
+the contract writes.
+
+48
+00:01:33.697 --> 00:01:35.037
+Recap from lesson one point two.
+
+49
+00:01:35.288 --> 00:01:37.381
+Every slot, five numbers go in: the guitar
+
+50
+00:01:37.381 --> 00:01:38.930
+onset, its velocity, the running
+
+51
+00:01:38.930 --> 00:01:40.773
+intensity, a flag for whether this song's
+
+52
+00:01:40.773 --> 00:01:42.489
+velocity is real at all, and the tempo.
+
+53
+00:01:42.741 --> 00:01:44.457
+The onset, velocity and intensity come
+
+54
+00:01:44.457 --> 00:01:46.341
+from the slot before: the loader shifts
+
+55
+00:01:46.341 --> 00:01:48.142
+the guitar one slot later before any model
+
+56
+00:01:48.142 --> 00:01:49.859
+sees it, so the future is never handed
+
+57
+00:01:49.859 --> 00:01:50.068
+over.
+
+58
+00:01:50.319 --> 00:01:51.868
+Nine logits come out, one per drum.
+
+59
+00:01:52.120 --> 00:01:53.794
+Each is its own yes or no, so several
+
+60
+00:01:53.794 --> 00:01:54.715
+drums can hit at once.
+
+61
+00:01:55.061 --> 00:01:57.915
+In the code, B songs of C slots go in as B
+
+62
+00:01:57.915 --> 00:02:00.579
+by C by five, and come out as B by C by
+
+63
+00:02:00.579 --> 00:02:00.896
+nine.
+
+64
+00:02:01.277 --> 00:02:04.004
+How hard each drum hits, and how far off
+
+65
+00:02:04.004 --> 00:02:06.351
+the grid, are not this stage's job.
+
+66
+00:02:09.923 --> 00:02:12.471
+Three rules from lesson three point four,
+
+67
+00:02:12.471 --> 00:02:13.745
+now as the contract's.
+
+68
+00:02:14.093 --> 00:02:16.525
+Causal: slot t uses nothing after it.
+
+69
+00:02:16.872 --> 00:02:19.015
+Live there is no future to use, so
+
+70
+00:02:19.015 --> 00:02:20.926
+training must not use one either.
+
+71
+00:02:21.915 --> 00:02:24.185
+Second: the state runs through the whole
+
+72
+00:02:24.185 --> 00:02:24.432
+song.
+
+73
+00:02:24.728 --> 00:02:26.702
+It's carried from chunk to chunk, and
+
+74
+00:02:26.702 --> 00:02:28.331
+never reset at a window boundary.
+
+75
+00:02:28.627 --> 00:02:30.453
+It starts fresh only when a new song
+
+76
+00:02:30.453 --> 00:02:30.799
+starts.
+
+77
+00:02:31.245 --> 00:02:33.403
+Third: at each chunk edge the state is
+
+78
+00:02:33.403 --> 00:02:33.845
+detached.
+
+79
+00:02:34.139 --> 00:02:36.445
+The memory crosses the edge; the learning
+
+80
+00:02:36.445 --> 00:02:37.230
+signal does not.
+
+81
+00:02:40.673 --> 00:02:42.208
+So every model offers the same three
+
+82
+00:02:42.208 --> 00:02:44.032
+calls, written at the top of model dot py.
+
+83
+00:02:44.281 --> 00:02:45.194
+This is the interface.
+
+84
+00:02:45.442 --> 00:02:47.392
+init state: a fresh memory for a batch of
+
+85
+00:02:47.392 --> 00:02:47.640
+songs.
+
+86
+00:02:47.889 --> 00:02:49.880
+The forward call: a chunk of slots and the
+
+87
+00:02:49.880 --> 00:02:51.870
+state go in; logits and the new state come
+
+88
+00:02:51.870 --> 00:02:52.036
+out.
+
+89
+00:02:52.285 --> 00:02:54.234
+The third argument, prev out, is the drums
+
+90
+00:02:54.234 --> 00:02:55.022
+of the slot before.
+
+91
+00:02:55.271 --> 00:02:56.681
+Every model we compare ignores it.
+
+92
+00:02:56.930 --> 00:02:58.879
+detach state: keep the numbers, cut the
+
+93
+00:02:58.879 --> 00:03:00.165
+gradient, at each chunk edge.
+
+94
+00:03:00.513 --> 00:03:02.490
+What the state is differs completely.
+
+95
+00:03:02.811 --> 00:03:05.375
+The LSTM's is two small vectors per layer:
+
+96
+00:03:05.375 --> 00:03:07.566
+five hundred and twelve numbers per song.
+
+97
+00:03:07.886 --> 00:03:10.184
+S4D's is one tensor of complex numbers per
+
+98
+00:03:10.184 --> 00:03:12.535
+layer, sixteen thousand three hundred and
+
+99
+00:03:12.535 --> 00:03:15.153
+eighty-four of them: thirty-two thousand,
+
+100
+00:03:15.153 --> 00:03:17.023
+seven hundred and sixty-eight real
+
+101
+00:03:17.023 --> 00:03:17.450
+numbers.
+
+102
+00:03:17.771 --> 00:03:20.282
+The transformer's is its key-value cache:
+
+103
+00:03:20.282 --> 00:03:22.419
+what it computed for up to two thousand
+
+104
+00:03:22.419 --> 00:03:24.770
+and forty-seven earlier slots, kept so it
+
+105
+00:03:24.770 --> 00:03:27.441
+can look back at them, and a slot counter:
+
+106
+00:03:27.441 --> 00:03:29.471
+seven hundred and eighty-six thousand
+
+107
+00:03:29.471 --> 00:03:30.433
+numbers when full.
+
+108
+00:03:30.754 --> 00:03:32.410
+The trainer never looks inside.
+
+109
+00:03:32.730 --> 00:03:34.013
+It hands the state back.
+
+110
+00:03:35.770 --> 00:03:37.829
+The trainer calls exactly these: a fresh
+
+111
+00:03:37.829 --> 00:03:39.844
+state at a song's first chunk, the forward
+
+112
+00:03:39.844 --> 00:03:41.545
+call, and a detach after every step.
+
+113
+00:03:41.813 --> 00:03:43.649
+The live loop calls the same ones, one
+
+114
+00:03:43.649 --> 00:03:45.036
+slot at a time, for one song.
+
+115
+00:03:45.305 --> 00:03:46.827
+Neither one names an architecture.
+
+116
+00:03:47.096 --> 00:03:49.065
+That's what let the transformer, added on
+
+117
+00:03:49.065 --> 00:03:51.169
+the twenty-sixth of September, drop in:
+
+118
+00:03:51.169 --> 00:03:53.005
+its cache is carried and detached by the
+
+119
+00:03:53.005 --> 00:03:54.571
+trainer just like the LSTM's state.
+
+120
+00:03:57.957 --> 00:04:00.123
+The contract also settled what a candidate
+
+121
+00:04:00.123 --> 00:04:00.777
+may remember.
+
+122
+00:04:01.080 --> 00:04:02.843
+Two things sound alike and are not.
+
+123
+00:04:03.145 --> 00:04:05.009
+Memory: a state over the guitar.
+
+124
+00:04:05.311 --> 00:04:07.023
+The model remembers what it heard.
+
+125
+00:04:07.326 --> 00:04:09.542
+Output feedback: the drums it actually
+
+126
+00:04:09.542 --> 00:04:11.758
+played at the slot before, fed back in as
+
+127
+00:04:11.758 --> 00:04:12.060
+input.
+
+128
+00:04:12.363 --> 00:04:13.974
+The model remembers what it did.
+
+129
+00:04:14.447 --> 00:04:16.963
+Option A: a fixed stretch of guitar in,
+
+130
+00:04:16.963 --> 00:04:18.140
+drums out, no state.
+
+131
+00:04:18.461 --> 00:04:20.762
+The same local guitar always gets the same
+
+132
+00:04:20.762 --> 00:04:21.083
+drums.
+
+133
+00:04:21.404 --> 00:04:22.903
+The contract calls that the
+
+134
+00:04:22.903 --> 00:04:25.151
+density-follower's ceiling, and says it
+
+135
+00:04:25.151 --> 00:04:25.739
+cannot win.
+
+136
+00:04:26.060 --> 00:04:28.415
+Option B: a memory of the guitar, no
+
+137
+00:04:28.415 --> 00:04:28.897
+feedback.
+
+138
+00:04:29.218 --> 00:04:31.679
+Same guitar, different history, different
+
+139
+00:04:31.679 --> 00:04:32.001
+drums.
+
+140
+00:04:32.322 --> 00:04:34.623
+Option C: B, plus the drums it just
+
+141
+00:04:34.623 --> 00:04:35.800
+played, fed back in.
+
+142
+00:04:36.121 --> 00:04:38.208
+It can stay in step with what actually
+
+143
+00:04:38.208 --> 00:04:40.777
+sounded, at a risk called exposure bias:
+
+144
+00:04:40.777 --> 00:04:43.185
+it trains on the real drummer's past, then
+
+145
+00:04:43.185 --> 00:04:44.416
+has to play on its own.
+
+146
+00:04:44.925 --> 00:04:47.045
+The decision: B is the default.
+
+147
+00:04:47.399 --> 00:04:49.754
+In B the state already carries what the
+
+148
+00:04:49.754 --> 00:04:51.168
+model was about to play.
+
+149
+00:04:51.521 --> 00:04:54.171
+The LSTM, S4D and T128 are all option B,
+
+150
+00:04:54.171 --> 00:04:56.762
+the transformer included: its cache is
+
+151
+00:04:56.762 --> 00:04:59.353
+built from what it heard, never from what
+
+152
+00:04:59.353 --> 00:04:59.942
+it played.
+
+153
+00:05:00.446 --> 00:05:03.170
+C is a flag, not a rewrite: built on the
+
+154
+00:05:03.170 --> 00:05:05.554
+sixteenth of October, it joins the nine
+
+155
+00:05:05.554 --> 00:05:07.654
+drums of the slot before to the five
+
+156
+00:05:07.654 --> 00:05:09.584
+guitar numbers, fourteen inputs.
+
+157
+00:05:09.925 --> 00:05:12.365
+The one option C drummer trained so far is
+
+158
+00:05:12.365 --> 00:05:14.125
+silent when it runs on its own.
+
+159
+00:05:14.465 --> 00:05:16.565
+Lesson four point eight is about why.
+
+160
+00:05:20.090 --> 00:05:22.088
+A fair comparison also needs the same food
+
+161
+00:05:22.088 --> 00:05:23.064
+and the same cooking.
+
+162
+00:05:23.343 --> 00:05:25.294
+Every arm of the architecture run got one
+
+163
+00:05:25.294 --> 00:05:27.339
+shared list of settings: the same Lakh
+
+164
+00:05:27.339 --> 00:05:29.291
+songs, the same four hundred validation
+
+165
+00:05:29.291 --> 00:05:31.010
+songs, twelve epochs, batches of
+
+166
+00:05:31.010 --> 00:05:33.101
+thirty-two, Adam at a learning rate of one
+
+167
+00:05:33.101 --> 00:05:35.053
+in a thousand after three hundred warm-up
+
+168
+00:05:35.053 --> 00:05:37.144
+steps, unweighted cross-entropy, dropout
+
+169
+00:05:37.144 --> 00:05:39.281
+of a tenth, clipping at one, and one seed.
+
+170
+00:05:39.748 --> 00:05:41.490
+And it shows in the run records.
+
+171
+00:05:41.817 --> 00:05:44.103
+The LSTM, S4D and transformer runs each
+
+172
+00:05:44.103 --> 00:05:46.226
+used fourteen thousand two hundred and
+
+173
+00:05:46.226 --> 00:05:48.621
+fifty-six songs, two thousand one hundred
+
+174
+00:05:48.621 --> 00:05:50.853
+and five steps in the first epoch, the
+
+175
+00:05:50.853 --> 00:05:53.357
+same slots, and the same validation list,
+
+176
+00:05:53.357 --> 00:05:55.807
+with the same seed and plan: their step
+
+177
+00:05:55.807 --> 00:05:57.331
+counts match epoch by epoch.
+
+178
+00:05:59.096 --> 00:06:00.475
+Three honest exceptions.
+
+179
+00:06:00.819 --> 00:06:03.289
+One S4D run, S128 full, trained on all
+
+180
+00:06:03.289 --> 00:06:05.357
+forty-seven thousand training songs.
+
+181
+00:06:05.702 --> 00:06:08.459
+How far the gradient reaches differs: five
+
+182
+00:06:08.459 --> 00:06:10.354
+hundred and twelve slots for the
+
+183
+00:06:10.354 --> 00:06:12.767
+short-horizon LSTM and S4D, and for the
+
+184
+00:06:12.767 --> 00:06:15.294
+transformer, two thousand and forty-eight
+
+185
+00:06:15.294 --> 00:06:16.787
+for the long-horizon ones.
+
+186
+00:06:17.132 --> 00:06:19.544
+The transformer's attention still reaches
+
+187
+00:06:19.544 --> 00:06:21.210
+two thousand and forty-eight.
+
+188
+00:06:21.555 --> 00:06:24.025
+And the transformer is told where it is in
+
+189
+00:06:24.025 --> 00:06:26.092
+the bar, by a sixteen-entry table.
+
+190
+00:06:26.437 --> 00:06:28.907
+The recurrent models have to count it from
+
+191
+00:06:28.907 --> 00:06:29.481
+slot zero.
+
+192
+00:06:33.347 --> 00:06:34.508
+The last rule is size.
+
+193
+00:06:34.825 --> 00:06:37.254
+A parameter, from lesson three point one,
+
+194
+00:06:37.254 --> 00:06:38.416
+is any learned number.
+
+195
+00:06:38.733 --> 00:06:40.739
+The parameter budget is how many each
+
+196
+00:06:40.739 --> 00:06:41.531
+model may have.
+
+197
+00:06:41.848 --> 00:06:44.171
+The plan said about two hundred thousand,
+
+198
+00:06:44.171 --> 00:06:45.650
+give or take twenty percent.
+
+199
+00:06:46.083 --> 00:06:48.472
+The LSTM has two hundred and two thousand,
+
+200
+00:06:48.472 --> 00:06:50.170
+three hundred and seventy-seven.
+
+201
+00:06:50.489 --> 00:06:52.825
+S4D has two hundred and one thousand, six
+
+202
+00:06:52.825 --> 00:06:55.001
+hundred and nine: seven hundred and
+
+203
+00:06:55.001 --> 00:06:57.231
+sixty-eight fewer, under half a percent.
+
+204
+00:06:57.549 --> 00:06:59.461
+The transformer has two hundred and
+
+205
+00:06:59.461 --> 00:07:01.637
+twenty-six thousand, eight hundred and
+
+206
+00:07:01.637 --> 00:07:02.274
+fifty-seven.
+
+207
+00:07:02.723 --> 00:07:04.902
+That's twelve percent more than the LSTM.
+
+208
+00:07:05.220 --> 00:07:07.718
+Inside the plan's band, but not equal, and
+
+209
+00:07:07.718 --> 00:07:09.950
+the report must say so: it's finding
+
+210
+00:07:09.950 --> 00:07:10.322
+thirty.
+
+211
+00:07:10.641 --> 00:07:12.926
+A transformer sized to match, sixty-four
+
+212
+00:07:12.926 --> 00:07:15.318
+wide and four layers deep, two hundred and
+
+213
+00:07:15.318 --> 00:07:17.550
+two thousand and fifty-seven, exists on
+
+214
+00:07:17.550 --> 00:07:17.869
+paper.
+
+215
+00:07:18.188 --> 00:07:19.304
+It was never trained.
+
+216
+00:07:20.828 --> 00:07:23.004
+And equal weights would not mean equal
+
+217
+00:07:23.004 --> 00:07:23.282
+cost.
+
+218
+00:07:23.617 --> 00:07:25.960
+The memory each one carries differs about
+
+219
+00:07:25.960 --> 00:07:28.414
+fifteen hundred fold: five hundred and
+
+220
+00:07:28.414 --> 00:07:30.702
+twelve numbers against seven hundred and
+
+221
+00:07:30.702 --> 00:07:31.817
+eighty-six thousand.
+
+222
+00:07:32.152 --> 00:07:34.439
+One warm step, measured offline on one
+
+223
+00:07:34.439 --> 00:07:36.782
+processor thread, takes zero point zero
+
+224
+00:07:36.782 --> 00:07:39.181
+four one milliseconds for the LSTM, zero
+
+225
+00:07:39.181 --> 00:07:41.468
+point one four three for S4D, and zero
+
+226
+00:07:41.468 --> 00:07:43.755
+point two seven nine for the transformer.
+
+227
+00:07:44.089 --> 00:07:45.038
+All far inside a
+
+228
+00:07:45.038 --> 00:07:47.492
+hundred-and-twenty-five-millisecond slot,
+
+229
+00:07:47.492 --> 00:07:49.445
+and inside lesson one point four's
+
+230
+00:07:49.445 --> 00:07:51.564
+decision window of thirty-seven and a
+
+231
+00:07:51.564 --> 00:07:51.843
+half.
+
+232
+00:07:53.531 --> 00:07:56.016
+Say it in one breath: every drummer reads
+
+233
+00:07:56.016 --> 00:07:58.236
+five numbers a slot and answers with nine
+
+234
+00:07:58.236 --> 00:08:00.879
+logits, never from the future; carries its
+
+235
+00:08:00.879 --> 00:08:03.100
+state through the song and detaches it at
+
+236
+00:08:03.100 --> 00:08:05.426
+each chunk edge; offers the same three
+
+237
+00:08:05.426 --> 00:08:07.805
+calls; remembers the guitar but not its
+
+238
+00:08:07.805 --> 00:08:10.184
+own drums; and trains on the same songs
+
+239
+00:08:10.184 --> 00:08:12.564
+the same way, at near, not equal, size.
+
+240
+00:08:12.881 --> 00:08:14.943
+This pairs with the contract itself,
+
+241
+00:08:14.943 --> 00:08:17.322
+sections one to five, and the model dot py
+
+242
+00:08:17.322 --> 00:08:19.595
+row of Reading the code in part two of the
+
+243
+00:08:19.595 --> 00:08:20.494
+course explainer.
+
+244
+00:08:20.811 --> 00:08:23.243
+Next, lesson four point one: recurrent
+
+245
+00:08:23.243 --> 00:08:24.723
+nets, and why they forget.
+

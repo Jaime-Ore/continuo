@@ -1,0 +1,1162 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.760
+Part four point seven point four.
+
+2
+00:00:02.075 --> 00:00:04.225
+Attention for one head, built piece by
+
+3
+00:00:04.225 --> 00:00:05.535
+piece on the worked slot.
+
+4
+00:00:09.473 --> 00:00:11.986
+Part four point seven point three ended on
+
+5
+00:00:11.986 --> 00:00:14.557
+one number: how much two vectors agree.
+
+6
+00:00:14.908 --> 00:00:17.655
+Now the worked slot: validation song zero
+
+7
+00:00:17.655 --> 00:00:19.875
+zero one one b three c f, slot five
+
+8
+00:00:19.875 --> 00:00:22.388
+hundred and seventy-six, the downbeat of
+
+9
+00:00:22.388 --> 00:00:23.265
+bar thirty-six.
+
+10
+00:00:23.615 --> 00:00:25.485
+It is about to choose its drums.
+
+11
+00:00:25.836 --> 00:00:28.407
+It may look back at every slot before it,
+
+12
+00:00:28.407 --> 00:00:30.569
+and at itself: five hundred and
+
+13
+00:00:30.569 --> 00:00:32.965
+seventy-seven slots, from slot zero to
+
+14
+00:00:32.965 --> 00:00:34.660
+five hundred and seventy-six.
+
+15
+00:00:35.011 --> 00:00:37.582
+Only past slots are in view; part four
+
+16
+00:00:37.582 --> 00:00:39.802
+point seven point seven shows how the
+
+17
+00:00:39.802 --> 00:00:40.913
+future is kept out.
+
+18
+00:00:41.362 --> 00:00:43.243
+Each slot's vector comes in three
+
+19
+00:00:43.243 --> 00:00:45.344
+versions, called q, k and v, of
+
+20
+00:00:45.344 --> 00:00:47.557
+twenty-four numbers each in the head we
+
+21
+00:00:47.557 --> 00:00:49.824
+follow, one of four in the first block.
+
+22
+00:00:50.156 --> 00:00:52.258
+Why three versions is part four point
+
+23
+00:00:52.258 --> 00:00:54.857
+seven point five; why twenty-four is four
+
+24
+00:00:54.857 --> 00:00:56.074
+point seven point six.
+
+25
+00:00:56.406 --> 00:00:58.452
+Here we only need where each is used.
+
+26
+00:00:58.784 --> 00:01:01.218
+q, the query, belongs to the slot doing
+
+27
+00:01:01.218 --> 00:01:01.882
+the looking.
+
+28
+00:01:02.213 --> 00:01:04.592
+k, the key, belongs to each slot being
+
+29
+00:01:04.592 --> 00:01:06.196
+looked at, and gets scored.
+
+30
+00:01:06.528 --> 00:01:09.072
+v, the value, is what each of those slots
+
+31
+00:01:09.072 --> 00:01:09.680
+hands over.
+
+32
+00:01:13.197 --> 00:01:15.151
+Step one: give every slot in view a score.
+
+33
+00:01:15.400 --> 00:01:17.271
+The raw score of slot j, call it r j, is
+
+34
+00:01:17.271 --> 00:01:18.976
+the dot product of slot five hundred and
+
+35
+00:01:18.976 --> 00:01:20.556
+seventy-six's query with slot j's key.
+
+36
+00:01:20.806 --> 00:01:21.720
+Here are five of them.
+
+37
+00:01:21.970 --> 00:01:23.841
+Slot five hundred and seventy-three, three
+
+38
+00:01:23.841 --> 00:01:25.670
+back, is the thirty-one point one nine we
+
+39
+00:01:25.670 --> 00:01:27.001
+multiplied out in the last part.
+
+40
+00:01:27.250 --> 00:01:29.329
+The rest are negative: its own slot, minus
+
+41
+00:01:29.329 --> 00:01:31.200
+fourteen point seven seven; one back,
+
+42
+00:01:31.200 --> 00:01:32.697
+minus forty-three point three eight.
+
+43
+00:01:33.128 --> 00:01:35.251
+That's five hundred and seventy-seven
+
+44
+00:01:35.251 --> 00:01:37.261
+scores, each one a dot product of
+
+45
+00:01:37.261 --> 00:01:38.267
+twenty-four pairs.
+
+46
+00:01:38.602 --> 00:01:40.948
+A high score means this slot's key agrees
+
+47
+00:01:40.948 --> 00:01:42.903
+with what the query is looking for.
+
+48
+00:01:46.293 --> 00:01:47.203
+How big do scores get?
+
+49
+00:01:47.451 --> 00:01:49.269
+Try it with vectors that mean nothing:
+
+50
+00:01:49.269 --> 00:01:51.088
+random numbers, each with a spread of one.
+
+51
+00:01:51.336 --> 00:01:53.155
+Take two random lists of two numbers, dot
+
+52
+00:01:53.155 --> 00:01:54.808
+them, and repeat two hundred thousand
+
+53
+00:01:54.808 --> 00:01:55.056
+times.
+
+54
+00:01:55.304 --> 00:01:56.958
+The results spread about one point four.
+
+55
+00:01:57.206 --> 00:01:58.942
+With twenty-four numbers, the spread is
+
+56
+00:01:58.942 --> 00:01:59.603
+four point nine.
+
+57
+00:01:59.851 --> 00:02:01.339
+With ninety-six, nine point eight.
+
+58
+00:02:01.587 --> 00:02:03.282
+The spread grows like the square root of
+
+59
+00:02:03.282 --> 00:02:03.695
+the width.
+
+60
+00:02:04.246 --> 00:02:05.168
+Why the square root?
+
+61
+00:02:05.445 --> 00:02:07.244
+Each of the twenty-four products has a
+
+62
+00:02:07.244 --> 00:02:07.890
+spread of one.
+
+63
+00:02:08.166 --> 00:02:10.104
+When you add numbers that don't depend on
+
+64
+00:02:10.104 --> 00:02:12.364
+each other, their spreads squared add up:
+
+65
+00:02:12.364 --> 00:02:14.301
+the squared spread is called the variance.
+
+66
+00:02:14.577 --> 00:02:16.515
+So the variance is twenty-four, and the
+
+67
+00:02:16.515 --> 00:02:18.544
+spread is the square root of twenty-four,
+
+68
+00:02:18.544 --> 00:02:19.789
+four point eight nine nine.
+
+69
+00:02:20.225 --> 00:02:22.540
+Divide each dot product by the square root
+
+70
+00:02:22.540 --> 00:02:24.910
+of its width, and every row comes back to
+
+71
+00:02:24.910 --> 00:02:25.772
+a spread of one.
+
+72
+00:02:27.152 --> 00:02:29.115
+So T128 divides every raw score by the
+
+73
+00:02:29.115 --> 00:02:31.179
+square root of twenty-four, four point
+
+74
+00:02:31.179 --> 00:02:33.343
+eight nine nine, or, the same thing,
+
+75
+00:02:33.343 --> 00:02:35.457
+multiplies it by zero point two zero four
+
+76
+00:02:35.457 --> 00:02:35.659
+one.
+
+77
+00:02:35.961 --> 00:02:37.974
+Call the result s j, the scaled score.
+
+78
+00:02:38.276 --> 00:02:40.591
+For slot five hundred and seventy-three:
+
+79
+00:02:40.591 --> 00:02:42.706
+thirty-one point one nine over four point
+
+80
+00:02:42.706 --> 00:02:44.870
+eight nine nine, six point three six six.
+
+81
+00:02:45.254 --> 00:02:47.488
+Be clear about what this is: a fixed
+
+82
+00:02:47.488 --> 00:02:49.456
+setting, chosen for random-looking
+
+83
+00:02:49.456 --> 00:02:51.530
+vectors, as at the start of training.
+
+84
+00:02:51.849 --> 00:02:54.242
+The original transformer does the same;
+
+85
+00:02:54.242 --> 00:02:56.423
+the course explainer gives its reason as
+
+86
+00:02:56.423 --> 00:02:57.327
+stable gradients.
+
+87
+00:02:57.646 --> 00:02:59.933
+The trained model is not random: this
+
+88
+00:02:59.933 --> 00:03:02.060
+head's raw scores over its five hundred
+
+89
+00:03:02.060 --> 00:03:04.081
+and seventy-seven slots spread twenty
+
+90
+00:03:04.081 --> 00:03:04.666
+point five.
+
+91
+00:03:04.985 --> 00:03:07.219
+Trained scores are far larger than random
+
+92
+00:03:07.219 --> 00:03:07.485
+ones.
+
+93
+00:03:07.804 --> 00:03:09.666
+Why keep scores small at the start?
+
+94
+00:03:09.985 --> 00:03:12.325
+Because of what softmax, the next step,
+
+95
+00:03:12.325 --> 00:03:13.495
+does with big numbers.
+
+96
+00:03:16.840 --> 00:03:19.002
+Step two turns scores into weights, with
+
+97
+00:03:19.002 --> 00:03:20.410
+four made-up keys to see it.
+
+98
+00:03:20.712 --> 00:03:23.276
+Their scores: two, one, one half, minus
+
+99
+00:03:23.276 --> 00:03:23.477
+one.
+
+100
+00:03:23.779 --> 00:03:25.941
+We want weights that are never negative,
+
+101
+00:03:25.941 --> 00:03:28.103
+add up to one, and give the bigger score
+
+102
+00:03:28.103 --> 00:03:28.958
+the bigger share.
+
+103
+00:03:29.465 --> 00:03:32.192
+First try: divide each score by their sum,
+
+104
+00:03:32.192 --> 00:03:33.009
+two and a half.
+
+105
+00:03:33.337 --> 00:03:35.627
+That gives D a weight of minus zero point
+
+106
+00:03:35.627 --> 00:03:35.899
+four.
+
+107
+00:03:36.226 --> 00:03:38.571
+A negative share makes no sense, so that
+
+108
+00:03:38.571 --> 00:03:38.898
+fails.
+
+109
+00:03:39.747 --> 00:03:40.913
+Second try, in three moves.
+
+110
+00:03:41.154 --> 00:03:43.003
+Move one: raise e, two point seven one
+
+111
+00:03:43.003 --> 00:03:44.450
+eight, to the power of each score.
+
+112
+00:03:44.691 --> 00:03:46.460
+Any power of e is positive, even e to the
+
+113
+00:03:46.460 --> 00:03:48.068
+minus one, zero point three six eight.
+
+114
+00:03:48.310 --> 00:03:50.199
+Move two: add them up, twelve point one
+
+115
+00:03:50.199 --> 00:03:50.360
+two.
+
+116
+00:03:50.601 --> 00:03:52.209
+Move three: divide each by the sum.
+
+117
+00:03:52.450 --> 00:03:54.219
+Zero point six one, zero point two two,
+
+118
+00:03:54.219 --> 00:03:55.787
+zero point one four, zero point zero
+
+119
+00:03:55.787 --> 00:03:56.028
+three.
+
+120
+00:03:56.269 --> 00:03:58.038
+They are all positive, they add to one,
+
+121
+00:03:58.038 --> 00:03:59.485
+and the order of the scores is kept.
+
+122
+00:03:59.949 --> 00:04:02.561
+Written as a formula: the weight of key j
+
+123
+00:04:02.561 --> 00:04:04.894
+is e to its score, over the sum of e to
+
+124
+00:04:04.894 --> 00:04:05.561
+every score.
+
+125
+00:04:05.894 --> 00:04:08.284
+This is the softmax, and its outputs are
+
+126
+00:04:08.284 --> 00:04:09.506
+the attention weights.
+
+127
+00:04:10.555 --> 00:04:11.260
+Why exponentials?
+
+128
+00:04:11.509 --> 00:04:13.253
+They are always positive, and they keep
+
+129
+00:04:13.253 --> 00:04:13.668
+the order.
+
+130
+00:04:13.917 --> 00:04:15.453
+A score one higher gives e times the
+
+131
+00:04:15.453 --> 00:04:17.363
+weight: A's seven point three eight nine
+
+132
+00:04:17.363 --> 00:04:18.982
+is two point seven one eight times B's.
+
+133
+00:04:19.231 --> 00:04:20.975
+And adding the same number to every score
+
+134
+00:04:20.975 --> 00:04:23.009
+changes nothing: add ten to all four, and
+
+135
+00:04:23.009 --> 00:04:24.254
+the weights come out the same.
+
+136
+00:04:24.503 --> 00:04:26.371
+Only the differences between scores count,
+
+137
+00:04:26.371 --> 00:04:28.074
+which parts four point seven point seven
+
+138
+00:04:28.074 --> 00:04:29.776
+and four point seven point eight rely on.
+
+139
+00:04:30.913 --> 00:04:32.120
+Now stretch the scores.
+
+140
+00:04:32.434 --> 00:04:35.058
+Times five: ten, five, two and a half,
+
+141
+00:04:35.058 --> 00:04:35.636
+minus five.
+
+142
+00:04:35.950 --> 00:04:38.469
+A takes zero point nine nine three: nearly
+
+143
+00:04:38.469 --> 00:04:39.047
+everything.
+
+144
+00:04:39.361 --> 00:04:41.565
+Large scores make softmax close to a hard
+
+145
+00:04:41.565 --> 00:04:42.510
+choice of one key.
+
+146
+00:04:42.825 --> 00:04:45.396
+Shrink them instead, times one fifth: the
+
+147
+00:04:45.396 --> 00:04:47.338
+weights flatten towards equal shares.
+
+148
+00:04:47.766 --> 00:04:48.924
+That's why we scaled.
+
+149
+00:04:49.255 --> 00:04:50.964
+Without the division, random
+
+150
+00:04:50.964 --> 00:04:53.060
+width-twenty-four scores would spread
+
+151
+00:04:53.060 --> 00:04:55.541
+about four point nine times wider, and the
+
+152
+00:04:55.541 --> 00:04:57.747
+top key would take zero point nine nine
+
+153
+00:04:57.747 --> 00:05:00.228
+two, before the model has learned anything
+
+154
+00:05:00.228 --> 00:05:01.055
+worth choosing.
+
+155
+00:05:04.423 --> 00:05:07.066
+Now the real thing: the head we follow, at
+
+156
+00:05:07.066 --> 00:05:08.863
+slot five hundred and seventy-six.
+
+157
+00:05:09.180 --> 00:05:11.399
+These are the five slots that end up with
+
+158
+00:05:11.399 --> 00:05:13.672
+the most weight, out of five hundred and
+
+159
+00:05:13.672 --> 00:05:14.412
+seventy-seven.
+
+160
+00:05:14.729 --> 00:05:16.895
+First the raw scores, the dot products.
+
+161
+00:05:17.212 --> 00:05:19.062
+Then divided by the square root of
+
+162
+00:05:19.062 --> 00:05:19.696
+twenty-four.
+
+163
+00:05:20.146 --> 00:05:22.379
+Each head also adds a penalty that grows
+
+164
+00:05:22.379 --> 00:05:23.903
+with how far back a slot is.
+
+165
+00:05:24.230 --> 00:05:26.572
+Part four point seven point eight explains
+
+166
+00:05:26.572 --> 00:05:29.458
+it; here it is just a number added on: for
+
+167
+00:05:29.458 --> 00:05:31.854
+this head, a quarter per slot of distance.
+
+168
+00:05:32.181 --> 00:05:32.725
+Call it b.
+
+169
+00:05:33.052 --> 00:05:35.394
+Add it on: s plus b is the total that
+
+170
+00:05:35.394 --> 00:05:36.319
+softmax works on.
+
+171
+00:05:36.786 --> 00:05:37.489
+Now softmax.
+
+172
+00:05:37.841 --> 00:05:40.595
+Raise e to each s plus b: two hundred and
+
+173
+00:05:40.595 --> 00:05:42.822
+seventy-four point nine for slot five
+
+174
+00:05:42.822 --> 00:05:45.342
+hundred and seventy-three, six point one
+
+175
+00:05:45.342 --> 00:05:47.451
+one three for slot five hundred and
+
+176
+00:05:47.451 --> 00:05:49.971
+fifty-seven, and tiny numbers after that.
+
+177
+00:05:50.323 --> 00:05:52.959
+Add all five hundred and seventy-seven:
+
+178
+00:05:52.959 --> 00:05:55.128
+two hundred and eighty-one point one.
+
+179
+00:05:55.479 --> 00:05:57.530
+Divide: slot five hundred and
+
+180
+00:05:57.530 --> 00:05:59.991
+seventy-three takes zero point nine seven
+
+181
+00:05:59.991 --> 00:06:00.577
+seven six.
+
+182
+00:06:00.929 --> 00:06:01.925
+Almost all of it.
+
+183
+00:06:02.277 --> 00:06:04.562
+And all five hundred and seventy-seven
+
+184
+00:06:04.562 --> 00:06:06.144
+weights add to exactly one.
+
+185
+00:06:06.657 --> 00:06:07.262
+One detail.
+
+186
+00:06:07.593 --> 00:06:09.960
+Slot five hundred and fifty-seven, a bar
+
+187
+00:06:09.960 --> 00:06:12.272
+further back, has a slightly higher raw
+
+188
+00:06:12.272 --> 00:06:14.749
+score than five hundred and seventy-three,
+
+189
+00:06:14.749 --> 00:06:16.180
+thirty-two point one four.
+
+190
+00:06:16.511 --> 00:06:18.878
+The distance penalty pulls it down to zero
+
+191
+00:06:18.878 --> 00:06:19.924
+point zero two two.
+
+192
+00:06:20.254 --> 00:06:22.621
+Four point seven point eight comes back to
+
+193
+00:06:22.621 --> 00:06:22.896
+this.
+
+194
+00:06:26.240 --> 00:06:26.824
+Step three.
+
+195
+00:06:27.143 --> 00:06:29.374
+Each slot in view hands over its value,
+
+196
+00:06:29.374 --> 00:06:30.437
+twenty-four numbers.
+
+197
+00:06:30.755 --> 00:06:32.986
+Multiply each value by its weight and add
+
+198
+00:06:32.986 --> 00:06:33.624
+them all up.
+
+199
+00:06:33.943 --> 00:06:36.120
+The result is the head's output for slot
+
+200
+00:06:36.120 --> 00:06:38.617
+five hundred and seventy-six: twenty-four
+
+201
+00:06:38.617 --> 00:06:41.061
+numbers, a blend of the values, mostly of
+
+202
+00:06:41.061 --> 00:06:41.751
+the heaviest.
+
+203
+00:06:42.207 --> 00:06:44.366
+Work one of the twenty-four numbers
+
+204
+00:06:44.366 --> 00:06:45.865
+through: entry zero.
+
+205
+00:06:46.225 --> 00:06:49.043
+Slot five hundred and seventy-three: zero
+
+206
+00:06:49.043 --> 00:06:51.262
+point nine seven seven six times its
+
+207
+00:06:51.262 --> 00:06:53.780
+value's entry zero, minus one point two
+
+208
+00:06:53.780 --> 00:06:56.359
+seven eight: minus one point two five.
+
+209
+00:06:56.718 --> 00:06:59.057
+Slot five hundred and fifty-seven adds
+
+210
+00:06:59.057 --> 00:07:01.575
+minus zero point zero two six, and slot
+
+211
+00:07:01.575 --> 00:07:03.734
+five hundred and forty-one far less.
+
+212
+00:07:04.094 --> 00:07:06.492
+The other five hundred and seventy-four
+
+213
+00:07:06.492 --> 00:07:08.951
+slots together add minus zero point zero
+
+214
+00:07:08.951 --> 00:07:09.790
+zero zero two.
+
+215
+00:07:10.150 --> 00:07:12.968
+Entry zero of the output: minus one point
+
+216
+00:07:12.968 --> 00:07:13.928
+two seven seven.
+
+217
+00:07:14.416 --> 00:07:16.678
+Put the output next to slot five hundred
+
+218
+00:07:16.678 --> 00:07:19.327
+and seventy-three's value: almost the same
+
+219
+00:07:19.327 --> 00:07:19.768
+numbers.
+
+220
+00:07:20.099 --> 00:07:22.471
+With ninety-eight percent of the weight on
+
+221
+00:07:22.471 --> 00:07:24.678
+one slot, this head's answer is, in
+
+222
+00:07:24.678 --> 00:07:26.720
+effect, what slot five hundred and
+
+223
+00:07:26.720 --> 00:07:28.154
+seventy-three handed over.
+
+224
+00:07:28.485 --> 00:07:30.692
+Its top three slots, five hundred and
+
+225
+00:07:30.692 --> 00:07:33.230
+seventy-three, fifty-seven and forty-one,
+
+226
+00:07:33.230 --> 00:07:35.548
+sit at the same place in the bar, a bar
+
+227
+00:07:35.548 --> 00:07:37.920
+apart, and the distance penalty lets the
+
+228
+00:07:37.920 --> 00:07:38.803
+most recent win.
+
+229
+00:07:39.134 --> 00:07:41.396
+Part four point seven point six looks at
+
+230
+00:07:41.396 --> 00:07:42.555
+what each head picks.
+
+231
+00:07:45.907 --> 00:07:47.410
+Put the three steps into one line.
+
+232
+00:07:47.676 --> 00:07:49.754
+q, the looking slot's query: one row of
+
+233
+00:07:49.754 --> 00:07:50.285
+twenty-four.
+
+234
+00:07:50.550 --> 00:07:52.629
+K, every key in view stacked as rows, five
+
+235
+00:07:52.629 --> 00:07:54.442
+hundred and seventy-seven by twenty-four.
+
+236
+00:07:54.707 --> 00:07:56.565
+The little T turns it on its side, so q
+
+237
+00:07:56.565 --> 00:07:58.466
+times K transposed is all five hundred and
+
+238
+00:07:58.466 --> 00:08:00.456
+seventy-seven dot products at once: the
+
+239
+00:08:00.456 --> 00:08:00.943
+raw scores.
+
+240
+00:08:01.208 --> 00:08:03.331
+Divided by the square root of twenty-four:
+
+241
+00:08:03.331 --> 00:08:03.862
+the scaling.
+
+242
+00:08:04.127 --> 00:08:06.294
+Plus B, one number for each slot in view:
+
+243
+00:08:06.294 --> 00:08:08.195
+the band that keeps the future out and the
+
+244
+00:08:08.195 --> 00:08:10.097
+distance penalty, parts four point seven
+
+245
+00:08:10.097 --> 00:08:11.822
+point seven and four point seven point
+
+246
+00:08:11.822 --> 00:08:12.087
+eight.
+
+247
+00:08:12.353 --> 00:08:14.033
+Here, the box we added in the table.
+
+248
+00:08:14.298 --> 00:08:16.333
+Softmax across the row: five hundred and
+
+249
+00:08:16.333 --> 00:08:18.013
+seventy-seven weights that add to one.
+
+250
+00:08:18.279 --> 00:08:20.445
+Times V, the values stacked the same way:
+
+251
+00:08:20.445 --> 00:08:22.391
+the weighted sum, twenty-four numbers out.
+
+252
+00:08:22.786 --> 00:08:24.332
+In T128's code it is three lines.
+
+253
+00:08:24.614 --> 00:08:26.629
+The scores, with the scaling folded into
+
+254
+00:08:26.629 --> 00:08:28.644
+q: q times the width to the minus one
+
+255
+00:08:28.644 --> 00:08:28.878
+half.
+
+256
+00:08:29.159 --> 00:08:31.221
+Then the bias B is added: the distance
+
+257
+00:08:31.221 --> 00:08:33.236
+penalty of four point seven point eight,
+
+258
+00:08:33.236 --> 00:08:35.064
+and the band of four point seven point
+
+259
+00:08:35.064 --> 00:08:36.564
+seven that keeps the future out.
+
+260
+00:08:36.845 --> 00:08:37.970
+Then softmax, times V.
+
+261
+00:08:38.251 --> 00:08:40.219
+On the CPU and in training, one library
+
+262
+00:08:40.219 --> 00:08:41.625
+call does the same arithmetic.
+
+263
+00:08:42.883 --> 00:08:44.574
+This is the same four steps as lesson
+
+264
+00:08:44.574 --> 00:08:46.755
+seventeen of the course: scores, scale,
+
+265
+00:08:46.755 --> 00:08:48.714
+softmax, times V, with our bias B added
+
+266
+00:08:48.714 --> 00:08:50.717
+before the softmax, and a key width of two
+
+267
+00:08:50.717 --> 00:08:52.320
+in his example and twenty-four here.
+
+268
+00:08:52.587 --> 00:08:54.456
+One difference to keep straight: his
+
+269
+00:08:54.456 --> 00:08:56.148
+general transformer ends with another
+
+270
+00:08:56.148 --> 00:08:57.839
+softmax, over a vocabulary of words.
+
+271
+00:08:58.106 --> 00:08:59.976
+Ours ends in nine sigmoids, from lesson
+
+272
+00:08:59.976 --> 00:09:01.890
+three point two, so the softmax you just
+
+273
+00:09:01.890 --> 00:09:03.226
+built is the only one in T128.
+
+274
+00:09:04.697 --> 00:09:07.240
+Say it in one breath: every slot in view
+
+275
+00:09:07.240 --> 00:09:09.506
+gets a score, my query dotted with its
+
+276
+00:09:09.506 --> 00:09:11.551
+key, divided by the square root of
+
+277
+00:09:11.551 --> 00:09:14.039
+twenty-four, plus the bias B of parts four
+
+278
+00:09:14.039 --> 00:09:16.195
+point seven point seven and four point
+
+279
+00:09:16.195 --> 00:09:17.190
+seven point eight.
+
+280
+00:09:17.521 --> 00:09:19.898
+Softmax turns the scores into weights that
+
+281
+00:09:19.898 --> 00:09:21.446
+are positive and add to one.
+
+282
+00:09:21.777 --> 00:09:23.933
+My output is the weighted sum of their
+
+283
+00:09:23.933 --> 00:09:24.320
+values.
+
+284
+00:09:24.652 --> 00:09:26.918
+This pairs with the four steps of lesson
+
+285
+00:09:26.918 --> 00:09:28.908
+seventeen in part two of the course
+
+286
+00:09:28.908 --> 00:09:31.230
+explainer, and its attention-over-slots
+
+287
+00:09:31.230 --> 00:09:31.838
+visualiser.
+
+288
+00:09:32.169 --> 00:09:34.767
+Next, part four point seven point five:
+
+289
+00:09:34.767 --> 00:09:37.089
+why three versions, queries, keys and
+
+290
+00:09:37.089 --> 00:09:37.476
+values.
+

@@ -1,0 +1,1142 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.107
+Lesson two point five.
+
+2
+00:00:01.401 --> 00:00:03.555
+Where our genre labels come from, and how
+
+3
+00:00:03.555 --> 00:00:04.436
+far to trust them.
+
+4
+00:00:08.380 --> 00:00:10.239
+A genre drummer learns from, and is
+
+5
+00:00:10.239 --> 00:00:11.854
+checked on, songs of its genre.
+
+6
+00:00:12.147 --> 00:00:13.664
+So each song needs a genre tag.
+
+7
+00:00:13.957 --> 00:00:16.305
+Lakh's files carry none: each one is named
+
+8
+00:00:16.305 --> 00:00:17.431
+by a hash of its bytes.
+
+9
+00:00:17.724 --> 00:00:19.828
+This lesson compares three ways of getting
+
+10
+00:00:19.828 --> 00:00:21.980
+one: borrowing it from a recording the
+
+11
+00:00:21.980 --> 00:00:23.986
+file was matched to, letting a machine
+
+12
+00:00:23.986 --> 00:00:25.796
+listen, and having people label it.
+
+13
+00:00:26.309 --> 00:00:28.289
+For each one, two questions: how many
+
+14
+00:00:28.289 --> 00:00:30.005
+songs does it reach, and is it right?
+
+15
+00:00:33.407 --> 00:00:34.689
+Start with a Lakh file.
+
+16
+00:00:35.023 --> 00:00:37.308
+In twenty sixteen, Raffel matched Lakh
+
+17
+00:00:37.308 --> 00:00:39.872
+files to recordings: he synthesised each
+
+18
+00:00:39.872 --> 00:00:42.101
+file and lined its sound up against the
+
+19
+00:00:42.101 --> 00:00:43.996
+recording's thirty-second preview.
+
+20
+00:00:44.331 --> 00:00:46.616
+Each match has a confidence from zero to
+
+21
+00:00:46.616 --> 00:00:49.012
+one, and he counted a match at a half or
+
+22
+00:00:49.012 --> 00:00:49.291
+more.
+
+23
+00:00:49.626 --> 00:00:51.632
+Lesson two point four used the same
+
+24
+00:00:51.632 --> 00:00:52.858
+matches to find songs.
+
+25
+00:00:53.193 --> 00:00:55.533
+The recordings belong to the Million Song
+
+26
+00:00:55.533 --> 00:00:58.097
+Dataset: data about a million commercial
+
+27
+00:00:58.097 --> 00:01:00.271
+recordings, with no audio we can use.
+
+28
+00:01:00.605 --> 00:01:02.946
+And tagtraum's C D two file gives many of
+
+29
+00:01:02.946 --> 00:01:05.343
+those recordings a genre, itself decided
+
+30
+00:01:05.343 --> 00:01:06.402
+by a majority vote.
+
+31
+00:01:06.736 --> 00:01:07.572
+Fifteen genres.
+
+32
+00:01:08.015 --> 00:01:08.550
+Now count.
+
+33
+00:01:08.872 --> 00:01:11.014
+Of fifty-two thousand seven hundred and
+
+34
+00:01:11.014 --> 00:01:13.424
+ninety-three songs, seventeen thousand two
+
+35
+00:01:13.424 --> 00:01:15.513
+hundred and ten match any recording at
+
+36
+00:01:15.513 --> 00:01:17.602
+all: thirty-two point six percent.
+
+37
+00:01:17.923 --> 00:01:20.227
+Seven thousand seven hundred and ninety of
+
+38
+00:01:20.227 --> 00:01:22.530
+those match only recordings tagtraum never
+
+39
+00:01:22.530 --> 00:01:23.012
+labelled.
+
+40
+00:01:23.333 --> 00:01:25.636
+That leaves nine thousand four hundred and
+
+41
+00:01:25.636 --> 00:01:28.207
+twenty songs with a genre: seventeen point
+
+42
+00:01:28.207 --> 00:01:28.957
+eight percent.
+
+43
+00:01:29.278 --> 00:01:30.725
+That share is the coverage.
+
+44
+00:01:31.046 --> 00:01:32.653
+And the ceiling is structural.
+
+45
+00:01:32.974 --> 00:01:35.277
+Every label borrowed from the Million Song
+
+46
+00:01:35.277 --> 00:01:37.473
+Dataset rides on Raffel's match, so no
+
+47
+00:01:37.473 --> 00:01:39.562
+such source can ever label more than a
+
+48
+00:01:39.562 --> 00:01:40.633
+third of the corpus.
+
+49
+00:01:44.073 --> 00:01:46.390
+A song can match several recordings, and
+
+50
+00:01:46.390 --> 00:01:48.114
+they don't always share a genre.
+
+51
+00:01:48.437 --> 00:01:50.269
+So the label is decided by a vote.
+
+52
+00:01:50.592 --> 00:01:52.424
+Here it is, one piece at a time.
+
+53
+00:01:52.748 --> 00:01:55.280
+s is one song: in the code, one file of
+
+54
+00:01:55.280 --> 00:01:55.872
+our corpus.
+
+55
+00:01:56.196 --> 00:01:58.620
+M of s is its set of matches, m, keeping
+
+56
+00:01:58.620 --> 00:02:00.668
+those with a confidence of at least a
+
+57
+00:02:00.668 --> 00:02:02.499
+half: Raffel's own threshold.
+
+58
+00:02:02.823 --> 00:02:04.978
+tag of m is the tagtraum genre of match
+
+59
+00:02:04.978 --> 00:02:05.732
+m's recording.
+
+60
+00:02:06.055 --> 00:02:08.426
+The bold one is an indicator: it's one
+
+61
+00:02:08.426 --> 00:02:10.850
+when that tag equals the genre G, and zero
+
+62
+00:02:10.850 --> 00:02:11.389
+otherwise.
+
+63
+00:02:11.712 --> 00:02:13.975
+Summing it over the song's matches counts
+
+64
+00:02:13.975 --> 00:02:14.837
+the votes for G.
+
+65
+00:02:15.161 --> 00:02:17.316
+Arg max over G picks the genre with the
+
+66
+00:02:17.316 --> 00:02:17.908
+most votes.
+
+67
+00:02:18.232 --> 00:02:19.740
+And that's the song's genre.
+
+68
+00:02:20.706 --> 00:02:22.291
+Here's a real song from the corpus.
+
+69
+00:02:22.563 --> 00:02:24.555
+It has ten matches, and three of them are
+
+70
+00:02:24.555 --> 00:02:26.593
+recordings tagtraum labels: Pop at zero
+
+71
+00:02:26.593 --> 00:02:28.540
+point seven, Pop at zero point seven one
+
+72
+00:02:28.540 --> 00:02:30.442
+nine, and Rock at zero point seven five
+
+73
+00:02:30.442 --> 00:02:30.624
+one.
+
+74
+00:02:30.895 --> 00:02:32.978
+Pop gets two votes, Rock one, so the song
+
+75
+00:02:32.978 --> 00:02:33.295
+is Pop.
+
+76
+00:02:33.567 --> 00:02:35.333
+Even though its single best match says
+
+77
+00:02:35.333 --> 00:02:35.560
+Rock.
+
+78
+00:02:35.831 --> 00:02:37.960
+That's what a vote does: two good matches
+
+79
+00:02:37.960 --> 00:02:39.454
+outweigh one slightly better one.
+
+80
+00:02:39.883 --> 00:02:42.102
+One thing the equation leaves out is a
+
+81
+00:02:42.102 --> 00:02:42.330
+tie.
+
+82
+00:02:42.671 --> 00:02:45.345
+This song has two tagged matches: Country
+
+83
+00:02:45.345 --> 00:02:47.734
+at zero point seven two seven and Rock at
+
+84
+00:02:47.734 --> 00:02:50.180
+zero point seven four eight: one vote
+
+85
+00:02:50.180 --> 00:02:50.465
+each.
+
+86
+00:02:50.806 --> 00:02:53.252
+The code gives a tie to the most confident
+
+87
+00:02:53.252 --> 00:02:54.902
+match, so this one is Rock.
+
+88
+00:02:55.433 --> 00:02:56.646
+And votes split often.
+
+89
+00:02:56.977 --> 00:02:59.293
+Of two thousand two hundred and sixty-six
+
+90
+00:02:59.293 --> 00:03:01.775
+songs with two or more tagged matches, all
+
+91
+00:03:01.775 --> 00:03:03.981
+the matches agree in only eight hundred
+
+92
+00:03:03.981 --> 00:03:06.242
+and eighty-six: thirty-nine percent.
+
+93
+00:03:09.727 --> 00:03:11.891
+tagtraum also publishes a stricter file, C
+
+94
+00:03:11.891 --> 00:03:12.276
+D two C.
+
+95
+00:03:12.565 --> 00:03:14.200
+It's C D two with every ambiguous
+
+96
+00:03:14.200 --> 00:03:16.124
+recording removed: the eighty-nine
+
+97
+00:03:16.124 --> 00:03:18.048
+thousand recordings whose sources split
+
+98
+00:03:18.048 --> 00:03:18.962
+between two genres.
+
+99
+00:03:19.251 --> 00:03:21.223
+Six thousand eight hundred and thirty of
+
+100
+00:03:21.223 --> 00:03:23.003
+our labelled songs have a match that
+
+101
+00:03:23.003 --> 00:03:24.061
+survives in C D two C.
+
+102
+00:03:24.349 --> 00:03:26.274
+The other two thousand five hundred and
+
+103
+00:03:26.274 --> 00:03:28.246
+ninety are labelled only by the full C D
+
+104
+00:03:28.246 --> 00:03:28.438
+two.
+
+105
+00:03:28.905 --> 00:03:31.062
+And seventy percent of those two thousand
+
+106
+00:03:31.062 --> 00:03:33.423
+five hundred and ninety are Rock or Pop:
+
+107
+00:03:33.423 --> 00:03:35.631
+the boundary that's already the hardest to
+
+108
+00:03:35.631 --> 00:03:35.887
+call.
+
+109
+00:03:36.373 --> 00:03:38.597
+So every row keeps a flag, c d two c
+
+110
+00:03:38.597 --> 00:03:40.535
+clean, instead of dropping them.
+
+111
+00:03:40.877 --> 00:03:43.328
+Whoever uses the labels can take the clean
+
+112
+00:03:43.328 --> 00:03:45.837
+six thousand eight hundred and thirty, or
+
+113
+00:03:45.837 --> 00:03:48.231
+all nine thousand four hundred and twenty.
+
+114
+00:03:49.714 --> 00:03:51.361
+Now the numbers that mattered.
+
+115
+00:03:51.691 --> 00:03:53.943
+The split in lesson two point four holds
+
+116
+00:03:53.943 --> 00:03:56.249
+back five percent of songs for validation.
+
+117
+00:03:56.579 --> 00:03:58.885
+Of those, a hundred and fifty-two carry
+
+118
+00:03:58.885 --> 00:04:00.423
+Rock, and eighty-four Pop.
+
+119
+00:04:00.752 --> 00:04:03.114
+Country twenty-five, R and B nineteen,
+
+120
+00:04:03.114 --> 00:04:05.530
+Jazz fourteen, Metal eleven, Electronic
+
+121
+00:04:05.530 --> 00:04:05.805
+nine.
+
+122
+00:04:06.270 --> 00:04:08.458
+A Country drummer checked on twenty-five
+
+123
+00:04:08.458 --> 00:04:08.778
+songs.
+
+124
+00:04:09.099 --> 00:04:11.500
+Too few, Jaime decided on the fifteenth of
+
+125
+00:04:11.500 --> 00:04:13.849
+October, and that sent the genre drummers
+
+126
+00:04:13.849 --> 00:04:15.290
+to look for another corpus.
+
+127
+00:04:18.733 --> 00:04:21.315
+MidiCaps, published in twenty twenty-four,
+
+128
+00:04:21.315 --> 00:04:23.292
+labels nearly every Lakh file:
+
+129
+00:04:23.292 --> 00:04:25.379
+ninety-seven point two percent of our
+
+130
+00:04:25.379 --> 00:04:25.763
+corpus.
+
+131
+00:04:26.093 --> 00:04:28.674
+Its method: play each MIDI file through a
+
+132
+00:04:28.674 --> 00:04:30.596
+synthesiser, with a General MIDI
+
+133
+00:04:30.596 --> 00:04:31.145
+soundfont.
+
+134
+00:04:31.475 --> 00:04:33.946
+Then run an audio classifier on the sound,
+
+135
+00:04:33.946 --> 00:04:35.704
+and keep its top two genre tags.
+
+136
+00:04:36.153 --> 00:04:38.338
+We checked it against tagtraum on the nine
+
+137
+00:04:38.338 --> 00:04:40.472
+thousand one hundred and forty-nine songs
+
+138
+00:04:40.472 --> 00:04:41.031
+both label.
+
+139
+00:04:41.336 --> 00:04:43.318
+Agreement is the share where MidiCaps'
+
+140
+00:04:43.318 --> 00:04:45.148
+first tag is tagtraum's genre:
+
+141
+00:04:45.148 --> 00:04:46.723
+twenty-three point two percent.
+
+142
+00:04:47.028 --> 00:04:49.162
+Two sources guessing at random, each at
+
+143
+00:04:49.162 --> 00:04:51.093
+its own rates, would agree on about
+
+144
+00:04:51.093 --> 00:04:51.449
+twenty.
+
+145
+00:04:51.754 --> 00:04:53.228
+So it is barely above chance.
+
+146
+00:04:54.636 --> 00:04:56.700
+Recall asks it per genre: of the songs
+
+147
+00:04:56.700 --> 00:04:58.671
+tagtraum calls Country, what share does
+
+148
+00:04:58.671 --> 00:04:59.937
+MidiCaps also call Country?
+
+149
+00:05:00.219 --> 00:05:02.471
+Electronic, sixty-seven percent: the tag
+
+150
+00:05:02.471 --> 00:05:03.644
+it hands out most anyway.
+
+151
+00:05:03.925 --> 00:05:04.770
+Pop, thirty-six.
+
+152
+00:05:05.051 --> 00:05:06.036
+Rock, twenty-three.
+
+153
+00:05:06.318 --> 00:05:06.881
+Jazz, six.
+
+154
+00:05:07.162 --> 00:05:09.039
+Country, R and B and Metal: zero.
+
+155
+00:05:09.320 --> 00:05:09.930
+Not one song.
+
+156
+00:05:10.212 --> 00:05:12.088
+It calls Country songs pop, and Metal
+
+157
+00:05:12.088 --> 00:05:12.605
+songs rock.
+
+158
+00:05:14.124 --> 00:05:14.339
+Why?
+
+159
+00:05:14.661 --> 00:05:17.077
+Look at what it calls electronic: forty
+
+160
+00:05:17.077 --> 00:05:19.493
+point seven percent of our corpus, against
+
+161
+00:05:19.493 --> 00:05:20.352
+tagtraum's five.
+
+162
+00:05:20.674 --> 00:05:22.929
+The classifier is hearing the synthesiser.
+
+163
+00:05:23.251 --> 00:05:25.506
+A General MIDI soundfont makes every file
+
+164
+00:05:25.506 --> 00:05:27.761
+sound like a synthesiser playing it, so
+
+165
+00:05:27.761 --> 00:05:30.070
+the classifier labels the sound, not the
+
+166
+00:05:30.070 --> 00:05:30.392
+music.
+
+167
+00:05:30.839 --> 00:05:33.041
+Its most confident tags do only slightly
+
+168
+00:05:33.041 --> 00:05:35.673
+better: above zero point seven, agreement
+
+169
+00:05:35.673 --> 00:05:37.767
+is thirty-two point six percent, and
+
+170
+00:05:37.767 --> 00:05:39.540
+that's on just eighty-nine songs.
+
+171
+00:05:39.862 --> 00:05:41.849
+And it wasn't combined with tagtraum
+
+172
+00:05:41.849 --> 00:05:42.225
+either.
+
+173
+00:05:42.547 --> 00:05:44.856
+Where both label a song, tagtraum is the
+
+174
+00:05:44.856 --> 00:05:45.555
+better label.
+
+175
+00:05:45.877 --> 00:05:48.186
+Where only MidiCaps does, its errors are
+
+176
+00:05:48.186 --> 00:05:50.657
+systematic: each genre's errors lean one
+
+177
+00:05:50.657 --> 00:05:53.073
+predictable way, Country to pop, R and B
+
+178
+00:05:53.073 --> 00:05:54.738
+to electronic, Metal to rock.
+
+179
+00:05:55.060 --> 00:05:57.477
+So adding them adds a bias, not noise that
+
+180
+00:05:57.477 --> 00:05:58.175
+averages out.
+
+181
+00:05:58.498 --> 00:06:00.324
+Only its genre tags were measured.
+
+182
+00:06:00.646 --> 00:06:02.955
+Its mood and chord tags come from the same
+
+183
+00:06:02.955 --> 00:06:05.157
+synthesised audio and were never checked.
+
+184
+00:06:08.597 --> 00:06:10.358
+XMIDI, from twenty twenty-five, is a
+
+185
+00:06:10.358 --> 00:06:11.689
+hundred and eight thousand and
+
+186
+00:06:11.689 --> 00:06:13.235
+twenty-three MIDI files labelled by
+
+187
+00:06:13.235 --> 00:06:13.536
+people.
+
+188
+00:06:13.794 --> 00:06:15.297
+Its authors hired ten professional
+
+189
+00:06:15.297 --> 00:06:15.769
+annotators.
+
+190
+00:06:16.027 --> 00:06:17.831
+Each annotation was checked independently
+
+191
+00:06:17.831 --> 00:06:18.948
+by at least three experts.
+
+192
+00:06:19.205 --> 00:06:20.838
+Files went in batches of five hundred.
+
+193
+00:06:21.095 --> 00:06:23.028
+A random sample of each batch was checked,
+
+194
+00:06:23.028 --> 00:06:24.660
+and a batch under ninety-five percent
+
+195
+00:06:24.660 --> 00:06:26.035
+accuracy went back for revision.
+
+196
+00:06:26.292 --> 00:06:28.010
+Weekly meetings reviewed the cases they
+
+197
+00:06:28.010 --> 00:06:29.814
+got wrong, and a panel settled the hard
+
+198
+00:06:29.814 --> 00:06:30.029
+ones.
+
+199
+00:06:30.398 --> 00:06:32.396
+Six genres: Rock twenty-six thousand seven
+
+200
+00:06:32.396 --> 00:06:33.937
+hundred and eight, Pop twenty-five
+
+201
+00:06:33.937 --> 00:06:35.602
+thousand five hundred and eighty-two,
+
+202
+00:06:35.602 --> 00:06:37.392
+Country twenty-three thousand five hundred
+
+203
+00:06:37.392 --> 00:06:39.266
+and fifty-one, Jazz fifteen thousand eight
+
+204
+00:06:39.266 --> 00:06:41.014
+hundred and sixty-two, Classical twelve
+
+205
+00:06:41.014 --> 00:06:42.929
+thousand six hundred and sixty, and Folk,
+
+206
+00:06:42.929 --> 00:06:44.595
+three thousand six hundred and sixty,
+
+207
+00:06:44.595 --> 00:06:46.218
+which the file names spell traditional.
+
+208
+00:06:46.468 --> 00:06:48.092
+Eleven emotion labels come in the same
+
+209
+00:06:48.092 --> 00:06:48.508
+file name.
+
+210
+00:06:49.915 --> 00:06:52.284
+What holds by construction: no automatic
+
+211
+00:06:52.284 --> 00:06:54.343
+classifier stands between the music and
+
+212
+00:06:54.343 --> 00:06:54.858
+the label.
+
+213
+00:06:55.167 --> 00:06:56.042
+People decide it.
+
+214
+00:06:56.351 --> 00:06:58.617
+And XMIDI has no electronic genre at all,
+
+215
+00:06:58.617 --> 00:07:00.831
+so MidiCaps' particular failure, calling
+
+216
+00:07:00.831 --> 00:07:02.581
+things electronic, cannot recur.
+
+217
+00:07:02.890 --> 00:07:05.310
+What it bought, for Rock validation: on
+
+218
+00:07:05.310 --> 00:07:07.575
+Lakh, a hundred and fifty-two files carry
+
+219
+00:07:07.575 --> 00:07:09.532
+a tagtraum Rock label, and they are
+
+220
+00:07:09.532 --> 00:07:10.407
+ninety-one songs.
+
+221
+00:07:10.716 --> 00:07:12.827
+The XMIDI Rock list has four hundred and
+
+222
+00:07:12.827 --> 00:07:15.093
+seventy-seven files, at most four hundred
+
+223
+00:07:15.093 --> 00:07:16.740
+and twenty-three distinct songs.
+
+224
+00:07:17.049 --> 00:07:19.212
+Lesson two point seven builds those lists.
+
+225
+00:07:19.521 --> 00:07:21.786
+It has no Metal, Electronic or R and B,
+
+226
+00:07:21.786 --> 00:07:22.146
+though.
+
+227
+00:07:25.610 --> 00:07:27.428
+First: the paper publishes no agreement
+
+228
+00:07:27.428 --> 00:07:28.640
+figure between its annotators.
+
+229
+00:07:28.883 --> 00:07:30.458
+Ninety-five percent is a spot-check by
+
+230
+00:07:30.458 --> 00:07:31.953
+their own checkers, not a measured
+
+231
+00:07:31.953 --> 00:07:32.357
+agreement.
+
+232
+00:07:32.600 --> 00:07:34.499
+Second: the same file, copied under two
+
+233
+00:07:34.499 --> 00:07:36.034
+names, sometimes carries two genres.
+
+234
+00:07:36.276 --> 00:07:37.893
+A hundred and forty groups of identical
+
+235
+00:07:37.893 --> 00:07:39.630
+copies disagree; lesson two point six
+
+236
+00:07:39.630 --> 00:07:40.842
+shows how they were set aside.
+
+237
+00:07:41.084 --> 00:07:43.024
+Third, and the biggest: does XMIDI agree
+
+238
+00:07:43.024 --> 00:07:44.397
+with tagtraum on songs both label?
+
+239
+00:07:44.640 --> 00:07:46.296
+Nothing in the project's record measured
+
+240
+00:07:46.296 --> 00:07:46.418
+it.
+
+241
+00:07:46.784 --> 00:07:49.086
+So here's a first look, computed for this
+
+242
+00:07:49.086 --> 00:07:50.550
+lesson and not yet reviewed.
+
+243
+00:07:50.864 --> 00:07:53.061
+A melody twin is a Lakh song whose guitar
+
+244
+00:07:53.061 --> 00:07:54.996
+line matches an XMIDI file's closely
+
+245
+00:07:54.996 --> 00:07:56.775
+enough to call them the same song.
+
+246
+00:07:57.089 --> 00:07:59.338
+XMIDI files with a twin in Lakh's training
+
+247
+00:07:59.338 --> 00:08:01.430
+side were removed from the corpus, as
+
+248
+00:08:01.430 --> 00:08:03.784
+lesson two point six shows, and each one's
+
+249
+00:08:03.784 --> 00:08:04.726
+twin was recorded.
+
+250
+00:08:05.040 --> 00:08:06.871
+For three thousand one hundred and
+
+251
+00:08:06.871 --> 00:08:09.015
+forty-one of those removed files, both
+
+252
+00:08:09.015 --> 00:08:11.212
+labels are rock, pop, country or jazz.
+
+253
+00:08:11.526 --> 00:08:13.305
+They agree on forty-three percent.
+
+254
+00:08:13.618 --> 00:08:15.606
+Guessing at the same rates would give
+
+255
+00:08:15.606 --> 00:08:16.234
+twenty-nine.
+
+256
+00:08:16.548 --> 00:08:18.902
+Jazz agrees least: tagtraum calls about
+
+257
+00:08:18.902 --> 00:08:20.942
+six percent of XMIDI's Jazz files Jazz.
+
+258
+00:08:21.255 --> 00:08:23.400
+Country is next, at twenty-three and a
+
+259
+00:08:23.400 --> 00:08:24.080
+half percent.
+
+260
+00:08:24.507 --> 00:08:25.238
+Read it with care.
+
+261
+00:08:25.482 --> 00:08:27.269
+These are removed files, not the training
+
+262
+00:08:27.269 --> 00:08:27.513
+songs.
+
+263
+00:08:27.757 --> 00:08:29.341
+Several XMIDI files can share one Lakh
+
+264
+00:08:29.341 --> 00:08:31.291
+song: these three thousand one hundred and
+
+265
+00:08:31.291 --> 00:08:32.875
+forty-one files share two thousand one
+
+266
+00:08:32.875 --> 00:08:34.622
+hundred and thirty, so the pairs are not
+
+267
+00:08:34.622 --> 00:08:35.110
+independent.
+
+268
+00:08:35.354 --> 00:08:36.775
+And tagtraum labels the commercial
+
+269
+00:08:36.775 --> 00:08:37.913
+recording, XMIDI the file.
+
+270
+00:08:38.157 --> 00:08:39.863
+Neither one is ground truth, and nobody
+
+271
+00:08:39.863 --> 00:08:41.407
+has listened to the disagreements yet.
+
+272
+00:08:41.650 --> 00:08:43.275
+That check belongs in the report before
+
+273
+00:08:43.275 --> 00:08:44.413
+any genre claim leans on it.
+
+274
+00:08:45.915 --> 00:08:47.354
+Three sources, three trade-offs.
+
+275
+00:08:47.608 --> 00:08:49.343
+tagtraum is the one we adopted, but it
+
+276
+00:08:49.343 --> 00:08:50.401
+reaches eighteen percent.
+
+277
+00:08:50.655 --> 00:08:52.305
+MidiCaps reaches nearly everything and
+
+278
+00:08:52.305 --> 00:08:53.998
+agrees with tagtraum on under a quarter.
+
+279
+00:08:54.252 --> 00:08:56.072
+XMIDI's people label a whole corpus, and
+
+280
+00:08:56.072 --> 00:08:57.850
+how far they agree with tagtraum is still
+
+281
+00:08:57.850 --> 00:08:59.712
+open: a first look says a little under
+
+282
+00:08:59.712 --> 00:08:59.924
+half.
+
+283
+00:09:00.178 --> 00:09:01.870
+For any label in the report, give its
+
+284
+00:09:01.870 --> 00:09:03.521
+coverage, its agreement with another
+
+285
+00:09:03.521 --> 00:09:04.791
+source, and how it was made.
+

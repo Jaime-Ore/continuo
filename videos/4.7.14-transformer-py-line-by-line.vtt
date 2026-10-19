@@ -1,0 +1,1350 @@
+WEBVTT
+
+1
+00:00:00.020 --> 00:00:02.122
+Part four point seven point fourteen.
+
+2
+00:00:02.463 --> 00:00:05.019
+The whole of transformer dot p y, read top
+
+3
+00:00:05.019 --> 00:00:07.348
+to bottom, with everything the earlier
+
+4
+00:00:07.348 --> 00:00:08.029
+parts built.
+
+5
+00:00:10.688 --> 00:00:12.670
+Every part so far built one piece of the
+
+6
+00:00:12.670 --> 00:00:13.492
+strip at the top.
+
+7
+00:00:13.782 --> 00:00:15.909
+Now read the file that is all of it: a
+
+8
+00:00:15.909 --> 00:00:17.843
+hundred and seventy-two lines, top to
+
+9
+00:00:17.843 --> 00:00:18.181
+bottom.
+
+10
+00:00:18.471 --> 00:00:20.598
+Seven stretches, and each line on the way
+
+11
+00:00:20.598 --> 00:00:22.677
+gets its part number, so you can go back
+
+12
+00:00:22.677 --> 00:00:24.079
+to the part that explains it.
+
+13
+00:00:24.369 --> 00:00:26.254
+A long line is split onto a second row
+
+14
+00:00:26.254 --> 00:00:28.478
+with no number; nothing in it is changed.
+
+15
+00:00:30.495 --> 00:00:31.969
+The first thirty-two lines are the
+
+16
+00:00:31.969 --> 00:00:33.821
+docstring: the design note, in words.
+
+17
+00:00:34.074 --> 00:00:36.010
+Skip reading it aloud; here is what each
+
+18
+00:00:36.010 --> 00:00:36.642
+paragraph says.
+
+19
+00:00:36.894 --> 00:00:38.789
+Lines one to six: what the model is and
+
+20
+00:00:38.789 --> 00:00:40.472
+its sizes, two hundred and twenty-six
+
+21
+00:00:40.472 --> 00:00:42.114
+thousand eight hundred and fifty-seven
+
+22
+00:00:42.114 --> 00:00:42.451
+weights.
+
+23
+00:00:42.704 --> 00:00:44.640
+Eight to ten: positions by ALiBi, four
+
+24
+00:00:44.640 --> 00:00:45.650
+point seven point eight.
+
+25
+00:00:45.903 --> 00:00:47.671
+Twelve to eighteen: the cache is the
+
+26
+00:00:47.671 --> 00:00:49.439
+state, and gradients reach five hundred
+
+27
+00:00:49.439 --> 00:00:51.081
+and twelve while attention reaches two
+
+28
+00:00:51.081 --> 00:00:52.975
+thousand and forty-eight, four point seven
+
+29
+00:00:52.975 --> 00:00:53.607
+point thirteen.
+
+30
+00:00:53.860 --> 00:00:55.796
+Twenty to twenty-seven: the bar phase,
+
+31
+00:00:55.796 --> 00:00:56.933
+four point seven point two.
+
+32
+00:00:57.185 --> 00:00:59.122
+And twenty-nine to thirty-one: the shape
+
+33
+00:00:59.122 --> 00:00:59.669
+of the state.
+
+34
+00:00:59.922 --> 00:01:01.858
+One sentence is out of date: it says the
+
+35
+00:01:01.858 --> 00:01:03.458
+live phase comes from the board's bar
+
+36
+00:01:03.458 --> 00:01:05.352
+position; the live code actually starts
+
+37
+00:01:05.352 --> 00:01:07.078
+the slot counter at zero on the downbeat
+
+38
+00:01:07.078 --> 00:01:08.173
+where each segment begins.
+
+39
+00:01:10.438 --> 00:01:12.544
+Line thirty-four is a Python detail: type
+
+40
+00:01:12.544 --> 00:01:13.530
+hints are read lazily.
+
+41
+00:01:13.799 --> 00:01:15.098
+Nothing to do with the model.
+
+42
+00:01:15.367 --> 00:01:17.338
+Thirty-six: an ordered dictionary, a
+
+43
+00:01:17.338 --> 00:01:18.951
+dictionary that remembers its order.
+
+44
+00:01:19.220 --> 00:01:21.147
+It will keep the last few band matrices,
+
+45
+00:01:21.147 --> 00:01:22.312
+at line a hundred and ten.
+
+46
+00:01:22.581 --> 00:01:24.194
+Thirty-eight to forty: PyTorch.
+
+47
+00:01:24.463 --> 00:01:26.569
+torch for tensors, nn for layers, and F,
+
+48
+00:01:26.569 --> 00:01:28.540
+the functions, where the attention kernel
+
+49
+00:01:28.540 --> 00:01:28.809
+lives.
+
+50
+00:01:29.189 --> 00:01:31.564
+Forty-two: N features, the five inputs of
+
+51
+00:01:31.564 --> 00:01:33.601
+four point seven point one: onset,
+
+52
+00:01:33.601 --> 00:01:35.879
+velocity, intensity, the velocity flag and
+
+53
+00:01:35.879 --> 00:01:36.170
+tempo.
+
+54
+00:01:36.461 --> 00:01:38.449
+Forty-three, from model dot p y, the
+
+55
+00:01:38.449 --> 00:01:40.582
+contract of part four point zero: nine
+
+56
+00:01:40.582 --> 00:01:42.570
+voices, the detach, and the option C
+
+57
+00:01:42.570 --> 00:01:42.958
+helpers.
+
+58
+00:01:43.249 --> 00:01:45.625
+And forty-five: PHASE, sixteen slots to a
+
+59
+00:01:45.625 --> 00:01:47.758
+four-four bar, four point seven point two.
+
+60
+00:01:49.997 --> 00:01:52.474
+alibi slopes makes the four fixed slopes
+
+61
+00:01:52.474 --> 00:01:54.407
+of four point seven point eight.
+
+62
+00:01:54.769 --> 00:01:57.307
+The loop runs h from zero to three, and
+
+63
+00:01:57.307 --> 00:01:59.904
+each slope is two to the minus eight times
+
+64
+00:01:59.904 --> 00:02:01.354
+h plus one, over four.
+
+65
+00:02:01.869 --> 00:02:03.849
+So the slopes are a quarter, a sixteenth,
+
+66
+00:02:03.849 --> 00:02:05.442
+a sixty-fourth and a two hundred and
+
+67
+00:02:05.442 --> 00:02:05.959
+fifty-sixth.
+
+68
+00:02:06.217 --> 00:02:08.068
+One bar back, sixteen slots, that is a
+
+69
+00:02:08.068 --> 00:02:09.876
+penalty of four, one, a quarter and a
+
+70
+00:02:09.876 --> 00:02:11.813
+sixteenth: one steep head and one whose
+
+71
+00:02:11.813 --> 00:02:13.578
+horizon is sixty-four bars, inside the
+
+72
+00:02:13.578 --> 00:02:15.127
+hundred-and-twenty-eight-bar window.
+
+73
+00:02:15.386 --> 00:02:17.409
+The docstring counts h from one; the code
+
+74
+00:02:17.409 --> 00:02:18.700
+counts from zero and adds one.
+
+75
+00:02:18.958 --> 00:02:20.551
+Same numbers, and a test pins them.
+
+76
+00:02:22.753 --> 00:02:24.742
+Line fifty-three: a Block, one of the
+
+77
+00:02:24.742 --> 00:02:26.731
+model's two blocks, four point seven point
+
+78
+00:02:26.731 --> 00:02:26.908
+ten.
+
+79
+00:02:27.173 --> 00:02:28.941
+Its docstring is the whole block in one
+
+80
+00:02:28.941 --> 00:02:30.842
+line, pre-LN: h plus dropout of the
+
+81
+00:02:30.842 --> 00:02:32.654
+projected attention of the layer norm of
+
+82
+00:02:32.654 --> 00:02:34.776
+h; then h plus dropout of the feed-forward
+
+83
+00:02:34.776 --> 00:02:35.793
+of the layer norm of h.
+
+84
+00:02:36.058 --> 00:02:37.296
+Four point seven point nine.
+
+85
+00:02:37.561 --> 00:02:39.683
+Fifty-eight: four heads, each ninety-six
+
+86
+00:02:39.683 --> 00:02:41.009
+over four, twenty-four wide.
+
+87
+00:02:41.274 --> 00:02:42.467
+Four point seven point six.
+
+88
+00:02:42.859 --> 00:02:44.861
+Fifty-nine: the first layer norm,
+
+89
+00:02:44.861 --> 00:02:46.765
+ninety-six gammas and ninety-six betas.
+
+90
+00:02:47.058 --> 00:02:49.207
+Sixty: the one linear layer that makes
+
+91
+00:02:49.207 --> 00:02:51.355
+queries, keys and values, ninety-six in
+
+92
+00:02:51.355 --> 00:02:53.162
+and two hundred and eighty-eight out.
+
+93
+00:02:53.455 --> 00:02:54.822
+Four point seven point five.
+
+94
+00:02:55.115 --> 00:02:57.215
+Sixty-one: the output projection that
+
+95
+00:02:57.215 --> 00:02:59.363
+joins the heads, ninety-six to ninety-six.
+
+96
+00:02:59.656 --> 00:03:00.975
+Four point seven point six.
+
+97
+00:03:01.267 --> 00:03:03.123
+Sixty-two: the second layer norm.
+
+98
+00:03:03.416 --> 00:03:05.955
+Sixty-three: the feed-forward: ninety-six
+
+99
+00:03:05.955 --> 00:03:08.104
+to three hundred and eighty-four, GELU,
+
+100
+00:03:08.104 --> 00:03:09.227
+and back to ninety-six.
+
+101
+00:03:09.520 --> 00:03:10.838
+Four point seven point ten.
+
+102
+00:03:11.131 --> 00:03:13.573
+Sixty-four: dropout, ten percent, on the
+
+103
+00:03:13.573 --> 00:03:15.184
+two branches, in training only.
+
+104
+00:03:15.477 --> 00:03:17.284
+One block holds a hundred and eleven
+
+105
+00:03:17.284 --> 00:03:19.286
+thousand eight hundred and forty numbers.
+
+106
+00:03:21.475 --> 00:03:23.314
+Block dot forward takes h, the slots of
+
+107
+00:03:23.314 --> 00:03:25.240
+this call, k zero and v zero, the cache
+
+108
+00:03:25.240 --> 00:03:26.772
+carried in, the bias, and keep.
+
+109
+00:03:27.034 --> 00:03:28.391
+The docstring gives the shapes.
+
+110
+00:03:28.654 --> 00:03:30.536
+On the worked slot's chunk, the chunk at
+
+111
+00:03:30.536 --> 00:03:32.462
+five hundred and twelve, h is one by five
+
+112
+00:03:32.462 --> 00:03:34.345
+hundred and twelve by ninety-six; the
+
+113
+00:03:34.345 --> 00:03:36.139
+cache is one by four by five hundred and
+
+114
+00:03:36.139 --> 00:03:38.109
+twelve by twenty-four; the bias four by
+
+115
+00:03:38.109 --> 00:03:39.947
+five hundred and twelve by a thousand and
+
+116
+00:03:39.947 --> 00:03:40.473
+twenty-four.
+
+117
+00:03:40.887 --> 00:03:42.544
+Seventy is the busiest line in the file.
+
+118
+00:03:42.792 --> 00:03:44.407
+First the layer norm, then the q k v
+
+119
+00:03:44.407 --> 00:03:46.105
+layer: two hundred and eighty-eight
+
+120
+00:03:46.105 --> 00:03:46.809
+numbers per slot.
+
+121
+00:03:47.058 --> 00:03:48.424
+View reads those two hundred and
+
+122
+00:03:48.424 --> 00:03:50.164
+eighty-eight as three roles, times four
+
+123
+00:03:50.164 --> 00:03:51.282
+heads, times twenty-four.
+
+124
+00:03:51.530 --> 00:03:53.228
+Permute moves the role axis to the front
+
+125
+00:03:53.228 --> 00:03:54.761
+and the heads before the slots, so
+
+126
+00:03:54.761 --> 00:03:56.666
+unpacking gives q, k and v, each of shape
+
+127
+00:03:56.666 --> 00:03:58.819
+B, heads, C, twenty-four: every head its
+
+128
+00:03:58.819 --> 00:03:59.399
+own attention.
+
+129
+00:03:59.790 --> 00:04:02.101
+Seventy-one and seventy-two put the cache
+
+130
+00:04:02.101 --> 00:04:04.136
+in front of this call's own keys and
+
+131
+00:04:04.136 --> 00:04:05.787
+values, along the slot axis.
+
+132
+00:04:06.117 --> 00:04:08.703
+For the chunk at five hundred and twelve:
+
+133
+00:04:08.703 --> 00:04:10.958
+five hundred and twelve cached plus five
+
+134
+00:04:10.958 --> 00:04:13.214
+hundred and twelve new, a thousand and
+
+135
+00:04:13.214 --> 00:04:14.149
+twenty-four keys.
+
+136
+00:04:14.479 --> 00:04:16.130
+Four point seven point twelve.
+
+137
+00:04:18.411 --> 00:04:20.398
+Lines seventy-three to eighty run only on
+
+138
+00:04:20.398 --> 00:04:22.527
+the Mac's GPU with no gradient kept, which
+
+139
+00:04:22.527 --> 00:04:24.608
+means the trainer's validation passes:
+
+140
+00:04:24.608 --> 00:04:26.312
+there S D P A, PyTorch's built-in
+
+141
+00:04:26.312 --> 00:04:28.393
+attention, ran out of memory twice on the
+
+142
+00:04:28.393 --> 00:04:30.475
+twenty-sixth of September, so this branch
+
+143
+00:04:30.475 --> 00:04:32.462
+writes the same arithmetic out by hand,
+
+144
+00:04:32.462 --> 00:04:34.213
+and a test checks it matches the CPU.
+
+145
+00:04:34.497 --> 00:04:36.578
+Training, scoring and the live loop never
+
+146
+00:04:36.578 --> 00:04:36.957
+take it.
+
+147
+00:04:39.155 --> 00:04:41.675
+Eighty-two is attention, the whole of four
+
+148
+00:04:41.675 --> 00:04:44.363
+point seven point four in one call: scores
+
+149
+00:04:44.363 --> 00:04:46.659
+q dot k, scaled by one over the square
+
+150
+00:04:46.659 --> 00:04:49.011
+root of twenty-four, plus the bias from
+
+151
+00:04:49.011 --> 00:04:51.139
+four point seven point seven and four
+
+152
+00:04:51.139 --> 00:04:53.603
+point seven point eight, softmax over the
+
+153
+00:04:53.603 --> 00:04:56.011
+keys, and the weighted sum of the values.
+
+154
+00:04:56.347 --> 00:04:59.035
+The comment gives the result's shape: B,
+
+155
+00:04:59.035 --> 00:05:00.491
+heads, C, twenty-four.
+
+156
+00:05:00.827 --> 00:05:03.291
+On the worked slot, block one's head zero
+
+157
+00:05:03.291 --> 00:05:05.587
+puts zero point nine eight of its weight
+
+158
+00:05:05.587 --> 00:05:08.107
+on slot five hundred and seventy-three, so
+
+159
+00:05:08.107 --> 00:05:10.403
+its output is almost exactly that slot's
+
+160
+00:05:10.403 --> 00:05:10.739
+value.
+
+161
+00:05:11.224 --> 00:05:13.205
+Eighty-three, read from the inside:
+
+162
+00:05:13.205 --> 00:05:15.139
+transpose and reshape join the four heads
+
+163
+00:05:15.139 --> 00:05:17.027
+back into ninety-six, four point seven
+
+164
+00:05:17.027 --> 00:05:19.238
+point six; the projection mixes them;
+
+165
+00:05:19.238 --> 00:05:21.541
+dropout; and the result is added to h, the
+
+166
+00:05:21.541 --> 00:05:23.476
+residual stream of four point seven point
+
+167
+00:05:23.476 --> 00:05:23.706
+nine.
+
+168
+00:05:23.982 --> 00:05:25.732
+Eighty-four is the second half of the
+
+169
+00:05:25.732 --> 00:05:28.173
+block: layer norm, feed-forward, dropout,
+
+170
+00:05:28.173 --> 00:05:28.358
+add.
+
+171
+00:05:28.634 --> 00:05:29.878
+Four point seven point ten.
+
+172
+00:05:30.275 --> 00:05:32.245
+Eighty-five and eighty-six: n is the
+
+173
+00:05:32.245 --> 00:05:34.355
+number of keys, cached plus new, and the
+
+174
+00:05:34.355 --> 00:05:36.325
+block hands back h and the last keep keys
+
+175
+00:05:36.325 --> 00:05:38.342
+and values, two thousand and forty-seven
+
+176
+00:05:38.342 --> 00:05:38.717
+at most.
+
+177
+00:05:38.999 --> 00:05:40.922
+For the chunk at five hundred and twelve
+
+178
+00:05:40.922 --> 00:05:43.173
+all one thousand and twenty-four are kept;
+
+179
+00:05:43.173 --> 00:05:44.862
+once a song passes two thousand and
+
+180
+00:05:44.862 --> 00:05:46.785
+forty-seven slots, the oldest fall off.
+
+181
+00:05:47.066 --> 00:05:48.473
+Four point seven point twelve.
+
+182
+00:05:50.763 --> 00:05:52.408
+Eighty-nine: the model itself.
+
+183
+00:05:52.691 --> 00:05:54.806
+arch names the architecture; the shared
+
+184
+00:05:54.806 --> 00:05:56.828
+helpers in model dot p y print it in their
+
+185
+00:05:56.828 --> 00:05:57.157
+errors.
+
+186
+00:05:57.440 --> 00:05:59.603
+Ninety-two to ninety-four: every size,
+
+187
+00:05:59.603 --> 00:06:01.483
+with T one twenty-eight's values as the
+
+188
+00:06:01.483 --> 00:06:03.881
+defaults: d model ninety-six, two layers,
+
+189
+00:06:03.881 --> 00:06:05.997
+four heads, feed-forward three hundred and
+
+190
+00:06:05.997 --> 00:06:07.831
+eighty-four, window two thousand and
+
+191
+00:06:07.831 --> 00:06:09.994
+forty-eight, dropout zero point one, five
+
+192
+00:06:09.994 --> 00:06:11.922
+features in, nine voices out, and no
+
+193
+00:06:11.922 --> 00:06:13.050
+feedback: option B.
+
+194
+00:06:13.333 --> 00:06:15.354
+Ninety-six and ninety-seven refuse a width
+
+195
+00:06:15.354 --> 00:06:17.376
+that four heads cannot share, four point
+
+196
+00:06:17.376 --> 00:06:19.539
+seven point six; ninety-eight refuses an
+
+197
+00:06:19.539 --> 00:06:20.151
+empty window.
+
+198
+00:06:22.369 --> 00:06:24.118
+A hundred to a hundred and two keep the
+
+199
+00:06:24.118 --> 00:06:24.380
+sizes.
+
+200
+00:06:24.643 --> 00:06:26.741
+A hundred and three: how many numbers come
+
+201
+00:06:26.741 --> 00:06:27.266
+in per slot.
+
+202
+00:06:27.528 --> 00:06:29.321
+Five, or fourteen with option C's nine
+
+203
+00:06:29.321 --> 00:06:29.977
+fed-back drums.
+
+204
+00:06:30.239 --> 00:06:31.157
+Part four point zero.
+
+205
+00:06:31.419 --> 00:06:33.562
+A hundred and four: the input projection,
+
+206
+00:06:33.562 --> 00:06:35.529
+five to ninety-six, four point seven point
+
+207
+00:06:35.529 --> 00:06:35.704
+one.
+
+208
+00:06:35.966 --> 00:06:38.065
+A hundred and five: the bar-phase table,
+
+209
+00:06:38.065 --> 00:06:39.857
+sixteen rows of ninety-six, four point
+
+210
+00:06:39.857 --> 00:06:40.557
+seven point two.
+
+211
+00:06:40.972 --> 00:06:42.603
+A hundred and six: the two blocks.
+
+212
+00:06:42.854 --> 00:06:44.777
+A hundred and seven and eight: the final
+
+213
+00:06:44.777 --> 00:06:46.491
+layer norm and the head, ninety-six to
+
+214
+00:06:46.491 --> 00:06:46.993
+nine logits.
+
+215
+00:06:47.244 --> 00:06:48.498
+Four point seven point eleven.
+
+216
+00:06:48.749 --> 00:06:50.798
+A hundred and nine: the slopes, stored as
+
+217
+00:06:50.798 --> 00:06:52.930
+a buffer, not a parameter: never trained,
+
+218
+00:06:52.930 --> 00:06:54.728
+and not saved in the checkpoint, so they
+
+219
+00:06:54.728 --> 00:06:56.359
+are rebuilt from alibi slopes on every
+
+220
+00:06:56.359 --> 00:06:56.568
+load.
+
+221
+00:06:56.819 --> 00:06:58.575
+A hundred and ten: the cache of band
+
+222
+00:06:58.575 --> 00:06:58.951
+matrices.
+
+223
+00:07:01.119 --> 00:07:03.405
+Line a hundred and twelve: the interface,
+
+224
+00:07:03.405 --> 00:07:05.410
+the contract every candidate obeys, part
+
+225
+00:07:05.410 --> 00:07:06.157
+four point zero.
+
+226
+00:07:06.437 --> 00:07:08.676
+init state builds an empty cache: zeros of
+
+227
+00:07:08.676 --> 00:07:10.495
+shape B, four heads, zero slots,
+
+228
+00:07:10.495 --> 00:07:11.055
+twenty-four.
+
+229
+00:07:11.335 --> 00:07:13.574
+One pair, keys and values, per layer, and
+
+230
+00:07:13.574 --> 00:07:15.534
+the clone makes them two separate tensors.
+
+231
+00:07:15.813 --> 00:07:17.866
+And t, the song slot counter, starts at
+
+232
+00:07:17.866 --> 00:07:18.099
+zero.
+
+233
+00:07:18.379 --> 00:07:19.779
+Four point seven point twelve.
+
+234
+00:07:20.306 --> 00:07:22.683
+Forward: five numbers a slot in, nine
+
+235
+00:07:22.683 --> 00:07:23.633
+logits a slot out.
+
+236
+00:07:23.950 --> 00:07:26.116
+prev out is ignored unless the model was
+
+237
+00:07:26.116 --> 00:07:27.806
+built with feedback, option C.
+
+238
+00:07:28.123 --> 00:07:30.658
+A hundred and twenty-one and twenty-two: t
+
+239
+00:07:30.658 --> 00:07:32.665
+zero is where this call starts in the
+
+240
+00:07:32.665 --> 00:07:35.042
+song, and pos numbers its slots: five
+
+241
+00:07:35.042 --> 00:07:37.155
+hundred and twelve up to a thousand and
+
+242
+00:07:37.155 --> 00:07:39.320
+twenty-three for the worked slot's chunk.
+
+243
+00:07:39.637 --> 00:07:41.802
+A hundred and twenty-three is four point
+
+244
+00:07:41.802 --> 00:07:44.074
+seven point one and four point seven point
+
+245
+00:07:44.074 --> 00:07:46.081
+two: project the five numbers to
+
+246
+00:07:46.081 --> 00:07:48.405
+ninety-six, and add the bar-phase row for
+
+247
+00:07:48.405 --> 00:07:49.989
+each slot's index mod sixteen.
+
+248
+00:07:52.257 --> 00:07:54.592
+A hundred and twenty-four: T, how many
+
+249
+00:07:54.592 --> 00:07:56.775
+slots the cache already holds, read from
+
+250
+00:07:56.775 --> 00:07:57.943
+the first layer's keys.
+
+251
+00:07:58.247 --> 00:08:00.634
+A hundred and twenty-five: the band for T
+
+252
+00:08:00.634 --> 00:08:02.817
+cached and C new slots, four point seven
+
+253
+00:08:02.817 --> 00:08:04.797
+point seven and four point seven point
+
+254
+00:08:04.797 --> 00:08:05.101
+eight.
+
+255
+00:08:05.406 --> 00:08:07.944
+A hundred and twenty-six: keep, the window
+
+256
+00:08:07.944 --> 00:08:08.452
+minus one.
+
+257
+00:08:08.897 --> 00:08:10.866
+A hundred and twenty-seven to a hundred
+
+258
+00:08:10.866 --> 00:08:13.230
+and thirty: through the two blocks, each
+
+259
+00:08:13.230 --> 00:08:15.446
+with its own layer's cache, collecting the
+
+260
+00:08:15.446 --> 00:08:15.988
+new caches.
+
+261
+00:08:16.283 --> 00:08:18.549
+A hundred and thirty-one: the final norm
+
+262
+00:08:18.549 --> 00:08:20.617
+and the head, nine logits, four point
+
+263
+00:08:20.617 --> 00:08:23.079
+seven point eleven; and the new state, the
+
+264
+00:08:23.079 --> 00:08:24.901
+caches and the counter moved on by C.
+
+265
+00:08:25.335 --> 00:08:27.592
+A hundred and thirty-three: detach state,
+
+266
+00:08:27.592 --> 00:08:29.619
+the cut of part three point four, applied
+
+267
+00:08:29.619 --> 00:08:31.646
+by the trainer after every step: every
+
+268
+00:08:31.646 --> 00:08:33.534
+tensor in the state keeps its values and
+
+269
+00:08:33.534 --> 00:08:34.778
+loses its gradient history.
+
+270
+00:08:35.055 --> 00:08:36.529
+Four point seven point thirteen.
+
+271
+00:08:36.805 --> 00:08:38.740
+A hundred and thirty-six to a hundred and
+
+272
+00:08:38.740 --> 00:08:40.767
+thirty-eight: how many songs the state
+
+273
+00:08:40.767 --> 00:08:42.702
+holds, which the trainer checks against
+
+274
+00:08:42.702 --> 00:08:43.208
+each chunk.
+
+275
+00:08:45.396 --> 00:08:47.475
+A hundred and forty to a hundred and
+
+276
+00:08:47.475 --> 00:08:50.004
+forty-one: the band, four point seven
+
+277
+00:08:50.004 --> 00:08:50.679
+point seven.
+
+278
+00:08:51.016 --> 00:08:53.432
+It returns one sheet per head, C queries
+
+279
+00:08:53.432 --> 00:08:54.388
+by T plus C keys.
+
+280
+00:08:54.725 --> 00:08:57.366
+The docstring is the rule: query i of the
+
+281
+00:08:57.366 --> 00:08:59.727
+chunk sits at index T plus i of cache and
+
+282
+00:08:59.727 --> 00:09:02.200
+chunk together, and may see key j only if
+
+283
+00:09:02.200 --> 00:09:04.841
+the distance, T plus i minus j, is between
+
+284
+00:09:04.841 --> 00:09:06.527
+zero and the window minus one.
+
+285
+00:09:06.864 --> 00:09:09.562
+The bands are kept by shape: training uses
+
+286
+00:09:09.562 --> 00:09:11.922
+five, and the live loop one, once the
+
+287
+00:09:11.922 --> 00:09:12.709
+cache is full.
+
+288
+00:09:14.997 --> 00:09:17.671
+A hundred and forty-eight and forty-nine:
+
+289
+00:09:17.671 --> 00:09:19.890
+the distance from every query to every
+
+290
+00:09:19.890 --> 00:09:21.540
+key, a C by T plus C table.
+
+291
+00:09:21.881 --> 00:09:23.929
+Row sixty-four of the chunk at five
+
+292
+00:09:23.929 --> 00:09:26.204
+hundred and twelve is slot five hundred
+
+293
+00:09:26.204 --> 00:09:28.935
+and seventy-six; its distance to slot five
+
+294
+00:09:28.935 --> 00:09:30.926
+hundred and seventy-three is three.
+
+295
+00:09:31.267 --> 00:09:33.657
+A hundred and fifty: inside means no
+
+296
+00:09:33.657 --> 00:09:36.103
+future and nothing older than two thousand
+
+297
+00:09:36.103 --> 00:09:37.013
+and forty-seven.
+
+298
+00:09:37.355 --> 00:09:40.085
+A hundred and fifty-one: minus slope times
+
+299
+00:09:40.085 --> 00:09:42.474
+distance inside, four point seven point
+
+300
+00:09:42.474 --> 00:09:45.262
+eight; minus infinity outside, four point
+
+301
+00:09:45.262 --> 00:09:46.286
+seven point seven.
+
+302
+00:09:46.627 --> 00:09:48.846
+The view gives each head its own slope.
+
+303
+00:09:49.297 --> 00:09:51.465
+A hundred and fifty-two to a hundred and
+
+304
+00:09:51.465 --> 00:09:54.056
+fifty-seven: store the band, keep at most
+
+305
+00:09:54.056 --> 00:09:56.329
+eight, and drop the one used longest ago.
+
+306
+00:09:58.616 --> 00:10:00.431
+A hundred and fifty-nine to a hundred and
+
+307
+00:10:00.431 --> 00:10:02.505
+sixty-one: when the model moves to another
+
+308
+00:10:02.505 --> 00:10:04.319
+device, the stored bands are dropped,
+
+309
+00:10:04.319 --> 00:10:05.745
+because they live on the old one.
+
+310
+00:10:06.004 --> 00:10:08.035
+A hundred and sixty-three to sixty-six: n
+
+311
+00:10:08.035 --> 00:10:09.979
+params counts every learned number: two
+
+312
+00:10:09.979 --> 00:10:11.621
+hundred and twenty-six thousand eight
+
+313
+00:10:11.621 --> 00:10:13.522
+hundred and fifty-seven, four point seven
+
+314
+00:10:13.522 --> 00:10:13.954
+point ten.
+
+315
+00:10:14.213 --> 00:10:16.071
+The slopes are a buffer, so they are not
+
+316
+00:10:16.071 --> 00:10:16.417
+counted.
+
+317
+00:10:18.625 --> 00:10:20.707
+describe is the dictionary the trainer
+
+318
+00:10:20.707 --> 00:10:22.469
+writes into every run's manifest.
+
+319
+00:10:22.789 --> 00:10:25.352
+Its last entry is the full cache: keys and
+
+320
+00:10:25.352 --> 00:10:27.755
+values, two of them, times two layers,
+
+321
+00:10:27.755 --> 00:10:30.104
+times two thousand and forty-seven slots,
+
+322
+00:10:30.104 --> 00:10:32.293
+times ninety-six: seven hundred and
+
+323
+00:10:32.293 --> 00:10:34.215
+eighty-six thousand and forty-eight
+
+324
+00:10:34.215 --> 00:10:34.642
+numbers.
+
+325
+00:10:34.963 --> 00:10:36.564
+Four point seven point twelve.
+
+326
+00:10:38.098 --> 00:10:40.163
+Say it in one breath: transformer dot p y
+
+327
+00:10:40.163 --> 00:10:42.140
+is a block of layer norm, attention over a
+
+328
+00:10:42.140 --> 00:10:43.985
+carried cache with an ALiBi band, and a
+
+329
+00:10:43.985 --> 00:10:46.225
+feed-forward, run twice; five numbers in,
+
+330
+00:10:46.225 --> 00:10:48.158
+nine logits out, one slot or a chunk at a
+
+331
+00:10:48.158 --> 00:10:48.377
+time.
+
+332
+00:10:48.641 --> 00:10:50.354
+This pairs with the course explainer's
+
+333
+00:10:50.354 --> 00:10:52.287
+reading tour and lesson eighteen's table,
+
+334
+00:10:52.287 --> 00:10:54.000
+whose line numbers are from before the
+
+335
+00:10:54.000 --> 00:10:55.889
+sixteenth of October, two lines short of
+
+336
+00:10:55.889 --> 00:10:56.241
+today's.
+
+337
+00:10:56.504 --> 00:10:57.734
+Next, explain it yourself.
+

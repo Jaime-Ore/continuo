@@ -1,0 +1,378 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.071
+Lesson one point two.
+
+2
+00:00:01.369 --> 00:00:03.302
+How our drum model hears a guitar part.
+
+3
+00:00:07.243 --> 00:00:09.411
+Here is one bar of guitar, at a hundred
+
+4
+00:00:09.411 --> 00:00:10.856
+and twenty beats per minute.
+
+5
+00:00:11.166 --> 00:00:13.488
+Each dot is an onset: the moment a note
+
+6
+00:00:13.488 --> 00:00:15.811
+starts, wherever the guitarist happened to
+
+7
+00:00:15.811 --> 00:00:16.224
+play it.
+
+8
+00:00:16.738 --> 00:00:18.533
+We cut time into sixteenth notes.
+
+9
+00:00:18.860 --> 00:00:21.145
+Sixty seconds, divided by the beats per
+
+10
+00:00:21.145 --> 00:00:23.593
+minute, gives one beat: half a second.
+
+11
+00:00:23.920 --> 00:00:26.042
+A beat holds four sixteenths, so one
+
+12
+00:00:26.042 --> 00:00:28.109
+sixteenth lasts an eighth of a second.
+
+13
+00:00:28.436 --> 00:00:29.742
+We call each one a slot.
+
+14
+00:00:30.211 --> 00:00:31.495
+So one bar is sixteen slots.
+
+15
+00:00:32.151 --> 00:00:34.743
+To place a note, measure how many slots it
+
+16
+00:00:34.743 --> 00:00:37.279
+sits after the bar line, and round to the
+
+17
+00:00:37.279 --> 00:00:38.373
+nearest whole slot.
+
+18
+00:00:38.719 --> 00:00:41.081
+This note came at zero point seven seven
+
+19
+00:00:41.081 --> 00:00:41.542
+seconds.
+
+20
+00:00:41.888 --> 00:00:44.365
+That's six point one six slots in, so it
+
+21
+00:00:44.365 --> 00:00:45.345
+goes in slot six.
+
+22
+00:00:45.794 --> 00:00:47.767
+Every note snaps to its nearest slot.
+
+23
+00:00:48.087 --> 00:00:50.327
+Now a slot either holds an onset, or it
+
+24
+00:00:50.327 --> 00:00:50.754
+doesn't.
+
+25
+00:00:54.503 --> 00:00:56.654
+Two bars side by side make thirty-two
+
+26
+00:00:56.654 --> 00:00:57.955
+slots: one window.
+
+27
+00:00:58.294 --> 00:01:00.728
+The marks above are the beats, four to a
+
+28
+00:01:00.728 --> 00:01:00.954
+bar.
+
+29
+00:01:03.650 --> 00:01:05.774
+The model gets five numbers for every
+
+30
+00:01:05.774 --> 00:01:06.054
+slot.
+
+31
+00:01:06.389 --> 00:01:08.792
+The first is the onset: one if a note
+
+32
+00:01:08.792 --> 00:01:10.805
+started in this slot, zero if not.
+
+33
+00:01:11.287 --> 00:01:13.647
+The second is velocity: how hard the note
+
+34
+00:01:13.647 --> 00:01:15.756
+was hit, scaled from MIDI's nought to a
+
+35
+00:01:15.756 --> 00:01:17.915
+hundred and twenty-seven down to nought to
+
+36
+00:01:17.915 --> 00:01:18.116
+one.
+
+37
+00:01:18.983 --> 00:01:21.218
+The third is intensity: how busy the
+
+38
+00:01:21.218 --> 00:01:22.442
+guitar has been lately.
+
+39
+00:01:22.761 --> 00:01:23.985
+It's a running average.
+
+40
+00:01:24.304 --> 00:01:26.805
+Each slot, keep most of the old value, and
+
+41
+00:01:26.805 --> 00:01:28.667
+add a small share of the new onset.
+
+42
+00:01:28.986 --> 00:01:31.274
+The share, alpha, is chosen so that an
+
+43
+00:01:31.274 --> 00:01:33.668
+onset's effect halves every sixteen slots,
+
+44
+00:01:33.668 --> 00:01:34.094
+one bar.
+
+45
+00:01:34.577 --> 00:01:36.358
+Here it is across the two bars.
+
+46
+00:01:36.702 --> 00:01:39.058
+It starts at zero, because nothing has
+
+47
+00:01:39.058 --> 00:01:41.471
+been heard yet, and climbs as the notes
+
+48
+00:01:41.471 --> 00:01:42.160
+keep coming.
+
+49
+00:01:42.505 --> 00:01:44.917
+One onset on its own adds just zero point
+
+50
+00:01:44.917 --> 00:01:45.492
+zero four.
+
+51
+00:01:46.795 --> 00:01:49.063
+The fourth is a flag: does this song's
+
+52
+00:01:49.063 --> 00:01:50.610
+velocity mean anything at all?
+
+53
+00:01:50.919 --> 00:01:53.085
+In seventeen percent of the rock songs,
+
+54
+00:01:53.085 --> 00:01:55.250
+the notes use at most two loudness values.
+
+55
+00:01:55.560 --> 00:01:57.777
+The model is told when the channel carries
+
+56
+00:01:57.777 --> 00:01:58.189
+nothing.
+
+57
+00:01:58.499 --> 00:02:00.716
+Live, the board's velocity isn't trusted
+
+58
+00:02:00.716 --> 00:02:02.881
+yet, so the laptop sends one flat value
+
+59
+00:02:02.881 --> 00:02:04.015
+with the flag at zero.
+
+60
+00:02:04.459 --> 00:02:06.882
+And the fifth is tempo, shifted so that a
+
+61
+00:02:06.882 --> 00:02:08.369
+hundred and twenty is zero.
+
+62
+00:02:08.699 --> 00:02:11.177
+A hundred and eighty is plus a half, sixty
+
+63
+00:02:11.177 --> 00:02:12.058
+is minus a half.
+
+64
+00:02:15.353 --> 00:02:16.333
+There is one catch.
+
+65
+00:02:16.643 --> 00:02:18.707
+The three guitar rows slide one slot to
+
+66
+00:02:18.707 --> 00:02:19.222
+the right.
+
+67
+00:02:19.532 --> 00:02:21.853
+So when the model decides slot t, it reads
+
+68
+00:02:21.853 --> 00:02:24.226
+what the guitar did at slot t minus one:
+
+69
+00:02:24.226 --> 00:02:25.258
+the model is causal.
+
+70
+00:02:25.568 --> 00:02:27.631
+It can't use a note it hasn't heard yet.
+
+71
+00:02:27.941 --> 00:02:30.417
+The flag and the tempo don't move: they're
+
+72
+00:02:30.417 --> 00:02:31.294
+known in advance.
+
+73
+00:02:35.023 --> 00:02:35.825
+Take slot zero.
+
+74
+00:02:36.145 --> 00:02:38.442
+Its five numbers go into the drum model,
+
+75
+00:02:38.442 --> 00:02:40.739
+and out come nine probabilities, one for
+
+76
+00:02:40.739 --> 00:02:41.273
+each drum.
+
+77
+00:02:41.765 --> 00:02:44.345
+A decoder turns them into hits: a drum
+
+78
+00:02:44.345 --> 00:02:46.515
+plays if its probability clears that
+
+79
+00:02:46.515 --> 00:02:47.746
+drum's own threshold.
+
+80
+00:02:48.098 --> 00:02:50.444
+Each threshold is set so the drum plays
+
+81
+00:02:50.444 --> 00:02:52.496
+about as often as it does in forty
+
+82
+00:02:52.496 --> 00:02:53.493
+validation songs.
+
+83
+00:02:54.631 --> 00:02:55.386
+Then slot one.
+
+84
+00:02:55.709 --> 00:02:56.463
+Then slot two.
+
+85
+00:02:56.786 --> 00:02:59.157
+Slot by slot, the drum part is written,
+
+86
+00:02:59.157 --> 00:03:01.419
+always one sixteenth behind the guitar it
+
+87
+00:03:01.419 --> 00:03:01.958
+has heard.
+
+88
+00:03:02.929 --> 00:03:05.067
+Some of our models also read back the
+
+89
+00:03:05.067 --> 00:03:06.811
+drums they played one slot ago.
+
+90
+00:03:07.149 --> 00:03:09.399
+That's called option C, and it gets a
+
+91
+00:03:09.399 --> 00:03:10.412
+lesson of its own.
+
+92
+00:03:11.987 --> 00:03:14.266
+So the interface is small: five numbers
+
+93
+00:03:14.266 --> 00:03:16.242
+in, nine out, every sixteenth note.
+
+94
+00:03:16.546 --> 00:03:18.573
+Next: the loop that runs this live.
+

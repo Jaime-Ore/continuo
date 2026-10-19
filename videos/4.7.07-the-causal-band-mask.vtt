@@ -1,0 +1,758 @@
+WEBVTT
+
+1
+00:00:00.050 --> 00:00:01.617
+Four point seven point seven.
+
+2
+00:00:01.941 --> 00:00:04.373
+Which earlier slots each slot may look at,
+
+3
+00:00:04.373 --> 00:00:05.886
+and how the code makes sure.
+
+4
+00:00:10.357 --> 00:00:12.973
+Lesson three point four: causal means the
+
+5
+00:00:12.973 --> 00:00:15.310
+output at slot t uses inputs up to slot t
+
+6
+00:00:15.310 --> 00:00:15.588
+only.
+
+7
+00:00:15.922 --> 00:00:18.260
+Live that comes free, because the later
+
+8
+00:00:18.260 --> 00:00:19.985
+guitar has not been played yet.
+
+9
+00:00:20.319 --> 00:00:22.601
+But in training a whole chunk goes in at
+
+10
+00:00:22.601 --> 00:00:25.273
+once: five hundred and twelve slots in one
+
+11
+00:00:25.273 --> 00:00:25.551
+call.
+
+12
+00:00:25.885 --> 00:00:26.553
+Here, six.
+
+13
+00:00:26.977 --> 00:00:28.846
+Attention lets a slot score every key it
+
+14
+00:00:28.846 --> 00:00:29.256
+is given.
+
+15
+00:00:29.530 --> 00:00:31.354
+Slot two may look back at slots one and
+
+16
+00:00:31.354 --> 00:00:31.582
+zero.
+
+17
+00:00:31.855 --> 00:00:33.679
+But in one call it is also handed slots
+
+18
+00:00:33.679 --> 00:00:35.822
+three, four and five, which live would not
+
+19
+00:00:35.822 --> 00:00:36.643
+have happened yet.
+
+20
+00:00:36.917 --> 00:00:38.193
+The mask is what hides them.
+
+21
+00:00:38.467 --> 00:00:40.382
+Not the padding mask of lessons two point
+
+22
+00:00:40.382 --> 00:00:42.297
+eight and three point two, which marked
+
+23
+00:00:42.297 --> 00:00:44.394
+real slots with ones and zeros: this one
+
+24
+00:00:44.394 --> 00:00:45.443
+is added to the scores.
+
+25
+00:00:48.853 --> 00:00:51.151
+Here are a chunk's scores, as in four
+
+26
+00:00:51.151 --> 00:00:54.023
+point seven point four: one row per query,
+
+27
+00:00:54.023 --> 00:00:56.321
+one column per key, each a scaled dot
+
+28
+00:00:56.321 --> 00:00:56.780
+product.
+
+29
+00:00:57.125 --> 00:00:58.619
+These are made-up numbers.
+
+30
+00:00:59.085 --> 00:01:00.159
+Take query two's row.
+
+31
+00:01:00.466 --> 00:01:03.025
+Softmax with no mask: e to each score, add
+
+32
+00:01:03.025 --> 00:01:05.020
+them up, and each key's share is its
+
+33
+00:01:05.020 --> 00:01:05.378
+weight.
+
+34
+00:01:05.686 --> 00:01:07.579
+The three later keys take sixty-nine
+
+35
+00:01:07.579 --> 00:01:09.984
+percent of the weight: most of what query
+
+36
+00:01:09.984 --> 00:01:11.468
+two would hear is the future.
+
+37
+00:01:11.916 --> 00:01:14.291
+Now add the mask to the scores: zero on
+
+38
+00:01:14.291 --> 00:01:16.666
+the keys query two may see, minus infinity
+
+39
+00:01:16.666 --> 00:01:17.616
+on the later ones.
+
+40
+00:01:17.933 --> 00:01:20.150
+e to the minus infinity is zero, so the
+
+41
+00:01:20.150 --> 00:01:22.683
+sum runs over the three visible keys only:
+
+42
+00:01:22.683 --> 00:01:23.897
+eleven point seven six.
+
+43
+00:01:24.214 --> 00:01:26.589
+The weights are point two three, point one
+
+44
+00:01:26.589 --> 00:01:28.859
+four and point six three, and they still
+
+45
+00:01:28.859 --> 00:01:29.439
+add to one.
+
+46
+00:01:29.901 --> 00:01:32.446
+Written out: the weight on key j, is e to
+
+47
+00:01:32.446 --> 00:01:34.627
+its score plus its mask, divided by the
+
+48
+00:01:34.627 --> 00:01:36.341
+same thing summed over every key.
+
+49
+00:01:36.652 --> 00:01:38.989
+Why add the mask to the score, rather than
+
+50
+00:01:38.989 --> 00:01:40.391
+zero the weight afterwards?
+
+51
+00:01:40.703 --> 00:01:42.624
+Because then the sum covers only the
+
+52
+00:01:42.624 --> 00:01:44.805
+visible keys, and the weights are still
+
+53
+00:01:44.805 --> 00:01:46.000
+shares that add to one.
+
+54
+00:01:47.426 --> 00:01:49.843
+Do the same for every row, and the hidden
+
+55
+00:01:49.843 --> 00:01:52.479
+cells are everything above the diagonal: a
+
+56
+00:01:52.479 --> 00:01:52.973
+triangle.
+
+57
+00:01:53.303 --> 00:01:54.731
+The diagonal itself stays.
+
+58
+00:01:55.060 --> 00:01:57.312
+A slot may look at itself, because its
+
+59
+00:01:57.312 --> 00:01:59.509
+input is already the guitar of the slot
+
+60
+00:01:59.509 --> 00:02:01.156
+before, heard one slot late.
+
+61
+00:02:05.337 --> 00:02:07.463
+Ours also hides keys that are too far
+
+62
+00:02:07.463 --> 00:02:07.743
+back.
+
+63
+00:02:08.078 --> 00:02:10.261
+As an illustration, take a window of
+
+64
+00:02:10.261 --> 00:02:12.891
+three: each query sees itself and the two
+
+65
+00:02:12.891 --> 00:02:14.961
+slots before it, and nothing older.
+
+66
+00:02:15.646 --> 00:02:17.484
+What is left is a band along the diagonal.
+
+67
+00:02:17.886 --> 00:02:19.662
+In T128 the window is two thousand and
+
+68
+00:02:19.662 --> 00:02:20.209
+forty-eight.
+
+69
+00:02:20.482 --> 00:02:22.395
+A slot sees itself and up to two thousand
+
+70
+00:02:22.395 --> 00:02:24.490
+and forty-seven earlier slots: a hundred
+
+71
+00:02:24.490 --> 00:02:26.448
+and twenty-eight bars, over four minutes
+
+72
+00:02:26.448 --> 00:02:27.541
+at a hundred and twenty.
+
+73
+00:02:27.814 --> 00:02:28.634
+Why cut it at all?
+
+74
+00:02:28.907 --> 00:02:30.820
+Live, the cache keeps only the last two
+
+75
+00:02:30.820 --> 00:02:32.687
+thousand and forty-seven slots' keys and
+
+76
+00:02:32.687 --> 00:02:34.509
+values, so a live slot can never look
+
+77
+00:02:34.509 --> 00:02:35.101
+further back.
+
+78
+00:02:35.374 --> 00:02:36.513
+Training must not either.
+
+79
+00:02:40.000 --> 00:02:42.204
+The function underscore bias builds the
+
+80
+00:02:42.204 --> 00:02:43.195
+mask for one call.
+
+81
+00:02:43.526 --> 00:02:45.619
+T is how many keys are already in the
+
+82
+00:02:45.619 --> 00:02:47.767
+cache, and C how many slots the call
+
+83
+00:02:47.767 --> 00:02:48.153
+brings.
+
+84
+00:02:48.484 --> 00:02:50.632
+The keys are the cache followed by the
+
+85
+00:02:50.632 --> 00:02:52.229
+chunk: T plus C of them.
+
+86
+00:02:52.739 --> 00:02:54.623
+The first line is the distance.
+
+87
+00:02:54.988 --> 00:02:57.541
+Query i of the chunk sits at index T plus
+
+88
+00:02:57.541 --> 00:03:00.277
+i, so its distance to key j is T plus i,
+
+89
+00:03:00.277 --> 00:03:00.763
+minus j.
+
+90
+00:03:01.128 --> 00:03:03.802
+Positive means the key is in the past;
+
+91
+00:03:03.802 --> 00:03:05.201
+negative, the future.
+
+92
+00:03:05.565 --> 00:03:08.058
+That makes a table, C rows by T plus C
+
+93
+00:03:08.058 --> 00:03:08.544
+columns.
+
+94
+00:03:09.037 --> 00:03:11.245
+The next line keeps the keys inside the
+
+95
+00:03:11.245 --> 00:03:13.949
+band: a distance of at least zero, so not
+
+96
+00:03:13.949 --> 00:03:16.378
+the future, and at most W minus one, so
+
+97
+00:03:16.378 --> 00:03:17.316
+not too far back.
+
+98
+00:03:17.797 --> 00:03:20.451
+The last line: inside the band, minus a
+
+99
+00:03:20.451 --> 00:03:23.049
+slope times the distance, which is ALiBi,
+
+100
+00:03:23.049 --> 00:03:23.840
+the next part.
+
+101
+00:03:24.179 --> 00:03:26.381
+Outside it, masked fill writes minus
+
+102
+00:03:26.381 --> 00:03:26.889
+infinity.
+
+103
+00:03:27.228 --> 00:03:29.657
+One slice per head, so the bias is heads
+
+104
+00:03:29.657 --> 00:03:32.085
+by C by T plus C, and it is added to the
+
+105
+00:03:32.085 --> 00:03:33.328
+scores before softmax.
+
+106
+00:03:34.585 --> 00:03:37.066
+Now the worked slot: slot five hundred and
+
+107
+00:03:37.066 --> 00:03:39.133
+seventy-six of song zero zero one one b
+
+108
+00:03:39.133 --> 00:03:41.355
+three c f, through T one twenty-eight at
+
+109
+00:03:41.355 --> 00:03:42.027
+epoch eleven.
+
+110
+00:03:42.337 --> 00:03:44.611
+It is a validation song, never trained on.
+
+111
+00:03:44.921 --> 00:03:47.247
+In chunk mode, as in validation, it sits
+
+112
+00:03:47.247 --> 00:03:49.365
+in the chunk that starts at five hundred
+
+113
+00:03:49.365 --> 00:03:51.743
+and twelve: query sixty-four, at index
+
+114
+00:03:51.743 --> 00:03:53.810
+five hundred and twelve plus sixty-four.
+
+115
+00:03:54.120 --> 00:03:56.135
+It sees five hundred and seventy-seven
+
+116
+00:03:56.135 --> 00:03:58.409
+keys: five hundred and twelve from the
+
+117
+00:03:58.409 --> 00:04:00.786
+cache, and sixty-five from its own chunk,
+
+118
+00:04:00.786 --> 00:04:01.613
+itself included.
+
+119
+00:04:01.923 --> 00:04:03.939
+The four hundred and forty-seven later
+
+120
+00:04:03.939 --> 00:04:05.902
+slots of its chunk get minus infinity.
+
+121
+00:04:06.213 --> 00:04:08.280
+For this chunk the bias is four by five
+
+122
+00:04:08.280 --> 00:04:10.295
+hundred and twelve by one thousand and
+
+123
+00:04:10.295 --> 00:04:10.915
+twenty-four.
+
+124
+00:04:14.413 --> 00:04:16.380
+Here is why the lower edge matters.
+
+125
+00:04:16.717 --> 00:04:19.245
+Live, in slot mode, each call brings one
+
+126
+00:04:19.245 --> 00:04:19.526
+slot.
+
+127
+00:04:19.863 --> 00:04:22.166
+The cache holds at most two thousand and
+
+128
+00:04:22.166 --> 00:04:24.807
+forty-seven keys, plus the slot itself:
+
+129
+00:04:24.807 --> 00:04:26.436
+two thousand and forty-eight.
+
+130
+00:04:26.896 --> 00:04:29.025
+In training, once the cache is full, a
+
+131
+00:04:29.025 --> 00:04:31.054
+chunk of five hundred and twelve arrives.
+
+132
+00:04:31.351 --> 00:04:33.331
+Its first query sees the full cache and
+
+133
+00:04:33.331 --> 00:04:35.410
+itself: two thousand and forty-eight.
+
+134
+00:04:35.707 --> 00:04:37.885
+Its last query, without the lower edge,
+
+135
+00:04:37.885 --> 00:04:39.865
+would see the whole cache and the whole
+
+136
+00:04:39.865 --> 00:04:41.945
+chunk: two thousand five hundred and
+
+137
+00:04:41.945 --> 00:04:44.073
+fifty-nine keys, five hundred and eleven
+
+138
+00:04:44.073 --> 00:04:45.360
+more than live ever could.
+
+139
+00:04:45.657 --> 00:04:47.786
+The band hides the oldest five hundred and
+
+140
+00:04:47.786 --> 00:04:49.914
+eleven: one thousand five hundred and
+
+141
+00:04:49.914 --> 00:04:51.795
+thirty-six from the cache, plus the
+
+142
+00:04:51.795 --> 00:04:53.379
+chunk's five hundred and twelve.
+
+143
+00:04:53.676 --> 00:04:55.409
+Two thousand and forty-eight again.
+
+144
+00:04:55.839 --> 00:04:57.966
+So every query sees exactly the same keys
+
+145
+00:04:57.966 --> 00:05:00.092
+in both modes: from slot t minus two
+
+146
+00:05:00.092 --> 00:05:02.370
+thousand and forty-seven up to t, which is
+
+147
+00:05:02.370 --> 00:05:04.395
+up to two thousand and forty-eight keys.
+
+148
+00:05:04.699 --> 00:05:06.825
+Test T one, from four point seven point
+
+149
+00:05:06.825 --> 00:05:09.154
+thirteen, checks this: the chunked run
+
+150
+00:05:09.154 --> 00:05:11.280
+against the slot-by-slot run, to within
+
+151
+00:05:11.280 --> 00:05:13.407
+one hundred-thousandth, on a model with
+
+152
+00:05:13.407 --> 00:05:14.116
+fresh weights.
+
+153
+00:05:14.517 --> 00:05:16.782
+On the trained T one twenty-eight, at the
+
+154
+00:05:16.782 --> 00:05:19.046
+worked slot, the two runs differ by three
+
+155
+00:05:19.046 --> 00:05:20.230
+point three millionths.
+
+156
+00:05:20.539 --> 00:05:22.752
+Over two thousand six hundred slots of the
+
+157
+00:05:22.752 --> 00:05:24.708
+tests' input they differ by up to six
+
+158
+00:05:24.708 --> 00:05:26.921
+hundred-thousandths in float thirty-two,
+
+159
+00:05:26.921 --> 00:05:29.083
+above the test's tolerance, because the
+
+160
+00:05:29.083 --> 00:05:30.833
+trained model's numbers are large.
+
+161
+00:05:31.141 --> 00:05:33.303
+In float sixty-four they agree to about a
+
+162
+00:05:33.303 --> 00:05:35.568
+ten-trillionth, so the gap is rounding,
+
+163
+00:05:35.568 --> 00:05:37.009
+not a different computation.
+
+164
+00:05:37.317 --> 00:05:39.376
+Take the lower edge away and they agree
+
+165
+00:05:39.376 --> 00:05:41.075
+only up to slot two thousand and
+
+166
+00:05:41.075 --> 00:05:41.692
+forty-eight.
+
+167
+00:05:42.001 --> 00:05:44.060
+After that they drift apart, by up to
+
+168
+00:05:44.060 --> 00:05:45.501
+seven hundredths in a logit.
+
+169
+00:05:45.810 --> 00:05:47.971
+Small, but not the same computation any
+
+170
+00:05:47.971 --> 00:05:48.229
+more.
+
+171
+00:05:48.666 --> 00:05:50.749
+So chunk mode, in training and in
+
+172
+00:05:50.749 --> 00:05:53.352
+validation, sees exactly the keys the live
+
+173
+00:05:53.352 --> 00:05:55.781
+loop sees, and what the model learns in
+
+174
+00:05:55.781 --> 00:05:57.459
+chunks is what it plays live.
+
+175
+00:05:59.056 --> 00:06:01.660
+Say it in one breath: the mask adds minus
+
+176
+00:06:01.660 --> 00:06:04.153
+infinity to every key a slot must not see,
+
+177
+00:06:04.153 --> 00:06:06.258
+the future and anything more than two
+
+178
+00:06:06.258 --> 00:06:08.585
+thousand and forty-seven slots back, so
+
+179
+00:06:08.585 --> 00:06:11.023
+softmax gives them weight zero, and every
+
+180
+00:06:11.023 --> 00:06:13.073
+slot sees the same keys, up to two
+
+181
+00:06:13.073 --> 00:06:15.510
+thousand and forty-eight, in chunks as it
+
+182
+00:06:15.510 --> 00:06:16.064
+does live.
+
+183
+00:06:16.397 --> 00:06:18.447
+It pairs with the course explainer's
+
+184
+00:06:18.447 --> 00:06:20.940
+attention visualiser, where you can untick
+
+185
+00:06:20.940 --> 00:06:23.211
+the causal mask, with Velardo's lesson
+
+186
+00:06:23.211 --> 00:06:25.483
+eighteen, which uses the same triangle
+
+187
+00:06:25.483 --> 00:06:27.699
+without our lower edge, and with four
+
+188
+00:06:27.699 --> 00:06:30.026
+point seven point thirteen, training in
+
+189
+00:06:30.026 --> 00:06:30.414
+chunks.
+

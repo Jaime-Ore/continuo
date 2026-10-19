@@ -1,0 +1,890 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.054
+Part four point one.
+
+2
+00:00:01.359 --> 00:00:03.540
+A network with a loop in it, and why its
+
+3
+00:00:03.540 --> 00:00:05.366
+training signal fades with distance.
+
+4
+00:00:09.280 --> 00:00:11.095
+Lesson three point four called the hidden
+
+5
+00:00:11.095 --> 00:00:12.997
+state a vector the model carries forward,
+
+6
+00:00:12.997 --> 00:00:13.947
+a summary of the past.
+
+7
+00:00:14.207 --> 00:00:16.022
+Here is the simplest machine that does it.
+
+8
+00:00:16.281 --> 00:00:17.966
+At each slot, one step reads the new
+
+9
+00:00:17.966 --> 00:00:19.998
+input, x t, and gives out a new state, h
+
+10
+00:00:19.998 --> 00:00:20.084
+t.
+
+11
+00:00:20.343 --> 00:00:22.245
+Then that state is fed back in, so at the
+
+12
+00:00:22.245 --> 00:00:23.887
+next slot the step reads its own last
+
+13
+00:00:23.887 --> 00:00:25.270
+answer as well as the new input.
+
+14
+00:00:25.529 --> 00:00:26.999
+That loop is what makes a network
+
+15
+00:00:26.999 --> 00:00:27.431
+recurrent.
+
+16
+00:00:27.829 --> 00:00:29.029
+Inside the step is one line.
+
+17
+00:00:29.286 --> 00:00:30.530
+Build it from the middle out.
+
+18
+00:00:30.787 --> 00:00:33.016
+First, what it hears: the input x t, times
+
+19
+00:00:33.016 --> 00:00:33.488
+a weight W.
+
+20
+00:00:33.745 --> 00:00:35.846
+Plus what it remembers: the last state, h
+
+21
+00:00:35.846 --> 00:00:37.947
+t minus one, times a second weight, U, the
+
+22
+00:00:37.947 --> 00:00:38.847
+weight on the memory.
+
+23
+00:00:39.104 --> 00:00:40.562
+Plus a bias, b, a fixed nudge.
+
+24
+00:00:40.819 --> 00:00:42.620
+Then tanh squashes the sum into minus one
+
+25
+00:00:42.620 --> 00:00:44.292
+to one, as in lesson three point one.
+
+26
+00:00:44.549 --> 00:00:46.221
+And the result is the new state, h t.
+
+27
+00:00:46.613 --> 00:00:48.229
+The weights are the same at every slot.
+
+28
+00:00:48.477 --> 00:00:50.217
+The step is one machine, used again and
+
+29
+00:00:50.217 --> 00:00:50.466
+again.
+
+30
+00:00:50.714 --> 00:00:52.496
+With our five guitar inputs and a state of
+
+31
+00:00:52.496 --> 00:00:54.153
+a hundred and twenty-eight numbers, W
+
+32
+00:00:54.153 --> 00:00:55.768
+would be a hundred and twenty-eight by
+
+33
+00:00:55.768 --> 00:00:57.550
+five and U a hundred and twenty-eight by a
+
+34
+00:00:57.550 --> 00:00:58.585
+hundred and twenty-eight.
+
+35
+00:00:58.834 --> 00:01:00.532
+Our code has no plain recurrent net like
+
+36
+00:01:00.532 --> 00:01:02.396
+this one; it runs the LSTM of part four
+
+37
+00:01:02.396 --> 00:01:04.095
+point two, which grew out of this idea.
+
+38
+00:01:07.473 --> 00:01:09.705
+Draw the loop once for every slot and it
+
+39
+00:01:09.705 --> 00:01:12.155
+becomes a chain: the state passes along
+
+40
+00:01:12.155 --> 00:01:14.550
+from left to right, and each slot's input
+
+41
+00:01:14.550 --> 00:01:15.639
+comes in from below.
+
+42
+00:01:15.965 --> 00:01:18.143
+Every link uses the same U, and every
+
+43
+00:01:18.143 --> 00:01:19.068
+input the same W.
+
+44
+00:01:19.395 --> 00:01:21.572
+Drawing it this way is called unrolling.
+
+45
+00:01:21.899 --> 00:01:24.294
+Nothing new is computed; it's the same
+
+46
+00:01:24.294 --> 00:01:25.655
+loop, laid out in time.
+
+47
+00:01:25.982 --> 00:01:28.322
+To see numbers, shrink everything to one
+
+48
+00:01:28.322 --> 00:01:30.990
+number: W one and a half, U one half, b
+
+49
+00:01:30.990 --> 00:01:33.004
+zero, to keep the arithmetic clean.
+
+50
+00:01:33.330 --> 00:01:35.617
+And let the guitar play once, then rest.
+
+51
+00:01:36.068 --> 00:01:38.562
+Slot one: W times x is one and a half
+
+52
+00:01:38.562 --> 00:01:41.346
+times one; U times the old state is a half
+
+53
+00:01:41.346 --> 00:01:42.912
+times zero; plus zero.
+
+54
+00:01:43.260 --> 00:01:45.639
+That's one point five, and tanh of one
+
+55
+00:01:45.639 --> 00:01:47.959
+point five is zero point nine zero five
+
+56
+00:01:47.959 --> 00:01:50.395
+one, the number from lesson three point
+
+57
+00:01:50.395 --> 00:01:50.627
+one.
+
+58
+00:01:50.975 --> 00:01:53.875
+Slot two: the guitar is silent, so W times
+
+59
+00:01:53.875 --> 00:01:54.455
+x is zero.
+
+60
+00:01:54.803 --> 00:01:57.413
+All that's left is memory: a half times
+
+61
+00:01:57.413 --> 00:01:59.965
+zero point nine zero five one, zero point
+
+62
+00:01:59.965 --> 00:02:02.343
+four five two six, and tanh of that is
+
+63
+00:02:02.343 --> 00:02:03.794
+zero point four two four.
+
+64
+00:02:04.142 --> 00:02:07.042
+Slots three, four and five: zero point two
+
+65
+00:02:07.042 --> 00:02:09.710
+zero nine, zero point one zero four, zero
+
+66
+00:02:09.710 --> 00:02:10.870
+point zero five two.
+
+67
+00:02:11.430 --> 00:02:13.821
+The memory of that one onset about halves
+
+68
+00:02:13.821 --> 00:02:15.757
+every slot, because U is a half.
+
+69
+00:02:16.099 --> 00:02:18.206
+This net forgets even going forwards.
+
+70
+00:02:18.547 --> 00:02:20.882
+In training, lesson three point four's
+
+71
+00:02:20.882 --> 00:02:23.273
+chunks unroll this chain five hundred and
+
+72
+00:02:23.273 --> 00:02:24.298
+twelve slots long.
+
+73
+00:02:28.290 --> 00:02:30.717
+Lesson three point three: the gradient is
+
+74
+00:02:30.717 --> 00:02:32.886
+found by the chain rule, one factor for
+
+75
+00:02:32.886 --> 00:02:33.712
+every step back.
+
+76
+00:02:34.022 --> 00:02:36.139
+Lesson three point four did this along a
+
+77
+00:02:36.139 --> 00:02:38.411
+chain of states: backprop through time.
+
+78
+00:02:38.721 --> 00:02:40.373
+So go backwards along the chain.
+
+79
+00:02:40.683 --> 00:02:42.749
+To pass from h two back to h one, the
+
+80
+00:02:42.749 --> 00:02:44.866
+gradient is multiplied by how much h two
+
+81
+00:02:44.866 --> 00:02:46.260
+changes when h one changes.
+
+82
+00:02:46.669 --> 00:02:47.906
+Differentiate the step.
+
+83
+00:02:48.229 --> 00:02:49.573
+The answer has two parts.
+
+84
+00:02:49.896 --> 00:02:52.316
+The memory weight U, because h j minus one
+
+85
+00:02:52.316 --> 00:02:53.607
+came in multiplied by U.
+
+86
+00:02:53.929 --> 00:02:56.081
+Times the slope of tanh at that slot,
+
+87
+00:02:56.081 --> 00:02:57.049
+written tanh dash.
+
+88
+00:02:57.371 --> 00:02:59.738
+That slope is one minus h squared: one
+
+89
+00:02:59.738 --> 00:03:01.942
+where the curve is steepest, near zero
+
+90
+00:03:01.942 --> 00:03:02.857
+where it is flat.
+
+91
+00:03:03.329 --> 00:03:06.178
+For slot two: a half times one minus zero
+
+92
+00:03:06.178 --> 00:03:08.724
+point four two four squared, zero point
+
+93
+00:03:08.724 --> 00:03:09.816
+four one zero one.
+
+94
+00:03:10.179 --> 00:03:12.847
+The same at each link: zero point four
+
+95
+00:03:12.847 --> 00:03:15.332
+seven eight, zero point four nine four
+
+96
+00:03:15.332 --> 00:03:17.636
+six, zero point four nine eight six.
+
+97
+00:03:18.123 --> 00:03:20.290
+Four links back, from h five to h one,
+
+98
+00:03:20.290 --> 00:03:22.558
+multiply all four: zero point zero four
+
+99
+00:03:22.558 --> 00:03:22.861
+eight.
+
+100
+00:03:23.163 --> 00:03:25.229
+Under a twentieth of the signal survives
+
+101
+00:03:25.229 --> 00:03:25.784
+four slots.
+
+102
+00:03:26.086 --> 00:03:28.152
+And where tanh is squashed flat, it is
+
+103
+00:03:28.152 --> 00:03:28.455
+worse.
+
+104
+00:03:28.757 --> 00:03:30.924
+One step further back, through the onset
+
+105
+00:03:30.924 --> 00:03:33.192
+slot itself, where z was one and a half,
+
+106
+00:03:33.192 --> 00:03:35.259
+the slope of tanh is only zero point one
+
+107
+00:03:35.259 --> 00:03:35.561
+eight.
+
+108
+00:03:38.907 --> 00:03:40.171
+Why does it fall so fast?
+
+109
+00:03:40.474 --> 00:03:42.902
+Because every factor has the same U in it:
+
+110
+00:03:42.902 --> 00:03:44.317
+the loop reuses its weights.
+
+111
+00:03:44.621 --> 00:03:46.593
+A stack of different layers multiplies
+
+112
+00:03:46.593 --> 00:03:48.565
+different slopes; a recurrent net
+
+113
+00:03:48.565 --> 00:03:50.638
+multiplies the same kind of factor again
+
+114
+00:03:50.638 --> 00:03:51.144
+and again.
+
+115
+00:03:51.448 --> 00:03:53.521
+Say every factor is the same number, a.
+
+116
+00:03:53.824 --> 00:03:55.999
+Then n slots back the gradient is a to the
+
+117
+00:03:55.999 --> 00:03:56.403
+power n.
+
+118
+00:03:56.858 --> 00:03:59.492
+With a equal to a half, like our toy: a
+
+119
+00:03:59.492 --> 00:04:01.847
+half one slot back, zero point zero six
+
+120
+00:04:01.847 --> 00:04:04.257
+two five four back, fifteen millionths a
+
+121
+00:04:04.257 --> 00:04:06.723
+bar back, and five times ten to the minus
+
+122
+00:04:06.723 --> 00:04:08.012
+twenty after four bars.
+
+123
+00:04:08.348 --> 00:04:09.974
+The far past teaches nothing.
+
+124
+00:04:10.310 --> 00:04:11.992
+That's the vanishing gradient.
+
+125
+00:04:12.474 --> 00:04:14.672
+With a equal to one and a half, it goes
+
+126
+00:04:14.672 --> 00:04:17.185
+the other way: six hundred and fifty-seven
+
+127
+00:04:17.185 --> 00:04:19.383
+a bar back, two times ten to the eleven
+
+128
+00:04:19.383 --> 00:04:20.220
+after four bars.
+
+129
+00:04:20.534 --> 00:04:22.576
+One step of training would be enormous.
+
+130
+00:04:22.890 --> 00:04:24.460
+That's the exploding gradient.
+
+131
+00:04:24.901 --> 00:04:27.187
+Lesson three point three's clipping is the
+
+132
+00:04:27.187 --> 00:04:29.526
+patch for exploding: a gradient longer
+
+133
+00:04:29.526 --> 00:04:31.545
+than one is scaled down to length one.
+
+134
+00:04:31.864 --> 00:04:33.725
+But clipping only ever scales down.
+
+135
+00:04:34.044 --> 00:04:36.276
+It can't make a vanishing gradient bigger.
+
+136
+00:04:36.595 --> 00:04:39.359
+Our LSTM, L32, never needed it: it clipped
+
+137
+00:04:39.359 --> 00:04:40.954
+on none of its training steps.
+
+138
+00:04:41.273 --> 00:04:43.558
+With a hundred and twenty-eight numbers in
+
+139
+00:04:43.558 --> 00:04:45.791
+the state, each factor is a hundred and
+
+140
+00:04:45.791 --> 00:04:48.076
+twenty-eight by a hundred and twenty-eight
+
+141
+00:04:48.076 --> 00:04:50.255
+matrix rather than one number, but the
+
+142
+00:04:50.255 --> 00:04:52.807
+rule is the same: what matters is how much
+
+143
+00:04:52.807 --> 00:04:54.082
+it stretches or shrinks.
+
+144
+00:04:57.407 --> 00:04:58.315
+Now the real thing.
+
+145
+00:04:58.602 --> 00:05:00.849
+Take our LSTM, L32 at epoch eleven, at the
+
+146
+00:05:00.849 --> 00:05:03.143
+worked slot: validation song zero zero one
+
+147
+00:05:03.143 --> 00:05:05.103
+one b three c f, slot five hundred and
+
+148
+00:05:05.103 --> 00:05:06.777
+seventy-six, the downbeat of bar
+
+149
+00:05:06.777 --> 00:05:07.302
+thirty-six.
+
+150
+00:05:07.589 --> 00:05:09.501
+Ask how much its kick logit there moves
+
+151
+00:05:09.501 --> 00:05:11.509
+when the guitar inputs at an earlier slot
+
+152
+00:05:11.509 --> 00:05:13.374
+move: the length of that gradient.
+
+153
+00:05:13.661 --> 00:05:15.716
+The axis is a log axis, as in lesson one
+
+154
+00:05:15.716 --> 00:05:17.867
+point four: each step down is ten times
+
+155
+00:05:17.867 --> 00:05:18.250
+smaller.
+
+156
+00:05:18.665 --> 00:05:20.994
+One slot back, where the guitar played an
+
+157
+00:05:20.994 --> 00:05:22.899
+onset: zero point two one five.
+
+158
+00:05:23.217 --> 00:05:25.228
+Four back, zero point zero five two.
+
+159
+00:05:25.545 --> 00:05:27.980
+Sixteen back, one bar: zero point zero
+
+160
+00:05:27.980 --> 00:05:28.668
+zero two one.
+
+161
+00:05:28.986 --> 00:05:31.421
+Sixty-four back, four bars: zero point
+
+162
+00:05:31.421 --> 00:05:32.797
+zero zero zero four eight.
+
+163
+00:05:33.114 --> 00:05:35.655
+Five hundred and twelve back: twenty-three
+
+164
+00:05:35.655 --> 00:05:36.237
+millionths.
+
+165
+00:05:36.660 --> 00:05:39.098
+Against the slot just heard, the gradient
+
+166
+00:05:39.098 --> 00:05:41.537
+falls about a hundred times within a bar,
+
+167
+00:05:41.537 --> 00:05:43.920
+about four hundred and fifty times by four
+
+168
+00:05:43.920 --> 00:05:46.358
+bars, and about nine thousand six hundred
+
+169
+00:05:46.358 --> 00:05:48.520
+times by five hundred and twelve slots.
+
+170
+00:05:48.852 --> 00:05:51.235
+At this slot, the kick barely depends on
+
+171
+00:05:51.235 --> 00:05:52.787
+guitar more than a bar back.
+
+172
+00:05:53.119 --> 00:05:55.336
+This is one logit's gradient, not the
+
+173
+00:05:55.336 --> 00:05:57.497
+training loss, which covers all nine
+
+174
+00:05:57.497 --> 00:06:00.268
+drums; but it is a fair proxy, because the
+
+175
+00:06:00.268 --> 00:06:02.596
+training gradient passes back through the
+
+176
+00:06:02.596 --> 00:06:04.147
+same chain of state factors.
+
+177
+00:06:04.579 --> 00:06:06.299
+Training cut it shorter still.
+
+178
+00:06:06.643 --> 00:06:09.050
+This is a validation song, so L32 never
+
+179
+00:06:09.050 --> 00:06:11.687
+trained on it; but L32 trained in chunks
+
+180
+00:06:11.687 --> 00:06:14.267
+of five hundred and twelve, with the state
+
+181
+00:06:14.267 --> 00:06:16.846
+detached at every chunk edge, lesson three
+
+182
+00:06:16.846 --> 00:06:18.910
+point four, and the edges fall at
+
+183
+00:06:18.910 --> 00:06:21.030
+multiples of five hundred and twelve.
+
+184
+00:06:21.374 --> 00:06:23.839
+Had this been a training song, slot five
+
+185
+00:06:23.839 --> 00:06:25.788
+hundred and seventy-six would sit
+
+186
+00:06:25.788 --> 00:06:28.024
+sixty-four slots past the edge at five
+
+187
+00:06:28.024 --> 00:06:30.546
+hundred and twelve, so its gradient would
+
+188
+00:06:30.546 --> 00:06:33.010
+reach sixty-four slots back and stop:
+
+189
+00:06:33.010 --> 00:06:34.615
+beyond that, exactly zero.
+
+190
+00:06:36.011 --> 00:06:36.979
+One honest point.
+
+191
+00:06:37.320 --> 00:06:39.597
+L32 isn't the plain loop of this lesson.
+
+192
+00:06:39.939 --> 00:06:42.329
+It's an LSTM, which already has the fix
+
+193
+00:06:42.329 --> 00:06:44.208
+that part four point two teaches.
+
+194
+00:06:44.549 --> 00:06:46.655
+And its gradient still falls about a
+
+195
+00:06:46.655 --> 00:06:48.192
+hundred times within a bar.
+
+196
+00:06:48.534 --> 00:06:51.095
+So the fix helps; it doesn't remove the
+
+197
+00:06:51.095 --> 00:06:51.607
+fall-off.
+
+198
+00:06:51.949 --> 00:06:54.112
+Part four point two shows why most of
+
+199
+00:06:54.112 --> 00:06:55.819
+L32's cells still forget fast.
+
+200
+00:06:56.161 --> 00:06:58.608
+And all of this is one slot of one song,
+
+201
+00:06:58.608 --> 00:06:59.633
+at one checkpoint.
+
+202
+00:06:59.974 --> 00:07:02.308
+A fact check at four other slots of this
+
+203
+00:07:02.308 --> 00:07:04.983
+song found the same direction: falls of a
+
+204
+00:07:04.983 --> 00:07:07.260
+hundred and twenty to two hundred times
+
+205
+00:07:07.260 --> 00:07:08.000
+within a bar.
+
+206
+00:07:09.576 --> 00:07:12.103
+Say it in one breath: a recurrent net
+
+207
+00:07:12.103 --> 00:07:14.336
+feeds its last state back in at every
+
+208
+00:07:14.336 --> 00:07:16.863
+slot, h equals tanh of W x plus U h plus
+
+209
+00:07:16.863 --> 00:07:16.980
+b.
+
+210
+00:07:17.333 --> 00:07:19.684
+Going back, every slot multiplies the
+
+211
+00:07:19.684 --> 00:07:22.269
+gradient by U times the slope of tanh, so
+
+212
+00:07:22.269 --> 00:07:24.737
+it shrinks geometrically, the vanishing
+
+213
+00:07:24.737 --> 00:07:27.206
+gradient, or grows, the exploding one.
+
+214
+00:07:27.558 --> 00:07:30.085
+Measured on our LSTM at the worked slot,
+
+215
+00:07:30.085 --> 00:07:32.436
+it falls about a hundred times within a
+
+216
+00:07:32.436 --> 00:07:32.671
+bar.
+
+217
+00:07:33.023 --> 00:07:35.433
+This pairs with section five of the drum
+
+218
+00:07:35.433 --> 00:07:37.548
+LSTM explainer, the whole stretch
+
+219
+00:07:37.548 --> 00:07:39.899
+unrolled, and with lesson three point
+
+220
+00:07:39.899 --> 00:07:40.193
+four.
+
+221
+00:07:40.545 --> 00:07:43.190
+Next, part four point two: inside the
+
+222
+00:07:43.190 --> 00:07:43.483
+LSTM.
+

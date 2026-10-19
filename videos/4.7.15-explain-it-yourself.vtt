@@ -1,0 +1,1670 @@
+WEBVTT
+
+1
+00:00:00.050 --> 00:00:02.007
+Part four point seven point fifteen.
+
+2
+00:00:02.333 --> 00:00:04.780
+Explain it yourself: the whole model in
+
+3
+00:00:04.780 --> 00:00:06.845
+five minutes, then the questions an
+
+4
+00:00:06.845 --> 00:00:07.824
+examiner will ask.
+
+5
+00:00:12.287 --> 00:00:14.539
+This is the whole model the way we'd say
+
+6
+00:00:14.539 --> 00:00:15.528
+it to an examiner.
+
+7
+00:00:15.858 --> 00:00:18.330
+Our drummer is a small causal transformer,
+
+8
+00:00:18.330 --> 00:00:20.583
+and one token is one sixteenth-note slot.
+
+9
+00:00:20.913 --> 00:00:23.220
+It's contract option B: it hears the
+
+10
+00:00:23.220 --> 00:00:25.088
+guitar, and never its own drums.
+
+11
+00:00:25.418 --> 00:00:27.945
+Two blocks, ninety-six numbers wide, four
+
+12
+00:00:27.945 --> 00:00:30.363
+heads of twenty-four, and a window of two
+
+13
+00:00:30.363 --> 00:00:32.066
+thousand and forty-eight slots.
+
+14
+00:00:32.396 --> 00:00:34.868
+Two hundred and twenty-six thousand, eight
+
+15
+00:00:34.868 --> 00:00:36.791
+hundred and fifty-seven parameters.
+
+16
+00:00:37.121 --> 00:00:39.703
+We'll walk one real slot through it: slot
+
+17
+00:00:39.703 --> 00:00:42.066
+five hundred and seventy-six of validation
+
+18
+00:00:42.066 --> 00:00:44.374
+song zero zero one one b three c f, the
+
+19
+00:00:44.374 --> 00:00:45.857
+downbeat of bar thirty-six.
+
+20
+00:00:47.485 --> 00:00:49.282
+Each slot comes in as five numbers: the
+
+21
+00:00:49.282 --> 00:00:50.960
+guitar's onset and velocity from the slot
+
+22
+00:00:50.960 --> 00:00:52.797
+before, a running intensity, the velocity
+
+23
+00:00:52.797 --> 00:00:53.676
+flag, and the tempo.
+
+24
+00:00:53.915 --> 00:00:55.833
+At our slot, nought, nought, nought point
+
+25
+00:00:55.833 --> 00:00:57.071
+four four one, one, nought.
+
+26
+00:00:57.310 --> 00:00:58.948
+One linear layer turns five numbers into
+
+27
+00:00:58.948 --> 00:00:59.387
+ninety-six.
+
+28
+00:00:59.627 --> 00:01:01.145
+Then we add a learned row for the bar
+
+29
+00:01:01.145 --> 00:01:02.623
+phase, the slot number mod sixteen.
+
+30
+00:01:02.862 --> 00:01:04.260
+Here that's nought, the downbeat.
+
+31
+00:01:04.500 --> 00:01:06.178
+Those ninety-six numbers are the residual
+
+32
+00:01:06.178 --> 00:01:06.457
+stream.
+
+33
+00:01:06.697 --> 00:01:08.015
+Everything after this adds to it.
+
+34
+00:01:09.271 --> 00:01:11.039
+Each block starts with LayerNorm.
+
+35
+00:01:11.361 --> 00:01:14.039
+Per slot: subtract the mean, divide by the
+
+36
+00:01:14.039 --> 00:01:16.236
+spread, then a learned scale and shift.
+
+37
+00:01:16.557 --> 00:01:18.861
+It's pre-LN: the norm sits inside the
+
+38
+00:01:18.861 --> 00:01:21.218
+branch, so the stream itself is only ever
+
+39
+00:01:21.218 --> 00:01:21.700
+added to.
+
+40
+00:01:23.249 --> 00:01:23.960
+Then attention.
+
+41
+00:01:24.245 --> 00:01:26.285
+One layer, ninety-six to two hundred and
+
+42
+00:01:26.285 --> 00:01:28.420
+eighty-eight, makes a query, a key and a
+
+43
+00:01:28.420 --> 00:01:30.318
+value for every slot, split into four
+
+44
+00:01:30.318 --> 00:01:31.315
+heads of twenty-four.
+
+45
+00:01:31.599 --> 00:01:33.450
+Each head scores its query against the
+
+46
+00:01:33.450 --> 00:01:35.490
+keys in view, divides by the square root
+
+47
+00:01:35.490 --> 00:01:37.483
+of twenty-four, adds B, softmaxes the
+
+48
+00:01:37.483 --> 00:01:39.523
+scores into weights that add to one, and
+
+49
+00:01:39.523 --> 00:01:40.994
+takes that blend of the values.
+
+50
+00:01:41.361 --> 00:01:42.214
+B does two jobs.
+
+51
+00:01:42.535 --> 00:01:44.989
+Outside the band it's minus infinity: no
+
+52
+00:01:44.989 --> 00:01:47.390
+future, and nothing more than two thousand
+
+53
+00:01:47.390 --> 00:01:48.831
+and forty-seven slots back.
+
+54
+00:01:49.151 --> 00:01:51.659
+Inside, it's ALiBi: minus a slope times
+
+55
+00:01:51.659 --> 00:01:54.007
+the distance, with four fixed slopes, a
+
+56
+00:01:54.007 --> 00:01:56.194
+quarter down to one over two hundred and
+
+57
+00:01:56.194 --> 00:01:57.582
+fifty-six, one per head.
+
+58
+00:01:57.902 --> 00:02:00.249
+At our slot, block one's head nought puts
+
+59
+00:02:00.249 --> 00:02:02.437
+nought point nine eight of its weight on
+
+60
+00:02:02.437 --> 00:02:04.838
+slot five hundred and seventy-three, three
+
+61
+00:02:04.838 --> 00:02:05.105
+back.
+
+62
+00:02:05.425 --> 00:02:07.773
+It matches bar position thirteen, and the
+
+63
+00:02:07.773 --> 00:02:09.801
+distance penalty picks the latest one.
+
+64
+00:02:11.181 --> 00:02:13.668
+We join the four heads, project ninety-six
+
+65
+00:02:13.668 --> 00:02:15.934
+to ninety-six, and add the result back
+
+66
+00:02:15.934 --> 00:02:16.818
+onto the stream.
+
+67
+00:02:17.149 --> 00:02:18.310
+Add, don't replace.
+
+68
+00:02:19.695 --> 00:02:22.136
+LayerNorm again, then the feed-forward,
+
+69
+00:02:22.136 --> 00:02:24.523
+one slot at a time: ninety-six out to
+
+70
+00:02:24.523 --> 00:02:27.020
+three hundred and eighty-four, GELU, and
+
+71
+00:02:27.020 --> 00:02:28.074
+back to ninety-six.
+
+72
+00:02:28.407 --> 00:02:30.682
+Dropout of nought point one sits on both
+
+73
+00:02:30.682 --> 00:02:32.292
+branches, in training only.
+
+74
+00:02:33.655 --> 00:02:34.117
+Add again.
+
+75
+00:02:34.395 --> 00:02:36.293
+That's one block, a hundred and eleven
+
+76
+00:02:36.293 --> 00:02:37.959
+thousand, eight hundred and forty
+
+77
+00:02:37.959 --> 00:02:38.468
+parameters.
+
+78
+00:02:38.745 --> 00:02:39.347
+We stack two.
+
+79
+00:02:40.695 --> 00:02:42.964
+After two blocks the stream has grown,
+
+80
+00:02:42.964 --> 00:02:45.288
+from a length of twelve point seven three
+
+81
+00:02:45.288 --> 00:02:47.059
+to one thousand two hundred and
+
+82
+00:02:47.059 --> 00:02:47.667
+ninety-two.
+
+83
+00:02:47.999 --> 00:02:50.323
+A final LayerNorm brings it back to scale.
+
+84
+00:02:51.729 --> 00:02:54.081
+The head is one linear layer, ninety-six
+
+85
+00:02:54.081 --> 00:02:55.777
+to nine: a logit per drum.
+
+86
+00:02:56.106 --> 00:02:58.020
+The kick's is two point two oh six.
+
+87
+00:02:59.360 --> 00:03:00.997
+Nine sigmoids, one per drum, each
+
+88
+00:03:00.997 --> 00:03:01.514
+independent.
+
+89
+00:03:01.773 --> 00:03:03.668
+Kick, nought point nine oh, against its
+
+90
+00:03:03.668 --> 00:03:05.693
+threshold of nought point two four: a hit.
+
+91
+00:03:05.952 --> 00:03:07.675
+Closed hat, nought point six seven,
+
+92
+00:03:07.675 --> 00:03:09.528
+against nought point three one: a hit.
+
+93
+00:03:09.786 --> 00:03:11.553
+The crash is the nearest miss, and the
+
+94
+00:03:11.553 --> 00:03:12.630
+other six are well under.
+
+95
+00:03:12.889 --> 00:03:14.784
+So the decoder plays kick and closed hat,
+
+96
+00:03:14.784 --> 00:03:16.465
+which is exactly what the real drummer
+
+97
+00:03:16.465 --> 00:03:16.982
+played here.
+
+98
+00:03:18.265 --> 00:03:19.815
+Live, we run it one slot at a time.
+
+99
+00:03:20.067 --> 00:03:21.952
+Each slot's keys and values go on a shelf,
+
+100
+00:03:21.952 --> 00:03:23.753
+and the shelf is the state: the cache.
+
+101
+00:03:24.005 --> 00:03:25.471
+It holds the last two thousand and
+
+102
+00:03:25.471 --> 00:03:27.105
+forty-seven slots, seven hundred and
+
+103
+00:03:27.105 --> 00:03:28.613
+eighty-six thousand and forty-eight
+
+104
+00:03:28.613 --> 00:03:29.576
+numbers when it's full.
+
+105
+00:03:29.828 --> 00:03:31.420
+At our slot it holds five hundred and
+
+106
+00:03:31.420 --> 00:03:31.922
+seventy-six.
+
+107
+00:03:32.174 --> 00:03:34.101
+The live stepper, run warm offline, takes
+
+108
+00:03:34.101 --> 00:03:35.902
+nought point two seven nine milliseconds a
+
+109
+00:03:35.902 --> 00:03:36.112
+step.
+
+110
+00:03:36.363 --> 00:03:38.039
+In the real-time loop the median is one
+
+111
+00:03:38.039 --> 00:03:39.798
+point seven four, because the core goes
+
+112
+00:03:39.798 --> 00:03:40.594
+cold between slots.
+
+113
+00:03:40.846 --> 00:03:42.605
+At the ninety-ninth percentile it's about
+
+114
+00:03:42.605 --> 00:03:44.490
+three point seven: about a tenth of the
+
+115
+00:03:44.490 --> 00:03:46.250
+thirty-seven and a half milliseconds each
+
+116
+00:03:46.250 --> 00:03:48.009
+slot is decided ahead, at a hundred and
+
+117
+00:03:48.009 --> 00:03:48.554
+twenty b p m.
+
+118
+00:03:48.805 --> 00:03:50.732
+The worst step, seventy-one milliseconds,
+
+119
+00:03:50.732 --> 00:03:52.283
+overran that once, with no hit due.
+
+120
+00:03:52.534 --> 00:03:54.377
+And honestly, no live take has filled the
+
+121
+00:03:54.377 --> 00:03:54.796
+cache yet.
+
+122
+00:03:55.047 --> 00:03:56.472
+The longest was eight hundred and
+
+123
+00:03:56.472 --> 00:03:57.184
+thirty-two slots.
+
+124
+00:03:58.455 --> 00:04:00.539
+We train on chunks of five hundred and
+
+125
+00:04:00.539 --> 00:04:02.676
+twelve slots, thirty-two songs a step.
+
+126
+00:04:02.996 --> 00:04:05.187
+The cache is carried into the next chunk
+
+127
+00:04:05.187 --> 00:04:05.881
+and detached.
+
+128
+00:04:06.202 --> 00:04:08.232
+So attention reaches two thousand and
+
+129
+00:04:08.232 --> 00:04:10.529
+forty-eight slots back, but the gradient
+
+130
+00:04:10.529 --> 00:04:12.506
+reaches only five hundred and twelve.
+
+131
+00:04:12.827 --> 00:04:14.910
+The band mask makes chunk mode compute
+
+132
+00:04:14.910 --> 00:04:17.261
+what slot mode does, up to rounding:
+
+133
+00:04:17.261 --> 00:04:18.436
+that's the T one test.
+
+134
+00:04:18.757 --> 00:04:21.161
+The loss is plain binary cross-entropy, no
+
+135
+00:04:21.161 --> 00:04:21.748
+pos weight.
+
+136
+00:04:22.069 --> 00:04:24.420
+Twelve epochs, twenty-five thousand three
+
+137
+00:04:24.420 --> 00:04:26.770
+hundred and fifty-nine steps, and we play
+
+138
+00:04:26.770 --> 00:04:27.465
+epoch eleven.
+
+139
+00:04:27.932 --> 00:04:29.791
+That's the model, end to end, in about
+
+140
+00:04:29.791 --> 00:04:30.353
+five minutes.
+
+141
+00:04:33.730 --> 00:04:34.560
+Twelve questions.
+
+142
+00:04:34.852 --> 00:04:36.853
+Answer each one out loud in the pause,
+
+143
+00:04:36.853 --> 00:04:38.317
+before the model answer comes.
+
+144
+00:04:39.221 --> 00:04:39.933
+Question one.
+
+145
+00:04:40.262 --> 00:04:42.728
+Why a transformer, and not an RNN like the
+
+146
+00:04:42.728 --> 00:04:43.002
+LSTM?
+
+147
+00:04:43.489 --> 00:04:44.704
+Pause here and answer it yourself.
+
+148
+00:04:48.407 --> 00:04:50.579
+Honestly, the record first set it aside,
+
+149
+00:04:50.579 --> 00:04:52.316
+because its cost grew with the song.
+
+150
+00:04:52.605 --> 00:04:54.632
+It came back on twenty-six September with
+
+151
+00:04:54.632 --> 00:04:56.417
+the cache capped at two thousand and
+
+152
+00:04:56.417 --> 00:04:57.286
+forty-seven slots.
+
+153
+00:04:57.575 --> 00:04:59.264
+On the battery it's the steady one.
+
+154
+00:04:59.554 --> 00:05:01.580
+It follows least, nought point one nine
+
+155
+00:05:01.580 --> 00:05:03.703
+eight, just under the nought point two oh
+
+156
+00:05:03.703 --> 00:05:05.633
+two floor, where real drummers follow
+
+157
+00:05:05.633 --> 00:05:07.660
+nought point four oh five, and it leaks
+
+158
+00:05:07.660 --> 00:05:09.590
+least, nought point oh seven seven,
+
+159
+00:05:09.590 --> 00:05:11.520
+against real drummers' nought point one
+
+160
+00:05:11.520 --> 00:05:11.955
+nine two.
+
+161
+00:05:12.244 --> 00:05:13.885
+The LSTM L thirty-two reacts most.
+
+162
+00:05:14.174 --> 00:05:15.622
+That's a profile, not a win.
+
+163
+00:05:15.911 --> 00:05:18.083
+By ear, which is a separate test, it was
+
+164
+00:05:18.083 --> 00:05:20.157
+preferred on twenty-seven September and in
+
+165
+00:05:20.157 --> 00:05:22.088
+the fourteen October replays, but not
+
+166
+00:05:22.088 --> 00:05:24.018
+blind, with one rater; and S one
+
+167
+00:05:24.018 --> 00:05:26.092
+twenty-eight led the twenty-five September
+
+168
+00:05:26.092 --> 00:05:28.167
+blind listens, before T one twenty-eight
+
+169
+00:05:28.167 --> 00:05:28.553
+existed.
+
+170
+00:05:28.843 --> 00:05:29.953
+So we don't say it won.
+
+171
+00:05:30.242 --> 00:05:32.414
+The fair comparison is four point ten, and
+
+172
+00:05:32.414 --> 00:05:33.909
+six point one, still to come.
+
+173
+00:05:34.199 --> 00:05:36.322
+Rewatch four point seven point twelve;
+
+174
+00:05:36.322 --> 00:05:37.818
+follow and leak are topic five.
+
+175
+00:05:39.807 --> 00:05:40.329
+Question two.
+
+176
+00:05:40.570 --> 00:05:41.696
+What does attention compute?
+
+177
+00:05:42.079 --> 00:05:43.295
+Pause here and answer it yourself.
+
+178
+00:05:46.958 --> 00:05:48.878
+Softmax of q K transpose over root
+
+179
+00:05:48.878 --> 00:05:50.689
+twenty-four, plus B, times V.
+
+180
+00:05:51.018 --> 00:05:53.213
+Each slot's query is scored against the
+
+181
+00:05:53.213 --> 00:05:55.518
+keys of itself and up to two thousand and
+
+182
+00:05:55.518 --> 00:05:56.945
+forty-seven earlier slots.
+
+183
+00:05:57.274 --> 00:05:59.633
+The scores are scaled, B is added, the
+
+184
+00:05:59.633 --> 00:06:01.883
+softmax turns them into weights that add
+
+185
+00:06:01.883 --> 00:06:04.187
+to one, and the output is that blend of
+
+186
+00:06:04.187 --> 00:06:05.449
+the values, per head.
+
+187
+00:06:05.779 --> 00:06:08.193
+At our slot, block one's head nought puts
+
+188
+00:06:08.193 --> 00:06:10.223
+nought point nine eight on slot five
+
+189
+00:06:10.223 --> 00:06:12.583
+hundred and seventy-three, so its output
+
+190
+00:06:12.583 --> 00:06:14.558
+is almost exactly that slot's value.
+
+191
+00:06:14.887 --> 00:06:17.027
+Rewatch four point seven point four to
+
+192
+00:06:17.027 --> 00:06:18.509
+four point seven point six.
+
+193
+00:06:20.441 --> 00:06:21.210
+Question three.
+
+194
+00:06:21.517 --> 00:06:23.363
+Why divide by the square root of 24?
+
+195
+00:06:23.801 --> 00:06:25.017
+Pause here and answer it yourself.
+
+196
+00:06:28.690 --> 00:06:31.003
+Each head's query and key are twenty-four
+
+197
+00:06:31.003 --> 00:06:31.719
+numbers long.
+
+198
+00:06:32.050 --> 00:06:34.528
+With random entries of variance one, their
+
+199
+00:06:34.528 --> 00:06:36.345
+dot product has a spread of root
+
+200
+00:06:36.345 --> 00:06:38.383
+twenty-four, about four point nine.
+
+201
+00:06:38.714 --> 00:06:41.027
+Unscaled, the softmax would be nearly a
+
+202
+00:06:41.027 --> 00:06:43.340
+hard choice from the start: four toy
+
+203
+00:06:43.340 --> 00:06:45.488
+scores at that spread give the top one
+
+204
+00:06:45.488 --> 00:06:46.975
+nought point nine nine two.
+
+205
+00:06:47.305 --> 00:06:49.508
+Dividing by root twenty-four brings the
+
+206
+00:06:49.508 --> 00:06:50.885
+spread back to about one.
+
+207
+00:06:51.216 --> 00:06:52.372
+It's a fixed setting.
+
+208
+00:06:52.703 --> 00:06:54.630
+Training decides how large q and k
+
+209
+00:06:54.630 --> 00:06:55.346
+actually get.
+
+210
+00:06:55.677 --> 00:06:57.660
+Rewatch four point seven point four.
+
+211
+00:06:59.655 --> 00:07:00.372
+Question four.
+
+212
+00:07:00.679 --> 00:07:02.828
+Why ALiBi, and not sinusoidal positions?
+
+213
+00:07:03.241 --> 00:07:04.456
+Pause here and answer it yourself.
+
+214
+00:07:08.129 --> 00:07:10.633
+Attention by itself has no order: shuffle
+
+215
+00:07:10.633 --> 00:07:12.605
+the keys and values together and the
+
+216
+00:07:12.605 --> 00:07:13.777
+output doesn't change.
+
+217
+00:07:14.096 --> 00:07:16.440
+Sinusoids, as in Velardo's course and the
+
+218
+00:07:16.440 --> 00:07:18.518
+original transformer, add a position
+
+219
+00:07:18.518 --> 00:07:19.584
+vector to the input.
+
+220
+00:07:19.903 --> 00:07:22.194
+ALiBi subtracts a slope times the distance
+
+221
+00:07:22.194 --> 00:07:23.047
+from each score.
+
+222
+00:07:23.366 --> 00:07:25.764
+That depends on distance only, so it means
+
+223
+00:07:25.764 --> 00:07:28.055
+the same in a five hundred and twelve slot
+
+224
+00:07:28.055 --> 00:07:30.239
+chunk as at slot a hundred thousand of a
+
+225
+00:07:30.239 --> 00:07:32.530
+live take, and the cache can roll on for
+
+226
+00:07:32.530 --> 00:07:32.796
+ever.
+
+227
+00:07:33.116 --> 00:07:35.354
+Four fixed slopes give horizons of one,
+
+228
+00:07:35.354 --> 00:07:37.858
+four, sixteen and sixty-four bars, and the
+
+229
+00:07:37.858 --> 00:07:39.829
+bar phase says where the downbeat is.
+
+230
+00:07:40.148 --> 00:07:42.120
+Rewatch four point seven point eight.
+
+231
+00:07:44.182 --> 00:07:44.823
+Question five.
+
+232
+00:07:45.098 --> 00:07:46.975
+What is the bar phase, and why is it a
+
+233
+00:07:46.975 --> 00:07:47.707
+fairness caveat?
+
+234
+00:07:48.184 --> 00:07:49.400
+Pause here and answer it yourself.
+
+235
+00:07:53.073 --> 00:07:55.323
+It's a learned table of sixteen rows,
+
+236
+00:07:55.323 --> 00:07:57.686
+picked by the slot number mod sixteen and
+
+237
+00:07:57.686 --> 00:08:00.161
+added to each token: one thousand five
+
+238
+00:08:00.161 --> 00:08:02.692
+hundred and thirty-six parameters, because
+
+239
+00:08:02.692 --> 00:08:04.717
+ALiBi alone can't find the downbeat.
+
+240
+00:08:05.055 --> 00:08:07.024
+The LSTM and S4D get no such table.
+
+241
+00:08:07.361 --> 00:08:09.386
+They have to count from slot nought.
+
+242
+00:08:09.724 --> 00:08:11.862
+So T one twenty-eight is told the bar
+
+243
+00:08:11.862 --> 00:08:14.337
+position and the others aren't, and every
+
+244
+00:08:14.337 --> 00:08:15.743
+comparison has to say so.
+
+245
+00:08:16.081 --> 00:08:18.725
+Live, SYNC only places slot nought; the
+
+246
+00:08:18.725 --> 00:08:20.975
+counter then counts from each segment's
+
+247
+00:08:20.975 --> 00:08:23.450
+downbeat, not from SYNC's bar position as
+
+248
+00:08:23.450 --> 00:08:24.519
+the docstring says.
+
+249
+00:08:24.856 --> 00:08:26.825
+Rewatch four point seven point two.
+
+250
+00:08:28.828 --> 00:08:29.360
+Question six.
+
+251
+00:08:29.606 --> 00:08:31.202
+What is the state, and how big is it?
+
+252
+00:08:31.591 --> 00:08:32.807
+Pause here and answer it yourself.
+
+253
+00:08:36.510 --> 00:08:38.860
+The cache is the state: per layer, the
+
+254
+00:08:38.860 --> 00:08:40.955
+keys and values of the last two thousand
+
+255
+00:08:40.955 --> 00:08:43.203
+and forty-seven slots, and a slot counter.
+
+256
+00:08:43.509 --> 00:08:45.553
+It's built from what the model heard,
+
+257
+00:08:45.553 --> 00:08:46.881
+never from what it played.
+
+258
+00:08:47.188 --> 00:08:48.005
+That's option B.
+
+259
+00:08:48.312 --> 00:08:50.560
+Full, that's two layers, times keys and
+
+260
+00:08:50.560 --> 00:08:52.859
+values, times two thousand and forty-seven
+
+261
+00:08:52.859 --> 00:08:55.414
+slots, times ninety-six: seven hundred and
+
+262
+00:08:55.414 --> 00:08:57.253
+eighty-six thousand and forty-eight
+
+263
+00:08:57.253 --> 00:08:58.888
+floats, about three megabytes.
+
+264
+00:08:59.194 --> 00:09:01.442
+The LSTM carries five hundred and twelve,
+
+265
+00:09:01.442 --> 00:09:03.588
+and S4D thirty-two thousand seven hundred
+
+266
+00:09:03.588 --> 00:09:04.405
+and sixty-eight.
+
+267
+00:09:04.712 --> 00:09:06.653
+Rewatch four point seven point twelve.
+
+268
+00:09:08.673 --> 00:09:09.407
+Question seven.
+
+269
+00:09:09.700 --> 00:09:11.755
+Why does training in chunks give the same
+
+270
+00:09:11.755 --> 00:09:12.489
+answer as live?
+
+271
+00:09:12.972 --> 00:09:14.188
+Pause here and answer it yourself.
+
+272
+00:09:17.851 --> 00:09:18.790
+Because of the band.
+
+273
+00:09:19.071 --> 00:09:21.090
+The query at slot t sees exactly the slots
+
+274
+00:09:21.090 --> 00:09:23.062
+from t minus two thousand and forty-seven
+
+275
+00:09:23.062 --> 00:09:25.081
+to t, however the song is cut, and the
+
+276
+00:09:25.081 --> 00:09:27.053
+cache carries the earlier chunks' keys in.
+
+277
+00:09:27.334 --> 00:09:29.259
+The T one test checks chunk mode against
+
+278
+00:09:29.259 --> 00:09:31.137
+slot mode, to within ten to the minus
+
+279
+00:09:31.137 --> 00:09:33.203
+five, on a seeded, untrained model with
+
+280
+00:09:33.203 --> 00:09:34.518
+made-up input, on the CPU.
+
+281
+00:09:34.799 --> 00:09:36.724
+On the trained model the gap reaches two
+
+282
+00:09:36.724 --> 00:09:38.508
+point nine hundred-thousandths on one
+
+283
+00:09:38.508 --> 00:09:40.386
+validation song, above the test's own
+
+284
+00:09:40.386 --> 00:09:40.621
+line.
+
+285
+00:09:40.903 --> 00:09:42.828
+On the test input in double precision it
+
+286
+00:09:42.828 --> 00:09:44.753
+falls to about ten to the minus thirteen.
+
+287
+00:09:45.034 --> 00:09:47.053
+So it's rounding, and it flipped no hits
+
+288
+00:09:47.053 --> 00:09:48.227
+on the two songs checked.
+
+289
+00:09:48.509 --> 00:09:50.762
+What does differ is training: the gradient
+
+290
+00:09:50.762 --> 00:09:51.889
+stops at the chunk edge.
+
+291
+00:09:52.171 --> 00:09:54.237
+Rewatch four point seven point seven, and
+
+292
+00:09:54.237 --> 00:09:55.739
+four point seven point thirteen.
+
+293
+00:09:57.669 --> 00:09:58.349
+Question eight.
+
+294
+00:09:58.621 --> 00:10:00.388
+Why nine sigmoids, and not a softmax?
+
+295
+00:10:00.774 --> 00:10:01.990
+Pause here and answer it yourself.
+
+296
+00:10:05.653 --> 00:10:07.398
+A softmax shares one total among the
+
+297
+00:10:07.398 --> 00:10:08.624
+voices, so they compete.
+
+298
+00:10:08.907 --> 00:10:10.557
+That suits picking one word from a
+
+299
+00:10:10.557 --> 00:10:11.076
+vocabulary.
+
+300
+00:10:11.359 --> 00:10:13.528
+A drummer hits several drums at once: at
+
+301
+00:10:13.528 --> 00:10:15.462
+our slot, kick and closed hat together.
+
+302
+00:10:15.745 --> 00:10:17.678
+So each voice gets its own sigmoid, an
+
+303
+00:10:17.678 --> 00:10:19.518
+independent probability, and its own
+
+304
+00:10:19.518 --> 00:10:19.989
+threshold.
+
+305
+00:10:20.272 --> 00:10:22.253
+The only softmax in T one twenty-eight is
+
+306
+00:10:22.253 --> 00:10:23.055
+inside attention.
+
+307
+00:10:23.338 --> 00:10:25.130
+Rewatch four point seven point eleven.
+
+308
+00:10:27.024 --> 00:10:27.542
+Question nine.
+
+309
+00:10:27.764 --> 00:10:28.392
+What is the loss?
+
+310
+00:10:28.721 --> 00:10:29.936
+Pause here and answer it yourself.
+
+311
+00:10:33.609 --> 00:10:35.660
+Binary cross-entropy with logits, for each
+
+312
+00:10:35.660 --> 00:10:37.620
+voice, averaged over the nine voices and
+
+313
+00:10:37.620 --> 00:10:38.303
+the real slots.
+
+314
+00:10:38.577 --> 00:10:40.810
+It's plain: the pos weight cap is one, so
+
+315
+00:10:40.810 --> 00:10:42.086
+every voice's weight is one.
+
+316
+00:10:42.360 --> 00:10:44.410
+Round one weighted the rare voices, capped
+
+317
+00:10:44.410 --> 00:10:44.821
+at fifty.
+
+318
+00:10:45.094 --> 00:10:47.236
+From round two, on twelve September, every
+
+319
+00:10:47.236 --> 00:10:48.056
+run is unweighted.
+
+320
+00:10:48.330 --> 00:10:50.062
+Rare voices are left to the decoder's
+
+321
+00:10:50.062 --> 00:10:51.019
+per-voice thresholds.
+
+322
+00:10:51.292 --> 00:10:52.386
+Rewatch three point two.
+
+323
+00:10:54.309 --> 00:10:54.855
+Question ten.
+
+324
+00:10:55.107 --> 00:10:56.157
+How was the epoch chosen?
+
+325
+00:10:56.539 --> 00:10:57.755
+Pause here and answer it yourself.
+
+326
+00:11:01.428 --> 00:11:01.980
+Not by loss.
+
+327
+00:11:02.256 --> 00:11:03.960
+The lowest validation loss was epoch
+
+328
+00:11:03.960 --> 00:11:06.077
+seven, nought point one nine three three,
+
+329
+00:11:06.077 --> 00:11:08.010
+and epoch eleven is nought point one nine
+
+330
+00:11:08.010 --> 00:11:10.035
+three seven: a gap the loss can't rank.
+
+331
+00:11:10.311 --> 00:11:11.830
+Not by the battery's rule either.
+
+332
+00:11:12.106 --> 00:11:14.040
+It picked epoch ten, which passes every
+
+333
+00:11:14.040 --> 00:11:16.157
+gate, but the day before, blind listening
+
+334
+00:11:16.157 --> 00:11:18.182
+had put the rule's picks near the bottom,
+
+335
+00:11:18.182 --> 00:11:19.241
+so they were set aside.
+
+336
+00:11:19.517 --> 00:11:21.450
+We play epoch eleven, the last epoch,
+
+337
+00:11:21.450 --> 00:11:23.383
+because the team deck needed a last epoch
+
+338
+00:11:23.383 --> 00:11:24.948
+that had not collapsed to hi-hats.
+
+339
+00:11:25.224 --> 00:11:27.296
+It passes every gate but the follow floor,
+
+340
+00:11:27.296 --> 00:11:29.321
+half the real drummers' follow: nought
+
+341
+00:11:29.321 --> 00:11:31.254
+point one nine eight against nought point
+
+342
+00:11:31.254 --> 00:11:31.760
+two oh two.
+
+343
+00:11:32.036 --> 00:11:34.062
+Then the ear: it was rated on the team
+
+344
+00:11:34.062 --> 00:11:35.949
+deck on twenty-seven September, by one
+
+345
+00:11:35.949 --> 00:11:36.225
+rater.
+
+346
+00:11:36.501 --> 00:11:37.652
+Rewatch three point five.
+
+347
+00:11:39.637 --> 00:11:40.327
+Question eleven.
+
+348
+00:11:40.585 --> 00:11:41.448
+How fast is it live?
+
+349
+00:11:41.845 --> 00:11:43.061
+Pause here and answer it yourself.
+
+350
+00:11:46.734 --> 00:11:47.824
+Say which number you mean.
+
+351
+00:11:48.076 --> 00:11:50.173
+The live stepper, run warm offline: nought
+
+352
+00:11:50.173 --> 00:11:52.018
+point two seven nine milliseconds median,
+
+353
+00:11:52.018 --> 00:11:53.696
+past two thousand and forty-eight slots.
+
+354
+00:11:53.947 --> 00:11:55.792
+In the real-time loop: one point seven
+
+355
+00:11:55.792 --> 00:11:57.596
+four median, and about three point seven
+
+356
+00:11:57.596 --> 00:11:59.357
+at the ninety-ninth percentile, because
+
+357
+00:11:59.357 --> 00:12:00.741
+the core goes cold between slots.
+
+358
+00:12:00.993 --> 00:12:02.670
+The nought point three five six you may
+
+359
+00:12:02.670 --> 00:12:04.473
+see is an offline drill on an epoch nought
+
+360
+00:12:04.473 --> 00:12:05.815
+checkpoint: an upper bound.
+
+361
+00:12:06.067 --> 00:12:07.828
+The budget is the thirty-seven and a half
+
+362
+00:12:07.828 --> 00:12:09.632
+milliseconds each slot is decided ahead,
+
+363
+00:12:09.632 --> 00:12:11.309
+at a hundred and twenty b p m, so the
+
+364
+00:12:11.309 --> 00:12:13.029
+ninety-ninth percentile is about a tenth
+
+365
+00:12:13.029 --> 00:12:13.280
+of it.
+
+366
+00:12:13.532 --> 00:12:15.293
+The worst step in the loop, seventy-one
+
+367
+00:12:15.293 --> 00:12:17.264
+milliseconds, overran it once, with no hit
+
+368
+00:12:17.264 --> 00:12:19.277
+due; those sessions ran on a fake board or
+
+369
+00:12:19.277 --> 00:12:19.906
+with no guitar.
+
+370
+00:12:20.158 --> 00:12:21.877
+And a live take with a full cache hasn't
+
+371
+00:12:21.877 --> 00:12:22.465
+been measured.
+
+372
+00:12:22.716 --> 00:12:24.603
+Rewatch four point seven point twelve, and
+
+373
+00:12:24.603 --> 00:12:25.232
+one point four.
+
+374
+00:12:27.140 --> 00:12:27.791
+Question twelve.
+
+375
+00:12:28.035 --> 00:12:29.256
+What are its known weaknesses?
+
+376
+00:12:29.605 --> 00:12:30.820
+Pause here and answer it yourself.
+
+377
+00:12:34.493 --> 00:12:36.554
+It has twelve percent more parameters than
+
+378
+00:12:36.554 --> 00:12:38.664
+the LSTM, and a matched version was never
+
+379
+00:12:38.664 --> 00:12:39.047
+trained.
+
+380
+00:12:39.335 --> 00:12:41.396
+It's given the bar phase, and the others
+
+381
+00:12:41.396 --> 00:12:41.731
+aren't.
+
+382
+00:12:42.019 --> 00:12:43.792
+Its gradients reach five hundred and
+
+383
+00:12:43.792 --> 00:12:45.758
+twelve slots while attention reaches two
+
+384
+00:12:45.758 --> 00:12:47.819
+thousand and forty-eight, and whether it
+
+385
+00:12:47.819 --> 00:12:49.401
+uses the far keys isn't measured.
+
+386
+00:12:49.688 --> 00:12:50.983
+It misses the follow floor.
+
+387
+00:12:51.270 --> 00:12:53.092
+No live take has filled its cache yet.
+
+388
+00:12:53.379 --> 00:12:55.297
+What we said about the heads comes from
+
+389
+00:12:55.297 --> 00:12:56.303
+one slot of one song.
+
+390
+00:12:56.591 --> 00:12:58.748
+And on that song it over-plays kicks: a
+
+391
+00:12:58.748 --> 00:13:00.665
+hundred and forty against the drummer's
+
+392
+00:13:00.665 --> 00:13:02.726
+seventy-eight, adding beat three and the
+
+393
+00:13:02.726 --> 00:13:03.829
+last eighth of the bar.
+
+394
+00:13:04.116 --> 00:13:06.130
+Rewatch four point oh, four point seven
+
+395
+00:13:06.130 --> 00:13:08.383
+point two, four point seven point six, and
+
+396
+00:13:08.383 --> 00:13:10.396
+four point seven point eleven to thirteen.
+
+397
+00:13:14.433 --> 00:13:15.427
+Say it in one breath.
+
+398
+00:13:15.711 --> 00:13:17.651
+T one twenty-eight is a two-block causal
+
+399
+00:13:17.651 --> 00:13:19.448
+transformer over sixteenth-note slots.
+
+400
+00:13:19.732 --> 00:13:22.003
+Five guitar numbers and a bar phase go in;
+
+401
+00:13:22.003 --> 00:13:24.038
+attention looks over the last two thousand
+
+402
+00:13:24.038 --> 00:13:26.025
+and forty-eight slots with ALiBi distance
+
+403
+00:13:26.025 --> 00:13:27.870
+penalties; nine sigmoids come out.
+
+404
+00:13:28.154 --> 00:13:30.141
+Live, it runs one slot at a time from a
+
+405
+00:13:30.141 --> 00:13:31.324
+cache of keys and values.
+
+406
+00:13:31.608 --> 00:13:33.548
+It was trained on chunks of five hundred
+
+407
+00:13:33.548 --> 00:13:34.920
+and twelve with plain binary
+
+408
+00:13:34.920 --> 00:13:36.907
+cross-entropy, and we play epoch eleven.
+
+409
+00:13:37.191 --> 00:13:39.320
+This pairs with the course explainer, part
+
+410
+00:13:39.320 --> 00:13:41.591
+two: lessons seventeen and eighteen, his
+
+411
+00:13:41.591 --> 00:13:43.294
+transformer against ours, and the
+
+412
+00:13:43.294 --> 00:13:44.808
+attention over slots visualiser.
+
+413
+00:13:45.092 --> 00:13:47.032
+The interactive architecture walkthrough
+
+414
+00:13:47.032 --> 00:13:49.208
+was briefed on fifteen October; once its
+
+415
+00:13:49.208 --> 00:13:51.290
+link is recorded, click through it beside
+
+416
+00:13:51.290 --> 00:13:51.526
+this.
+
+417
+00:13:51.810 --> 00:13:53.229
+That's the transformer module.
+

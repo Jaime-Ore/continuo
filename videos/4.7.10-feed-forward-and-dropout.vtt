@@ -1,0 +1,870 @@
+WEBVTT
+
+1
+00:00:00.070 --> 00:00:01.417
+Four point seven point ten.
+
+2
+00:00:01.717 --> 00:00:03.913
+The second half of a block, and the whole
+
+3
+00:00:03.913 --> 00:00:05.111
+model's parameter count.
+
+4
+00:00:09.633 --> 00:00:10.920
+Four point seven point ten.
+
+5
+00:00:11.206 --> 00:00:13.064
+In four point seven point four to four
+
+6
+00:00:13.064 --> 00:00:15.208
+point seven point eight, attention let our
+
+7
+00:00:15.208 --> 00:00:17.448
+worked slot, slot five seventy-six, gather
+
+8
+00:00:17.448 --> 00:00:19.497
+from earlier slots: information moved
+
+9
+00:00:19.497 --> 00:00:20.164
+between slots.
+
+10
+00:00:20.450 --> 00:00:22.308
+The second half of each block does the
+
+11
+00:00:22.308 --> 00:00:22.737
+opposite.
+
+12
+00:00:23.023 --> 00:00:25.024
+Each slot goes through a small network of
+
+13
+00:00:25.024 --> 00:00:27.025
+its own, and no number crosses from one
+
+14
+00:00:27.025 --> 00:00:27.787
+slot to another.
+
+15
+00:00:28.246 --> 00:00:30.073
+That is the feed-forward network.
+
+16
+00:00:30.405 --> 00:00:33.062
+Every slot uses the very same weights: one
+
+17
+00:00:33.062 --> 00:00:34.834
+network, applied slot by slot.
+
+18
+00:00:35.166 --> 00:00:37.767
+Attention gathers; the feed-forward works
+
+19
+00:00:37.767 --> 00:00:38.930
+on what was gathered.
+
+20
+00:00:39.262 --> 00:00:41.255
+Velardo's line is that attention is
+
+21
+00:00:41.255 --> 00:00:43.414
+context and the feed-forward is nuance.
+
+22
+00:00:43.852 --> 00:00:46.663
+In the code it is one line: a linear layer
+
+23
+00:00:46.663 --> 00:00:49.122
+from d to ffn, a GELU, a linear layer
+
+24
+00:00:49.122 --> 00:00:49.415
+back.
+
+25
+00:00:49.766 --> 00:00:52.401
+And it is used on line eighty-four, inside
+
+26
+00:00:52.401 --> 00:00:54.684
+the residual add from four point seven
+
+27
+00:00:54.684 --> 00:00:57.261
+point nine, reading the second layer norm.
+
+28
+00:01:01.347 --> 00:01:03.408
+The slot's ninety-six numbers, after the
+
+29
+00:01:03.408 --> 00:01:04.702
+second layer norm, go in.
+
+30
+00:01:04.989 --> 00:01:06.715
+A linear layer widens them to three
+
+31
+00:01:06.715 --> 00:01:08.824
+hundred and eighty-four: four times as
+
+32
+00:01:08.824 --> 00:01:09.064
+wide.
+
+33
+00:01:09.351 --> 00:01:11.173
+That number is simply set in the code.
+
+34
+00:01:11.460 --> 00:01:13.473
+Each of the three hundred and eighty-four
+
+35
+00:01:13.473 --> 00:01:14.863
+goes through GELU on its own.
+
+36
+00:01:15.151 --> 00:01:17.020
+Then a second linear layer brings them
+
+37
+00:01:17.020 --> 00:01:19.034
+back to ninety-six, ready to add to the
+
+38
+00:01:19.034 --> 00:01:19.369
+stream.
+
+39
+00:01:19.779 --> 00:01:22.090
+Count the parameters, as in lesson three
+
+40
+00:01:22.090 --> 00:01:22.627
+point one.
+
+41
+00:01:22.950 --> 00:01:25.207
+The first layer has a weight from each of
+
+42
+00:01:25.207 --> 00:01:27.519
+ninety-six inputs to each of three hundred
+
+43
+00:01:27.519 --> 00:01:29.937
+and eighty-four outputs, plus one bias per
+
+44
+00:01:29.937 --> 00:01:32.625
+output: thirty-seven thousand, two hundred
+
+45
+00:01:32.625 --> 00:01:33.485
+and forty-eight.
+
+46
+00:01:33.807 --> 00:01:36.280
+The second layer: ninety-six times three
+
+47
+00:01:36.280 --> 00:01:38.591
+hundred and eighty-four, plus ninety-six
+
+48
+00:01:38.591 --> 00:01:41.225
+biases: thirty-six thousand, nine hundred
+
+49
+00:01:41.225 --> 00:01:41.762
+and sixty.
+
+50
+00:01:42.085 --> 00:01:42.837
+GELU has none.
+
+51
+00:01:43.160 --> 00:01:45.256
+So the feed-forward holds seventy-four
+
+52
+00:01:45.256 --> 00:01:47.675
+thousand, two hundred and eight numbers in
+
+53
+00:01:47.675 --> 00:01:48.266
+each block.
+
+54
+00:01:52.420 --> 00:01:54.892
+In lesson three point one you met ReLU:
+
+55
+00:01:54.892 --> 00:01:57.090
+keep z if it is positive, else nought.
+
+56
+00:01:57.420 --> 00:01:59.782
+Our model uses GELU, which you met there
+
+57
+00:01:59.782 --> 00:02:00.442
+in one line.
+
+58
+00:02:00.771 --> 00:02:01.870
+Here it is properly.
+
+59
+00:02:02.357 --> 00:02:05.085
+GELU of z is z, times capital phi of z:
+
+60
+00:02:05.085 --> 00:02:07.406
+the chance that a number drawn from the
+
+61
+00:02:07.406 --> 00:02:09.380
+standard bell curve falls below z.
+
+62
+00:02:09.728 --> 00:02:12.224
+For a big positive z that chance is nearly
+
+63
+00:02:12.224 --> 00:02:14.081
+one, so GELU passes z through.
+
+64
+00:02:14.429 --> 00:02:16.983
+For a big negative z it is nearly nought,
+
+65
+00:02:16.983 --> 00:02:18.608
+so GELU gives nearly nought.
+
+66
+00:02:19.082 --> 00:02:19.866
+Two worked values.
+
+67
+00:02:20.127 --> 00:02:21.913
+At one and a half, phi is nought point
+
+68
+00:02:21.913 --> 00:02:23.742
+nine three three two, so GELU gives one
+
+69
+00:02:23.742 --> 00:02:25.484
+point three nine nine eight, a little
+
+70
+00:02:25.484 --> 00:02:26.703
+under ReLU's one and a half.
+
+71
+00:02:26.965 --> 00:02:28.924
+At minus nought point seven, phi is nought
+
+72
+00:02:28.924 --> 00:02:30.797
+point two four two, and GELU gives minus
+
+73
+00:02:30.797 --> 00:02:32.757
+nought point one six nine four, where ReLU
+
+74
+00:02:32.757 --> 00:02:33.323
+gives nought.
+
+75
+00:02:33.584 --> 00:02:35.239
+It never goes lower than minus nought
+
+76
+00:02:35.239 --> 00:02:37.199
+point one seven, near z equals minus three
+
+77
+00:02:37.199 --> 00:02:37.591
+quarters.
+
+78
+00:02:37.951 --> 00:02:39.181
+Why a smooth version?
+
+79
+00:02:39.532 --> 00:02:42.168
+ReLU has a sharp corner at nought, and for
+
+80
+00:02:42.168 --> 00:02:44.628
+every negative input its slope is exactly
+
+81
+00:02:44.628 --> 00:02:46.854
+nought, so by the chain rule a unit
+
+82
+00:02:46.854 --> 00:02:49.197
+sitting below nought passes no gradient
+
+83
+00:02:49.197 --> 00:02:49.900
+back at all.
+
+84
+00:02:50.252 --> 00:02:52.478
+GELU bends smoothly and keeps a small
+
+85
+00:02:52.478 --> 00:02:55.114
+slope just below nought, so a unit that is
+
+86
+00:02:55.114 --> 00:02:57.105
+slightly negative can still learn.
+
+87
+00:02:57.457 --> 00:03:00.210
+No reason for the choice is recorded; the
+
+88
+00:03:00.210 --> 00:03:02.377
+course explainer calls it the common
+
+89
+00:03:02.377 --> 00:03:03.842
+choice in small decoders.
+
+90
+00:03:04.193 --> 00:03:06.536
+Velardo's general transformer uses ReLU
+
+91
+00:03:06.536 --> 00:03:06.829
+here.
+
+92
+00:03:10.923 --> 00:03:11.824
+Now the worked slot.
+
+93
+00:03:12.094 --> 00:03:13.895
+These are block one's three hundred and
+
+94
+00:03:13.895 --> 00:03:15.921
+eighty-four hidden numbers after GELU, one
+
+95
+00:03:15.921 --> 00:03:16.506
+bar per unit.
+
+96
+00:03:16.777 --> 00:03:18.307
+Only thirty-five are above nought.
+
+97
+00:03:18.578 --> 00:03:20.514
+The largest is unit fifty-one, at twenty
+
+98
+00:03:20.514 --> 00:03:21.234
+point two eight.
+
+99
+00:03:21.504 --> 00:03:23.440
+The other three hundred and forty-nine sit
+
+100
+00:03:23.440 --> 00:03:25.376
+near nought or are small negatives, down
+
+101
+00:03:25.376 --> 00:03:27.538
+to minus nought point one seven: too small
+
+102
+00:03:27.538 --> 00:03:28.483
+to see at this scale.
+
+103
+00:03:28.886 --> 00:03:30.840
+In block two, seventy-four are above
+
+104
+00:03:30.840 --> 00:03:33.295
+nought; the largest, unit one hundred and
+
+105
+00:03:33.295 --> 00:03:35.099
+twelve, is nineteen point six two.
+
+106
+00:03:35.399 --> 00:03:37.504
+Which units switch on depends on the slot.
+
+107
+00:03:37.804 --> 00:03:40.159
+What each one means isn't known: like the
+
+108
+00:03:40.159 --> 00:03:42.514
+ninety-six, they are learned features, not
+
+109
+00:03:42.514 --> 00:03:43.065
+named ones.
+
+110
+00:03:43.478 --> 00:03:45.689
+The second linear layer turns block one's
+
+111
+00:03:45.689 --> 00:03:48.006
+hidden numbers back into ninety-six, with
+
+112
+00:03:48.006 --> 00:03:50.270
+length four hundred and two, and the add
+
+113
+00:03:50.270 --> 00:03:52.324
+takes the stream from four hundred and
+
+114
+00:03:52.324 --> 00:03:54.062
+twenty-nine to seven hundred and
+
+115
+00:03:54.062 --> 00:03:56.431
+eighty-three: the growth we saw in four
+
+116
+00:03:56.431 --> 00:03:57.642
+point seven point nine.
+
+117
+00:04:01.723 --> 00:04:03.572
+One more piece sits on both branches, just
+
+118
+00:04:03.572 --> 00:04:04.805
+before each add: dropout.
+
+119
+00:04:05.051 --> 00:04:06.530
+Here are the first five numbers the
+
+120
+00:04:06.530 --> 00:04:08.050
+feed-forward hands back for our slot.
+
+121
+00:04:08.296 --> 00:04:09.940
+In training, each number is kept with
+
+122
+00:04:09.940 --> 00:04:11.747
+chance nine in ten, and dropped, set to
+
+123
+00:04:11.747 --> 00:04:13.103
+nought, with chance one in ten.
+
+124
+00:04:13.350 --> 00:04:14.664
+Here the dice dropped the third.
+
+125
+00:04:14.911 --> 00:04:16.554
+Every number that is kept is divided by
+
+126
+00:04:16.554 --> 00:04:18.485
+nought point nine: minus twenty-six point
+
+127
+00:04:18.485 --> 00:04:20.128
+six six becomes minus twenty-nine point
+
+128
+00:04:20.128 --> 00:04:20.457
+six two.
+
+129
+00:04:20.838 --> 00:04:22.391
+Why divide by nought point nine?
+
+130
+00:04:22.682 --> 00:04:24.769
+On average a number survives nine times in
+
+131
+00:04:24.769 --> 00:04:26.953
+ten, divided by nought point nine, so on
+
+132
+00:04:26.953 --> 00:04:29.039
+average it comes out the same size it went
+
+133
+00:04:29.039 --> 00:04:29.185
+in.
+
+134
+00:04:29.476 --> 00:04:31.320
+The next layer sees the same scale in
+
+135
+00:04:31.320 --> 00:04:33.504
+training as it does later, when nothing is
+
+136
+00:04:33.504 --> 00:04:33.892
+dropped.
+
+137
+00:04:34.184 --> 00:04:36.367
+With only five numbers, half a number goes
+
+138
+00:04:36.367 --> 00:04:38.503
+on average; this draw happened to drop
+
+139
+00:04:38.503 --> 00:04:38.697
+one.
+
+140
+00:04:39.121 --> 00:04:41.279
+In validation, in scoring and live,
+
+141
+00:04:41.279 --> 00:04:43.598
+dropout is off: the five pass through
+
+142
+00:04:43.598 --> 00:04:44.138
+unchanged.
+
+143
+00:04:44.461 --> 00:04:46.997
+That is eval mode; training is train mode.
+
+144
+00:04:48.262 --> 00:04:49.951
+In the code, self dot drop wraps
+
+145
+00:04:49.951 --> 00:04:51.881
+attention's answer on line eighty-three
+
+146
+00:04:51.881 --> 00:04:53.376
+and the feed-forward's on line
+
+147
+00:04:53.376 --> 00:04:53.956
+eighty-four.
+
+148
+00:04:54.245 --> 00:04:54.872
+Nowhere else.
+
+149
+00:04:55.162 --> 00:04:56.995
+The training pass switches it on with
+
+150
+00:04:56.995 --> 00:04:59.022
+model dot train; the validation pass
+
+151
+00:04:59.022 --> 00:05:01.193
+switches it off, and so does eval, which
+
+152
+00:05:01.193 --> 00:05:03.075
+every checkpoint loaded for scoring or
+
+153
+00:05:03.075 --> 00:05:03.943
+live goes through.
+
+154
+00:05:04.233 --> 00:05:05.053
+Why do it at all?
+
+155
+00:05:05.342 --> 00:05:07.514
+It guards against overfitting, from lesson
+
+156
+00:05:07.514 --> 00:05:08.334
+three point five.
+
+157
+00:05:08.624 --> 00:05:10.795
+Because any number might vanish, the model
+
+158
+00:05:10.795 --> 00:05:12.869
+cannot rely on one unit or one path, and
+
+159
+00:05:12.869 --> 00:05:14.606
+it spreads what it learns over many.
+
+160
+00:05:14.896 --> 00:05:16.440
+That is the general explanation.
+
+161
+00:05:16.730 --> 00:05:18.804
+We never trained a T128 without dropout,
+
+162
+00:05:18.804 --> 00:05:20.445
+so how much it helped here is not
+
+163
+00:05:20.445 --> 00:05:20.879
+measured.
+
+164
+00:05:21.168 --> 00:05:23.340
+The setting, nought point one, is shared
+
+165
+00:05:23.340 --> 00:05:24.642
+by all three architectures.
+
+166
+00:05:29.340 --> 00:05:30.803
+Now we can count a whole block.
+
+167
+00:05:31.086 --> 00:05:33.116
+A block is everything from the first layer
+
+168
+00:05:33.116 --> 00:05:34.201
+norm to the second add.
+
+169
+00:05:34.484 --> 00:05:36.042
+Six pieces in it hold parameters.
+
+170
+00:05:36.325 --> 00:05:38.354
+The first layer norm's gammas and betas,
+
+171
+00:05:38.354 --> 00:05:39.629
+one hundred and ninety-two.
+
+172
+00:05:39.912 --> 00:05:41.611
+The query, key and value layer,
+
+173
+00:05:41.611 --> 00:05:43.593
+twenty-seven thousand, nine hundred and
+
+174
+00:05:43.593 --> 00:05:44.112
+thirty-six.
+
+175
+00:05:44.396 --> 00:05:46.378
+The output projection, nine thousand,
+
+176
+00:05:46.378 --> 00:05:47.558
+three hundred and twelve.
+
+177
+00:05:47.841 --> 00:05:49.965
+The second layer norm, another one hundred
+
+178
+00:05:49.965 --> 00:05:50.673
+and ninety-two.
+
+179
+00:05:50.956 --> 00:05:52.513
+The feed-forward's two layers,
+
+180
+00:05:52.513 --> 00:05:54.448
+thirty-seven thousand, two hundred and
+
+181
+00:05:54.448 --> 00:05:56.525
+forty-eight and thirty-six thousand, nine
+
+182
+00:05:56.525 --> 00:05:57.375
+hundred and sixty.
+
+183
+00:05:57.658 --> 00:05:59.498
+One block: one hundred and eleven
+
+184
+00:05:59.498 --> 00:06:01.197
+thousand, eight hundred and forty.
+
+185
+00:06:01.481 --> 00:06:03.227
+The feed-forward is two thirds of it.
+
+186
+00:06:03.702 --> 00:06:05.536
+And the whole model, from the start.
+
+187
+00:06:05.825 --> 00:06:08.189
+The input projection, five to ninety-six:
+
+188
+00:06:08.189 --> 00:06:09.589
+five hundred and seventy-six.
+
+189
+00:06:09.878 --> 00:06:11.760
+The bar-phase table, sixteen rows of
+
+190
+00:06:11.760 --> 00:06:14.028
+ninety-six: one thousand five hundred and
+
+191
+00:06:14.028 --> 00:06:14.558
+thirty-six.
+
+192
+00:06:14.848 --> 00:06:16.923
+Block one and block two, one hundred and
+
+193
+00:06:16.923 --> 00:06:18.998
+eleven thousand, eight hundred and forty
+
+194
+00:06:18.998 --> 00:06:19.239
+each.
+
+195
+00:06:19.528 --> 00:06:21.458
+The final layer norm, one hundred and
+
+196
+00:06:21.458 --> 00:06:21.989
+ninety-two.
+
+197
+00:06:22.279 --> 00:06:24.353
+The head, ninety-six to nine: eight
+
+198
+00:06:24.353 --> 00:06:25.608
+hundred and seventy-three.
+
+199
+00:06:25.897 --> 00:06:27.779
+Total: two hundred and twenty-six
+
+200
+00:06:27.779 --> 00:06:29.951
+thousand, eight hundred and fifty-seven,
+
+201
+00:06:29.951 --> 00:06:31.929
+the number at the top of transformer dot
+
+202
+00:06:31.929 --> 00:06:34.004
+py, and the one lesson three point three
+
+203
+00:06:34.004 --> 00:06:34.341
+quoted.
+
+204
+00:06:34.631 --> 00:06:36.464
+Ninety-eight and a half percent of it
+
+205
+00:06:36.464 --> 00:06:37.622
+lives in the two blocks.
+
+206
+00:06:40.021 --> 00:06:41.898
+Say it in one breath: attention mixes
+
+207
+00:06:41.898 --> 00:06:43.513
+information across slots, then the
+
+208
+00:06:43.513 --> 00:06:45.260
+feed-forward network works on each slot
+
+209
+00:06:45.260 --> 00:06:47.049
+alone, ninety-six to three hundred and
+
+210
+00:06:47.049 --> 00:06:48.883
+eighty-four to ninety-six through GELU,
+
+211
+00:06:48.883 --> 00:06:50.585
+and dropout knocks out a tenth of each
+
+212
+00:06:50.585 --> 00:06:52.200
+branch's numbers, in training only.
+
+213
+00:06:52.462 --> 00:06:54.426
+This part pairs with the course explainer,
+
+214
+00:06:54.426 --> 00:06:56.347
+part two, lesson seventeen's feed-forward
+
+215
+00:06:56.347 --> 00:06:58.311
+row, and lessons three point one and three
+
+216
+00:06:58.311 --> 00:06:58.792
+point five.
+
+217
+00:06:59.054 --> 00:07:00.319
+Next: out to nine drums.
+

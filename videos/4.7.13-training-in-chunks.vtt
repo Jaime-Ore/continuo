@@ -1,0 +1,890 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:02.109
+Part four point seven point thirteen.
+
+2
+00:00:02.445 --> 00:00:04.905
+How the transformer is trained on chunks,
+
+3
+00:00:04.905 --> 00:00:06.974
+and why training sees what live sees.
+
+4
+00:00:11.513 --> 00:00:13.895
+In four point seven point twelve the live
+
+5
+00:00:13.895 --> 00:00:15.880
+loop fed the model one slot a call.
+
+6
+00:00:16.220 --> 00:00:18.772
+Training feeds it a chunk: five hundred
+
+7
+00:00:18.772 --> 00:00:21.210
+and twelve slots of thirty-two songs, up
+
+8
+00:00:21.210 --> 00:00:23.365
+to sixteen thousand three hundred and
+
+9
+00:00:23.365 --> 00:00:25.633
+eighty-four slots in one optimiser step.
+
+10
+00:00:26.094 --> 00:00:28.292
+Inside that call nothing waits its turn.
+
+11
+00:00:28.622 --> 00:00:30.986
+Every slot of the chunk makes its query at
+
+12
+00:00:30.986 --> 00:00:33.294
+once, and one matrix scores all of them
+
+13
+00:00:33.294 --> 00:00:34.613
+against all of the keys.
+
+14
+00:00:34.943 --> 00:00:37.251
+The band mask from four point seven point
+
+15
+00:00:37.251 --> 00:00:39.724
+seven keeps each row causal: row t sees
+
+16
+00:00:39.724 --> 00:00:42.143
+keys up to slot t, and above the diagonal
+
+17
+00:00:42.143 --> 00:00:44.616
+sits minus infinity, so nothing later gets
+
+18
+00:00:44.616 --> 00:00:45.056
+through.
+
+19
+00:00:45.385 --> 00:00:47.914
+The bias has one sheet per head: four by
+
+20
+00:00:47.914 --> 00:00:50.112
+five hundred and twelve by five hundred
+
+21
+00:00:50.112 --> 00:00:50.717
+and twelve.
+
+22
+00:00:51.046 --> 00:00:53.520
+This is a song's first chunk, so the cache
+
+23
+00:00:53.520 --> 00:00:54.014
+is empty.
+
+24
+00:00:58.097 --> 00:00:59.583
+The second chunk starts at slot five
+
+25
+00:00:59.583 --> 00:01:01.310
+hundred and twelve, and it doesn't start
+
+26
+00:01:01.310 --> 00:01:01.551
+empty.
+
+27
+00:01:01.791 --> 00:01:03.398
+The trainer hands it the state from the
+
+28
+00:01:03.398 --> 00:01:05.165
+first chunk: the cache, the keys and
+
+29
+00:01:05.165 --> 00:01:06.812
+values of slots zero to five hundred and
+
+30
+00:01:06.812 --> 00:01:07.093
+eleven.
+
+31
+00:01:07.334 --> 00:01:09.221
+So the scores get wider: five hundred and
+
+32
+00:01:09.221 --> 00:01:10.547
+twelve queries by a thousand and
+
+33
+00:01:10.547 --> 00:01:11.229
+twenty-four keys.
+
+34
+00:01:11.470 --> 00:01:13.237
+Every cached key is in view, because none
+
+35
+00:01:13.237 --> 00:01:14.924
+is more than two thousand and forty-seven
+
+36
+00:01:14.924 --> 00:01:16.691
+slots back, and the chunk's own keys make
+
+37
+00:01:16.691 --> 00:01:17.816
+the same triangle as before.
+
+38
+00:01:18.503 --> 00:01:20.530
+Here's our worked slot: validation song
+
+39
+00:01:20.530 --> 00:01:22.468
+zero zero one one b three c f, slot five
+
+40
+00:01:22.468 --> 00:01:24.405
+hundred and seventy-six, the downbeat of
+
+41
+00:01:24.405 --> 00:01:25.081
+bar thirty-six.
+
+42
+00:01:25.352 --> 00:01:27.019
+Five hundred and seventy-six is five
+
+43
+00:01:27.019 --> 00:01:28.866
+hundred and twelve plus sixty-four, so
+
+44
+00:01:28.866 --> 00:01:30.398
+it's row sixty-four of this chunk.
+
+45
+00:01:30.669 --> 00:01:32.426
+It sees five hundred and seventy-seven
+
+46
+00:01:32.426 --> 00:01:34.409
+keys: five hundred and twelve from the
+
+47
+00:01:34.409 --> 00:01:36.481
+cache, and sixty-five from its own chunk,
+
+48
+00:01:36.481 --> 00:01:37.202
+itself included.
+
+49
+00:01:37.617 --> 00:01:40.037
+And the cache matters at this slot: in
+
+50
+00:01:40.037 --> 00:01:42.456
+block two, head two puts zero point eight
+
+51
+00:01:42.456 --> 00:01:44.765
+nine of its weight on slot seventy-six,
+
+52
+00:01:44.765 --> 00:01:46.964
+five hundred slots back, in the first
+
+53
+00:01:46.964 --> 00:01:47.294
+chunk.
+
+54
+00:01:47.624 --> 00:01:49.658
+That's one slot of one song, not a
+
+55
+00:01:49.658 --> 00:01:52.023
+measurement of how much the model uses far
+
+56
+00:01:52.023 --> 00:01:52.297
+keys.
+
+57
+00:01:54.043 --> 00:01:56.126
+Later in a long song the cache is full,
+
+58
+00:01:56.126 --> 00:01:58.358
+two thousand and forty-seven keys, and the
+
+59
+00:01:58.358 --> 00:02:00.738
+band becomes a parallelogram: five hundred
+
+60
+00:02:00.738 --> 00:02:02.722
+and twelve by two thousand five hundred
+
+61
+00:02:02.722 --> 00:02:03.466
+and fifty-nine.
+
+62
+00:02:03.764 --> 00:02:05.649
+The first query sees keys zero to two
+
+63
+00:02:05.649 --> 00:02:07.880
+thousand and forty-seven; the last sees
+
+64
+00:02:07.880 --> 00:02:09.616
+five hundred and eleven to the end.
+
+65
+00:02:09.914 --> 00:02:11.650
+Each sees exactly two thousand and
+
+66
+00:02:11.650 --> 00:02:12.245
+forty-eight.
+
+67
+00:02:12.792 --> 00:02:15.222
+That's the attention reach: how far back a
+
+68
+00:02:15.222 --> 00:02:15.982
+query can look.
+
+69
+00:02:16.286 --> 00:02:18.564
+Two thousand and forty-eight slots, itself
+
+70
+00:02:18.564 --> 00:02:20.792
+included, a hundred and twenty-eight bars
+
+71
+00:02:20.792 --> 00:02:22.868
+at a hundred and twenty beats per minute.
+
+72
+00:02:27.083 --> 00:02:29.658
+Lesson three point four: after every step
+
+73
+00:02:29.658 --> 00:02:31.356
+the trainer detaches the state.
+
+74
+00:02:31.684 --> 00:02:33.711
+For the transformer the state is the
+
+75
+00:02:33.711 --> 00:02:36.011
+cache, so the chunk at five hundred and
+
+76
+00:02:36.011 --> 00:02:38.257
+twelve receives those keys and values as
+
+77
+00:02:38.257 --> 00:02:40.667
+plain numbers, with no record of how they
+
+78
+00:02:40.667 --> 00:02:41.215
+were made.
+
+79
+00:02:41.687 --> 00:02:43.065
+The values cross the edge.
+
+80
+00:02:43.383 --> 00:02:44.496
+The gradient doesn't.
+
+81
+00:02:44.813 --> 00:02:46.986
+Take the kick logit at slot five hundred
+
+82
+00:02:46.986 --> 00:02:49.106
+and seventy-six and run backprop to the
+
+83
+00:02:49.106 --> 00:02:51.650
+inputs: sixty-five slots get a gradient,
+
+84
+00:02:51.650 --> 00:02:53.770
+five hundred and twelve to five hundred
+
+85
+00:02:53.770 --> 00:02:56.102
+and seventy-six, and the five hundred and
+
+86
+00:02:56.102 --> 00:02:58.010
+twelve slots of the first chunk get
+
+87
+00:02:58.010 --> 00:02:58.699
+exactly zero.
+
+88
+00:02:59.127 --> 00:03:00.512
+Checked with the real model.
+
+89
+00:03:00.808 --> 00:03:02.836
+Without the detach, every one of those
+
+90
+00:03:02.836 --> 00:03:04.813
+five hundred and twelve slots would get
+
+91
+00:03:04.813 --> 00:03:05.061
+some.
+
+92
+00:03:05.515 --> 00:03:08.186
+One honest detail: the weights still learn
+
+93
+00:03:08.186 --> 00:03:10.524
+from the cached keys, because slot five
+
+94
+00:03:10.524 --> 00:03:12.862
+hundred and seventy-six's query is scored
+
+95
+00:03:12.862 --> 00:03:13.585
+against them.
+
+96
+00:03:13.919 --> 00:03:16.146
+What training can't change is how those
+
+97
+00:03:16.146 --> 00:03:16.981
+keys were made.
+
+98
+00:03:18.741 --> 00:03:20.948
+So there are two reaches, and they differ.
+
+99
+00:03:21.249 --> 00:03:23.205
+Take the last slot of the chunk at two
+
+100
+00:03:23.205 --> 00:03:24.459
+thousand and forty-eight.
+
+101
+00:03:24.760 --> 00:03:26.465
+It can look back two thousand and
+
+102
+00:03:26.465 --> 00:03:28.421
+forty-eight slots, across four chunk
+
+103
+00:03:28.421 --> 00:03:30.527
+edges, but its gradient reaches only to
+
+104
+00:03:30.527 --> 00:03:32.835
+the start of its own chunk: five hundred
+
+105
+00:03:32.835 --> 00:03:34.740
+and twelve at most, thirty-two bars.
+
+106
+00:03:38.147 --> 00:03:40.232
+The other drummers' names count bars of
+
+107
+00:03:40.232 --> 00:03:41.014
+gradient reach.
+
+108
+00:03:41.327 --> 00:03:43.256
+L thirty-two's gradient reaches five
+
+109
+00:03:43.256 --> 00:03:45.550
+hundred and twelve slots, thirty-two bars.
+
+110
+00:03:45.863 --> 00:03:48.052
+L one twenty-eight and S one twenty-eight
+
+111
+00:03:48.052 --> 00:03:50.398
+trained in horizon mode, from lesson three
+
+112
+00:03:50.398 --> 00:03:52.796
+point four: two thousand and forty-eight
+
+113
+00:03:52.796 --> 00:03:54.934
+slots, a hundred and twenty-eight bars.
+
+114
+00:03:55.331 --> 00:03:57.510
+T one twenty-eight trained in chunk mode,
+
+115
+00:03:57.510 --> 00:03:58.401
+says its manifest.
+
+116
+00:03:58.698 --> 00:04:00.481
+Its hundred and twenty-eight is the
+
+117
+00:04:00.481 --> 00:04:02.858
+attention window in bars: two thousand and
+
+118
+00:04:02.858 --> 00:04:04.095
+forty-eight over sixteen.
+
+119
+00:04:04.393 --> 00:04:06.621
+Its gradient reach is thirty-two bars, the
+
+120
+00:04:06.621 --> 00:04:07.760
+same as L thirty-two's.
+
+121
+00:04:08.057 --> 00:04:09.988
+By the other names' rule it would read
+
+122
+00:04:09.988 --> 00:04:10.532
+thirty-two.
+
+123
+00:04:10.829 --> 00:04:12.761
+The report has to say so: finding
+
+124
+00:04:12.761 --> 00:04:13.404
+thirty-three.
+
+125
+00:04:14.989 --> 00:04:16.871
+For the record, T one twenty-eight's
+
+126
+00:04:16.871 --> 00:04:18.706
+training, all from its manifest and
+
+127
+00:04:18.706 --> 00:04:19.092
+history.
+
+128
+00:04:19.381 --> 00:04:21.023
+Fourteen thousand two hundred and
+
+129
+00:04:21.023 --> 00:04:22.954
+fifty-six Lakh songs, thirty-two at a
+
+130
+00:04:22.954 --> 00:04:24.788
+time, in chunks of five hundred and
+
+131
+00:04:24.788 --> 00:04:25.126
+twelve.
+
+132
+00:04:25.415 --> 00:04:27.346
+Twelve epochs of about two thousand one
+
+133
+00:04:27.346 --> 00:04:29.615
+hundred steps: twenty-five thousand three
+
+134
+00:04:29.615 --> 00:04:31.353
+hundred and fifty-nine steps in all.
+
+135
+00:04:31.643 --> 00:04:33.718
+Adam at a learning rate of zero point zero
+
+136
+00:04:33.718 --> 00:04:35.794
+zero one, warmed up over the first three
+
+137
+00:04:35.794 --> 00:04:36.470
+hundred steps.
+
+138
+00:04:36.759 --> 00:04:38.835
+Plain binary cross-entropy: every pos
+
+139
+00:04:38.835 --> 00:04:39.511
+weight is one.
+
+140
+00:04:39.801 --> 00:04:41.925
+Clipping at one never bit: the largest
+
+141
+00:04:41.925 --> 00:04:43.759
+gradient norm was zero point nine two.
+
+142
+00:04:44.049 --> 00:04:46.028
+Dropout zero point one, trained on the
+
+143
+00:04:46.028 --> 00:04:48.152
+Mac's GPU, and epoch eleven, validation
+
+144
+00:04:48.152 --> 00:04:50.227
+loss zero point one nine three seven, is
+
+145
+00:04:50.227 --> 00:04:51.579
+the one the live link plays.
+
+146
+00:04:55.000 --> 00:04:56.527
+One test guards all of this.
+
+147
+00:04:56.855 --> 00:04:59.309
+Run a song in chunks, the way training and
+
+148
+00:04:59.309 --> 00:05:01.764
+scoring do, and run it again one slot at a
+
+149
+00:05:01.764 --> 00:05:03.673
+time, the way the live loop does.
+
+150
+00:05:04.111 --> 00:05:05.095
+Compare the logits.
+
+151
+00:05:05.406 --> 00:05:07.789
+z chunk, t, v is the logit for voice v at
+
+152
+00:05:07.789 --> 00:05:10.069
+slot t, from the chunked run, minus the
+
+153
+00:05:10.069 --> 00:05:11.985
+same logit from the slot-by-slot run.
+
+154
+00:05:12.296 --> 00:05:14.628
+Take the size of the gap, its sign doesn't
+
+155
+00:05:14.628 --> 00:05:16.855
+matter, then the largest over every slot
+
+156
+00:05:16.855 --> 00:05:19.135
+and every voice, and it must be under ten
+
+157
+00:05:19.135 --> 00:05:21.104
+to the minus five, one in a hundred
+
+158
+00:05:21.104 --> 00:05:21.570
+thousand.
+
+159
+00:05:21.998 --> 00:05:24.483
+The test holds its own model to that line:
+
+160
+00:05:24.483 --> 00:05:26.657
+a seeded, untrained model, on made-up
+
+161
+00:05:26.657 --> 00:05:27.692
+input, on the CPU.
+
+162
+00:05:28.003 --> 00:05:30.125
+The trained T one twenty-eight goes past
+
+163
+00:05:30.125 --> 00:05:31.005
+it on some songs.
+
+164
+00:05:31.316 --> 00:05:33.283
+On our worked song the gap is at most
+
+165
+00:05:33.283 --> 00:05:35.198
+seven point two millionths, but on
+
+166
+00:05:35.198 --> 00:05:37.217
+validation song three eight nine eight
+
+167
+00:05:37.217 --> 00:05:39.184
+eight e b f it reaches two point nine
+
+168
+00:05:39.184 --> 00:05:40.220
+hundred-thousandths.
+
+169
+00:05:40.530 --> 00:05:42.963
+That is rounding: run the same arithmetic
+
+170
+00:05:42.963 --> 00:05:45.086
+in double precision and the gap falls to
+
+171
+00:05:45.086 --> 00:05:47.157
+about a ten-trillionth, as four point
+
+172
+00:05:47.157 --> 00:05:48.451
+seven point seven showed.
+
+173
+00:05:48.761 --> 00:05:51.039
+And it changes no hits: the live check
+
+174
+00:05:51.039 --> 00:05:53.265
+flipped none of thirty-three thousand nine
+
+175
+00:05:53.265 --> 00:05:54.507
+hundred and eighty-four.
+
+176
+00:05:54.932 --> 00:05:57.563
+A real mistake would be far bigger: losing
+
+177
+00:05:57.563 --> 00:05:59.865
+the cache moves the logits by more than a
+
+178
+00:05:59.865 --> 00:06:00.468
+thousandth.
+
+179
+00:06:00.797 --> 00:06:01.783
+That's test T two.
+
+180
+00:06:02.969 --> 00:06:05.047
+The test itself runs twenty-six hundred
+
+181
+00:06:05.047 --> 00:06:07.280
+slots in chunks of five hundred and twelve
+
+182
+00:06:07.280 --> 00:06:09.462
+and of two thousand and forty-eight, so
+
+183
+00:06:09.462 --> 00:06:11.072
+the cache fills and then rolls.
+
+184
+00:06:11.384 --> 00:06:13.462
+Others use chunks that don't divide the
+
+185
+00:06:13.462 --> 00:06:15.695
+song, and a plain loop over each query's
+
+186
+00:06:15.695 --> 00:06:18.032
+keys, so the two modes can't both be wrong
+
+187
+00:06:18.032 --> 00:06:18.708
+the same way.
+
+188
+00:06:22.173 --> 00:06:22.598
+Why care?
+
+189
+00:06:22.882 --> 00:06:24.866
+Because the drummer the trainer shaped is
+
+190
+00:06:24.866 --> 00:06:26.377
+the drummer the live loop plays.
+
+191
+00:06:26.660 --> 00:06:28.408
+Training ran T one twenty-eight five
+
+192
+00:06:28.408 --> 00:06:30.533
+hundred and twelve slots at a time; the
+
+193
+00:06:30.533 --> 00:06:32.139
+live loop runs it one slot a call.
+
+194
+00:06:32.423 --> 00:06:34.217
+T one says the code computes the same
+
+195
+00:06:34.217 --> 00:06:36.437
+thing both ways: the same keys in view,
+
+196
+00:06:36.437 --> 00:06:38.657
+the same distances, the same bar phase, at
+
+197
+00:06:38.657 --> 00:06:40.594
+every slot, with gaps only of rounding
+
+198
+00:06:40.594 --> 00:06:40.830
+size.
+
+199
+00:06:41.224 --> 00:06:43.169
+Velardo's decoder masks a triangle for the
+
+200
+00:06:43.169 --> 00:06:45.250
+same reason: train on whole sentences,
+
+201
+00:06:45.250 --> 00:06:47.196
+generate word by word, and never let the
+
+202
+00:06:47.196 --> 00:06:47.784
+two disagree.
+
+203
+00:06:48.055 --> 00:06:50.091
+Ours is a band with a carried cache, so it
+
+204
+00:06:50.091 --> 00:06:51.449
+holds for songs of any length.
+
+205
+00:06:51.720 --> 00:06:53.484
+And for the genre drummers, the same
+
+206
+00:06:53.484 --> 00:06:55.385
+class, the live stepper and the offline
+
+207
+00:06:55.385 --> 00:06:57.556
+decoder were checked hit by hit: zero of a
+
+208
+00:06:57.556 --> 00:06:59.411
+hundred and eleven thousand four hundred
+
+209
+00:06:59.411 --> 00:07:00.633
+and fifty-six cells differ.
+
+210
+00:07:02.143 --> 00:07:03.995
+Say it in one breath: T one twenty-eight
+
+211
+00:07:03.995 --> 00:07:05.486
+trains on chunks of five hundred and
+
+212
+00:07:05.486 --> 00:07:06.855
+twelve with the cache carried and
+
+213
+00:07:06.855 --> 00:07:08.345
+detached, so each slot attends two
+
+214
+00:07:08.345 --> 00:07:09.957
+thousand and forty-eight back while its
+
+215
+00:07:09.957 --> 00:07:11.648
+gradient reaches at most five hundred and
+
+216
+00:07:11.648 --> 00:07:13.300
+twelve, and the T one test shows chunk
+
+217
+00:07:13.300 --> 00:07:15.032
+mode computes what slot mode does, up to
+
+218
+00:07:15.032 --> 00:07:15.394
+rounding.
+
+219
+00:07:15.636 --> 00:07:17.207
+This pairs with the course explainer's
+
+220
+00:07:17.207 --> 00:07:18.737
+training recipe and lesson eighteen's
+
+221
+00:07:18.737 --> 00:07:20.388
+mask, and with lesson three point four.
+
+222
+00:07:20.630 --> 00:07:22.201
+Next, the whole file, line by line.
+

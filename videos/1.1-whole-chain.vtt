@@ -1,0 +1,506 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.124
+Lesson one point one.
+
+2
+00:00:01.434 --> 00:00:03.758
+How a guitar note becomes a drum hit, from
+
+3
+00:00:03.758 --> 00:00:05.100
+the string to the speaker.
+
+4
+00:00:09.047 --> 00:00:11.222
+A drummer playing with a guitarist has to
+
+5
+00:00:11.222 --> 00:00:13.554
+answer almost at once: within about one
+
+6
+00:00:13.554 --> 00:00:14.331
+sixteenth note.
+
+7
+00:00:14.642 --> 00:00:16.921
+At a hundred and twenty beats per minute,
+
+8
+00:00:16.921 --> 00:00:18.682
+that is a hundred and twenty-five
+
+9
+00:00:18.682 --> 00:00:19.356
+milliseconds.
+
+10
+00:00:19.904 --> 00:00:21.880
+The hard part is hearing the guitar.
+
+11
+00:00:22.210 --> 00:00:24.570
+One microphone hears all six strings mixed
+
+12
+00:00:24.570 --> 00:00:25.064
+together.
+
+13
+00:00:25.394 --> 00:00:27.754
+The low E string's third harmonic sits two
+
+14
+00:00:27.754 --> 00:00:29.895
+cents away from the B string, so one
+
+15
+00:00:29.895 --> 00:00:32.146
+microphone sees one peak where there are
+
+16
+00:00:32.146 --> 00:00:32.695
+two notes.
+
+17
+00:00:33.227 --> 00:00:34.581
+Look closely at this peak.
+
+18
+00:00:34.893 --> 00:00:37.340
+Twelve hundred times the log, base two, of
+
+19
+00:00:37.340 --> 00:00:39.578
+the ratio of the two frequencies: two
+
+20
+00:00:39.578 --> 00:00:39.890
+cents.
+
+21
+00:00:40.203 --> 00:00:42.389
+In the mixed signal the two notes fall in
+
+22
+00:00:42.389 --> 00:00:43.118
+the same peak.
+
+23
+00:00:43.430 --> 00:00:45.512
+In the GuitarSet recordings of solos,
+
+24
+00:00:45.512 --> 00:00:47.751
+about a third of all notes overlap another
+
+25
+00:00:47.751 --> 00:00:48.115
+string.
+
+26
+00:00:48.999 --> 00:00:50.317
+So we didn't solve that problem.
+
+27
+00:00:50.565 --> 00:00:51.141
+We removed it.
+
+28
+00:00:57.147 --> 00:01:00.034
+A hexaphonic pickup, the Roland GK-3, puts
+
+29
+00:01:00.034 --> 00:01:02.308
+one small magnetic pickup under each
+
+30
+00:01:02.308 --> 00:01:02.738
+string.
+
+31
+00:01:03.106 --> 00:01:05.318
+Six strings, six separate signals.
+
+32
+00:01:05.787 --> 00:01:08.294
+Sena's circuit board, the PCB, amplifies
+
+33
+00:01:08.294 --> 00:01:10.746
+each one, filters it, and turns it into
+
+34
+00:01:10.746 --> 00:01:11.192
+numbers.
+
+35
+00:01:15.627 --> 00:01:17.956
+The FPGA watches all six strings at once.
+
+36
+00:01:18.297 --> 00:01:20.684
+For each one, it measures the energy in
+
+37
+00:01:20.684 --> 00:01:21.423
+short frames.
+
+38
+00:01:21.764 --> 00:01:24.150
+When the energy jumps past a threshold,
+
+39
+00:01:24.150 --> 00:01:26.480
+that's an onset, and a packet goes out
+
+40
+00:01:26.480 --> 00:01:27.276
+straight away.
+
+41
+00:01:28.015 --> 00:01:30.661
+Pitch takes longer: the board has to see a
+
+42
+00:01:30.661 --> 00:01:32.976
+few full cycles of the wave before it can
+
+43
+00:01:32.976 --> 00:01:33.747
+name the note.
+
+44
+00:01:34.078 --> 00:01:36.448
+On the low E string one cycle lasts twelve
+
+45
+00:01:36.448 --> 00:01:38.818
+milliseconds, so the plan puts its pitch
+
+46
+00:01:38.818 --> 00:01:41.023
+about thirty-five to fifty milliseconds
+
+47
+00:01:41.023 --> 00:01:41.905
+after the onset.
+
+48
+00:01:42.437 --> 00:01:44.630
+Vindy built the onset detector, Felix the
+
+49
+00:01:44.630 --> 00:01:45.378
+pitch detector.
+
+50
+00:01:47.097 --> 00:01:49.152
+Two packets matter to the laptop:
+
+51
+00:01:49.152 --> 00:01:50.943
+thirty-two bytes for the onset,
+
+52
+00:01:50.943 --> 00:01:53.051
+forty-eight for the pitch, which most
+
+53
+00:01:53.051 --> 00:01:53.577
+notes get.
+
+54
+00:01:53.894 --> 00:01:56.159
+The board also sends an offset packet when
+
+55
+00:01:56.159 --> 00:01:56.791
+a note ends.
+
+56
+00:02:01.353 --> 00:02:03.952
+They travel over Ethernet to the laptop,
+
+57
+00:02:03.952 --> 00:02:06.430
+as UDP packets to port five thousand and
+
+58
+00:02:06.430 --> 00:02:06.732
+five.
+
+59
+00:02:07.094 --> 00:02:09.391
+A ping takes well under a millisecond.
+
+60
+00:02:09.909 --> 00:02:11.982
+One surprise: the link only works at
+
+61
+00:02:11.982 --> 00:02:12.672
+gigabit speed.
+
+62
+00:02:12.968 --> 00:02:15.139
+That's not about bandwidth, because a few
+
+63
+00:02:15.139 --> 00:02:16.916
+small packets a second would fit on
+
+64
+00:02:16.916 --> 00:02:17.360
+anything.
+
+65
+00:02:17.656 --> 00:02:19.876
+At a hundred megabits, the likely cause,
+
+66
+00:02:19.876 --> 00:02:22.097
+read from the driver's code, is a firmware
+
+67
+00:02:22.097 --> 00:02:24.120
+setting that leaves the board's transmit
+
+68
+00:02:24.120 --> 00:02:26.340
+clock at the wrong rate, and nothing valid
+
+69
+00:02:26.340 --> 00:02:26.833
+comes out.
+
+70
+00:02:30.657 --> 00:02:33.034
+On the laptop, each onset is rounded to
+
+71
+00:02:33.034 --> 00:02:35.185
+its nearest slot, exactly as in the
+
+72
+00:02:35.185 --> 00:02:35.977
+training data.
+
+73
+00:02:36.499 --> 00:02:38.536
+The drum model reads five numbers per
+
+74
+00:02:38.536 --> 00:02:40.680
+slot, which the next lesson covers in
+
+75
+00:02:40.680 --> 00:02:41.055
+detail.
+
+76
+00:02:41.376 --> 00:02:43.198
+Notice what's missing: pitch.
+
+77
+00:02:43.520 --> 00:02:45.771
+The drums only listen to when notes start.
+
+78
+00:02:46.092 --> 00:02:47.218
+Pitch feeds the bass.
+
+79
+00:02:49.058 --> 00:02:50.106
+Here's the timing.
+
+80
+00:02:50.455 --> 00:02:52.783
+Slot t is decided from the guitar up to
+
+81
+00:02:52.783 --> 00:02:54.937
+slot t minus one, and it's decided
+
+82
+00:02:54.937 --> 00:02:57.090
+thirty-seven and a half milliseconds
+
+83
+00:02:57.090 --> 00:02:58.429
+before it has to sound.
+
+84
+00:02:58.925 --> 00:03:00.522
+The model's step takes about a
+
+85
+00:03:00.522 --> 00:03:01.140
+millisecond.
+
+86
+00:03:01.449 --> 00:03:03.045
+The audio system reports about
+
+87
+00:03:03.045 --> 00:03:05.157
+twenty-three milliseconds to get a sound
+
+88
+00:03:05.157 --> 00:03:07.011
+out of the speaker, so the hit is
+
+89
+00:03:07.011 --> 00:03:08.968
+scheduled to land exactly on its grid
+
+90
+00:03:08.968 --> 00:03:09.225
+line.
+
+91
+00:03:09.534 --> 00:03:11.543
+If a hit would be late, it's dropped.
+
+92
+00:03:11.852 --> 00:03:13.036
+It's never played late.
+
+93
+00:03:15.086 --> 00:03:17.276
+Seven drummers can be switched in at the
+
+94
+00:03:17.276 --> 00:03:19.734
+next bar line, and a simple rule bass, so
+
+95
+00:03:19.734 --> 00:03:21.871
+far tried only with a fake board, can
+
+96
+00:03:21.871 --> 00:03:22.725
+follow the kick.
+
+97
+00:03:26.627 --> 00:03:28.822
+Here is the whole budget against one slot.
+
+98
+00:03:29.135 --> 00:03:31.696
+Measured, and drawn solid: the network,
+
+99
+00:03:31.696 --> 00:03:32.428
+and the model.
+
+100
+00:03:32.742 --> 00:03:34.884
+The audio's twenty-three milliseconds,
+
+101
+00:03:34.884 --> 00:03:36.923
+drawn pale, is the system's reported
+
+102
+00:03:36.923 --> 00:03:39.327
+figure: only the round trip out and back
+
+103
+00:03:39.327 --> 00:03:40.163
+in was measured.
+
+104
+00:03:40.633 --> 00:03:43.101
+The dashed parts we haven't measured yet:
+
+105
+00:03:43.101 --> 00:03:45.097
+how long the board takes to report an
+
+106
+00:03:45.097 --> 00:03:47.250
+onset, and the full time from pluck to
+
+107
+00:03:47.250 --> 00:03:47.828
+drum sound.
+
+108
+00:03:48.347 --> 00:03:50.315
+By the arithmetic, a pluck is answered
+
+109
+00:03:50.315 --> 00:03:52.331
+between half a slot and a slot and a half
+
+110
+00:03:52.331 --> 00:03:52.619
+later.
+
+111
+00:03:57.240 --> 00:03:58.216
+Where does it stand?
+
+112
+00:03:58.509 --> 00:04:00.462
+The laptop half has run live, in real
+
+113
+00:04:00.462 --> 00:04:02.512
+time, with a fake board standing in for
+
+114
+00:04:02.512 --> 00:04:02.952
+the FPGA.
+
+115
+00:04:03.245 --> 00:04:05.295
+The real board has sent real notes to the
+
+116
+00:04:05.295 --> 00:04:05.637
+laptop.
+
+117
+00:04:05.930 --> 00:04:07.785
+And real playing has gone through all
+
+118
+00:04:07.785 --> 00:04:09.786
+seven drummers, but only as recordings
+
+119
+00:04:09.786 --> 00:04:10.372
+played back.
+
+120
+00:04:10.665 --> 00:04:12.716
+The last step, a guitarist playing into
+
+121
+00:04:12.716 --> 00:04:14.815
+the board with the drums answering live,
+
+122
+00:04:14.815 --> 00:04:15.547
+hasn't run yet.
+
+123
+00:04:17.461 --> 00:04:19.947
+So: a pluck becomes an onset packet, and
+
+124
+00:04:19.947 --> 00:04:21.812
+the drums answer from the next slot.
+
+125
+00:04:22.123 --> 00:04:24.558
+Next: the slot grid, where the laptop's
+
+126
+00:04:24.558 --> 00:04:25.180
+half begins.
+

@@ -1,0 +1,618 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.016
+Lesson two point one.
+
+2
+00:00:01.295 --> 00:00:03.388
+Where the songs come from, and which model
+
+3
+00:00:03.388 --> 00:00:04.271
+learned from which.
+
+4
+00:00:08.173 --> 00:00:10.325
+Every song in this topic is a MIDI file.
+
+5
+00:00:10.647 --> 00:00:12.476
+A MIDI file holds no sound at all.
+
+6
+00:00:12.799 --> 00:00:15.380
+It's a list of timed instructions: at this
+
+7
+00:00:15.380 --> 00:00:17.693
+moment, on this instrument, start this
+
+8
+00:00:17.693 --> 00:00:18.661
+note, this hard.
+
+9
+00:00:19.311 --> 00:00:21.572
+A synthesiser turns the instructions into
+
+10
+00:00:21.572 --> 00:00:23.887
+sound, so the same file sounds different
+
+11
+00:00:23.887 --> 00:00:24.695
+on every synth.
+
+12
+00:00:25.018 --> 00:00:27.602
+The models never hear any of it: they read
+
+13
+00:00:27.602 --> 00:00:28.518
+the instructions.
+
+14
+00:00:28.942 --> 00:00:31.376
+A big collection of files like this, used
+
+15
+00:00:31.376 --> 00:00:33.202
+to train and test, is a corpus.
+
+16
+00:00:33.534 --> 00:00:35.857
+This project trains on two corpora, and
+
+17
+00:00:35.857 --> 00:00:36.964
+judges with a third.
+
+18
+00:00:37.296 --> 00:00:38.900
+Here's why each one is there.
+
+19
+00:00:42.600 --> 00:00:45.329
+The main corpus is the Lakh MIDI Dataset,
+
+20
+00:00:45.329 --> 00:00:47.872
+built by Colin Raffel for his PhD thesis
+
+21
+00:00:47.872 --> 00:00:48.988
+in twenty sixteen.
+
+22
+00:00:49.532 --> 00:00:51.833
+He crawled the web for every MIDI file he
+
+23
+00:00:51.833 --> 00:00:52.436
+could find.
+
+24
+00:00:52.765 --> 00:00:55.121
+Nobody curated them: they're whatever
+
+25
+00:00:55.121 --> 00:00:57.313
+hobbyists and karaoke sites uploaded,
+
+26
+00:00:57.313 --> 00:00:59.340
+roughly from nineteen ninety-five to
+
+27
+00:00:59.340 --> 00:00:59.943
+twenty ten.
+
+28
+00:01:00.415 --> 00:01:02.018
+Our archive holds a hundred and
+
+29
+00:01:02.018 --> 00:01:04.173
+seventy-eight thousand, five hundred and
+
+30
+00:01:04.173 --> 00:01:04.975
+sixty-one files.
+
+31
+00:01:05.276 --> 00:01:07.581
+After a filter, fifty-two thousand, seven
+
+32
+00:01:07.581 --> 00:01:09.585
+hundred and ninety-three songs are left
+
+33
+00:01:09.585 --> 00:01:11.590
+that have both a guitar part and a drum
+
+34
+00:01:11.590 --> 00:01:12.943
+part, about three in ten.
+
+35
+00:01:13.243 --> 00:01:15.649
+That's version three of the corpus; lesson
+
+36
+00:01:15.649 --> 00:01:17.603
+two point two is the filter, and the
+
+37
+00:01:17.603 --> 00:01:18.054
+versions.
+
+38
+00:01:18.471 --> 00:01:18.917
+Why Lakh?
+
+39
+00:01:19.214 --> 00:01:21.245
+Because nothing else has guitar and drum
+
+40
+00:01:21.245 --> 00:01:23.375
+parts written for the same song, at this
+
+41
+00:01:23.375 --> 00:01:23.672
+scale.
+
+42
+00:01:23.970 --> 00:01:26.199
+And with about fifty thousand songs, there
+
+43
+00:01:26.199 --> 00:01:28.180
+was room to throw out anything doubtful
+
+44
+00:01:28.180 --> 00:01:29.864
+and keep only what we could trust.
+
+45
+00:01:33.317 --> 00:01:35.489
+The genre drummers are drummers for one
+
+46
+00:01:35.489 --> 00:01:37.770
+genre each: a Rock drummer, a Jazz
+
+47
+00:01:37.770 --> 00:01:39.345
+drummer, a Country drummer.
+
+48
+00:01:39.670 --> 00:01:42.005
+Each one has to be checked on songs of its
+
+49
+00:01:42.005 --> 00:01:44.232
+genre that it never trained on: the
+
+50
+00:01:44.232 --> 00:01:45.101
+validation side.
+
+51
+00:01:45.623 --> 00:01:47.278
+Lakh's genre labels are thin.
+
+52
+00:01:47.621 --> 00:01:50.075
+On its validation side: a hundred and
+
+53
+00:01:50.075 --> 00:01:52.529
+fifty-two Rock songs, eighty-four Pop,
+
+54
+00:01:52.529 --> 00:01:54.641
+twenty-five Country, fourteen Jazz.
+
+55
+00:01:54.984 --> 00:01:57.266
+Twenty-five songs is too few to judge a
+
+56
+00:01:57.266 --> 00:01:58.351
+Country drummer by.
+
+57
+00:01:58.843 --> 00:02:01.074
+So on the fifteenth of October a second
+
+58
+00:02:01.074 --> 00:02:03.864
+corpus came in, with labels on every file:
+
+59
+00:02:03.864 --> 00:02:04.199
+XMIDI.
+
+60
+00:02:04.534 --> 00:02:06.933
+Its validation side holds four hundred and
+
+61
+00:02:06.933 --> 00:02:09.388
+seventy-seven Rock songs, six hundred and
+
+62
+00:02:09.388 --> 00:02:11.731
+twenty-three Country, and three hundred
+
+63
+00:02:11.731 --> 00:02:12.568
+and eight Jazz.
+
+64
+00:02:16.173 --> 00:02:18.374
+XMIDI comes from a twenty twenty-five
+
+65
+00:02:18.374 --> 00:02:20.516
+paper called XMusic, by authors at
+
+66
+00:02:20.516 --> 00:02:20.979
+Tencent.
+
+67
+00:02:21.327 --> 00:02:23.527
+It's a hundred and eight thousand and
+
+68
+00:02:23.527 --> 00:02:26.133
+twenty-three MIDI files, also crawled from
+
+69
+00:02:26.133 --> 00:02:26.596
+the web.
+
+70
+00:02:27.302 --> 00:02:29.890
+Every file carries its labels in its name:
+
+71
+00:02:29.890 --> 00:02:32.101
+one of eleven emotions, and one of six
+
+72
+00:02:32.101 --> 00:02:32.478
+genres.
+
+73
+00:02:32.963 --> 00:02:35.343
+And the labels are human: ten trained
+
+74
+00:02:35.343 --> 00:02:37.835
+annotators, every file checked by at least
+
+75
+00:02:37.835 --> 00:02:38.610
+three of them.
+
+76
+00:02:38.942 --> 00:02:40.437
+Not a guess from a program.
+
+77
+00:02:40.769 --> 00:02:42.818
+Lesson two point five compares label
+
+78
+00:02:42.818 --> 00:02:43.260
+sources.
+
+79
+00:02:43.889 --> 00:02:44.875
+It has its own catches.
+
+80
+00:02:45.132 --> 00:02:47.017
+After our filter, and dropping songs that
+
+81
+00:02:47.017 --> 00:02:48.603
+twin our Lakh training side, forty
+
+82
+00:02:48.603 --> 00:02:50.316
+thousand, six hundred and ninety-four
+
+83
+00:02:50.316 --> 00:02:50.959
+songs are left.
+
+84
+00:02:51.216 --> 00:02:53.144
+Nine in ten songs were saved at one tempo,
+
+85
+00:02:53.144 --> 00:02:54.987
+a hundred and nineteen beats per minute,
+
+86
+00:02:54.987 --> 00:02:56.101
+so the true tempo is gone.
+
+87
+00:02:56.358 --> 00:02:58.200
+And there are no song identities, so the
+
+88
+00:02:58.200 --> 00:02:59.957
+split groups songs whose guitar melodies
+
+89
+00:02:59.957 --> 00:03:01.928
+match, twins, and keeps each group on one
+
+90
+00:03:01.928 --> 00:03:02.142
+side.
+
+91
+00:03:05.577 --> 00:03:07.914
+The third dataset is Groove MIDI, from
+
+92
+00:03:07.914 --> 00:03:09.852
+Google Magenta in twenty nineteen.
+
+93
+00:03:10.194 --> 00:03:12.588
+Ten real drummers on an electronic kit,
+
+94
+00:03:12.588 --> 00:03:15.096
+playing to a click: eleven hundred and
+
+95
+00:03:15.096 --> 00:03:17.433
+fifty files, thirteen point five eight
+
+96
+00:03:17.433 --> 00:03:17.775
+hours.
+
+97
+00:03:18.239 --> 00:03:20.282
+It has no guitar, so it can't teach a
+
+98
+00:03:20.282 --> 00:03:21.967
+drummer that listens to a guitar.
+
+99
+00:03:22.274 --> 00:03:23.398
+It's never trained on.
+
+100
+00:03:23.704 --> 00:03:25.901
+Instead it's the judge: the battery's
+
+101
+00:03:25.901 --> 00:03:27.995
+picture of how real drummers play, two
+
+102
+00:03:27.995 --> 00:03:29.987
+thousand, four hundred and forty-one
+
+103
+00:03:29.987 --> 00:03:32.132
+windows from a hundred and sixty-eight of
+
+104
+00:03:32.132 --> 00:03:34.022
+its two hundred and three rock beats.
+
+105
+00:03:34.442 --> 00:03:36.620
+Lakh's parts were typed into sequencers by
+
+106
+00:03:36.620 --> 00:03:38.747
+hobbyists, so their timing and loudness
+
+107
+00:03:38.747 --> 00:03:40.570
+are mostly the sequencer's, not a
+
+108
+00:03:40.570 --> 00:03:41.076
+drummer's.
+
+109
+00:03:41.380 --> 00:03:43.457
+Groove is the only judge of how hard and
+
+110
+00:03:43.457 --> 00:03:44.723
+how loosely a human hits.
+
+111
+00:03:45.027 --> 00:03:47.204
+A feel model trained on Groove was planned
+
+112
+00:03:47.204 --> 00:03:49.331
+and never built, so the live drums play
+
+113
+00:03:49.331 --> 00:03:51.610
+every hit at velocity one hundred, exactly
+
+114
+00:03:51.610 --> 00:03:52.218
+on the grid.
+
+115
+00:03:55.717 --> 00:03:58.163
+Now, which model learned from which.
+
+116
+00:03:58.549 --> 00:04:01.189
+Four drummers trained on Lakh, version
+
+117
+00:04:01.189 --> 00:04:04.022
+three: two S4D models, S128 on about
+
+118
+00:04:04.022 --> 00:04:06.597
+fourteen thousand songs and S128full on
+
+119
+00:04:06.597 --> 00:04:09.366
+all forty-seven and a half thousand, the
+
+120
+00:04:09.366 --> 00:04:11.490
+transformer T128, and the LSTM.
+
+121
+00:04:12.077 --> 00:04:14.719
+Three genre drummers trained on XMIDI,
+
+122
+00:04:14.719 --> 00:04:17.554
+each a transformer at T128's settings, on
+
+123
+00:04:17.554 --> 00:04:20.711
+one genre's songs: Rock, Jazz and Country.
+
+124
+00:04:21.098 --> 00:04:23.676
+The bass models trained on XMIDI's rock
+
+125
+00:04:23.676 --> 00:04:24.320
+songs too.
+
+126
+00:04:24.889 --> 00:04:27.714
+There's one bridge between them: the Lakh
+
+127
+00:04:27.714 --> 00:04:30.298
+T128 is scored on XMIDI's validation songs
+
+128
+00:04:30.298 --> 00:04:32.642
+for each genre, without any training
+
+129
+00:04:32.642 --> 00:04:33.002
+there.
+
+130
+00:04:33.363 --> 00:04:35.766
+It's the all-genre reference each genre
+
+131
+00:04:35.766 --> 00:04:37.269
+drummer is compared with.
+
+132
+00:04:40.807 --> 00:04:42.479
+Here's the whole lesson on one card.
+
+133
+00:04:42.757 --> 00:04:45.080
+Songs: fifty-two thousand from Lakh, forty
+
+134
+00:04:45.080 --> 00:04:47.077
+thousand from XMIDI, and Groove's eleven
+
+135
+00:04:47.077 --> 00:04:49.074
+hundred and fifty files, two hundred and
+
+136
+00:04:49.074 --> 00:04:50.839
+three of them rock beats in four four.
+
+137
+00:04:51.118 --> 00:04:53.580
+Genres: under a fifth of Lakh is labelled;
+
+138
+00:04:53.580 --> 00:04:54.508
+every XMIDI file is.
+
+139
+00:04:54.787 --> 00:04:57.017
+The labels: Lakh's come through a match to
+
+140
+00:04:57.017 --> 00:04:58.828
+real recordings, XMIDI's from people.
+
+141
+00:04:59.239 --> 00:05:01.959
+Tempo: Lakh keeps the real tempos; XMIDI
+
+142
+00:05:01.959 --> 00:05:04.039
+sits at a hundred and nineteen in nine
+
+143
+00:05:04.039 --> 00:05:04.732
+songs of ten.
+
+144
+00:05:05.052 --> 00:05:07.719
+The split: Lakh by song identity, XMIDI by
+
+145
+00:05:07.719 --> 00:05:10.119
+twin clusters, both ninety, five, five.
+
+146
+00:05:10.439 --> 00:05:13.052
+And the models: four on Lakh, three genre
+
+147
+00:05:13.052 --> 00:05:15.559
+drummers on XMIDI, and none on Groove, the
+
+148
+00:05:15.559 --> 00:05:15.879
+judge.
+
+149
+00:05:18.815 --> 00:05:21.227
+So: Lakh supplies the guitar and drum
+
+150
+00:05:21.227 --> 00:05:23.358
+patterns, XMIDI supplies songs with
+
+151
+00:05:23.358 --> 00:05:25.601
+trustworthy genres, and Groove is the
+
+152
+00:05:25.601 --> 00:05:27.676
+judge that no model ever learns from.
+
+153
+00:05:28.012 --> 00:05:30.592
+Next, lesson two point two: how Lakh's
+
+154
+00:05:30.592 --> 00:05:32.499
+files were filtered down to songs.
+

@@ -1,0 +1,782 @@
+WEBVTT
+
+1
+00:00:00.050 --> 00:00:01.521
+Four point seven point five.
+
+2
+00:00:01.836 --> 00:00:04.199
+Why each slot makes three vectors, and the
+
+3
+00:00:04.199 --> 00:00:05.565
+one layer that makes them.
+
+4
+00:00:09.540 --> 00:00:11.341
+This is four point seven point five,
+
+5
+00:00:11.341 --> 00:00:12.588
+inside the attention stage.
+
+6
+00:00:12.865 --> 00:00:14.897
+In four point seven point four, slot five
+
+7
+00:00:14.897 --> 00:00:16.883
+hundred and seventy-six, the downbeat of
+
+8
+00:00:16.883 --> 00:00:18.869
+bar thirty-six, scored every slot it can
+
+9
+00:00:18.869 --> 00:00:19.285
+see, j.
+
+10
+00:00:19.562 --> 00:00:21.640
+Each score is a dot product, scaled by the
+
+11
+00:00:21.640 --> 00:00:23.580
+square root of twenty-four, and softmax
+
+12
+00:00:23.580 --> 00:00:25.520
+turns the scores into weights that add up
+
+13
+00:00:25.520 --> 00:00:25.843
+to one.
+
+14
+00:00:26.120 --> 00:00:27.783
+Then the answer is the weighted sum.
+
+15
+00:00:28.175 --> 00:00:30.115
+That used three vectors, and we never said
+
+16
+00:00:30.115 --> 00:00:31.020
+where they come from.
+
+17
+00:00:31.279 --> 00:00:31.925
+The first is q.
+
+18
+00:00:32.184 --> 00:00:34.081
+It belongs to the slot being decided, and
+
+19
+00:00:34.081 --> 00:00:36.107
+it is called the query: what this slot is
+
+20
+00:00:36.107 --> 00:00:36.624
+looking for.
+
+21
+00:00:36.883 --> 00:00:37.658
+The second is k j.
+
+22
+00:00:37.917 --> 00:00:39.771
+Every slot has one, and it is called the
+
+23
+00:00:39.771 --> 00:00:41.797
+key: what that slot offers, to be found
+
+24
+00:00:41.797 --> 00:00:41.926
+by.
+
+25
+00:00:42.185 --> 00:00:44.167
+The third is v j, the value: what that
+
+26
+00:00:44.167 --> 00:00:45.547
+slot hands over if it is chosen.
+
+27
+00:00:45.925 --> 00:00:48.007
+Two more things act on the score, the
+
+28
+00:00:48.007 --> 00:00:49.569
+distance penalty and the mask.
+
+29
+00:00:49.882 --> 00:00:52.224
+They get their own parts, four point seven
+
+30
+00:00:52.224 --> 00:00:54.255
+point seven and four point seven point
+
+31
+00:00:54.255 --> 00:00:55.869
+eight, so here they're boxes.
+
+32
+00:00:56.181 --> 00:00:58.576
+So one slot plays three roles: asking,
+
+33
+00:00:58.576 --> 00:01:00.242
+being found, and handing over.
+
+34
+00:01:03.980 --> 00:01:04.596
+Why three?
+
+35
+00:01:04.965 --> 00:01:05.458
+Try one.
+
+36
+00:01:05.827 --> 00:01:08.721
+Suppose each slot kept a single vector, x,
+
+37
+00:01:08.721 --> 00:01:11.307
+and scored by x of five seventy-six dot x
+
+38
+00:01:11.307 --> 00:01:11.431
+j.
+
+39
+00:01:11.927 --> 00:01:12.868
+Two things follow.
+
+40
+00:01:13.181 --> 00:01:15.532
+A dot product doesn't care about order, so
+
+41
+00:01:15.532 --> 00:01:17.257
+five seventy-six looking at five
+
+42
+00:01:17.257 --> 00:01:19.294
+seventy-three would score exactly what
+
+43
+00:01:19.294 --> 00:01:21.123
+five seventy-three looking at five
+
+44
+00:01:21.123 --> 00:01:22.116
+seventy-six scores.
+
+45
+00:01:22.429 --> 00:01:24.467
+And a vector dotted with itself is its
+
+46
+00:01:24.467 --> 00:01:26.191
+length squared, never negative.
+
+47
+00:01:26.504 --> 00:01:28.699
+So a slot would match itself, and slots
+
+48
+00:01:28.699 --> 00:01:29.744
+like itself, best.
+
+49
+00:01:30.186 --> 00:01:31.741
+Here it is with real numbers.
+
+50
+00:01:32.063 --> 00:01:34.314
+Take the worked slot's ninety-six numbers
+
+51
+00:01:34.314 --> 00:01:35.708
+and compare them directly.
+
+52
+00:01:36.030 --> 00:01:38.228
+Slot five seventy-six's best matches are
+
+53
+00:01:38.228 --> 00:01:40.748
+other downbeats: slots zero, sixteen,
+
+54
+00:01:40.748 --> 00:01:42.142
+thirty-two, forty-eight.
+
+55
+00:01:42.464 --> 00:01:44.984
+Slot five seventy-three, three slots back,
+
+56
+00:01:44.984 --> 00:01:47.022
+comes three hundred and fifth of five
+
+57
+00:01:47.022 --> 00:01:48.416
+hundred and seventy-seven.
+
+58
+00:01:48.737 --> 00:01:50.828
+Add the same distance penalty the real
+
+59
+00:01:50.828 --> 00:01:53.080
+head uses, and the slot puts zero point
+
+60
+00:01:53.080 --> 00:01:55.332
+eight eight eight of its weight on itself.
+
+61
+00:01:55.654 --> 00:01:57.959
+The real head, with a query and keys and
+
+62
+00:01:57.959 --> 00:02:00.158
+the same penalty, puts zero point nine
+
+63
+00:02:00.158 --> 00:02:02.409
+seven eight on slot five seventy-three,
+
+64
+00:02:02.409 --> 00:02:03.964
+and almost nothing on itself.
+
+65
+00:02:04.421 --> 00:02:06.356
+A downbeat isn't looking for another
+
+66
+00:02:06.356 --> 00:02:06.826
+downbeat.
+
+67
+00:02:07.140 --> 00:02:08.969
+This head's query matches position
+
+68
+00:02:08.969 --> 00:02:11.269
+thirteen of the bar, three slots before a
+
+69
+00:02:11.269 --> 00:02:13.517
+downbeat, and the distance penalty picks
+
+70
+00:02:13.517 --> 00:02:15.713
+the latest one, slot five seventy-three.
+
+71
+00:02:16.027 --> 00:02:18.065
+What a slot is after has to be free to
+
+72
+00:02:18.065 --> 00:02:19.268
+differ from what it is.
+
+73
+00:02:20.696 --> 00:02:22.614
+An analogy, and only an analogy: a
+
+74
+00:02:22.614 --> 00:02:22.979
+library.
+
+75
+00:02:23.253 --> 00:02:25.216
+The words you type into the search are the
+
+76
+00:02:25.216 --> 00:02:25.490
+query.
+
+77
+00:02:25.764 --> 00:02:27.818
+Each book's catalogue entry is its key:
+
+78
+00:02:27.818 --> 00:02:29.325
+the search is matched against it.
+
+79
+00:02:29.599 --> 00:02:31.242
+And what you carry home is the book
+
+80
+00:02:31.242 --> 00:02:32.156
+itself, the value.
+
+81
+00:02:32.429 --> 00:02:34.621
+The entry is written to be found; the book
+
+82
+00:02:34.621 --> 00:02:35.671
+is what's worth having.
+
+83
+00:02:35.945 --> 00:02:37.817
+Two different things, so two different
+
+84
+00:02:37.817 --> 00:02:38.182
+vectors.
+
+85
+00:02:41.873 --> 00:02:43.342
+In the code it's one layer.
+
+86
+00:02:43.668 --> 00:02:46.278
+Line sixty: q k v is a linear layer from d
+
+87
+00:02:46.278 --> 00:02:46.877
+to three d.
+
+88
+00:02:47.203 --> 00:02:49.487
+With d at ninety-six, that's ninety-six
+
+89
+00:02:49.487 --> 00:02:51.173
+numbers in and two hundred and
+
+90
+00:02:51.173 --> 00:02:52.097
+eighty-eight out.
+
+91
+00:02:52.424 --> 00:02:54.980
+Line seventy uses it: the slot's vector h
+
+92
+00:02:54.980 --> 00:02:57.427
+goes through LN one, then q k v, and the
+
+93
+00:02:57.427 --> 00:02:59.167
+result is cut into q, k and v.
+
+94
+00:02:59.674 --> 00:03:00.710
+Here's the picture.
+
+95
+00:03:01.037 --> 00:03:02.891
+The slot's ninety-six numbers are
+
+96
+00:03:02.891 --> 00:03:05.127
+normalised by LN, a box for four point
+
+97
+00:03:05.127 --> 00:03:07.580
+seven point nine, then the one layer makes
+
+98
+00:03:07.580 --> 00:03:09.162
+two hundred and eighty-eight.
+
+99
+00:03:09.489 --> 00:03:11.779
+The first ninety-six are the query, the
+
+100
+00:03:11.779 --> 00:03:13.742
+next ninety-six the key, the last
+
+101
+00:03:13.742 --> 00:03:14.887
+ninety-six the value.
+
+102
+00:03:15.345 --> 00:03:17.693
+Each of the three is then cut again, into
+
+103
+00:03:17.693 --> 00:03:19.081
+four heads of twenty-four.
+
+104
+00:03:19.401 --> 00:03:21.215
+That's four point seven point six.
+
+105
+00:03:22.139 --> 00:03:24.471
+As an equation: the three vectors stacked
+
+106
+00:03:24.471 --> 00:03:26.407
+are W times z plus b, where z is the
+
+107
+00:03:26.407 --> 00:03:27.201
+normalised slot.
+
+108
+00:03:27.499 --> 00:03:29.037
+W is a grid of two hundred and
+
+109
+00:03:29.037 --> 00:03:31.171
+eighty-eight rows by ninety-six columns,
+
+110
+00:03:31.171 --> 00:03:33.107
+and b has two hundred and eighty-eight
+
+111
+00:03:33.107 --> 00:03:33.454
+biases.
+
+112
+00:03:33.752 --> 00:03:35.390
+So the layer has two hundred and
+
+113
+00:03:35.390 --> 00:03:37.425
+eighty-eight times ninety-six weights,
+
+114
+00:03:37.425 --> 00:03:39.410
+plus two hundred and eighty-eight:
+
+115
+00:03:39.410 --> 00:03:41.494
+twenty-seven thousand, nine hundred and
+
+116
+00:03:41.494 --> 00:03:42.586
+thirty-six parameters.
+
+117
+00:03:42.884 --> 00:03:43.926
+That's exactly three
+
+118
+00:03:43.926 --> 00:03:46.209
+ninety-six-to-ninety-six layers stacked:
+
+119
+00:03:46.209 --> 00:03:48.244
+rows nought to ninety-five of W make the
+
+120
+00:03:48.244 --> 00:03:50.428
+query, the next ninety-six the key, the
+
+121
+00:03:50.428 --> 00:03:51.718
+last ninety-six the value.
+
+122
+00:03:52.016 --> 00:03:54.051
+One layer, cut in three, is the same
+
+123
+00:03:54.051 --> 00:03:55.391
+arithmetic as three layers.
+
+124
+00:03:55.797 --> 00:03:57.732
+Each of the two blocks has its own.
+
+125
+00:03:58.064 --> 00:04:00.664
+And every slot runs it: a slot's query is
+
+126
+00:04:00.664 --> 00:04:03.152
+used when it's the slot being decided, and
+
+127
+00:04:03.152 --> 00:04:05.420
+its key and value whenever it or a later
+
+128
+00:04:05.420 --> 00:04:06.305
+slot looks back.
+
+129
+00:04:10.297 --> 00:04:11.972
+Now the real numbers, block one, head
+
+130
+00:04:11.972 --> 00:04:13.289
+zero, at slot five seventy-six.
+
+131
+00:04:13.528 --> 00:04:15.523
+The query: minus zero point two, minus two
+
+132
+00:04:15.523 --> 00:04:17.239
+point oh, one point nine, and so on,
+
+133
+00:04:17.239 --> 00:04:18.914
+twenty-four numbers, length about eight.
+
+134
+00:04:19.154 --> 00:04:21.069
+The key, from the same input: minus four
+
+135
+00:04:21.069 --> 00:04:22.705
+point oh nine, minus one point four,
+
+136
+00:04:22.705 --> 00:04:24.021
+length fourteen point eight five.
+
+137
+00:04:24.261 --> 00:04:26.335
+And the value: minus two, seven point one,
+
+138
+00:04:26.335 --> 00:04:27.492
+length seventeen point seven.
+
+139
+00:04:27.732 --> 00:04:29.447
+One input, three quite different vectors.
+
+140
+00:04:29.774 --> 00:04:32.373
+Slot five seventy-three, three slots back,
+
+141
+00:04:32.373 --> 00:04:34.750
+at position thirteen of the bar, has its
+
+142
+00:04:34.750 --> 00:04:35.745
+own key and value.
+
+143
+00:04:36.077 --> 00:04:38.510
+The query against that key: thirty-one
+
+144
+00:04:38.510 --> 00:04:39.339
+point one nine.
+
+145
+00:04:39.671 --> 00:04:42.214
+Scaled, with the head's distance penalty,
+
+146
+00:04:42.214 --> 00:04:44.813
+then softmax: a weight of zero point nine
+
+147
+00:04:44.813 --> 00:04:45.476
+seven eight.
+
+148
+00:04:45.808 --> 00:04:48.020
+On content alone it's only twenty-sixth.
+
+149
+00:04:48.351 --> 00:04:50.729
+The best raw matches are slots twenty-nine
+
+150
+00:04:50.729 --> 00:04:52.996
+and thirteen, the same position in the
+
+151
+00:04:52.996 --> 00:04:54.101
+silent opening bars.
+
+152
+00:04:54.433 --> 00:04:56.700
+The query matches the position; the
+
+153
+00:04:56.700 --> 00:04:59.022
+distance penalty makes the latest one win.
+
+154
+00:04:59.885 --> 00:05:02.290
+So the head's output is almost exactly v
+
+155
+00:05:02.290 --> 00:05:04.930
+five seventy-three: minus one point two
+
+156
+00:05:04.930 --> 00:05:07.511
+seven seven, four point five one seven,
+
+157
+00:05:07.511 --> 00:05:08.918
+six point two eight six.
+
+158
+00:05:09.270 --> 00:05:11.851
+That's the value's job: it's what gets
+
+159
+00:05:11.851 --> 00:05:12.555
+handed over.
+
+160
+00:05:12.907 --> 00:05:14.373
+The key only decided who.
+
+161
+00:05:18.197 --> 00:05:20.124
+With a separate query and key, looking has
+
+162
+00:05:20.124 --> 00:05:20.638
+a direction.
+
+163
+00:05:20.895 --> 00:05:22.523
+Five seventy-six's query against five
+
+164
+00:05:22.523 --> 00:05:24.365
+seventy-three's key gives thirty-one point
+
+165
+00:05:24.365 --> 00:05:24.750
+one nine.
+
+166
+00:05:25.007 --> 00:05:26.892
+Turn it round, five seventy-three's query
+
+167
+00:05:26.892 --> 00:05:28.734
+against five seventy-six's key, and it's
+
+168
+00:05:28.734 --> 00:05:30.019
+minus sixty-two point six one.
+
+169
+00:05:30.276 --> 00:05:31.261
+Not even the same sign.
+
+170
+00:05:31.518 --> 00:05:33.488
+The model never uses that second number:
+
+171
+00:05:33.488 --> 00:05:34.688
+five seventy-six is in five
+
+172
+00:05:34.688 --> 00:05:36.615
+seventy-three's future, and the mask hides
+
+173
+00:05:36.615 --> 00:05:36.744
+it.
+
+174
+00:05:37.001 --> 00:05:38.800
+It's here only to show the two directions
+
+175
+00:05:38.800 --> 00:05:39.100
+differ.
+
+176
+00:05:39.497 --> 00:05:41.603
+And the slot against itself: its query
+
+177
+00:05:41.603 --> 00:05:43.422
+against its own key is minus fourteen
+
+178
+00:05:43.422 --> 00:05:44.284
+point seven seven.
+
+179
+00:05:44.571 --> 00:05:46.725
+If the key were simply the query again, it
+
+180
+00:05:46.725 --> 00:05:48.591
+would be the query's length squared,
+
+181
+00:05:48.591 --> 00:05:50.458
+sixty-two point nine seven, a strong
+
+182
+00:05:50.458 --> 00:05:50.745
+match.
+
+183
+00:05:51.032 --> 00:05:53.138
+So the downbeat isn't drawn to itself;
+
+184
+00:05:53.138 --> 00:05:55.292
+it's free to look for something else, here
+
+185
+00:05:55.292 --> 00:05:56.680
+position thirteen of the bar.
+
+186
+00:05:58.207 --> 00:06:00.044
+Say it in one breath: one layer,
+
+187
+00:06:00.044 --> 00:06:01.422
+ninety-six to two hundred and
+
+188
+00:06:01.422 --> 00:06:03.535
+eighty-eight, gives every slot a query, a
+
+189
+00:06:03.535 --> 00:06:05.601
+key and a value; the slot being decided
+
+190
+00:06:05.601 --> 00:06:07.576
+matches its query against every key, and
+
+191
+00:06:07.576 --> 00:06:09.505
+the slots it picks hand over their values.
+
+192
+00:06:09.780 --> 00:06:11.709
+It pairs with Lesson seventeen's table in
+
+193
+00:06:11.709 --> 00:06:13.638
+the course explainer, and the attention
+
+194
+00:06:13.638 --> 00:06:15.016
+visualiser on the course page.
+
+195
+00:06:15.291 --> 00:06:16.302
+Next: four heads.
+

@@ -1,0 +1,886 @@
+WEBVTT
+
+1
+00:00:00.050 --> 00:00:01.402
+Lesson two point seven.
+
+2
+00:00:01.754 --> 00:00:04.281
+How XMIDI's songs were split into training
+
+3
+00:00:04.281 --> 00:00:06.867
+and validation, with no song IDs to go on.
+
+4
+00:00:10.853 --> 00:00:13.547
+Every split here follows one rule: all the
+
+5
+00:00:13.547 --> 00:00:15.624
+copies of a song go to the same side.
+
+6
+00:00:15.960 --> 00:00:18.149
+Lesson two point four showed why:
+
+7
+00:00:18.149 --> 00:00:20.506
+otherwise the model is scored on songs it
+
+8
+00:00:20.506 --> 00:00:21.517
+has already heard.
+
+9
+00:00:22.180 --> 00:00:24.138
+Lakh's split knows which files are the
+
+10
+00:00:24.138 --> 00:00:26.197
+same song from two outside sources:
+
+11
+00:00:26.197 --> 00:00:27.954
+Raffel's match to the Million Song
+
+12
+00:00:27.954 --> 00:00:30.163
+Dataset, which gives recording IDs, and
+
+13
+00:00:30.163 --> 00:00:32.372
+the web paths each file was scraped from,
+
+14
+00:00:32.372 --> 00:00:34.180
+which often read artist slash title.
+
+15
+00:00:34.481 --> 00:00:36.037
+An XMIDI file has none of that.
+
+16
+00:00:36.339 --> 00:00:38.498
+Its name holds an emotion, a genre and a
+
+17
+00:00:38.498 --> 00:00:39.000
+random ID.
+
+18
+00:00:39.301 --> 00:00:41.209
+No artist, no title, no recording.
+
+19
+00:00:41.707 --> 00:00:43.946
+On Lakh, the melody fingerprint was the
+
+20
+00:00:43.946 --> 00:00:46.239
+check: it measured how many same-song
+
+21
+00:00:46.239 --> 00:00:47.465
+pairs the split missed.
+
+22
+00:00:47.784 --> 00:00:50.130
+On XMIDI it's the only relation there is,
+
+23
+00:00:50.130 --> 00:00:51.783
+so it becomes the split itself.
+
+24
+00:00:52.102 --> 00:00:54.661
+Keep that in mind; chapter five comes back
+
+25
+00:00:54.661 --> 00:00:55.567
+to what it costs.
+
+26
+00:00:59.003 --> 00:01:00.939
+Every one of the forty thousand six
+
+27
+00:01:00.939 --> 00:01:03.197
+hundred and ninety-four songs is sketched
+
+28
+00:01:03.197 --> 00:01:05.240
+with the fingerprint from lessons two
+
+29
+00:01:05.240 --> 00:01:06.799
+point four and two point six.
+
+30
+00:01:07.122 --> 00:01:09.434
+Two songs are twins if they share at least
+
+31
+00:01:09.434 --> 00:01:11.692
+thirty-two hashes, with a Jaccard of at
+
+32
+00:01:11.692 --> 00:01:12.391
+least a half.
+
+33
+00:01:12.869 --> 00:01:13.872
+Picture six songs.
+
+34
+00:01:14.206 --> 00:01:16.770
+A and B are twins, B and C are twins, and
+
+35
+00:01:16.770 --> 00:01:17.773
+E and F are twins.
+
+36
+00:01:18.108 --> 00:01:20.114
+A and C are not twins of each other.
+
+37
+00:01:20.621 --> 00:01:23.013
+Union-find joins every linked pair into
+
+38
+00:01:23.013 --> 00:01:26.062
+one group, and follows chains: A, B and C
+
+39
+00:01:26.062 --> 00:01:28.573
+become one cluster, because A reaches C
+
+40
+00:01:28.573 --> 00:01:29.170
+through B.
+
+41
+00:01:29.529 --> 00:01:31.980
+D, with no twin, is a cluster of one.
+
+42
+00:01:32.339 --> 00:01:34.073
+E and F are a cluster of two.
+
+43
+00:01:35.576 --> 00:01:37.913
+In the code: for each song, the later
+
+44
+00:01:37.913 --> 00:01:40.198
+songs sharing at least thirty-two hashes,
+
+45
+00:01:40.198 --> 00:01:42.275
+their Jaccard, and if it's at least a
+
+46
+00:01:42.275 --> 00:01:43.002
+half, union.
+
+47
+00:01:43.313 --> 00:01:45.650
+Every pair that passes is joined, not only
+
+48
+00:01:45.650 --> 00:01:46.844
+each song's best match.
+
+49
+00:01:47.267 --> 00:01:49.599
+On the real corpus: thirteen thousand four
+
+50
+00:01:49.599 --> 00:01:51.446
+hundred and fifty-one twin pairs make
+
+51
+00:01:51.446 --> 00:01:53.390
+thirty-three thousand three hundred and
+
+52
+00:01:53.390 --> 00:01:54.070
+nine clusters.
+
+53
+00:01:54.362 --> 00:01:56.597
+Twenty-eight thousand songs stand alone;
+
+54
+00:01:56.597 --> 00:01:58.881
+the other twelve thousand, thirty percent,
+
+55
+00:01:58.881 --> 00:02:00.387
+sit in clusters of two or more.
+
+56
+00:02:00.679 --> 00:02:03.060
+Most of those are pairs, and one is huge:
+
+57
+00:02:03.060 --> 00:02:04.615
+two hundred and forty-two songs.
+
+58
+00:02:05.995 --> 00:02:08.083
+That giant is a chain, like A, B, C, but
+
+59
+00:02:08.083 --> 00:02:09.404
+two hundred and forty-two long.
+
+60
+00:02:09.660 --> 00:02:11.535
+It mixes every genre: ninety-three pop
+
+61
+00:02:11.535 --> 00:02:13.367
+songs, fifty-five country, fifty-three
+
+62
+00:02:13.367 --> 00:02:14.092
+rock, and more.
+
+63
+00:02:14.347 --> 00:02:15.881
+It's six tenths of a percent of the
+
+64
+00:02:15.881 --> 00:02:17.671
+corpus, under the one percent rule that
+
+65
+00:02:17.671 --> 00:02:19.376
+would send it to training automatically.
+
+66
+00:02:19.632 --> 00:02:21.549
+It landed in training anyway, by the order
+
+67
+00:02:21.549 --> 00:02:22.657
+the next chapter explains.
+
+68
+00:02:22.913 --> 00:02:24.490
+Lakh's biggest chain was about seven
+
+69
+00:02:24.490 --> 00:02:25.129
+thousand files.
+
+70
+00:02:28.530 --> 00:02:30.660
+First the clusters are put in a fixed
+
+71
+00:02:30.660 --> 00:02:32.901
+order: by a hash of each cluster's
+
+72
+00:02:32.901 --> 00:02:33.630
+smallest md5.
+
+73
+00:02:33.966 --> 00:02:36.432
+That order is as good as random, but it's
+
+74
+00:02:36.432 --> 00:02:38.953
+the same every time, so anyone can rebuild
+
+75
+00:02:38.953 --> 00:02:39.514
+the split.
+
+76
+00:02:39.989 --> 00:02:42.362
+Then, one cluster at a time: give it to
+
+77
+00:02:42.362 --> 00:02:44.230
+the side that is furthest behind its
+
+78
+00:02:44.230 --> 00:02:44.533
+share.
+
+79
+00:02:44.836 --> 00:02:47.007
+n k is the songs that side has so far, N
+
+80
+00:02:47.007 --> 00:02:48.925
+is all forty thousand six hundred and
+
+81
+00:02:48.925 --> 00:02:51.349
+ninety-four, and t k is its target: nine
+
+82
+00:02:51.349 --> 00:02:53.419
+tenths for train, a twentieth each for
+
+83
+00:02:53.419 --> 00:02:54.428
+validation and test.
+
+84
+00:02:54.731 --> 00:02:56.599
+Arg min picks the side with the most
+
+85
+00:02:56.599 --> 00:02:57.256
+negative gap.
+
+86
+00:02:57.749 --> 00:03:00.047
+At the start every side has nothing:
+
+87
+00:03:00.047 --> 00:03:02.235
+train's gap is minus nine tenths, the
+
+88
+00:03:02.235 --> 00:03:04.696
+others minus one twentieth, so train takes
+
+89
+00:03:04.696 --> 00:03:05.681
+the first cluster.
+
+90
+00:03:06.163 --> 00:03:07.970
+Here is each side filling toward its own
+
+91
+00:03:07.970 --> 00:03:08.279
+target.
+
+92
+00:03:08.725 --> 00:03:11.068
+Train is so far behind that it takes every
+
+93
+00:03:11.068 --> 00:03:13.412
+cluster until it holds eighty-five percent
+
+94
+00:03:13.412 --> 00:03:15.701
+of the songs: the first twenty-eight
+
+95
+00:03:15.701 --> 00:03:17.717
+thousand two hundred and fifty-eight
+
+96
+00:03:17.717 --> 00:03:18.208
+clusters.
+
+97
+00:03:18.665 --> 00:03:21.062
+From then on the three sides take turns,
+
+98
+00:03:21.062 --> 00:03:23.516
+and each ends at its share: thirty-six
+
+99
+00:03:23.516 --> 00:03:25.913
+thousand six hundred and twenty-five songs
+
+100
+00:03:25.913 --> 00:03:28.366
+in train, two thousand and thirty-four in
+
+101
+00:03:28.366 --> 00:03:30.764
+validation, two thousand and thirty-five
+
+102
+00:03:30.764 --> 00:03:31.210
+in test.
+
+103
+00:03:31.658 --> 00:03:32.483
+Why this shape?
+
+104
+00:03:32.813 --> 00:03:35.289
+Clusters can't be cut in half, so an exact
+
+105
+00:03:35.289 --> 00:03:37.325
+ninety, five, five is impossible.
+
+106
+00:03:37.655 --> 00:03:39.690
+Giving each cluster to the side most
+
+107
+00:03:39.690 --> 00:03:41.891
+behind keeps every side as close to its
+
+108
+00:03:41.891 --> 00:03:42.936
+share as it can be.
+
+109
+00:03:43.267 --> 00:03:45.412
+Validation ends with seventeen hundred
+
+110
+00:03:45.412 --> 00:03:47.448
+clusters, the largest eleven songs.
+
+111
+00:03:50.907 --> 00:03:53.210
+After the split, each validation song is
+
+112
+00:03:53.210 --> 00:03:55.513
+checked against the whole training side,
+
+113
+00:03:55.513 --> 00:03:56.906
+with the same fingerprint.
+
+114
+00:03:57.228 --> 00:03:59.638
+Twins at the rule: zero of two thousand
+
+115
+00:03:59.638 --> 00:04:00.495
+and thirty-four.
+
+116
+00:04:00.985 --> 00:04:03.228
+That zero is guaranteed, not discovered.
+
+117
+00:04:03.548 --> 00:04:05.898
+If a validation song had a training twin,
+
+118
+00:04:05.898 --> 00:04:08.035
+the two would have been joined into one
+
+119
+00:04:08.035 --> 00:04:10.064
+cluster, and dealt to the same side.
+
+120
+00:04:10.502 --> 00:04:12.294
+Below the rule, overlap remains.
+
+121
+00:04:12.610 --> 00:04:14.718
+Four hundred and sixty-seven validation
+
+122
+00:04:14.718 --> 00:04:16.773
+songs, twenty-three percent, share
+
+123
+00:04:16.773 --> 00:04:18.670
+thirty-two hashes or more with some
+
+124
+00:04:18.670 --> 00:04:20.936
+training song, at a Jaccard under a half.
+
+125
+00:04:21.252 --> 00:04:23.307
+On Lakh the same figure is twenty-five
+
+126
+00:04:23.307 --> 00:04:23.729
+percent.
+
+127
+00:04:24.045 --> 00:04:26.311
+Whether those are the same songs, nobody
+
+128
+00:04:26.311 --> 00:04:26.996
+has measured.
+
+129
+00:04:27.461 --> 00:04:29.750
+And for scale, a simulation on the real
+
+130
+00:04:29.750 --> 00:04:32.367
+clusters: splitting song by song at random
+
+131
+00:04:32.367 --> 00:04:34.548
+instead would have left twenty-seven to
+
+132
+00:04:34.548 --> 00:04:36.729
+twenty-nine percent of validation songs
+
+133
+00:04:36.729 --> 00:04:38.474
+with a cluster-mate in training.
+
+134
+00:04:41.993 --> 00:04:44.024
+How much does this fingerprint catch?
+
+135
+00:04:44.353 --> 00:04:46.932
+On Lakh, where song identity is known, the
+
+136
+00:04:46.932 --> 00:04:49.181
+same recipe was tested on pairs known to
+
+137
+00:04:49.181 --> 00:04:50.114
+be the same song.
+
+138
+00:04:50.443 --> 00:04:52.474
+At thirty-two shared hashes it found
+
+139
+00:04:52.474 --> 00:04:54.394
+fourteen point six percent of them.
+
+140
+00:04:54.859 --> 00:04:57.075
+Picture seven pairs that really are the
+
+141
+00:04:57.075 --> 00:04:57.629
+same song.
+
+142
+00:04:57.962 --> 00:05:00.178
+The fingerprint joins about one of them.
+
+143
+00:05:00.511 --> 00:05:02.672
+The twin rule adds the Jaccard test on
+
+144
+00:05:02.672 --> 00:05:04.556
+top, so it can only catch fewer.
+
+145
+00:05:05.195 --> 00:05:07.524
+It sees only the guitar's top line, so it
+
+146
+00:05:07.524 --> 00:05:09.535
+misses the same song with a different
+
+147
+00:05:09.535 --> 00:05:11.917
+guitar part, a different arrangement, or
+
+148
+00:05:11.917 --> 00:05:13.558
+the tune on another instrument.
+
+149
+00:05:14.016 --> 00:05:15.251
+So compare the two honestly.
+
+150
+00:05:15.515 --> 00:05:17.147
+Lakh was split by metadata, so the
+
+151
+00:05:17.147 --> 00:05:19.131
+fingerprint is still an independent check,
+
+152
+00:05:19.131 --> 00:05:20.895
+and it finds eight point one percent of
+
+153
+00:05:20.895 --> 00:05:22.923
+validation songs with a training twin: a
+
+154
+00:05:22.923 --> 00:05:23.188
+floor.
+
+155
+00:05:23.452 --> 00:05:25.436
+XMIDI was split by the fingerprint itself,
+
+156
+00:05:25.436 --> 00:05:27.421
+so it reads zero by construction, and with
+
+157
+00:05:27.421 --> 00:05:29.317
+no song IDs nothing independent is left to
+
+158
+00:05:29.317 --> 00:05:30.066
+measure the leak.
+
+159
+00:05:30.331 --> 00:05:32.271
+It is not measured, and most likely above
+
+160
+00:05:32.271 --> 00:05:32.491
+zero.
+
+161
+00:05:32.926 --> 00:05:35.388
+For the report, that is the sentence:
+
+162
+00:05:35.388 --> 00:05:37.850
+split by melodic-twin clusters, zero twins
+
+163
+00:05:37.850 --> 00:05:40.312
+at the rule by construction, the remaining
+
+164
+00:05:40.312 --> 00:05:41.188
+leak unmeasured.
+
+165
+00:05:44.693 --> 00:05:46.835
+From the split, the song lists: one per
+
+166
+00:05:46.835 --> 00:05:48.613
+genre and per emotion, for train and
+
+167
+00:05:48.613 --> 00:05:49.342
+validation only.
+
+168
+00:05:49.616 --> 00:05:51.484
+Rock has eight thousand five hundred and
+
+169
+00:05:51.484 --> 00:05:53.399
+sixty-one training songs and four hundred
+
+170
+00:05:53.399 --> 00:05:55.541
+and seventy-seven for validation; country
+
+171
+00:05:55.541 --> 00:05:57.455
+the most, eleven thousand three hundred
+
+172
+00:05:57.455 --> 00:05:59.415
+and sixty-eight; jazz five and a half
+
+173
+00:05:59.415 --> 00:05:59.825
+thousand.
+
+174
+00:06:00.098 --> 00:06:02.013
+Songs whose copies disagreed on the genre
+
+175
+00:06:02.013 --> 00:06:02.970
+are in no genre list.
+
+176
+00:06:03.434 --> 00:06:05.803
+There are eleven emotion lists too, from
+
+177
+00:06:05.803 --> 00:06:08.118
+nine thousand training songs for exciting
+
+178
+00:06:08.118 --> 00:06:09.991
+down to two hundred and fifty for
+
+179
+00:06:09.991 --> 00:06:12.305
+magnificent, and a mixed pool of eleven
+
+180
+00:06:12.305 --> 00:06:14.454
+thousand three hundred and sixty-eight
+
+181
+00:06:14.454 --> 00:06:16.769
+training songs, drawn once with a fixed
+
+182
+00:06:16.769 --> 00:06:19.138
+seed, for an all-genre model of the same
+
+183
+00:06:19.138 --> 00:06:19.413
+size.
+
+184
+00:06:20.872 --> 00:06:22.728
+The test side, two thousand and
+
+185
+00:06:22.728 --> 00:06:24.639
+thirty-five songs, is never read.
+
+186
+00:06:24.967 --> 00:06:27.369
+No list is written for it, and the loader
+
+187
+00:06:27.369 --> 00:06:29.717
+refuses it: asking for the test songs
+
+188
+00:06:29.717 --> 00:06:31.791
+raises an error unless the loader was
+
+189
+00:06:31.791 --> 00:06:33.921
+built with allow test, a one-line,
+
+190
+00:06:33.921 --> 00:06:36.104
+searchable act of spending the test set.
+
+191
+00:06:36.565 --> 00:06:38.725
+A song list with a song from the wrong
+
+192
+00:06:38.725 --> 00:06:41.108
+side is refused too, naming the song and
+
+193
+00:06:41.108 --> 00:06:42.160
+where it really is.
+
+194
+00:06:42.493 --> 00:06:44.709
+And a test checks the counts, and the
+
+195
+00:06:44.709 --> 00:06:45.152
+refusal.
+
+196
+00:06:46.661 --> 00:06:48.578
+Here's what the three genre drummers
+
+197
+00:06:48.578 --> 00:06:49.977
+trained and were scored on.
+
+198
+00:06:50.288 --> 00:06:52.516
+Rock: eight thousand five hundred and
+
+199
+00:06:52.516 --> 00:06:54.641
+sixty-one training songs; Jazz five
+
+200
+00:06:54.641 --> 00:06:56.972
+thousand five hundred and ninety-eight;
+
+201
+00:06:56.972 --> 00:06:59.149
+Country eleven thousand three hundred and
+
+202
+00:06:59.149 --> 00:06:59.770
+sixty-eight.
+
+203
+00:07:00.189 --> 00:07:02.477
+Each was scored on its validation list,
+
+204
+00:07:02.477 --> 00:07:04.493
+minus any of its songs among the two
+
+205
+00:07:04.493 --> 00:07:06.563
+hundred validation songs reserved for
+
+206
+00:07:06.563 --> 00:07:08.850
+fitting the decoders' thresholds, which
+
+207
+00:07:08.850 --> 00:07:11.356
+lesson four point nine covers: fifty-six
+
+208
+00:07:11.356 --> 00:07:13.371
+for Rock, leaving four hundred and
+
+209
+00:07:13.371 --> 00:07:13.971
+twenty-one.
+
+210
+00:07:14.298 --> 00:07:16.749
+Some songs give no reading in the battery,
+
+211
+00:07:16.749 --> 00:07:18.819
+the set of measurements that scores a
+
+212
+00:07:18.819 --> 00:07:21.215
+drummer, from lesson five point one:
+
+213
+00:07:21.215 --> 00:07:23.667
+twenty-four percent for Rock, twenty-three
+
+214
+00:07:23.667 --> 00:07:25.846
+for Jazz, and thirty-nine for Country.
+
+215
+00:07:26.172 --> 00:07:28.406
+So it read three hundred and twenty Rock
+
+216
+00:07:28.406 --> 00:07:28.733
+songs.
+
+217
+00:07:30.264 --> 00:07:32.756
+So XMIDI is split by whole twin clusters,
+
+218
+00:07:32.756 --> 00:07:34.059
+ninety, five, five.
+
+219
+00:07:34.398 --> 00:07:36.947
+Zero twins at the rule, by construction,
+
+220
+00:07:36.947 --> 00:07:38.986
+and the rest of the leak unmeasured.
+
+221
+00:07:39.326 --> 00:07:41.874
+Next: how songs become training batches.
+

@@ -1,0 +1,1202 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.225
+Lesson five point four.
+
+2
+00:00:01.537 --> 00:00:03.511
+Do the drums hit with the guitar more
+
+3
+00:00:03.511 --> 00:00:04.758
+often than chance would?
+
+4
+00:00:08.760 --> 00:00:11.078
+The battery's second axis asks whether the
+
+5
+00:00:11.078 --> 00:00:13.343
+drums are in conversation with the guitar.
+
+6
+00:00:13.666 --> 00:00:15.661
+Its first attempt asked the simplest
+
+7
+00:00:15.661 --> 00:00:17.979
+version: do they hit at the same time?
+
+8
+00:00:18.303 --> 00:00:20.783
+Take one window: thirty-two slots, two
+
+9
+00:00:20.783 --> 00:00:22.077
+bars of sixteenth notes.
+
+10
+00:00:22.500 --> 00:00:24.837
+Call the guitar's onset slots G, and count
+
+11
+00:00:24.837 --> 00:00:25.928
+them: a is four.
+
+12
+00:00:26.239 --> 00:00:28.524
+Call one drum group's onset slots D, here
+
+13
+00:00:28.524 --> 00:00:30.758
+the kick, and count them: b is four.
+
+14
+00:00:31.069 --> 00:00:33.147
+Then count the slots where both start a
+
+15
+00:00:33.147 --> 00:00:33.822
+note at once.
+
+16
+00:00:34.133 --> 00:00:36.418
+Each one is a coincidence: here, two.
+
+17
+00:00:36.879 --> 00:00:38.871
+NOC scores each drum group like this
+
+18
+00:00:38.871 --> 00:00:41.294
+separately, plus all the drums together,
+
+19
+00:00:41.294 --> 00:00:42.156
+in every window.
+
+20
+00:00:42.649 --> 00:00:44.853
+But a raw count rewards a busy drummer.
+
+21
+00:00:45.192 --> 00:00:47.509
+Fill twenty-eight slots and every guitar
+
+22
+00:00:47.509 --> 00:00:49.318
+onset gets hit, by luck alone.
+
+23
+00:00:49.657 --> 00:00:52.370
+So the real question is: more coincidences
+
+24
+00:00:52.370 --> 00:00:53.670
+than chance would give?
+
+25
+00:00:57.160 --> 00:00:58.478
+Here's the chance model.
+
+26
+00:00:58.808 --> 00:01:01.225
+Keep the guitar fixed, and throw the four
+
+27
+00:01:01.225 --> 00:01:03.642
+drum hits into random slots, never two in
+
+28
+00:01:03.642 --> 00:01:04.137
+one slot.
+
+29
+00:01:04.466 --> 00:01:06.279
+Count the coincidences each time.
+
+30
+00:01:06.609 --> 00:01:09.081
+Sometimes none, sometimes one, sometimes
+
+31
+00:01:09.081 --> 00:01:09.300
+two.
+
+32
+00:01:10.701 --> 00:01:12.051
+The count it gives follows the
+
+33
+00:01:12.051 --> 00:01:13.270
+hypergeometric distribution.
+
+34
+00:01:13.531 --> 00:01:14.925
+This is the chance of exactly k
+
+35
+00:01:14.925 --> 00:01:15.491
+coincidences.
+
+36
+00:01:15.752 --> 00:01:17.799
+On top: the ways to choose which k of the
+
+37
+00:01:17.799 --> 00:01:19.671
+guitar's a slots get hit, times the ways
+
+38
+00:01:19.671 --> 00:01:21.500
+to put the other b minus k hits among the
+
+39
+00:01:21.500 --> 00:01:22.719
+slots the guitar left empty.
+
+40
+00:01:22.981 --> 00:01:25.071
+Underneath: every way to place b hits in N
+
+41
+00:01:25.071 --> 00:01:25.332
+slots.
+
+42
+00:01:25.593 --> 00:01:27.466
+Never two hits in one slot is what drawing
+
+43
+00:01:27.466 --> 00:01:29.512
+without replacement means: once a slot is
+
+44
+00:01:29.512 --> 00:01:30.949
+taken, it can't be drawn again.
+
+45
+00:01:31.371 --> 00:01:33.797
+With four and four, no coincidence at all
+
+46
+00:01:33.797 --> 00:01:36.112
+comes up twenty thousand four hundred and
+
+47
+00:01:36.112 --> 00:01:38.151
+seventy-five ways out of thirty-five
+
+48
+00:01:38.151 --> 00:01:40.577
+thousand nine hundred and sixty: about
+
+49
+00:01:40.577 --> 00:01:42.341
+fifty-seven percent of the time.
+
+50
+00:01:42.817 --> 00:01:44.997
+Here is the whole distribution for four
+
+51
+00:01:44.997 --> 00:01:45.488
+and four.
+
+52
+00:01:45.815 --> 00:01:47.940
+Chance nearly always gives zero or one.
+
+53
+00:01:48.418 --> 00:01:50.175
+On average, chance gives a times b over N
+
+54
+00:01:50.175 --> 00:01:50.695
+coincidences.
+
+55
+00:01:50.934 --> 00:01:52.612
+Each drum hit lands on a guitar slot with
+
+56
+00:01:52.612 --> 00:01:54.409
+probability a over N, one in eight here,
+
+57
+00:01:54.409 --> 00:01:55.887
+and there are four hits: half a
+
+58
+00:01:55.887 --> 00:01:56.366
+coincidence.
+
+59
+00:01:56.606 --> 00:01:58.284
+The most there can be is the smaller of a
+
+60
+00:01:58.284 --> 00:01:58.963
+and b: four.
+
+61
+00:01:59.202 --> 00:02:00.920
+The fewest is zero, unless the two parts
+
+62
+00:02:00.920 --> 00:02:02.518
+together need more than N slots and are
+
+63
+00:02:02.518 --> 00:02:03.117
+forced to meet.
+
+64
+00:02:03.356 --> 00:02:04.874
+And the busy drummer: four times
+
+65
+00:02:04.874 --> 00:02:06.552
+twenty-eight over thirty-two is three and
+
+66
+00:02:06.552 --> 00:02:06.831
+a half.
+
+67
+00:02:07.071 --> 00:02:08.629
+Its four coincidences are barely above
+
+68
+00:02:08.629 --> 00:02:08.908
+chance.
+
+69
+00:02:12.237 --> 00:02:14.175
+NOC turns the count into a dial.
+
+70
+00:02:14.539 --> 00:02:16.901
+Zero on the dial is chance: C exp.
+
+71
+00:02:17.264 --> 00:02:19.566
+Plus one is the most coincidences the
+
+72
+00:02:19.566 --> 00:02:21.989
+densities allow, and minus one is the
+
+73
+00:02:21.989 --> 00:02:22.413
+fewest.
+
+74
+00:02:22.892 --> 00:02:25.245
+Above chance, NOC is how far the count
+
+75
+00:02:25.245 --> 00:02:27.828
+sits past C exp, as a share of the room up
+
+76
+00:02:27.828 --> 00:02:28.344
+to C max.
+
+77
+00:02:28.689 --> 00:02:31.214
+Below chance, as a share of the room down
+
+78
+00:02:31.214 --> 00:02:31.730
+to C min.
+
+79
+00:02:32.075 --> 00:02:34.657
+And if there's no room at all, the reading
+
+80
+00:02:34.657 --> 00:02:35.748
+is defined as zero.
+
+81
+00:02:36.225 --> 00:02:38.789
+Two coincidences: two minus a half, over
+
+82
+00:02:38.789 --> 00:02:39.750
+four minus a half.
+
+83
+00:02:40.071 --> 00:02:42.634
+One and a half over three and a half: plus
+
+84
+00:02:42.634 --> 00:02:43.809
+zero point four three.
+
+85
+00:02:44.130 --> 00:02:46.533
+No coincidences: minus a half, over a
+
+86
+00:02:46.533 --> 00:02:47.655
+half: minus one.
+
+87
+00:02:48.246 --> 00:02:49.151
+Look at the spacing.
+
+88
+00:02:49.423 --> 00:02:51.369
+Below chance there's half a coincidence of
+
+89
+00:02:51.369 --> 00:02:53.270
+room, stretched over the whole of minus
+
+90
+00:02:53.270 --> 00:02:55.397
+one to zero: one coincidence is worth two
+
+91
+00:02:55.397 --> 00:02:55.940
+whole units.
+
+92
+00:02:56.212 --> 00:02:57.886
+Above, three and a half of room is
+
+93
+00:02:57.886 --> 00:02:59.561
+squeezed into zero to one: each
+
+94
+00:02:59.561 --> 00:03:01.417
+coincidence is worth only zero point two
+
+95
+00:03:01.417 --> 00:03:01.643
+nine.
+
+96
+00:03:01.914 --> 00:03:03.725
+That lopsidedness is the price of fixed
+
+97
+00:03:03.725 --> 00:03:05.626
+ends: plus one and minus one mean as
+
+98
+00:03:05.626 --> 00:03:07.753
+together, and as apart, as these densities
+
+99
+00:03:07.753 --> 00:03:08.024
+allow.
+
+100
+00:03:11.500 --> 00:03:13.254
+There's another way to see NOC.
+
+101
+00:03:13.594 --> 00:03:15.688
+Treat the guitar and the drum as two
+
+102
+00:03:15.688 --> 00:03:18.631
+raters, each labelling every slot: hit, or
+
+103
+00:03:18.631 --> 00:03:19.027
+no hit.
+
+104
+00:03:19.366 --> 00:03:21.743
+Cohen's kappa measures how far two raters
+
+105
+00:03:21.743 --> 00:03:23.780
+agree beyond what chance would give.
+
+106
+00:03:24.439 --> 00:03:26.993
+They agree on a slot where both say hit:
+
+107
+00:03:26.993 --> 00:03:29.713
+two slots here, or where both say no hit:
+
+108
+00:03:29.713 --> 00:03:30.656
+twenty-six slots.
+
+109
+00:03:30.989 --> 00:03:33.543
+So p o, the share of slots they agree on,
+
+110
+00:03:33.543 --> 00:03:35.930
+is twenty-eight over thirty-two: zero
+
+111
+00:03:35.930 --> 00:03:37.206
+point eight seven five.
+
+112
+00:03:37.670 --> 00:03:40.354
+Chance agreement, p e, comes from the base
+
+113
+00:03:40.354 --> 00:03:43.038
+rates: both say hit, four in thirty-two
+
+114
+00:03:43.038 --> 00:03:45.607
+times four in thirty-two, plus both say no
+
+115
+00:03:45.607 --> 00:03:47.891
+hit, twenty-eight in thirty-two times
+
+116
+00:03:47.891 --> 00:03:49.433
+twenty-eight in thirty-two.
+
+117
+00:03:49.776 --> 00:03:51.317
+Zero point seven eight one.
+
+118
+00:03:51.814 --> 00:03:54.352
+Kappa is zero point eight seven five minus
+
+119
+00:03:54.352 --> 00:03:57.009
+zero point seven eight one, over one minus
+
+120
+00:03:57.009 --> 00:03:59.606
+zero point seven eight one: zero point
+
+121
+00:03:59.606 --> 00:04:00.255
+four three.
+
+122
+00:04:00.609 --> 00:04:02.852
+Exactly NOC's reading for this window.
+
+123
+00:04:03.207 --> 00:04:05.863
+They match here because a equals b, so the
+
+124
+00:04:05.863 --> 00:04:07.870
+best case gives kappa exactly one.
+
+125
+00:04:09.279 --> 00:04:11.235
+Now make the drums dense: twenty-eight
+
+126
+00:04:11.235 --> 00:04:11.458
+hits.
+
+127
+00:04:11.725 --> 00:04:13.681
+Even in the best case, every guitar onset
+
+128
+00:04:13.681 --> 00:04:15.638
+hit, kappa can only reach zero point zero
+
+129
+00:04:15.638 --> 00:04:15.860
+four.
+
+130
+00:04:16.127 --> 00:04:17.283
+Its ceiling has collapsed.
+
+131
+00:04:17.550 --> 00:04:19.551
+NOC divides by that ceiling: kappa over
+
+132
+00:04:19.551 --> 00:04:21.508
+its best possible value above chance, and
+
+133
+00:04:21.508 --> 00:04:22.442
+over its worst below.
+
+134
+00:04:22.709 --> 00:04:23.909
+The trade can't be avoided.
+
+135
+00:04:24.176 --> 00:04:25.999
+Kappa keeps zero at chance and loses its
+
+136
+00:04:25.999 --> 00:04:26.222
+ends.
+
+137
+00:04:26.489 --> 00:04:28.312
+NOC keeps its ends, and loses the zero.
+
+138
+00:04:31.703 --> 00:04:34.042
+If a drummer threw dice, what would NOC
+
+139
+00:04:34.042 --> 00:04:34.932
+read on average?
+
+140
+00:04:35.266 --> 00:04:37.660
+Weight each count's NOC by how likely that
+
+141
+00:04:37.660 --> 00:04:39.219
+count is, and add them up.
+
+142
+00:04:39.732 --> 00:04:42.088
+At four and four that average is minus
+
+143
+00:04:42.088 --> 00:04:44.504
+zero point four eight eight, not zero.
+
+144
+00:04:44.867 --> 00:04:47.222
+Fifty-seven percent of chance outcomes
+
+145
+00:04:47.222 --> 00:04:49.759
+have no coincidence, and NOC maps every
+
+146
+00:04:49.759 --> 00:04:51.270
+one of them to minus one.
+
+147
+00:04:51.798 --> 00:04:53.679
+So the validity experiments subtract the
+
+148
+00:04:53.679 --> 00:04:55.834
+dice line and report the excess, x: NOC
+
+149
+00:04:55.834 --> 00:04:57.119
+minus what dice would score.
+
+150
+00:04:57.394 --> 00:04:59.366
+Two coincidences read plus zero point four
+
+151
+00:04:59.366 --> 00:05:01.247
+three, and the dice line is minus zero
+
+152
+00:05:01.247 --> 00:05:03.311
+point four nine: an excess of plus zero
+
+153
+00:05:03.311 --> 00:05:03.999
+point nine two.
+
+154
+00:05:04.274 --> 00:05:06.063
+At four guitar onsets and sixteen drum
+
+155
+00:05:06.063 --> 00:05:07.668
+hits the dice line is exactly zero.
+
+156
+00:05:07.944 --> 00:05:09.870
+It drifts with density, so raw readings
+
+157
+00:05:09.870 --> 00:05:11.888
+can't be compared across windows, and the
+
+158
+00:05:11.888 --> 00:05:12.393
+excess can.
+
+159
+00:05:13.901 --> 00:05:15.493
+Back to the busy drummer, with
+
+160
+00:05:15.493 --> 00:05:16.361
+twenty-eight hits.
+
+161
+00:05:16.650 --> 00:05:18.917
+Four coincidences read NOC plus one: full
+
+162
+00:05:18.917 --> 00:05:19.206
+marks.
+
+163
+00:05:19.495 --> 00:05:21.473
+But chance alone gives four coincidences
+
+164
+00:05:21.473 --> 00:05:23.498
+fifty-seven percent of the time, so its
+
+165
+00:05:23.498 --> 00:05:25.427
+dice line is plus zero point four eight
+
+166
+00:05:25.427 --> 00:05:25.716
+eight.
+
+167
+00:05:26.006 --> 00:05:27.935
+The excess is only plus zero point five
+
+168
+00:05:27.935 --> 00:05:28.128
+one.
+
+169
+00:05:28.417 --> 00:05:30.491
+A busy drummer gets full raw marks most of
+
+170
+00:05:30.491 --> 00:05:32.516
+the time, and that is why the dice line
+
+171
+00:05:32.516 --> 00:05:32.902
+matters.
+
+172
+00:05:33.303 --> 00:05:34.026
+One caution.
+
+173
+00:05:34.387 --> 00:05:36.735
+The dice line makes the average excess
+
+174
+00:05:36.735 --> 00:05:39.384
+zero, but results are reported as medians.
+
+175
+00:05:39.745 --> 00:05:42.394
+At four and four, a dice drummer's median
+
+176
+00:05:42.394 --> 00:05:44.561
+excess is minus zero point five one.
+
+177
+00:05:44.923 --> 00:05:47.451
+At real song densities the null median is
+
+178
+00:05:47.451 --> 00:05:47.752
+zero.
+
+179
+00:05:51.273 --> 00:05:53.647
+Sena's point: a coincidence on a beat is
+
+180
+00:05:53.647 --> 00:05:55.968
+cheap, because both parts sit on the beats
+
+181
+00:05:55.968 --> 00:05:56.691
+by convention.
+
+182
+00:05:57.000 --> 00:05:58.548
+Off the beat, it's a choice.
+
+183
+00:05:58.858 --> 00:05:59.838
+So split the slots.
+
+184
+00:06:00.147 --> 00:06:02.572
+The strong mask is every fourth slot: the
+
+185
+00:06:02.572 --> 00:06:03.191
+eight beats.
+
+186
+00:06:03.501 --> 00:06:05.513
+The weak mask is the twenty-four slots
+
+187
+00:06:05.513 --> 00:06:06.184
+between them.
+
+188
+00:06:06.623 --> 00:06:08.839
+Inside a mask it's the same statistic,
+
+189
+00:06:08.839 --> 00:06:10.946
+with every count taken inside the mask.
+
+190
+00:06:11.271 --> 00:06:13.648
+N becomes the mask's size, and the chance
+
+191
+00:06:13.648 --> 00:06:16.080
+model is drawn inside it too, so a smaller
+
+192
+00:06:16.080 --> 00:06:18.080
+mask doesn't move the dial by itself.
+
+193
+00:06:18.404 --> 00:06:20.620
+Measured on the ninth of September, on
+
+194
+00:06:20.620 --> 00:06:23.322
+forty Rock songs: on the strong slots, the
+
+195
+00:06:23.322 --> 00:06:25.591
+song's real drums and borrowed drums both
+
+196
+00:06:25.591 --> 00:06:27.591
+read a median excess of exactly zero.
+
+197
+00:06:27.915 --> 00:06:30.509
+Much of that zero is built in: a part that
+
+198
+00:06:30.509 --> 00:06:32.832
+hits every beat has no room to move, and
+
+199
+00:06:32.832 --> 00:06:34.183
+reads zero by definition.
+
+200
+00:06:34.508 --> 00:06:36.669
+The off-beat line is the guitar against
+
+201
+00:06:36.669 --> 00:06:38.885
+all the drums, on the twenty-four weak
+
+202
+00:06:38.885 --> 00:06:39.209
+slots.
+
+203
+00:06:40.650 --> 00:06:42.664
+Here are two of the battery's own test
+
+204
+00:06:42.664 --> 00:06:45.142
+patterns: its guitar riff, and its fixed
+
+205
+00:06:45.142 --> 00:06:45.658
+rock loop.
+
+206
+00:06:45.968 --> 00:06:47.259
+Keep only the weak slots.
+
+207
+00:06:47.569 --> 00:06:49.737
+The riff has ten onsets there, the loop
+
+208
+00:06:49.737 --> 00:06:51.492
+eight, and six of them coincide.
+
+209
+00:06:51.802 --> 00:06:53.816
+Chance would give ten times eight over
+
+210
+00:06:53.816 --> 00:06:55.984
+twenty-four: three point three three.
+
+211
+00:06:56.294 --> 00:06:57.688
+The most possible is eight.
+
+212
+00:06:57.998 --> 00:07:00.115
+So the off-beat line reads two point six
+
+213
+00:07:00.115 --> 00:07:02.593
+seven over four point six seven: plus zero
+
+214
+00:07:02.593 --> 00:07:03.832
+point five seven, raw.
+
+215
+00:07:04.142 --> 00:07:06.156
+Its excess over the dice line would be
+
+216
+00:07:06.156 --> 00:07:07.395
+plus zero point six one.
+
+217
+00:07:07.705 --> 00:07:09.770
+On the strong slots the loop hits every
+
+218
+00:07:09.770 --> 00:07:12.093
+beat, so there's no room to move at all,
+
+219
+00:07:12.093 --> 00:07:13.900
+and the reading is defined as zero.
+
+220
+00:07:15.373 --> 00:07:16.105
+One more rule.
+
+221
+00:07:16.418 --> 00:07:18.508
+A window with no drum hits off the beat
+
+222
+00:07:18.508 --> 00:07:20.232
+gets no reading, not minus one.
+
+223
+00:07:20.545 --> 00:07:22.583
+Playing nothing off the beat is a fact
+
+224
+00:07:22.583 --> 00:07:24.516
+about density, not about listening.
+
+225
+00:07:24.829 --> 00:07:26.867
+If more than half the windows are like
+
+226
+00:07:26.867 --> 00:07:28.800
+that, the part's off-beat score is
+
+227
+00:07:28.800 --> 00:07:29.270
+withheld.
+
+228
+00:07:32.640 --> 00:07:34.300
+Before trusting the off-beat line to rank
+
+229
+00:07:34.300 --> 00:07:36.079
+drummers, the song's own drums were tested
+
+230
+00:07:36.079 --> 00:07:37.542
+against four controls, on the same
+
+231
+00:07:37.542 --> 00:07:37.858
+guitars.
+
+232
+00:07:38.095 --> 00:07:40.032
+First, the song's own drums: the score to
+
+233
+00:07:40.032 --> 00:07:40.230
+beat.
+
+234
+00:07:40.467 --> 00:07:42.364
+A stranger's: another song's real drums,
+
+235
+00:07:42.364 --> 00:07:43.392
+lined up window by window.
+
+236
+00:07:43.629 --> 00:07:45.606
+A fixed loop: kick on one and three, snare
+
+237
+00:07:45.606 --> 00:07:47.266
+on two and four, hats on the eighths,
+
+238
+00:07:47.266 --> 00:07:48.254
+never reading the guitar.
+
+239
+00:07:48.492 --> 00:07:50.270
+And two that destroy the bar alignment:
+
+240
+00:07:50.270 --> 00:07:52.010
+the stranger's drums rotated off the bar,
+
+241
+00:07:52.010 --> 00:07:53.433
+and random hits at the same density.
+
+242
+00:07:53.793 --> 00:07:55.931
+The loop scored plus zero point nine six,
+
+243
+00:07:55.931 --> 00:07:57.875
+above the song's own drums at plus zero
+
+244
+00:07:57.875 --> 00:07:58.701
+point nine three.
+
+245
+00:07:58.993 --> 00:08:01.326
+Song by song, own minus loop: the median
+
+246
+00:08:01.326 --> 00:08:03.513
+difference is zero, with a p value of zero
+
+247
+00:08:03.513 --> 00:08:04.339
+point five seven.
+
+248
+00:08:04.630 --> 00:08:06.526
+No evidence at all that the real drums
+
+249
+00:08:06.526 --> 00:08:07.206
+couple better.
+
+250
+00:08:07.498 --> 00:08:09.393
+Against the stranger the real drums do
+
+251
+00:08:09.393 --> 00:08:11.532
+win, by plus zero point zero seven two,
+
+252
+00:08:11.532 --> 00:08:12.941
+with p of one in ten million.
+
+253
+00:08:13.387 --> 00:08:15.978
+Every NOC line told the same story: the
+
+254
+00:08:15.978 --> 00:08:18.626
+kick, the snare and toms, the hats, all
+
+255
+00:08:18.626 --> 00:08:20.872
+the drums together, and off the beat.
+
+256
+00:08:21.217 --> 00:08:23.693
+On every line the median of own minus loop
+
+257
+00:08:23.693 --> 00:08:24.211
+was zero.
+
+258
+00:08:24.745 --> 00:08:24.963
+Why?
+
+259
+00:08:25.292 --> 00:08:27.315
+A steady beat lines up with a steady
+
+260
+00:08:27.315 --> 00:08:28.354
+guitar by accident.
+
+261
+00:08:28.682 --> 00:08:30.760
+A loop is as conventional as drumming
+
+262
+00:08:30.760 --> 00:08:32.072
+gets, in every window.
+
+263
+00:08:32.400 --> 00:08:34.642
+Real drummers play fills, drop out and
+
+264
+00:08:34.642 --> 00:08:36.666
+vary, and each of those costs them
+
+265
+00:08:36.666 --> 00:08:37.377
+coincidences.
+
+266
+00:08:37.920 --> 00:08:39.095
+Two things survived.
+
+267
+00:08:39.448 --> 00:08:41.798
+Random drums read zero, so the chance
+
+268
+00:08:41.798 --> 00:08:42.973
+correction is sound.
+
+269
+00:08:43.326 --> 00:08:45.676
+And the stranger's plus zero point five
+
+270
+00:08:45.676 --> 00:08:48.497
+eight is real genre convention: rotate the
+
+271
+00:08:48.497 --> 00:08:51.024
+same drums off the bar and it collapses to
+
+272
+00:08:51.024 --> 00:08:51.317
+zero.
+
+273
+00:08:52.508 --> 00:08:54.603
+So NOC was demoted to a floor check.
+
+274
+00:08:54.953 --> 00:08:57.281
+It may claim that a part is bar-aligned
+
+275
+00:08:57.281 --> 00:08:58.910
+and metrically conventional.
+
+276
+00:08:59.260 --> 00:09:01.297
+It may not claim that the model is
+
+277
+00:09:01.297 --> 00:09:01.879
+listening.
+
+278
+00:09:05.387 --> 00:09:07.483
+NOC asks whether the parts coincide.
+
+279
+00:09:07.832 --> 00:09:10.103
+The replacement asks whether the drums
+
+280
+00:09:10.103 --> 00:09:11.966
+change where the guitar changes.
+
+281
+00:09:12.316 --> 00:09:14.878
+A loop never changes, so on that question
+
+282
+00:09:14.878 --> 00:09:16.857
+it scores zero, by construction.
+
+283
+00:09:17.587 --> 00:09:19.982
+Here is its committed run: a hundred and
+
+284
+00:09:19.982 --> 00:09:22.168
+sixty-eight Rock songs, a different set
+
+285
+00:09:22.168 --> 00:09:23.210
+from the NOC figure.
+
+286
+00:09:23.522 --> 00:09:25.292
+Own drums plus zero point two two.
+
+287
+00:09:25.605 --> 00:09:27.635
+The stranger and the shuffled bars sit
+
+288
+00:09:27.635 --> 00:09:29.874
+just under zero, and the loop is exactly
+
+289
+00:09:29.874 --> 00:09:30.135
+zero.
+
+290
+00:09:30.447 --> 00:09:32.634
+Own minus loop is plus zero point two two
+
+291
+00:09:32.634 --> 00:09:34.925
+zero, with p of one point seven times ten
+
+292
+00:09:34.925 --> 00:09:36.174
+to the minus twenty-two.
+
+293
+00:09:36.649 --> 00:09:39.024
+Lessons five point five and five point six
+
+294
+00:09:39.024 --> 00:09:41.675
+build it: finding the guitar's sections,
+
+295
+00:09:41.675 --> 00:09:43.277
+then scoring follow and leak.
+
+296
+00:09:44.864 --> 00:09:47.424
+NOC is a sound, chance-corrected count of
+
+297
+00:09:47.424 --> 00:09:49.869
+coincidences, and a fixed loop fools it.
+
+298
+00:09:50.218 --> 00:09:51.847
+Coinciding is not listening.
+
+299
+00:09:52.196 --> 00:09:54.233
+It pairs with row five of the year
+
+300
+00:09:54.233 --> 00:09:54.815
+explainer.
+

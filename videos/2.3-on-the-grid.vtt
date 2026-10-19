@@ -1,0 +1,1022 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.216
+Lesson two point three.
+
+2
+00:00:01.525 --> 00:00:03.639
+How a MIDI file's notes land on our grid
+
+3
+00:00:03.639 --> 00:00:04.361
+of sixteenths.
+
+4
+00:00:08.290 --> 00:00:09.931
+A MIDI file doesn't store seconds.
+
+5
+00:00:10.220 --> 00:00:12.344
+It counts time in ticks: whole numbers
+
+6
+00:00:12.344 --> 00:00:13.116
+that only go up.
+
+7
+00:00:13.406 --> 00:00:15.336
+Its header says how many ticks make one
+
+8
+00:00:15.336 --> 00:00:15.577
+beat.
+
+9
+00:00:15.867 --> 00:00:17.846
+In the data primer's sample file, four
+
+10
+00:00:17.846 --> 00:00:18.763
+hundred and eighty.
+
+11
+00:00:19.052 --> 00:00:20.838
+So a sixteenth note is a hundred and
+
+12
+00:00:20.838 --> 00:00:22.865
+twenty ticks, and a bar of four four is
+
+13
+00:00:22.865 --> 00:00:24.650
+one thousand nine hundred and twenty.
+
+14
+00:00:25.079 --> 00:00:27.264
+Each message is stored with its gap since
+
+15
+00:00:27.264 --> 00:00:28.772
+the one before: a delta.
+
+16
+00:00:29.084 --> 00:00:31.425
+Add the deltas up, and every note gets its
+
+17
+00:00:31.425 --> 00:00:33.921
+tick: nought, four hundred and eighty,
+
+18
+00:00:33.921 --> 00:00:35.117
+nine hundred and sixty.
+
+19
+00:00:36.899 --> 00:00:39.397
+A tick gets a length from a tempo event:
+
+20
+00:00:39.397 --> 00:00:41.677
+the number of microseconds one beat lasts.
+
+21
+00:00:42.003 --> 00:00:44.230
+So divide a note's tick by the ticks per
+
+22
+00:00:44.230 --> 00:00:46.727
+beat, to count beats, and multiply by the
+
+23
+00:00:46.727 --> 00:00:49.280
+microseconds per beat over a million: the
+
+24
+00:00:49.280 --> 00:00:50.203
+seconds per beat.
+
+25
+00:00:50.629 --> 00:00:52.567
+The sample file's tempo event says four
+
+26
+00:00:52.567 --> 00:00:54.603
+hundred and twenty-eight thousand, five
+
+27
+00:00:54.603 --> 00:00:56.784
+hundred and seventy-one microseconds: a
+
+28
+00:00:56.784 --> 00:00:58.481
+hundred and forty beats per minute.
+
+29
+00:00:58.772 --> 00:01:00.710
+So tick five thousand seven hundred and
+
+30
+00:01:00.710 --> 00:01:02.891
+sixty is twelve beats in, and twelve times
+
+31
+00:01:02.891 --> 00:01:04.733
+zero point four two eight six is five
+
+32
+00:01:04.733 --> 00:01:05.848
+point one four seconds.
+
+33
+00:01:06.139 --> 00:01:08.126
+At this tempo, one tick is less than a
+
+34
+00:01:08.126 --> 00:01:08.708
+millisecond.
+
+35
+00:01:12.167 --> 00:01:14.573
+When a tempo event changes the tempo, the
+
+36
+00:01:14.573 --> 00:01:16.596
+conversion changes from that tick on.
+
+37
+00:01:16.924 --> 00:01:19.221
+The list of tempo events is the tempo map.
+
+38
+00:01:19.549 --> 00:01:22.065
+Seconds are worked out piece by piece: a
+
+39
+00:01:22.065 --> 00:01:24.307
+straight line between changes, steeper
+
+40
+00:01:24.307 --> 00:01:25.729
+where the music is slower.
+
+41
+00:01:26.437 --> 00:01:28.563
+The sample file plays at a hundred and
+
+42
+00:01:28.563 --> 00:01:30.852
+forty, then drops to thirty-eight beats
+
+43
+00:01:30.852 --> 00:01:33.251
+per minute for its last six seconds: a
+
+44
+00:01:33.251 --> 00:01:34.886
+sequenced ending slowing down.
+
+45
+00:01:35.213 --> 00:01:37.448
+Our store converts every note to seconds
+
+46
+00:01:37.448 --> 00:01:39.410
+once, through each file's own map.
+
+47
+00:01:42.943 --> 00:01:45.186
+Bars aren't stored in a MIDI file either.
+
+48
+00:01:45.514 --> 00:01:48.084
+They're implied by time-signature events:
+
+49
+00:01:48.084 --> 00:01:50.545
+four four, then two four, then four four
+
+50
+00:01:50.545 --> 00:01:50.873
+again.
+
+51
+00:01:51.202 --> 00:01:53.389
+Here's a song with one short bar of two
+
+52
+00:01:53.389 --> 00:01:53.663
+four.
+
+53
+00:01:53.991 --> 00:01:56.233
+A crash marks the first beat of each bar
+
+54
+00:01:56.233 --> 00:01:56.725
+after it.
+
+55
+00:01:57.168 --> 00:01:59.565
+Count bars of four four from tick zero,
+
+56
+00:01:59.565 --> 00:02:01.963
+and every bar after the short one is half
+
+57
+00:02:01.963 --> 00:02:04.646
+a bar out: each crash lands on beat three.
+
+58
+00:02:05.135 --> 00:02:07.284
+So since the ninth of September, bars
+
+59
+00:02:07.284 --> 00:02:09.540
+restart wherever the signature changes,
+
+60
+00:02:09.540 --> 00:02:10.882
+each with its own length.
+
+61
+00:02:11.205 --> 00:02:12.977
+The crashes are back on beat one.
+
+62
+00:02:13.299 --> 00:02:15.501
+A window only ever covers two whole bars
+
+63
+00:02:15.501 --> 00:02:16.683
+of four four in a row.
+
+64
+00:02:17.005 --> 00:02:19.422
+So the short bar carries none, and neither
+
+65
+00:02:19.422 --> 00:02:21.463
+does the lone four four bar before it.
+
+66
+00:02:23.723 --> 00:02:25.778
+A lead-in is the same problem at the
+
+67
+00:02:25.778 --> 00:02:26.111
+start.
+
+68
+00:02:26.445 --> 00:02:28.722
+When a file's first time signature comes
+
+69
+00:02:28.722 --> 00:02:31.332
+after tick zero, bars start there, and the
+
+70
+00:02:31.332 --> 00:02:33.220
+part before it carries no windows.
+
+71
+00:02:33.878 --> 00:02:36.150
+In Lakh, four thousand three hundred and
+
+72
+00:02:36.150 --> 00:02:38.474
+fifty-six songs, eight percent, have at
+
+73
+00:02:38.474 --> 00:02:40.323
+least one bar that isn't four four.
+
+74
+00:02:40.640 --> 00:02:42.753
+And about three percent put their first
+
+75
+00:02:42.753 --> 00:02:44.391
+time signature after tick zero.
+
+76
+00:02:47.877 --> 00:02:49.881
+Fifty-two thousand songs can't be checked
+
+77
+00:02:49.881 --> 00:02:51.743
+by ear, so the fix was tested with a
+
+78
+00:02:51.743 --> 00:02:52.029
+probe.
+
+79
+00:02:52.315 --> 00:02:53.843
+Crashes mark the start of a bar.
+
+80
+00:02:54.129 --> 00:02:56.086
+So of the crash hits on beat one or beat
+
+81
+00:02:56.086 --> 00:02:57.756
+three, what share is on beat one?
+
+82
+00:02:58.043 --> 00:03:00.095
+c one counts the crashes on beat one:
+
+83
+00:03:00.095 --> 00:03:01.861
+slots nought and sixteen of a window.
+
+84
+00:03:02.147 --> 00:03:04.390
+c three counts those on beat three: slots
+
+85
+00:03:04.390 --> 00:03:05.440
+eight and twenty-four.
+
+86
+00:03:05.893 --> 00:03:08.297
+A song with eight crashes on beat one and
+
+87
+00:03:08.297 --> 00:03:11.044
+two on beat three scores eight out of ten:
+
+88
+00:03:11.044 --> 00:03:11.902
+eighty percent.
+
+89
+00:03:12.246 --> 00:03:14.707
+Only songs with at least four such crashes
+
+90
+00:03:14.707 --> 00:03:15.050
+count.
+
+91
+00:03:15.601 --> 00:03:17.816
+On the three thousand seven hundred and
+
+92
+00:03:17.816 --> 00:03:19.755
+fifteen affected songs with enough
+
+93
+00:03:19.755 --> 00:03:22.191
+crashes, the share was fifty-nine percent
+
+94
+00:03:22.191 --> 00:03:24.406
+with bars counted from tick zero, and
+
+95
+00:03:24.406 --> 00:03:26.788
+eighty-three point seven percent after the
+
+96
+00:03:26.788 --> 00:03:27.009
+fix.
+
+97
+00:03:27.451 --> 00:03:29.831
+Song by song: two thousand three hundred
+
+98
+00:03:29.831 --> 00:03:32.159
+and thirty-four improved, one thousand and
+
+99
+00:03:32.159 --> 00:03:34.435
+ninety-one didn't change, and two hundred
+
+100
+00:03:34.435 --> 00:03:35.521
+and ninety got worse.
+
+101
+00:03:37.032 --> 00:03:38.901
+The first version of the rule restarted
+
+102
+00:03:38.901 --> 00:03:40.536
+bars at every time-signature event.
+
+103
+00:03:40.816 --> 00:03:42.825
+But files often restate the same signature
+
+104
+00:03:42.825 --> 00:03:43.432
+at odd ticks.
+
+105
+00:03:43.712 --> 00:03:45.534
+Here four four is restated at tick one
+
+106
+00:03:45.534 --> 00:03:47.216
+thousand, part-way through a beat.
+
+107
+00:03:47.496 --> 00:03:49.832
+Restart there, and the bar line moves: the
+
+108
+00:03:49.832 --> 00:03:51.701
+crash at tick one thousand nine hundred
+
+109
+00:03:51.701 --> 00:03:53.569
+and twenty is now seven point six seven
+
+110
+00:03:53.569 --> 00:03:54.223
+sixteenths in.
+
+111
+00:03:54.504 --> 00:03:55.812
+Slot eight: beat three.
+
+112
+00:03:56.232 --> 00:03:58.303
+That first version made one thousand and
+
+113
+00:03:58.303 --> 00:04:00.274
+ninety-six songs worse, on the first
+
+114
+00:04:00.274 --> 00:04:01.789
+probe, which used the snare.
+
+115
+00:04:02.092 --> 00:04:04.113
+After two fixes, restarting bars only
+
+116
+00:04:04.113 --> 00:04:06.286
+where the signature changes, and probing
+
+117
+00:04:06.286 --> 00:04:08.357
+with the crash, two hundred and ninety
+
+118
+00:04:08.357 --> 00:04:08.913
+were worse.
+
+119
+00:04:09.216 --> 00:04:11.186
+A rule that was right in principle was
+
+120
+00:04:11.186 --> 00:04:13.409
+wrong on this data, until it was measured.
+
+121
+00:04:17.117 --> 00:04:19.248
+Lesson one point two placed a note by
+
+122
+00:04:19.248 --> 00:04:21.042
+rounding it to the nearest slot.
+
+123
+00:04:21.379 --> 00:04:23.734
+Here's the whole of Equation five, with
+
+124
+00:04:23.734 --> 00:04:24.688
+the part we keep.
+
+125
+00:04:25.024 --> 00:04:27.212
+Delta sixteen is one sixteenth at this
+
+126
+00:04:27.212 --> 00:04:29.904
+tempo: sixty over four times the beats per
+
+127
+00:04:29.904 --> 00:04:30.296
+minute.
+
+128
+00:04:30.633 --> 00:04:32.988
+At a hundred and twenty, an eighth of a
+
+129
+00:04:32.988 --> 00:04:33.381
+second.
+
+130
+00:04:33.717 --> 00:04:35.961
+x is how many sixteenths the onset sits
+
+131
+00:04:35.961 --> 00:04:38.148
+after its bar line: a real number.
+
+132
+00:04:38.484 --> 00:04:40.615
+s rounds it to the nearest whole slot.
+
+133
+00:04:40.952 --> 00:04:43.644
+And O is what rounding threw away: x minus
+
+134
+00:04:43.644 --> 00:04:46.168
+s, somewhere between minus a half and plus
+
+135
+00:04:46.168 --> 00:04:46.560
+a half.
+
+136
+00:04:47.045 --> 00:04:49.396
+Take a snare zero point three one seconds
+
+137
+00:04:49.396 --> 00:04:50.460
+after the bar line.
+
+138
+00:04:50.796 --> 00:04:53.146
+x is zero point three one over zero point
+
+139
+00:04:53.146 --> 00:04:55.385
+one two five: two point four eight.
+
+140
+00:04:55.721 --> 00:04:58.016
+That rounds to slot two, and O is plus
+
+141
+00:04:58.016 --> 00:05:00.591
+zero point four eight: the hit is nearly
+
+142
+00:05:00.591 --> 00:05:02.830
+half a slot late, and the store keeps
+
+143
+00:05:02.830 --> 00:05:03.109
+that.
+
+144
+00:05:05.579 --> 00:05:07.752
+In the code, the slot lines are laid out
+
+145
+00:05:07.752 --> 00:05:10.178
+in ticks first: a quarter of the ticks per
+
+146
+00:05:10.178 --> 00:05:12.250
+beat apart, from the start of a run of
+
+147
+00:05:12.250 --> 00:05:13.008
+four four bars.
+
+148
+00:05:13.312 --> 00:05:15.232
+Then each line is turned into seconds
+
+149
+00:05:15.232 --> 00:05:16.344
+through the tempo map.
+
+150
+00:05:16.647 --> 00:05:18.972
+So Delta sixteen is the local sixteenth:
+
+151
+00:05:18.972 --> 00:05:21.247
+when the tempo changes, the slots after it
+
+152
+00:05:21.247 --> 00:05:22.055
+stretch with it.
+
+153
+00:05:22.475 --> 00:05:24.791
+Each onset's position is read between its
+
+154
+00:05:24.791 --> 00:05:26.886
+two neighbouring lines: that's x.
+
+155
+00:05:27.217 --> 00:05:29.422
+Floor of x plus a half rounds it to the
+
+156
+00:05:29.422 --> 00:05:30.139
+nearest slot.
+
+157
+00:05:30.470 --> 00:05:32.731
+And x minus the slot, the offset, is
+
+158
+00:05:32.731 --> 00:05:33.944
+handed back beside it.
+
+159
+00:05:37.713 --> 00:05:39.950
+A drummer is never exactly on the line.
+
+160
+00:05:40.294 --> 00:05:42.358
+Push a snare meant for beat two ten
+
+161
+00:05:42.358 --> 00:05:44.881
+milliseconds late: O becomes plus zero
+
+162
+00:05:44.881 --> 00:05:47.233
+point zero eight, and it stays in slot
+
+163
+00:05:47.233 --> 00:05:47.519
+four.
+
+164
+00:05:48.026 --> 00:05:50.118
+Twenty milliseconds: plus zero point one
+
+165
+00:05:50.118 --> 00:05:50.300
+six.
+
+166
+00:05:50.573 --> 00:05:52.302
+Thirty: plus zero point two four.
+
+167
+00:05:52.575 --> 00:05:53.302
+Still slot four.
+
+168
+00:05:53.575 --> 00:05:55.577
+To change slot, a hit has to miss by more
+
+169
+00:05:55.577 --> 00:05:57.578
+than half a sixteenth: sixty-two and a
+
+170
+00:05:57.578 --> 00:05:59.625
+half milliseconds at a hundred and twenty,
+
+171
+00:05:59.625 --> 00:06:00.625
+less at faster tempos.
+
+172
+00:06:00.898 --> 00:06:02.854
+A typical human looseness of ten to thirty
+
+173
+00:06:02.854 --> 00:06:04.901
+milliseconds, a common estimate we haven't
+
+174
+00:06:04.901 --> 00:06:06.493
+measured, stays inside that edge.
+
+175
+00:06:06.925 --> 00:06:09.343
+In Lakh, the average drum hit misses its
+
+176
+00:06:09.343 --> 00:06:11.592
+line by just one point two percent of a
+
+177
+00:06:11.592 --> 00:06:12.154
+sixteenth.
+
+178
+00:06:12.492 --> 00:06:14.797
+For these files, rounding recovers the
+
+179
+00:06:14.797 --> 00:06:17.271
+slot that was meant, and the offset keeps
+
+180
+00:06:17.271 --> 00:06:17.777
+the rest.
+
+181
+00:06:19.125 --> 00:06:20.547
+What does get there is swing.
+
+182
+00:06:20.842 --> 00:06:23.146
+Straight eighths split each beat in half:
+
+183
+00:06:23.146 --> 00:06:24.029
+slots two and six.
+
+184
+00:06:24.323 --> 00:06:26.285
+Swung, the second eighth of each beat
+
+185
+00:06:26.285 --> 00:06:28.246
+comes two thirds of the way through the
+
+186
+00:06:28.246 --> 00:06:28.491
+beat.
+
+187
+00:06:29.173 --> 00:06:31.311
+In sixteenths that's two point six seven.
+
+188
+00:06:31.624 --> 00:06:33.761
+Past sixty-two and a half percent of the
+
+189
+00:06:33.761 --> 00:06:36.211
+beat, rounding goes the other way: slot
+
+190
+00:06:36.211 --> 00:06:37.775
+three, with O minus a third.
+
+191
+00:06:38.088 --> 00:06:40.382
+And the same on every beat: slot seven.
+
+192
+00:06:40.695 --> 00:06:42.676
+So the grid hears a swung eighth as a
+
+193
+00:06:42.676 --> 00:06:44.501
+syncopated sixteenth, every time.
+
+194
+00:06:44.970 --> 00:06:47.484
+About one song in ten: nine point nine
+
+195
+00:06:47.484 --> 00:06:49.769
+percent of Lakh songs have their median
+
+196
+00:06:49.769 --> 00:06:52.282
+drum onset on a triplet grid, where swing
+
+197
+00:06:52.282 --> 00:06:52.625
+lives.
+
+198
+00:06:52.968 --> 00:06:55.253
+For those songs the sixteenth grid is a
+
+199
+00:06:55.253 --> 00:06:56.852
+limit of the representation.
+
+200
+00:06:57.195 --> 00:06:59.137
+A swing-aware grid is future work.
+
+201
+00:07:02.620 --> 00:07:05.154
+Each two-bar window becomes four arrays:
+
+202
+00:07:05.154 --> 00:07:05.925
+Equation four.
+
+203
+00:07:06.256 --> 00:07:08.680
+H is thirty-two slots by nine drums, with
+
+204
+00:07:08.680 --> 00:07:10.167
+a one wherever a drum hits.
+
+205
+00:07:10.498 --> 00:07:13.142
+Here, the year explainer's example: kick
+
+206
+00:07:13.142 --> 00:07:15.511
+on beats one and three, snare on two and
+
+207
+00:07:15.511 --> 00:07:17.439
+four, closed hat on every eighth.
+
+208
+00:07:17.936 --> 00:07:20.622
+V has the same shape: each hit's velocity,
+
+209
+00:07:20.622 --> 00:07:22.342
+over a hundred and twenty-seven.
+
+210
+00:07:22.664 --> 00:07:23.524
+Paler is softer.
+
+211
+00:07:23.963 --> 00:07:26.602
+O has it again: each hit's offset from its
+
+212
+00:07:26.602 --> 00:07:28.910
+slot line, as a fraction of a sixteenth.
+
+213
+00:07:29.240 --> 00:07:31.494
+The marks sit early or late inside their
+
+214
+00:07:31.494 --> 00:07:31.824
+cells.
+
+215
+00:07:32.302 --> 00:07:34.800
+And g is thirty-two numbers: the slots
+
+216
+00:07:34.800 --> 00:07:36.559
+where the guitar's onsets fall.
+
+217
+00:07:36.900 --> 00:07:39.284
+The store keeps the guitar's velocity per
+
+218
+00:07:39.284 --> 00:07:41.441
+slot beside it, but not its offsets.
+
+219
+00:07:41.873 --> 00:07:44.285
+Two hits of one drum in one slot keep the
+
+220
+00:07:44.285 --> 00:07:44.744
+loudest.
+
+221
+00:07:45.089 --> 00:07:47.328
+A drum note outside the nine voices is
+
+222
+00:07:47.328 --> 00:07:48.649
+dropped, and counted.
+
+223
+00:07:49.177 --> 00:07:51.623
+The drum model learns to predict H, from
+
+224
+00:07:51.623 --> 00:07:52.249
+the guitar.
+
+225
+00:07:52.590 --> 00:07:54.980
+V and O are kept for the battery, where
+
+226
+00:07:54.980 --> 00:07:57.256
+feel is judged against real drummers in
+
+227
+00:07:57.256 --> 00:07:58.906
+Groove, never against Lakh.
+
+228
+00:07:59.247 --> 00:08:01.694
+Lesson two point eight turns these windows
+
+229
+00:08:01.694 --> 00:08:02.945
+into training batches.
+
+230
+00:08:06.563 --> 00:08:08.070
+Everything so far is shared.
+
+231
+00:08:08.392 --> 00:08:10.598
+XMIDI's songs go through the same parser
+
+232
+00:08:10.598 --> 00:08:11.835
+and the same grid code.
+
+233
+00:08:12.158 --> 00:08:13.556
+What differs is the files.
+
+234
+00:08:13.879 --> 00:08:15.923
+Every XMIDI file has four hundred and
+
+235
+00:08:15.923 --> 00:08:18.559
+eighty ticks per beat, one tempo event: a
+
+236
+00:08:18.559 --> 00:08:20.765
+hundred and nineteen beats per minute in
+
+237
+00:08:20.765 --> 00:08:22.863
+ninety percent of songs, so the real
+
+238
+00:08:22.863 --> 00:08:23.723
+tempos are lost.
+
+239
+00:08:24.046 --> 00:08:25.552
+That's lesson two point six.
+
+240
+00:08:25.875 --> 00:08:28.403
+And one time signature, four four, at tick
+
+241
+00:08:28.403 --> 00:08:28.672
+zero.
+
+242
+00:08:28.995 --> 00:08:31.631
+No lead-ins, no changes: the re-anchoring
+
+243
+00:08:31.631 --> 00:08:32.599
+has nothing to do.
+
+244
+00:08:32.922 --> 00:08:35.504
+Its drums also sit closer to the lines: in
+
+245
+00:08:35.504 --> 00:08:37.710
+a sample of a thousand files, a median
+
+246
+00:08:37.710 --> 00:08:39.754
+miss of zero point zero zero two of a
+
+247
+00:08:39.754 --> 00:08:41.959
+sixteenth, against zero point zero one
+
+248
+00:08:41.959 --> 00:08:43.681
+three for a thousand Lakh songs.
+
+249
+00:08:45.434 --> 00:08:47.871
+One grid for both corpora: ticks become
+
+250
+00:08:47.871 --> 00:08:50.199
+seconds through the tempo map, bars come
+
+251
+00:08:50.199 --> 00:08:52.527
+from the time signatures, and each onset
+
+252
+00:08:52.527 --> 00:08:54.909
+is rounded to the nearest sixteenth, with
+
+253
+00:08:54.909 --> 00:08:56.101
+what's left over kept.
+
+254
+00:08:56.426 --> 00:08:59.025
+Next: how Lakh is split by song, and the
+
+255
+00:08:59.025 --> 00:08:59.999
+leak that remains.
+

@@ -1,0 +1,1078 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.211
+Lesson three point one.
+
+2
+00:00:01.517 --> 00:00:03.655
+What a model actually is: numbers,
+
+3
+00:00:03.655 --> 00:00:04.724
+multiplied and added.
+
+4
+00:00:08.693 --> 00:00:11.203
+From lesson one point two: at each slot
+
+5
+00:00:11.203 --> 00:00:13.602
+the model is handed five numbers, and it
+
+6
+00:00:13.602 --> 00:00:14.606
+answers with nine.
+
+7
+00:00:14.940 --> 00:00:17.227
+Inside, the smallest working part is a
+
+8
+00:00:17.227 --> 00:00:19.849
+neuron: some numbers in, one number out.
+
+9
+00:00:20.417 --> 00:00:22.356
+Here are three inputs, made up for
+
+10
+00:00:22.356 --> 00:00:24.716
+illustration, with names borrowed from our
+
+11
+00:00:24.716 --> 00:00:27.284
+five: a pluck, how loud it was, and how
+
+12
+00:00:27.284 --> 00:00:28.962
+busy the guitar has been lately.
+
+13
+00:00:29.431 --> 00:00:31.626
+Each input travels along its own line, and
+
+14
+00:00:31.626 --> 00:00:33.675
+each line carries a weight: a number
+
+15
+00:00:33.675 --> 00:00:35.870
+saying how much that input matters, and in
+
+16
+00:00:35.870 --> 00:00:36.650
+which direction.
+
+17
+00:00:36.943 --> 00:00:38.797
+A weight of two makes the pluck count
+
+18
+00:00:38.797 --> 00:00:39.138
+double.
+
+19
+00:00:39.431 --> 00:00:41.431
+A half makes the loudness count for half.
+
+20
+00:00:41.723 --> 00:00:43.723
+Minus one means a busy guitar pushes the
+
+21
+00:00:43.723 --> 00:00:44.309
+answer down.
+
+22
+00:00:44.601 --> 00:00:46.845
+A weight of zero would mean: ignore this
+
+23
+00:00:46.845 --> 00:00:47.138
+input.
+
+24
+00:00:47.584 --> 00:00:49.740
+The neuron multiplies each input by its
+
+25
+00:00:49.740 --> 00:00:51.465
+weight, and adds the three up.
+
+26
+00:00:51.788 --> 00:00:54.160
+Then it adds one more number, the bias,
+
+27
+00:00:54.160 --> 00:00:56.262
+which is there whatever the inputs are.
+
+28
+00:00:56.586 --> 00:00:58.796
+It sets where the neuron sits when every
+
+29
+00:00:58.796 --> 00:00:59.551
+input is zero.
+
+30
+00:01:00.225 --> 00:01:02.643
+Read it left to right: weight one times
+
+31
+00:01:02.643 --> 00:01:04.955
+input one, weight two times input two,
+
+32
+00:01:04.955 --> 00:01:07.266
+weight three times input three, plus the
+
+33
+00:01:07.266 --> 00:01:07.803
+bias, b.
+
+34
+00:01:08.126 --> 00:01:09.362
+The answer is called z.
+
+35
+00:01:09.909 --> 00:01:10.757
+Now the numbers.
+
+36
+00:01:11.074 --> 00:01:12.187
+Two times one is two.
+
+37
+00:01:12.505 --> 00:01:14.731
+A half times nought point eight is nought
+
+38
+00:01:14.731 --> 00:01:15.314
+point four.
+
+39
+00:01:15.632 --> 00:01:17.910
+Minus one times nought point four is minus
+
+40
+00:01:17.910 --> 00:01:18.864
+nought point four.
+
+41
+00:01:19.182 --> 00:01:20.719
+And the bias is minus a half.
+
+42
+00:01:21.037 --> 00:01:23.051
+Add them up: z is one and a half.
+
+43
+00:01:23.521 --> 00:01:24.282
+Why this shape?
+
+44
+00:01:24.587 --> 00:01:26.669
+A weighted sum lets every input count by
+
+45
+00:01:26.669 --> 00:01:28.498
+its own amount, with its own sign.
+
+46
+00:01:28.802 --> 00:01:30.935
+And it is smooth: nudge one weight a
+
+47
+00:01:30.935 --> 00:01:33.322
+little, say from two to two point one, and
+
+48
+00:01:33.322 --> 00:01:35.506
+z moves a little, from one and a half to
+
+49
+00:01:35.506 --> 00:01:36.217
+one point six.
+
+50
+00:01:36.521 --> 00:01:38.502
+Lesson three point three needs exactly
+
+51
+00:01:38.502 --> 00:01:38.756
+that.
+
+52
+00:01:39.181 --> 00:01:41.263
+The weights and the bias are this neuron's
+
+53
+00:01:41.263 --> 00:01:43.298
+parameters: the numbers it can learn.
+
+54
+00:01:43.588 --> 00:01:44.460
+This one has four.
+
+55
+00:01:47.870 --> 00:01:49.778
+Put a second neuron beside the first.
+
+56
+00:01:50.087 --> 00:01:52.305
+It reads the same three inputs, with its
+
+57
+00:01:52.305 --> 00:01:54.471
+own weights and its own bias, and gives
+
+58
+00:01:54.471 --> 00:01:56.431
+its own answer: nought point six.
+
+59
+00:01:56.871 --> 00:01:59.503
+Written for both neurons at once, this is
+
+60
+00:01:59.503 --> 00:02:00.699
+y equals W x plus b.
+
+61
+00:02:01.058 --> 00:02:04.049
+W is a matrix, a grid of numbers: each row
+
+62
+00:02:04.049 --> 00:02:05.664
+holds one neuron's weights.
+
+63
+00:02:06.023 --> 00:02:08.475
+x is the column of inputs, b holds one
+
+64
+00:02:08.475 --> 00:02:10.987
+bias per neuron, and y is the column of
+
+65
+00:02:10.987 --> 00:02:12.542
+answers, one per neuron.
+
+66
+00:02:13.113 --> 00:02:15.820
+Row one across, times the column down: two
+
+67
+00:02:15.820 --> 00:02:18.201
+times one, plus a half times nought point
+
+68
+00:02:18.201 --> 00:02:20.150
+eight, and so on, plus its bias.
+
+69
+00:02:20.474 --> 00:02:22.856
+The same sum as before: one and a half.
+
+70
+00:02:23.181 --> 00:02:24.859
+Row two gives nought point six.
+
+71
+00:02:25.339 --> 00:02:27.584
+This is a linear layer: many neurons
+
+72
+00:02:27.584 --> 00:02:28.867
+reading the same inputs.
+
+73
+00:02:29.187 --> 00:02:31.646
+Its shapes: W has one row per output and
+
+74
+00:02:31.646 --> 00:02:33.624
+one column per input, so out by in.
+
+75
+00:02:33.945 --> 00:02:34.907
+Here two by three.
+
+76
+00:02:35.228 --> 00:02:37.526
+Counting its parameters: out times in
+
+77
+00:02:37.526 --> 00:02:38.969
+weights, plus out biases.
+
+78
+00:02:39.290 --> 00:02:41.268
+Two times three plus two: eight.
+
+79
+00:02:42.804 --> 00:02:43.605
+Now a real one.
+
+80
+00:02:43.925 --> 00:02:46.061
+This is our transformer, building its
+
+81
+00:02:46.061 --> 00:02:46.434
+layers.
+
+82
+00:02:46.755 --> 00:02:48.783
+The dimmed middle lines are boxes for
+
+83
+00:02:48.783 --> 00:02:49.371
+topic four.
+
+84
+00:02:49.691 --> 00:02:52.360
+The last line is its head: n n dot Linear,
+
+85
+00:02:52.360 --> 00:02:54.816
+PyTorch's linear layer, from d model, the
+
+86
+00:02:54.816 --> 00:02:57.165
+width of the core, ninety-six numbers per
+
+87
+00:02:57.165 --> 00:02:59.194
+slot, to n voices, the nine drums.
+
+88
+00:02:59.635 --> 00:03:01.986
+So W is nine by ninety-six, x is the
+
+89
+00:03:01.986 --> 00:03:04.699
+core's ninety-six numbers, and b and y are
+
+90
+00:03:04.699 --> 00:03:05.302
+nine long.
+
+91
+00:03:05.663 --> 00:03:08.256
+Its parameters: nine times ninety-six
+
+92
+00:03:08.256 --> 00:03:10.848
+weights is eight hundred and sixty-four,
+
+93
+00:03:10.848 --> 00:03:13.139
+plus nine biases, eight hundred and
+
+94
+00:03:13.139 --> 00:03:13.983
+seventy-three.
+
+95
+00:03:14.515 --> 00:03:16.671
+The first line is a linear layer too,
+
+96
+00:03:16.671 --> 00:03:19.204
+going the other way: from our five inputs
+
+97
+00:03:19.204 --> 00:03:20.174
+out to ninety-six.
+
+98
+00:03:20.498 --> 00:03:22.330
+That's ninety-six times five plus
+
+99
+00:03:22.330 --> 00:03:24.648
+ninety-six, five hundred and seventy-six
+
+100
+00:03:24.648 --> 00:03:25.241
+parameters.
+
+101
+00:03:25.564 --> 00:03:27.774
+The LSTM's and S4D's heads read a core a
+
+102
+00:03:27.774 --> 00:03:30.199
+hundred and twenty-eight wide, so each has
+
+103
+00:03:30.199 --> 00:03:31.762
+eleven hundred and sixty-one.
+
+104
+00:03:35.243 --> 00:03:37.015
+Why not just stack linear layers?
+
+105
+00:03:37.337 --> 00:03:39.753
+Take our neuron as layer one, and call its
+
+106
+00:03:39.753 --> 00:03:40.236
+answer h.
+
+107
+00:03:40.558 --> 00:03:43.028
+Add a second layer that reads h: three h
+
+108
+00:03:43.028 --> 00:03:43.511
+plus one.
+
+109
+00:03:43.833 --> 00:03:44.531
+Also made up.
+
+110
+00:03:45.091 --> 00:03:46.670
+Put layer one inside layer two.
+
+111
+00:03:46.976 --> 00:03:49.370
+Multiply out: six x one, plus one and a
+
+112
+00:03:49.370 --> 00:03:51.662
+half x two, minus three x three, minus a
+
+113
+00:03:51.662 --> 00:03:51.917
+half.
+
+114
+00:03:52.222 --> 00:03:54.464
+Check with our inputs: through the two
+
+115
+00:03:54.464 --> 00:03:56.705
+layers, h is one and a half and z is five
+
+116
+00:03:56.705 --> 00:03:57.266
+and a half.
+
+117
+00:03:57.571 --> 00:03:59.915
+Straight from the new weights: also five
+
+118
+00:03:59.915 --> 00:04:00.475
+and a half.
+
+119
+00:04:00.920 --> 00:04:02.937
+Two layers, but it's one neuron in
+
+120
+00:04:02.937 --> 00:04:03.428
+disguise.
+
+121
+00:04:03.755 --> 00:04:06.045
+The same is true for whole layers: a
+
+122
+00:04:06.045 --> 00:04:08.116
+matrix times a matrix is just another
+
+123
+00:04:08.116 --> 00:04:08.498
+matrix.
+
+124
+00:04:08.825 --> 00:04:11.224
+However many linear layers you stack, the
+
+125
+00:04:11.224 --> 00:04:13.677
+result is one linear layer: it can only
+
+126
+00:04:13.677 --> 00:04:14.713
+ever weigh and add.
+
+127
+00:04:16.281 --> 00:04:18.819
+The fix is an activation: a fixed bend,
+
+128
+00:04:18.819 --> 00:04:21.141
+applied to each neuron's answer before the
+
+129
+00:04:21.141 --> 00:04:22.221
+next layer reads it.
+
+130
+00:04:22.545 --> 00:04:24.813
+The simplest is ReLU: keep z if it's
+
+131
+00:04:24.813 --> 00:04:26.541
+positive, otherwise give zero.
+
+132
+00:04:26.865 --> 00:04:29.457
+Another is tanh, the hyperbolic tangent:
+
+133
+00:04:29.457 --> 00:04:31.779
+an S-shaped curve that squashes any z into
+
+134
+00:04:31.779 --> 00:04:33.237
+the range minus one to one.
+
+135
+00:04:33.710 --> 00:04:36.108
+Our neuron's one and a half goes through
+
+136
+00:04:36.108 --> 00:04:36.986
+ReLU unchanged.
+
+137
+00:04:37.337 --> 00:04:39.560
+Minus nought point seven comes out as
+
+138
+00:04:39.560 --> 00:04:39.852
+zero.
+
+139
+00:04:40.203 --> 00:04:42.485
+Through tanh, one and a half becomes
+
+140
+00:04:42.485 --> 00:04:44.766
+nought point nine oh five, and minus
+
+141
+00:04:44.766 --> 00:04:47.106
+nought point seven becomes minus nought
+
+142
+00:04:47.106 --> 00:04:48.159
+point six oh four.
+
+143
+00:04:48.675 --> 00:04:50.822
+Now put a ReLU between our two layers.
+
+144
+00:04:51.161 --> 00:04:53.760
+For every h below zero, z is just one, so
+
+145
+00:04:53.760 --> 00:04:56.190
+the two layers no longer multiply out into
+
+146
+00:04:56.190 --> 00:04:56.416
+one.
+
+147
+00:04:56.755 --> 00:04:59.184
+That bend is what lets a network say "only
+
+148
+00:04:59.184 --> 00:05:01.896
+if": only if the guitar is loud, only if
+
+149
+00:05:01.896 --> 00:05:02.518
+it is busy.
+
+150
+00:05:02.857 --> 00:05:04.496
+Stacking now means something.
+
+151
+00:05:06.096 --> 00:05:07.370
+Which does our code use?
+
+152
+00:05:07.688 --> 00:05:10.236
+The S4D and transformer models use GELU: a
+
+153
+00:05:10.236 --> 00:05:10.979
+smoothed ReLU.
+
+154
+00:05:11.297 --> 00:05:13.473
+It is z times the chance that a standard
+
+155
+00:05:13.473 --> 00:05:15.756
+bell-curve number falls below z, so it's
+
+156
+00:05:15.756 --> 00:05:17.826
+near zero for negatives and near z for
+
+157
+00:05:17.826 --> 00:05:18.356
+positives.
+
+158
+00:05:18.675 --> 00:05:20.957
+GELU sits inside every S4D block, and in
+
+159
+00:05:20.957 --> 00:05:22.868
+the transformer's feed-forward part.
+
+160
+00:05:23.186 --> 00:05:25.468
+tanh sits inside the LSTM, which stays a
+
+161
+00:05:25.468 --> 00:05:26.583
+box until topic four.
+
+162
+00:05:26.901 --> 00:05:29.343
+ReLU is in no drum model; semester one's
+
+163
+00:05:29.343 --> 00:05:30.670
+pitch classifier used it.
+
+164
+00:05:30.988 --> 00:05:33.536
+And the head has none: its nine numbers go
+
+165
+00:05:33.536 --> 00:05:33.960
+out raw.
+
+166
+00:05:34.279 --> 00:05:36.826
+Our two test numbers through GELU: one and
+
+167
+00:05:36.826 --> 00:05:39.055
+a half becomes one point four oh, minus
+
+168
+00:05:39.055 --> 00:05:41.178
+nought point seven becomes minus nought
+
+169
+00:05:41.178 --> 00:05:42.028
+point one seven.
+
+170
+00:05:45.473 --> 00:05:47.088
+Now stack layers into a network.
+
+171
+00:05:47.390 --> 00:05:48.550
+Here is our drum model.
+
+172
+00:05:48.853 --> 00:05:51.022
+Each orange box is a stage: the input
+
+173
+00:05:51.022 --> 00:05:53.292
+layer and the head are one layer each, and
+
+174
+00:05:53.292 --> 00:05:54.150
+the core is many.
+
+175
+00:05:54.452 --> 00:05:56.621
+A layer is one transformation that takes a
+
+176
+00:05:56.621 --> 00:05:58.337
+list of numbers and gives another.
+
+177
+00:05:58.639 --> 00:06:00.405
+The five inputs for a slot come in.
+
+178
+00:06:00.707 --> 00:06:02.776
+An input layer widens them to the core's
+
+179
+00:06:02.776 --> 00:06:05.348
+width, d: ninety-six for the transformer,
+
+180
+00:06:05.348 --> 00:06:07.114
+a hundred and twenty-eight for S4D.
+
+181
+00:06:07.416 --> 00:06:09.081
+The LSTM reads the five directly.
+
+182
+00:06:09.384 --> 00:06:11.351
+Then the core: the LSTM, S4D or
+
+183
+00:06:11.351 --> 00:06:13.268
+transformer, a box until topic four.
+
+184
+00:06:13.571 --> 00:06:15.689
+Then the head, the linear layer we just
+
+185
+00:06:15.689 --> 00:06:17.707
+counted, with a norm before it in the
+
+186
+00:06:17.707 --> 00:06:20.078
+transformer, also topic four, and out come
+
+187
+00:06:20.078 --> 00:06:21.541
+nine numbers, one per drum.
+
+188
+00:06:22.060 --> 00:06:24.521
+Running the inputs through every layer in
+
+189
+00:06:24.521 --> 00:06:27.217
+order, to the output, is the forward pass.
+
+190
+00:06:27.569 --> 00:06:29.327
+Live, it runs once per slot.
+
+191
+00:06:29.679 --> 00:06:32.609
+In training, a whole chunk at once: x of B
+
+192
+00:06:32.609 --> 00:06:35.246
+songs by C slots by five goes in, and B by
+
+193
+00:06:35.246 --> 00:06:36.418
+C by nine comes out.
+
+194
+00:06:38.002 --> 00:06:38.745
+What comes out?
+
+195
+00:06:39.042 --> 00:06:41.122
+Here is the real transformer drummer, T
+
+196
+00:06:41.122 --> 00:06:43.251
+one twenty-eight, at its epoch eleven,
+
+197
+00:06:43.251 --> 00:06:45.578
+handed a made-up guitar: a pluck on every
+
+198
+00:06:45.578 --> 00:06:47.509
+beat at a hundred and twenty beats per
+
+199
+00:06:47.509 --> 00:06:47.856
+minute.
+
+200
+00:06:48.153 --> 00:06:49.886
+These are its nine numbers at slot
+
+201
+00:06:49.886 --> 00:06:50.975
+sixteen, a downbeat.
+
+202
+00:06:51.273 --> 00:06:53.451
+Each is called a logit: the raw output
+
+203
+00:06:53.451 --> 00:06:55.135
+number, any size, either sign.
+
+204
+00:06:55.599 --> 00:06:58.004
+Bigger means leaning towards a hit: the
+
+205
+00:06:58.004 --> 00:07:00.088
+kick, at one point two seven, on a
+
+206
+00:07:00.088 --> 00:07:00.569
+downbeat.
+
+207
+00:07:00.889 --> 00:07:02.973
+The high tom, at minus six point one
+
+208
+00:07:02.973 --> 00:07:04.736
+eight, is leaning hard against.
+
+209
+00:07:05.057 --> 00:07:07.248
+How a logit becomes a probability is the
+
+210
+00:07:07.248 --> 00:07:07.889
+next lesson.
+
+211
+00:07:11.330 --> 00:07:12.379
+What does learning change?
+
+212
+00:07:12.621 --> 00:07:14.638
+Not the code: the shapes, the order of the
+
+213
+00:07:14.638 --> 00:07:16.333
+layers and the activations are fixed when
+
+214
+00:07:16.333 --> 00:07:17.099
+the model is built.
+
+215
+00:07:17.341 --> 00:07:19.157
+Only the numbers: every weight, every
+
+216
+00:07:19.157 --> 00:07:20.731
+bias, and every other learned number
+
+217
+00:07:20.731 --> 00:07:21.376
+inside the core.
+
+218
+00:07:21.618 --> 00:07:23.393
+In our trainer, the optimiser, the part
+
+219
+00:07:23.393 --> 00:07:25.047
+that changes them, is handed model dot
+
+220
+00:07:25.047 --> 00:07:26.298
+parameters, and nothing else.
+
+221
+00:07:26.540 --> 00:07:28.315
+By default that's this second line, plain
+
+222
+00:07:28.315 --> 00:07:29.768
+Adam: lesson three point three.
+
+223
+00:07:31.246 --> 00:07:32.150
+So how many numbers?
+
+224
+00:07:32.422 --> 00:07:34.366
+Counted with our own code: each model
+
+225
+00:07:34.366 --> 00:07:36.355
+built on the CPU from its run's settings,
+
+226
+00:07:36.355 --> 00:07:38.074
+adding up the size of every parameter.
+
+227
+00:07:38.345 --> 00:07:40.334
+The LSTM, a hundred and twenty-eight wide
+
+228
+00:07:40.334 --> 00:07:42.143
+in two layers: two hundred and two
+
+229
+00:07:42.143 --> 00:07:44.133
+thousand, three hundred and seventy-seven.
+
+230
+00:07:44.404 --> 00:07:46.303
+S4D, a hundred and twenty-eight wide in
+
+231
+00:07:46.303 --> 00:07:48.564
+four blocks: two hundred and one thousand,
+
+232
+00:07:48.564 --> 00:07:49.513
+six hundred and nine.
+
+233
+00:07:49.785 --> 00:07:51.684
+The transformer, ninety-six wide in two
+
+234
+00:07:51.684 --> 00:07:53.492
+blocks: two hundred and twenty-six
+
+235
+00:07:53.492 --> 00:07:55.391
+thousand, eight hundred and fifty-seven.
+
+236
+00:07:55.663 --> 00:07:57.562
+The Rock, Jazz and Country drummers are
+
+237
+00:07:57.562 --> 00:07:59.416
+the same model, trained on other songs.
+
+238
+00:07:59.687 --> 00:08:01.315
+The feedback version reads fourteen
+
+239
+00:08:01.315 --> 00:08:03.530
+inputs, so its input layer is bigger: two
+
+240
+00:08:03.530 --> 00:08:05.475
+hundred and twenty-seven thousand, seven
+
+241
+00:08:05.475 --> 00:08:06.515
+hundred and twenty-one.
+
+242
+00:08:06.888 --> 00:08:09.172
+The LSTM and S4D were matched: they are
+
+243
+00:08:09.172 --> 00:08:11.202
+within seven hundred and sixty-eight of
+
+244
+00:08:11.202 --> 00:08:11.760
+each other.
+
+245
+00:08:12.065 --> 00:08:14.095
+The transformer is about twelve percent
+
+246
+00:08:14.095 --> 00:08:16.480
+bigger; say so whenever they are compared.
+
+247
+00:08:16.785 --> 00:08:18.815
+And the head we counted is under nought
+
+248
+00:08:18.815 --> 00:08:20.439
+point six percent of each model.
+
+249
+00:08:20.743 --> 00:08:22.773
+Nearly all the numbers live in the core.
+
+250
+00:08:24.359 --> 00:08:26.561
+For T one twenty-eight, that's two hundred
+
+251
+00:08:26.561 --> 00:08:28.763
+and twenty-six thousand, eight hundred and
+
+252
+00:08:28.763 --> 00:08:29.741
+fifty-seven numbers.
+
+253
+00:08:30.035 --> 00:08:32.188
+Learning means nudging every one of them,
+
+254
+00:08:32.188 --> 00:08:34.389
+a little at a time, to make a score called
+
+255
+00:08:34.389 --> 00:08:35.221
+the loss smaller.
+
+256
+00:08:35.515 --> 00:08:37.423
+What the loss is comes in lesson three
+
+257
+00:08:37.423 --> 00:08:39.722
+point two; how to nudge, in three point
+
+258
+00:08:39.722 --> 00:08:40.016
+three.
+
+259
+00:08:41.767 --> 00:08:44.144
+A neuron weighs its inputs, adds them, and
+
+260
+00:08:44.144 --> 00:08:44.751
+adds a bias.
+
+261
+00:08:45.054 --> 00:08:47.330
+A linear layer is many neurons, y equals W
+
+262
+00:08:47.330 --> 00:08:47.785
+x plus b.
+
+263
+00:08:48.088 --> 00:08:50.010
+Between layers goes a bend, or they
+
+264
+00:08:50.010 --> 00:08:50.920
+collapse into one.
+
+265
+00:08:51.224 --> 00:08:53.145
+And learning changes only the numbers.
+
+266
+00:08:53.449 --> 00:08:55.471
+This pairs with the reading tour in the
+
+267
+00:08:55.471 --> 00:08:57.747
+course explainer, the rows for model dot p
+
+268
+00:08:57.747 --> 00:08:59.062
+y and transformer dot p y.
+
+269
+00:08:59.365 --> 00:09:01.034
+Next: a loss for nine drums.
+

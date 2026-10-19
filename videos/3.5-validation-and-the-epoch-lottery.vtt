@@ -1,0 +1,894 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.179
+Lesson three point five.
+
+2
+00:00:01.467 --> 00:00:03.622
+How we chose which checkpoint to play, and
+
+3
+00:00:03.622 --> 00:00:04.963
+why the loss couldn't do it.
+
+4
+00:00:08.907 --> 00:00:10.955
+From lesson two point four: Lakh is split
+
+5
+00:00:10.955 --> 00:00:12.917
+by song, so the validation songs are songs
+
+6
+00:00:12.917 --> 00:00:14.050
+the model never trains on.
+
+7
+00:00:14.312 --> 00:00:16.055
+Each epoch, the model learns from the
+
+8
+00:00:16.055 --> 00:00:16.709
+training songs.
+
+9
+00:00:16.971 --> 00:00:18.845
+Its weights change step by step, and the
+
+10
+00:00:18.845 --> 00:00:20.414
+loss averaged over that pass is the
+
+11
+00:00:20.414 --> 00:00:21.025
+training loss.
+
+12
+00:00:21.286 --> 00:00:23.204
+Then the weights are frozen, and the same
+
+13
+00:00:23.204 --> 00:00:24.643
+loss is measured on four hundred
+
+14
+00:00:24.643 --> 00:00:26.517
+validation songs: the validation loss.
+
+15
+00:00:26.778 --> 00:00:28.609
+Both go into the run's history, one row
+
+16
+00:00:28.609 --> 00:00:29.045
+per epoch.
+
+17
+00:00:30.657 --> 00:00:32.403
+Here's the textbook picture, made up to
+
+18
+00:00:32.403 --> 00:00:33.026
+show the shape.
+
+19
+00:00:33.276 --> 00:00:35.353
+Early on, both fall: what the model learns
+
+20
+00:00:35.353 --> 00:00:36.933
+from the training songs also works on
+
+21
+00:00:36.933 --> 00:00:37.930
+songs it has never seen.
+
+22
+00:00:38.179 --> 00:00:39.094
+That's generalisation.
+
+23
+00:00:39.343 --> 00:00:41.130
+Later, training loss keeps falling while
+
+24
+00:00:41.130 --> 00:00:42.169
+validation loss turns up.
+
+25
+00:00:42.418 --> 00:00:44.164
+The model is learning the training songs'
+
+26
+00:00:44.164 --> 00:00:45.701
+own quirks, which don't carry over.
+
+27
+00:00:45.951 --> 00:00:46.740
+That's overfitting.
+
+28
+00:00:46.990 --> 00:00:48.569
+The bottom of the validation curve is
+
+29
+00:00:48.569 --> 00:00:49.608
+where you'd usually stop.
+
+30
+00:00:51.211 --> 00:00:53.545
+Now a real pair, from the run of T one
+
+31
+00:00:53.545 --> 00:00:56.164
+twenty-eight, the transformer drummer:
+
+32
+00:00:56.164 --> 00:00:56.961
+twelve epochs.
+
+33
+00:00:57.303 --> 00:00:59.865
+Training loss, in green, falls from zero
+
+34
+00:00:59.865 --> 00:01:02.086
+point two zero eight to zero point one
+
+35
+00:01:02.086 --> 00:01:02.655
+eight two.
+
+36
+00:01:02.997 --> 00:01:05.445
+Validation loss, in blue, reaches zero
+
+37
+00:01:05.445 --> 00:01:08.007
+point one nine three three at epoch seven,
+
+38
+00:01:08.007 --> 00:01:10.455
+with bumps at epochs six and eight, then
+
+39
+00:01:10.455 --> 00:01:12.562
+stays about zero point one nine four.
+
+40
+00:01:12.903 --> 00:01:15.466
+No clear turn upward in twelve epochs, but
+
+41
+00:01:15.466 --> 00:01:18.028
+a gap opens: by epoch eleven, about a
+
+42
+00:01:18.028 --> 00:01:20.419
+hundredth lower on the songs it trains on.
+
+43
+00:01:20.883 --> 00:01:22.849
+At epoch zero, training sits above
+
+44
+00:01:22.849 --> 00:01:24.443
+validation, for two reasons.
+
+45
+00:01:24.761 --> 00:01:26.939
+The training number is averaged over the
+
+46
+00:01:26.939 --> 00:01:29.277
+whole pass, including its first and worst
+
+47
+00:01:29.277 --> 00:01:29.596
+steps.
+
+48
+00:01:29.914 --> 00:01:32.092
+And dropout is on in training and off in
+
+49
+00:01:32.092 --> 00:01:34.483
+validation, which raises the training loss
+
+50
+00:01:34.483 --> 00:01:35.280
+in every epoch.
+
+51
+00:01:35.598 --> 00:01:37.405
+How much each adds isn't measured.
+
+52
+00:01:40.873 --> 00:01:43.093
+A checkpoint is a saved copy of the model
+
+53
+00:01:43.093 --> 00:01:45.736
+at the end of an epoch: every weight, plus
+
+54
+00:01:45.736 --> 00:01:47.903
+the optimiser's state, so training can
+
+55
+00:01:47.903 --> 00:01:48.802
+carry on from it.
+
+56
+00:01:49.119 --> 00:01:51.286
+By default the trainer keeps one file,
+
+57
+00:01:51.286 --> 00:01:53.242
+overwritten whenever validation loss
+
+58
+00:01:53.242 --> 00:01:54.193
+reaches a new low.
+
+59
+00:01:54.510 --> 00:01:56.730
+With the flag save every epoch, it also
+
+60
+00:01:56.730 --> 00:01:58.686
+keeps every epoch under its own name.
+
+61
+00:01:59.165 --> 00:02:01.191
+For T one twenty-eight that's twelve
+
+62
+00:02:01.191 --> 00:02:03.766
+files, epoch zero to eleven, each with its
+
+63
+00:02:03.766 --> 00:02:04.642
+validation loss.
+
+64
+00:02:04.970 --> 00:02:07.326
+The usual rule is to play the one with the
+
+65
+00:02:07.326 --> 00:02:09.571
+lowest validation loss: epoch seven.
+
+66
+00:02:09.900 --> 00:02:12.474
+The question for the rest of this lesson:
+
+67
+00:02:12.474 --> 00:02:14.446
+is the lowest loss the best drummer?
+
+68
+00:02:18.007 --> 00:02:19.985
+On the thirteenth of September, one LSTM
+
+69
+00:02:19.985 --> 00:02:21.918
+run kept all twelve of its checkpoints,
+
+70
+00:02:21.918 --> 00:02:23.436
+and the battery scored every one.
+
+71
+00:02:23.712 --> 00:02:25.921
+Here's its validation loss: mostly down,
+
+72
+00:02:25.921 --> 00:02:27.808
+by a few hundredths, with one spike at
+
+73
+00:02:27.808 --> 00:02:28.268
+epoch six.
+
+74
+00:02:28.544 --> 00:02:30.569
+And here's the battery's following score,
+
+75
+00:02:30.569 --> 00:02:32.455
+follow minus leak from lesson five point
+
+76
+00:02:32.455 --> 00:02:34.250
+six, on two hundred and ninety-seven
+
+77
+00:02:34.250 --> 00:02:35.032
+validation songs.
+
+78
+00:02:35.308 --> 00:02:37.241
+The green line is the songs' own drummers.
+
+79
+00:02:37.602 --> 00:02:40.078
+Between neighbouring epochs it swings:
+
+80
+00:02:40.078 --> 00:02:42.553
+plus zero point two one two at epoch two,
+
+81
+00:02:42.553 --> 00:02:44.804
+minus zero point zero two five at epoch
+
+82
+00:02:44.804 --> 00:02:47.167
+three, plus zero point two eight two at
+
+83
+00:02:47.167 --> 00:02:47.786
+epoch four.
+
+84
+00:02:48.124 --> 00:02:50.487
+At epochs three, five and six the model
+
+85
+00:02:50.487 --> 00:02:53.188
+collapsed to a near-static beat: its drums
+
+86
+00:02:53.188 --> 00:02:55.044
+barely moved when the guitar did.
+
+87
+00:02:55.522 --> 00:02:56.700
+The loss didn't notice.
+
+88
+00:02:57.007 --> 00:02:59.413
+Epoch three's loss was the lowest so far:
+
+89
+00:02:59.413 --> 00:03:01.563
+stop the run anywhere from epoch three to
+
+90
+00:03:01.563 --> 00:03:03.765
+six, and the lowest-loss checkpoint is a
+
+91
+00:03:03.765 --> 00:03:04.533
+collapsed beat.
+
+92
+00:03:04.840 --> 00:03:07.246
+That's the epoch lottery: neighbours with
+
+93
+00:03:07.246 --> 00:03:08.833
+nearly the same loss play very
+
+94
+00:03:08.833 --> 00:03:11.035
+differently, so a pick by loss is a draw.
+
+95
+00:03:11.509 --> 00:03:13.866
+Here, the lowest loss at the end, epoch
+
+96
+00:03:13.866 --> 00:03:16.061
+ten, happened to be the battery's best
+
+97
+00:03:16.061 --> 00:03:16.275
+too.
+
+98
+00:03:16.597 --> 00:03:17.346
+That was luck.
+
+99
+00:03:17.668 --> 00:03:19.863
+In another run of the same round, with
+
+100
+00:03:19.863 --> 00:03:22.059
+input dropout, the loss's epoch scored
+
+101
+00:03:22.059 --> 00:03:24.254
+plus zero point one nine four, and the
+
+102
+00:03:24.254 --> 00:03:26.664
+battery's best, plus zero point four three
+
+103
+00:03:26.664 --> 00:03:26.878
+six.
+
+104
+00:03:30.417 --> 00:03:32.538
+Recall the loss from lesson three point
+
+105
+00:03:32.538 --> 00:03:32.750
+two.
+
+106
+00:03:33.069 --> 00:03:35.349
+For each slot t and drum v, a penalty,
+
+107
+00:03:35.349 --> 00:03:37.524
+ell, for how wrong the probability was.
+
+108
+00:03:37.842 --> 00:03:40.123
+Summed over the nine drums, kept only on
+
+109
+00:03:40.123 --> 00:03:42.351
+real slots by the mask, m, added over
+
+110
+00:03:42.351 --> 00:03:44.738
+every slot, and divided by nine times N,
+
+111
+00:03:44.738 --> 00:03:46.064
+the number of real slots.
+
+112
+00:03:46.382 --> 00:03:48.238
+So every real slot counts the same.
+
+113
+00:03:48.679 --> 00:03:50.311
+The battery's following is measured where
+
+114
+00:03:50.311 --> 00:03:51.787
+the guitar changes section, against
+
+115
+00:03:51.787 --> 00:03:52.408
+everywhere else.
+
+116
+00:03:52.641 --> 00:03:54.389
+On the two hundred and ninety-seven songs,
+
+117
+00:03:54.389 --> 00:03:55.982
+one thousand two hundred and eighty-four
+
+118
+00:03:55.982 --> 00:03:57.458
+of sixteen thousand eight hundred and
+
+119
+00:03:57.458 --> 00:03:58.895
+eighty-seven window changes are at a
+
+120
+00:03:58.895 --> 00:04:00.760
+boundary: seven point six percent, about
+
+121
+00:04:00.760 --> 00:04:01.381
+one in thirteen.
+
+122
+00:04:01.614 --> 00:04:03.284
+The rest is routine: the groove going
+
+123
+00:04:03.284 --> 00:04:03.517
+round.
+
+124
+00:04:03.750 --> 00:04:05.265
+A model that plays the groove well has
+
+125
+00:04:05.265 --> 00:04:06.974
+earned nearly all of its loss, whether or
+
+126
+00:04:06.974 --> 00:04:08.256
+not it changes at the boundaries.
+
+127
+00:04:08.583 --> 00:04:10.260
+So the loss can't see following.
+
+128
+00:04:10.574 --> 00:04:12.880
+In the lottery, collapsed epoch three had
+
+129
+00:04:12.880 --> 00:04:14.871
+a lower loss than epoch four, which
+
+130
+00:04:14.871 --> 00:04:15.919
+followed the guitar.
+
+131
+00:04:17.480 --> 00:04:19.094
+In round two, and again in the
+
+132
+00:04:19.094 --> 00:04:21.294
+architecture run, the battery scored every
+
+133
+00:04:21.294 --> 00:04:22.664
+epoch and a rule picked one.
+
+134
+00:04:22.957 --> 00:04:24.913
+A kit gate keeps only epochs whose kick
+
+135
+00:04:24.913 --> 00:04:26.918
+and snare play at least half as often as
+
+136
+00:04:26.918 --> 00:04:29.217
+the real drummer's: two runs' top-scoring
+
+137
+00:04:29.217 --> 00:04:30.586
+epochs had played hats only.
+
+138
+00:04:30.880 --> 00:04:32.640
+Then the best following among those.
+
+139
+00:04:32.933 --> 00:04:35.134
+The loss's epoch is printed beside it, for
+
+140
+00:04:35.134 --> 00:04:35.917
+comparison only.
+
+141
+00:04:36.380 --> 00:04:38.745
+One more thing sits inside every score:
+
+142
+00:04:38.745 --> 00:04:40.899
+the decoder, which turns probabilities
+
+143
+00:04:40.899 --> 00:04:41.425
+into hits.
+
+144
+00:04:41.740 --> 00:04:43.737
+When it was changed, the ranking of
+
+145
+00:04:43.737 --> 00:04:45.997
+checkpoints changed too, so it's part of
+
+146
+00:04:45.997 --> 00:04:46.733
+what's scored.
+
+147
+00:04:47.048 --> 00:04:48.625
+That's lesson four point nine.
+
+148
+00:04:50.245 --> 00:04:52.527
+Back to T one twenty-eight, one of the
+
+149
+00:04:52.527 --> 00:04:53.975
+drummers in the live link.
+
+150
+00:04:54.309 --> 00:04:56.369
+The battery scored all twelve of its
+
+151
+00:04:56.369 --> 00:04:56.758
+epochs.
+
+152
+00:04:57.092 --> 00:04:59.431
+Its lowest validation loss is epoch seven.
+
+153
+00:04:59.765 --> 00:05:02.047
+The battery's pre-registered rule picked
+
+154
+00:05:02.047 --> 00:05:02.604
+epoch ten.
+
+155
+00:05:02.938 --> 00:05:05.221
+The one in the live link is epoch eleven.
+
+156
+00:05:05.715 --> 00:05:06.299
+Why eleven?
+
+157
+00:05:06.617 --> 00:05:08.845
+The day before, blind listening had put
+
+158
+00:05:08.845 --> 00:05:11.231
+the rule's picks at or near the bottom, so
+
+159
+00:05:11.231 --> 00:05:13.141
+the rule was set aside for choosing.
+
+160
+00:05:13.459 --> 00:05:15.687
+The team's listening deck took each run's
+
+161
+00:05:15.687 --> 00:05:17.755
+last epoch, once the battery's gates
+
+162
+00:05:17.755 --> 00:05:20.089
+showed it hadn't collapsed: only seven
+
+163
+00:05:20.089 --> 00:05:22.210
+percent of its thirty-two-bar stretches
+
+164
+00:05:22.210 --> 00:05:23.536
+lost their kick or snare.
+
+165
+00:05:23.855 --> 00:05:26.241
+Epoch eleven passed the gates but one, the
+
+166
+00:05:26.241 --> 00:05:28.522
+follow floor, missed by four thousandths.
+
+167
+00:05:28.840 --> 00:05:30.962
+Then Jaime rated it five out of five on
+
+168
+00:05:30.962 --> 00:05:31.757
+all four songs.
+
+169
+00:05:32.076 --> 00:05:34.303
+Every drummer in the live link but one is
+
+170
+00:05:34.303 --> 00:05:36.319
+its run's last epoch, like this one.
+
+171
+00:05:36.637 --> 00:05:39.077
+The exception is the old LSTM favourite:
+
+172
+00:05:39.077 --> 00:05:40.827
+its run's lowest-loss checkpoint.
+
+173
+00:05:41.262 --> 00:05:44.027
+Across these three, the loss moves by five
+
+174
+00:05:44.027 --> 00:05:45.010
+ten-thousandths.
+
+175
+00:05:45.379 --> 00:05:47.775
+Follow minus leak moves from plus zero
+
+176
+00:05:47.775 --> 00:05:50.294
+point zero nine three to plus zero point
+
+177
+00:05:50.294 --> 00:05:51.216
+one four eight.
+
+178
+00:05:51.584 --> 00:05:52.813
+The loss had no say.
+
+179
+00:05:56.790 --> 00:05:57.408
+One more catch.
+
+180
+00:05:57.655 --> 00:05:59.427
+Imagine twelve epochs that are all equally
+
+181
+00:05:59.427 --> 00:06:01.239
+good, with a true score of zero point one
+
+182
+00:06:01.239 --> 00:06:03.093
+zero, each measured on the same songs with
+
+183
+00:06:03.093 --> 00:06:03.711
+a little noise.
+
+184
+00:06:03.958 --> 00:06:05.029
+These numbers are made up.
+
+185
+00:06:05.276 --> 00:06:06.883
+Pick the best, and you've picked the
+
+186
+00:06:06.883 --> 00:06:08.737
+luckiest draw: zero point one four nine.
+
+187
+00:06:08.984 --> 00:06:10.632
+Score it again on fresh songs, and on
+
+188
+00:06:10.632 --> 00:06:12.362
+average it lands back near zero point one
+
+189
+00:06:12.362 --> 00:06:12.568
+zero.
+
+190
+00:06:12.815 --> 00:06:14.669
+That's selection bias: the best of many
+
+191
+00:06:14.669 --> 00:06:16.564
+tries, scored on the songs that chose it,
+
+192
+00:06:16.564 --> 00:06:17.553
+looks better than it is.
+
+193
+00:06:19.000 --> 00:06:20.484
+Our numbers carry this bias.
+
+194
+00:06:20.802 --> 00:06:22.869
+The rule's picks in the results tables
+
+195
+00:06:22.869 --> 00:06:24.990
+were chosen on the same two hundred and
+
+196
+00:06:24.990 --> 00:06:27.375
+ninety-seven songs they're then scored on,
+
+197
+00:06:27.375 --> 00:06:29.601
+so those scores are optimistic, and the
+
+198
+00:06:29.601 --> 00:06:31.668
+confidence intervals leave the picking
+
+199
+00:06:31.668 --> 00:06:31.880
+out.
+
+200
+00:06:32.198 --> 00:06:34.371
+The epoch elevens we play weren't picked
+
+201
+00:06:34.371 --> 00:06:36.969
+by score, so for them the bias is weaker:
+
+202
+00:06:36.969 --> 00:06:38.241
+only the gate screening.
+
+203
+00:06:38.559 --> 00:06:40.785
+The fix is to re-score the final picks on
+
+204
+00:06:40.785 --> 00:06:42.799
+songs that played no part in choosing
+
+205
+00:06:42.799 --> 00:06:45.078
+them, or to state the bias in the report.
+
+206
+00:06:45.396 --> 00:06:47.676
+As of the sixteenth of October that hasn't
+
+207
+00:06:47.676 --> 00:06:50.220
+been done: the newest scores still use the
+
+208
+00:06:50.220 --> 00:06:51.492
+same four hundred songs.
+
+209
+00:06:53.161 --> 00:06:55.445
+The loss trains the model, but it can't
+
+210
+00:06:55.445 --> 00:06:56.424
+rank the drummers.
+
+211
+00:06:56.750 --> 00:06:58.925
+One honest footnote: the ear's old
+
+212
+00:06:58.925 --> 00:07:01.317
+favourite, the LSTM anchor, is itself a
+
+213
+00:07:01.317 --> 00:07:02.568
+lowest-loss checkpoint.
+
+214
+00:07:02.894 --> 00:07:05.450
+A loss pick can sound good; it just can't
+
+215
+00:07:05.450 --> 00:07:06.211
+be trusted to.
+
+216
+00:07:06.537 --> 00:07:09.093
+Keep every epoch, score every one, gate,
+
+217
+00:07:09.093 --> 00:07:09.745
+then listen.
+
+218
+00:07:10.072 --> 00:07:12.192
+And a picked score is optimistic until
+
+219
+00:07:12.192 --> 00:07:13.823
+it's re-scored on fresh songs.
+
+220
+00:07:14.150 --> 00:07:16.488
+This lesson pairs with row six of the year
+
+221
+00:07:16.488 --> 00:07:18.826
+explainer, and the Reading the code part
+
+222
+00:07:18.826 --> 00:07:20.131
+of the course explainer.
+
+223
+00:07:20.457 --> 00:07:22.795
+Next, topic four: the architectures.
+

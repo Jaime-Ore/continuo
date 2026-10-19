@@ -1,0 +1,874 @@
+WEBVTT
+
+1
+00:00:00.060 --> 00:00:01.460
+Four point seven point six.
+
+2
+00:00:01.771 --> 00:00:04.052
+Why the model attends four times at once,
+
+3
+00:00:04.052 --> 00:00:05.919
+and what each of its heads looks at.
+
+4
+00:00:10.943 --> 00:00:13.472
+From four point seven point five: one
+
+5
+00:00:13.472 --> 00:00:16.060
+layer gives the slot a query, a key and a
+
+6
+00:00:16.060 --> 00:00:18.000
+value, ninety-six numbers each.
+
+7
+00:00:18.485 --> 00:00:20.356
+Now each is cut into four pieces of
+
+8
+00:00:20.356 --> 00:00:20.979
+twenty-four.
+
+9
+00:00:21.291 --> 00:00:23.629
+Piece zero of the query, piece zero of the
+
+10
+00:00:23.629 --> 00:00:25.655
+key and piece zero of the value belong
+
+11
+00:00:25.655 --> 00:00:27.526
+together, and they make head zero.
+
+12
+00:00:27.837 --> 00:00:30.227
+Pieces one, two and three make heads one,
+
+13
+00:00:30.227 --> 00:00:30.955
+two and three.
+
+14
+00:00:31.266 --> 00:00:33.604
+A head is a whole attention of its own, on
+
+15
+00:00:33.604 --> 00:00:34.644
+twenty-four numbers.
+
+16
+00:00:35.441 --> 00:00:37.653
+In the code, line fifty-eight sets the
+
+17
+00:00:37.653 --> 00:00:40.027
+head width: d divided by the number of
+
+18
+00:00:40.027 --> 00:00:42.455
+heads, ninety-six over four, twenty-four.
+
+19
+00:00:42.779 --> 00:00:45.045
+Line seventy does the cutting, with two
+
+20
+00:00:45.045 --> 00:00:46.718
+operations, view and permute.
+
+21
+00:00:48.263 --> 00:00:50.150
+Live, one slot at a time, the layer's
+
+22
+00:00:50.150 --> 00:00:52.082
+output has shape one by one by two hundred
+
+23
+00:00:52.082 --> 00:00:54.373
+and eighty-eight: one song, one slot, two
+
+24
+00:00:54.373 --> 00:00:55.856
+hundred and eighty-eight numbers.
+
+25
+00:00:56.125 --> 00:00:58.057
+View reads the same numbers as a new shape
+
+26
+00:00:58.057 --> 00:01:00.303
+without moving them: three, for q, k and
+
+27
+00:01:00.303 --> 00:01:02.549
+v; four heads; twenty-four numbers each.
+
+28
+00:01:02.819 --> 00:01:04.661
+Permute then reorders the axes, so the
+
+29
+00:01:04.661 --> 00:01:05.874
+head comes before the slot.
+
+30
+00:01:06.323 --> 00:01:08.767
+Pulling the first axis apart gives q, k
+
+31
+00:01:08.767 --> 00:01:10.863
+and v, each one by four by one by
+
+32
+00:01:10.863 --> 00:01:13.657
+twenty-four: for each of the four heads,
+
+33
+00:01:13.657 --> 00:01:15.286
+its own twenty-four numbers.
+
+34
+00:01:15.636 --> 00:01:18.080
+In training it's thirty-two songs by four
+
+35
+00:01:18.080 --> 00:01:20.525
+heads by five hundred and twelve slots by
+
+36
+00:01:20.525 --> 00:01:21.223
+twenty-four.
+
+37
+00:01:25.007 --> 00:01:27.302
+Each head now does four point seven point
+
+38
+00:01:27.302 --> 00:01:28.941
+four's attention, by itself.
+
+39
+00:01:29.269 --> 00:01:31.454
+The same equation, with an h on every
+
+40
+00:01:31.454 --> 00:01:33.367
+symbol: head h scores its own
+
+41
+00:01:33.367 --> 00:01:35.607
+twenty-four-number query against its own
+
+42
+00:01:35.607 --> 00:01:37.902
+keys, and divides by the square root of
+
+43
+00:01:37.902 --> 00:01:40.251
+twenty-four, because each head's vectors
+
+44
+00:01:40.251 --> 00:01:41.399
+are twenty-four long.
+
+45
+00:01:41.903 --> 00:01:43.805
+Each head also has its own distance
+
+46
+00:01:43.805 --> 00:01:44.598
+penalty, b h.
+
+47
+00:01:44.915 --> 00:01:47.029
+How the four differ is four point seven
+
+48
+00:01:47.029 --> 00:01:48.826
+point eight; here it's a box.
+
+49
+00:01:49.143 --> 00:01:51.363
+Then each head has its own softmax, its
+
+50
+00:01:51.363 --> 00:01:53.636
+own weights, and its own weighted sum of
+
+51
+00:01:53.636 --> 00:01:55.856
+its own values: a twenty-four-number
+
+52
+00:01:55.856 --> 00:01:56.596
+answer, a h.
+
+53
+00:01:57.008 --> 00:01:59.466
+In the code, line eighty-two does all four
+
+54
+00:01:59.466 --> 00:02:00.449
+heads in one call.
+
+55
+00:02:00.776 --> 00:02:03.016
+The heads sit side by side on the second
+
+56
+00:02:03.016 --> 00:02:05.200
+axis, and nothing passes between them.
+
+57
+00:02:06.468 --> 00:02:08.340
+Here's block one at the worked slot, slot
+
+58
+00:02:08.340 --> 00:02:09.063
+five seventy-six.
+
+59
+00:02:09.318 --> 00:02:11.147
+Head zero puts zero point nine seven eight
+
+60
+00:02:11.147 --> 00:02:12.253
+of its weight on one slot.
+
+61
+00:02:12.509 --> 00:02:14.253
+To compare the others, count effective
+
+62
+00:02:14.253 --> 00:02:16.295
+keys: if the weight were shared equally,
+
+63
+00:02:16.295 --> 00:02:17.954
+how many slots would it be shared over?
+
+64
+00:02:18.209 --> 00:02:20.166
+Head one spreads over about seven; heads
+
+65
+00:02:20.166 --> 00:02:21.825
+two and three over about twenty-one to
+
+66
+00:02:21.825 --> 00:02:22.378
+twenty-three.
+
+67
+00:02:22.633 --> 00:02:24.632
+Same slot, same input, four very different
+
+68
+00:02:24.632 --> 00:02:24.973
+choices.
+
+69
+00:02:28.660 --> 00:02:30.985
+Four heads, four answers of twenty-four
+
+70
+00:02:30.985 --> 00:02:31.428
+numbers.
+
+71
+00:02:31.760 --> 00:02:34.085
+Block one's, at the worked slot, have
+
+72
+00:02:34.085 --> 00:02:36.520
+lengths thirty-four point seven, thirteen
+
+73
+00:02:36.520 --> 00:02:38.789
+point six, twenty-nine point eight and
+
+74
+00:02:38.789 --> 00:02:40.118
+seventy-seven point one.
+
+75
+00:02:40.607 --> 00:02:42.941
+They're joined end to end: head zero's
+
+76
+00:02:42.941 --> 00:02:45.382
+twenty-four first, then head one's, two's
+
+77
+00:02:45.382 --> 00:02:46.018
+and three's.
+
+78
+00:02:46.337 --> 00:02:48.671
+That's called concatenating, and it gives
+
+79
+00:02:48.671 --> 00:02:50.899
+ninety-six numbers again, length ninety
+
+80
+00:02:50.899 --> 00:02:51.748
+point six three.
+
+81
+00:02:52.225 --> 00:02:54.277
+In the code it's line eighty-three.
+
+82
+00:02:54.629 --> 00:02:57.034
+Transpose puts the slot axis back before
+
+83
+00:02:57.034 --> 00:02:59.556
+the head axis, and reshape lays the four
+
+84
+00:02:59.556 --> 00:03:02.078
+heads' twenty-four numbers side by side as
+
+85
+00:03:02.078 --> 00:03:02.723
+ninety-six.
+
+86
+00:03:03.210 --> 00:03:05.443
+Then one more linear layer, proj,
+
+87
+00:03:05.443 --> 00:03:06.912
+ninety-six to ninety-six.
+
+88
+00:03:07.265 --> 00:03:09.791
+Its weights are a ninety-six by ninety-six
+
+89
+00:03:09.791 --> 00:03:12.612
+grid plus ninety-six biases: nine thousand
+
+90
+00:03:12.612 --> 00:03:14.727
+three hundred and twelve parameters.
+
+91
+00:03:15.199 --> 00:03:16.028
+Why is it there?
+
+92
+00:03:16.339 --> 00:03:18.514
+In the joined vector, numbers nought to
+
+93
+00:03:18.514 --> 00:03:20.845
+twenty-three come only from head zero, and
+
+94
+00:03:20.845 --> 00:03:21.156
+so on.
+
+95
+00:03:21.466 --> 00:03:23.745
+Each output of proj reads all ninety-six,
+
+96
+00:03:23.745 --> 00:03:25.817
+so it can mix what the four heads found.
+
+97
+00:03:26.128 --> 00:03:27.889
+It's called the output projection.
+
+98
+00:03:28.852 --> 00:03:30.944
+At the worked slot, proj gives six point
+
+99
+00:03:30.944 --> 00:03:33.183
+three seven, twenty-eight point nine, and
+
+100
+00:03:33.183 --> 00:03:34.788
+so on, length four hundred and
+
+101
+00:03:34.788 --> 00:03:35.421
+twenty-three.
+
+102
+00:03:35.713 --> 00:03:37.854
+That passes through dropout, which is off
+
+103
+00:03:37.854 --> 00:03:39.898
+when the model plays, and is added back
+
+104
+00:03:39.898 --> 00:03:41.017
+onto h, the residual.
+
+105
+00:03:41.309 --> 00:03:43.498
+Both are boxes, for four point seven point
+
+106
+00:03:43.498 --> 00:03:45.250
+ten and four point seven point nine.
+
+107
+00:03:48.717 --> 00:03:49.734
+Why not one big head?
+
+108
+00:03:50.025 --> 00:03:51.527
+A head's weights add up to one.
+
+109
+00:03:51.818 --> 00:03:53.901
+If it wants two different kinds of slot,
+
+110
+00:03:53.901 --> 00:03:55.985
+it has to split its weight between them,
+
+111
+00:03:55.985 --> 00:03:57.632
+and their values come out blended.
+
+112
+00:03:57.923 --> 00:03:59.764
+With four heads, each makes its own
+
+113
+00:03:59.764 --> 00:04:01.945
+choice, and the output projection combines
+
+114
+00:04:01.945 --> 00:04:02.526
+the answers.
+
+115
+00:04:02.915 --> 00:04:05.294
+At the worked slot, head zero takes slot
+
+116
+00:04:05.294 --> 00:04:07.783
+five seventy-three, the latest slot at bar
+
+117
+00:04:07.783 --> 00:04:09.996
+position thirteen, and head two takes
+
+118
+00:04:09.996 --> 00:04:12.375
+mostly the slot after each downbeat, bar
+
+119
+00:04:12.375 --> 00:04:12.929
+after bar.
+
+120
+00:04:13.260 --> 00:04:15.473
+One head would have to split its weight
+
+121
+00:04:15.473 --> 00:04:16.193
+between them.
+
+122
+00:04:16.695 --> 00:04:18.140
+And it costs nothing extra.
+
+123
+00:04:18.461 --> 00:04:20.656
+The q k v layer and proj don't depend on
+
+124
+00:04:20.656 --> 00:04:23.118
+the number of heads; the head count only
+
+125
+00:04:23.118 --> 00:04:25.152
+changes how line seventy cuts the two
+
+126
+00:04:25.152 --> 00:04:26.919
+hundred and eighty-eight outputs.
+
+127
+00:04:27.240 --> 00:04:29.809
+What a head gives up is width: it compares
+
+128
+00:04:29.809 --> 00:04:31.843
+twenty-four numbers, not ninety-six.
+
+129
+00:04:35.583 --> 00:04:37.430
+Here is block one at the worked slot.
+
+130
+00:04:37.729 --> 00:04:39.726
+Each row is one head's weights over the
+
+131
+00:04:39.726 --> 00:04:41.872
+last sixty-four slots, four bars, with
+
+132
+00:04:41.872 --> 00:04:43.819
+slot five seventy-six, the one being
+
+133
+00:04:43.819 --> 00:04:45.016
+decided, on the right.
+
+134
+00:04:45.316 --> 00:04:47.811
+Beneath, what really happened: in green,
+
+135
+00:04:47.811 --> 00:04:49.958
+the guitar onsets the model heard; in
+
+136
+00:04:49.958 --> 00:04:52.054
+blue, the real drummer's kick and snare.
+
+137
+00:04:52.491 --> 00:04:54.829
+Head zero is one spike: zero point nine
+
+138
+00:04:54.829 --> 00:04:57.011
+seven eight on slot five seventy-three,
+
+139
+00:04:57.011 --> 00:04:57.895
+three slots back.
+
+140
+00:04:58.206 --> 00:05:00.441
+Its query matches position thirteen of the
+
+141
+00:05:00.441 --> 00:05:02.623
+bar, and the distance penalty picks the
+
+142
+00:05:02.623 --> 00:05:03.195
+latest one.
+
+143
+00:05:03.506 --> 00:05:05.585
+Head one is a comb over the most recent
+
+144
+00:05:05.585 --> 00:05:07.819
+guitar onsets, at three positions in the
+
+145
+00:05:07.819 --> 00:05:10.209
+bar, fading with distance: about seven
+
+146
+00:05:10.209 --> 00:05:10.989
+effective keys.
+
+147
+00:05:11.412 --> 00:05:13.307
+Head two has one tooth per bar, mostly on
+
+148
+00:05:13.307 --> 00:05:15.159
+the slot just after the downbeat, each a
+
+149
+00:05:15.159 --> 00:05:15.978
+heard guitar onset.
+
+150
+00:05:16.236 --> 00:05:17.873
+Thirty-eight percent of its weight is
+
+151
+00:05:17.873 --> 00:05:19.208
+further back than this picture.
+
+152
+00:05:19.467 --> 00:05:21.190
+Head three's teeth sit where beat two's
+
+153
+00:05:21.190 --> 00:05:22.094
+guitar note is heard.
+
+154
+00:05:22.353 --> 00:05:24.291
+It gives more to bar thirty-two, where the
+
+155
+00:05:24.291 --> 00:05:26.186
+guitar played beat two, than to the three
+
+156
+00:05:26.186 --> 00:05:27.521
+nearer bars, where it didn't.
+
+157
+00:05:27.780 --> 00:05:29.331
+Eighty-one percent of its weight is
+
+158
+00:05:29.331 --> 00:05:29.934
+earlier still.
+
+159
+00:05:30.336 --> 00:05:32.431
+Now block two, which reads block one's
+
+160
+00:05:32.431 --> 00:05:32.789
+output.
+
+161
+00:05:33.095 --> 00:05:33.760
+It's sharper.
+
+162
+00:05:34.066 --> 00:05:36.314
+Head zero again: zero point nine eight
+
+163
+00:05:36.314 --> 00:05:38.001
+seven on slot five seventy-three.
+
+164
+00:05:38.307 --> 00:05:40.453
+Head one is a comb on beat two, exactly
+
+165
+00:05:40.453 --> 00:05:42.702
+where the real snare plays: zero point
+
+166
+00:05:42.702 --> 00:05:44.848
+four nine, zero point three one, zero
+
+167
+00:05:44.848 --> 00:05:46.994
+point one one, zero point oh six, one
+
+168
+00:05:46.994 --> 00:05:47.709
+tooth per bar.
+
+169
+00:05:48.171 --> 00:05:50.061
+Head two has one small tooth here, on beat
+
+170
+00:05:50.061 --> 00:05:51.867
+four at slot five seventy-two, where the
+
+171
+00:05:51.867 --> 00:05:52.581
+snare also plays.
+
+172
+00:05:52.833 --> 00:05:54.597
+Almost all its weight, zero point eight
+
+173
+00:05:54.597 --> 00:05:56.488
+nine three, is on slot seventy-six, five
+
+174
+00:05:56.488 --> 00:05:57.916
+hundred slots back, in bar four.
+
+175
+00:05:58.168 --> 00:05:59.974
+Head three sits on the off-beat after beat
+
+176
+00:05:59.974 --> 00:06:01.444
+four, where the closed hat plays.
+
+177
+00:06:01.696 --> 00:06:03.376
+Its biggest tooth here is zero point oh
+
+178
+00:06:03.376 --> 00:06:05.392
+nine four on slot five twenty-six; most of
+
+179
+00:06:05.392 --> 00:06:07.283
+its weight, zero point eight nine, is on
+
+180
+00:06:07.283 --> 00:06:07.829
+earlier bars.
+
+181
+00:06:11.190 --> 00:06:12.107
+What does it mean?
+
+182
+00:06:12.413 --> 00:06:14.604
+This is interpretation, from one slot of
+
+183
+00:06:14.604 --> 00:06:15.063
+one song.
+
+184
+00:06:15.368 --> 00:06:17.559
+Five heads comb one position in the bar,
+
+185
+00:06:17.559 --> 00:06:19.751
+across bars; block one head one combs
+
+186
+00:06:19.751 --> 00:06:21.228
+recent guitar onsets instead.
+
+187
+00:06:21.534 --> 00:06:23.521
+The two head zeros spike on one recent
+
+188
+00:06:23.521 --> 00:06:25.916
+slot: they match position thirteen, and
+
+189
+00:06:25.916 --> 00:06:28.056
+the distance penalty makes the latest one
+
+190
+00:06:28.056 --> 00:06:28.260
+win.
+
+191
+00:06:28.566 --> 00:06:30.910
+None looks at the same slot one bar ago:
+
+192
+00:06:30.910 --> 00:06:33.050
+across all eight, the weight on slots a
+
+193
+00:06:33.050 --> 00:06:35.190
+whole number of bars back, not counting
+
+194
+00:06:35.190 --> 00:06:37.279
+the slot itself, is at most three in a
+
+195
+00:06:37.279 --> 00:06:37.687
+million.
+
+196
+00:06:37.993 --> 00:06:40.133
+The obvious copy-the-last-bar story isn't
+
+197
+00:06:40.133 --> 00:06:41.458
+what this model does here.
+
+198
+00:06:41.763 --> 00:06:43.955
+And block one head three seems to match on
+
+199
+00:06:43.955 --> 00:06:46.197
+what the guitar did, not only on where in
+
+200
+00:06:46.197 --> 00:06:46.604
+the bar.
+
+201
+00:06:47.087 --> 00:06:49.457
+What isn't explained: why block two head
+
+202
+00:06:49.457 --> 00:06:51.621
+two picks slot seventy-six, and not any
+
+203
+00:06:51.621 --> 00:06:52.446
+other beat four.
+
+204
+00:06:52.755 --> 00:06:53.991
+These numbers don't say.
+
+205
+00:06:54.301 --> 00:06:56.362
+And none of this is measured over other
+
+206
+00:06:56.362 --> 00:06:57.907
+slots, songs or checkpoints.
+
+207
+00:06:59.531 --> 00:07:01.435
+Say it in one breath: T128 cuts each
+
+208
+00:07:01.435 --> 00:07:03.248
+slot's query, key and value into four
+
+209
+00:07:03.248 --> 00:07:05.379
+heads of twenty-four; each head picks its
+
+210
+00:07:05.379 --> 00:07:07.465
+own slots with its own softmax; the four
+
+211
+00:07:07.465 --> 00:07:09.278
+answers are joined back into ninety-six
+
+212
+00:07:09.278 --> 00:07:11.182
+and mixed by one ninety-six by ninety-six
+
+213
+00:07:11.182 --> 00:07:11.455
+layer.
+
+214
+00:07:11.727 --> 00:07:13.676
+It pairs with the multi-head row of Lesson
+
+215
+00:07:13.676 --> 00:07:15.716
+seventeen's table in the course explainer,
+
+216
+00:07:15.716 --> 00:07:17.666
+and the attention visualiser on the course
+
+217
+00:07:17.666 --> 00:07:17.892
+page.
+
+218
+00:07:18.165 --> 00:07:19.389
+Next: the causal band.
+

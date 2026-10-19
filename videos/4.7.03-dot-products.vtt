@@ -1,0 +1,770 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.821
+Part four point seven point three.
+
+2
+00:00:02.137 --> 00:00:04.297
+Dot products: the arithmetic inside
+
+3
+00:00:04.297 --> 00:00:04.824
+attention.
+
+4
+00:00:08.773 --> 00:00:11.255
+We are inside attention, the stage where a
+
+5
+00:00:11.255 --> 00:00:13.517
+slot looks back over the slots before it.
+
+6
+00:00:13.848 --> 00:00:16.220
+In part four point seven point one, each
+
+7
+00:00:16.220 --> 00:00:18.481
+slot became a list of ninety-six numbers.
+
+8
+00:00:18.812 --> 00:00:21.184
+Attention makes shorter lists from them,
+
+9
+00:00:21.184 --> 00:00:23.225
+twenty-four numbers each in one head.
+
+10
+00:00:23.556 --> 00:00:25.927
+Parts four point seven point five and four
+
+11
+00:00:25.927 --> 00:00:27.582
+point seven point six say how.
+
+12
+00:00:27.913 --> 00:00:30.174
+Then it keeps asking one question of two
+
+13
+00:00:30.174 --> 00:00:31.884
+such lists: do they agree?
+
+14
+00:00:32.215 --> 00:00:34.697
+The answer it uses is a single number, the
+
+15
+00:00:34.697 --> 00:00:35.359
+dot product.
+
+16
+00:00:35.690 --> 00:00:37.952
+This part builds it, with no attention
+
+17
+00:00:37.952 --> 00:00:39.992
+yet: just arrows and arithmetic.
+
+18
+00:00:43.373 --> 00:00:45.386
+A vector is a list of numbers, in order.
+
+19
+00:00:45.673 --> 00:00:47.830
+With two numbers we can draw one: three
+
+20
+00:00:47.830 --> 00:00:49.650
+along and one up is an arrow from the
+
+21
+00:00:49.650 --> 00:00:50.657
+centre to that point.
+
+22
+00:00:50.944 --> 00:00:51.423
+Call it a.
+
+23
+00:00:51.711 --> 00:00:54.011
+Here is a second, b: one along, two up.
+
+24
+00:00:54.298 --> 00:00:56.263
+Ninety-six numbers can't be drawn, but
+
+25
+00:00:56.263 --> 00:00:58.275
+everything we find with two will hold for
+
+26
+00:00:58.275 --> 00:00:59.186
+any number of them.
+
+27
+00:01:02.043 --> 00:01:04.227
+The dot product of a and b is written a
+
+28
+00:01:04.227 --> 00:01:04.555
+dot b.
+
+29
+00:01:04.883 --> 00:01:07.012
+Multiply the first entries together,
+
+30
+00:01:07.012 --> 00:01:09.415
+multiply the second entries together, and
+
+31
+00:01:09.415 --> 00:01:10.343
+add the products.
+
+32
+00:01:10.671 --> 00:01:13.183
+For our two: three times one, plus one
+
+33
+00:01:13.183 --> 00:01:14.165
+times two, five.
+
+34
+00:01:14.493 --> 00:01:16.186
+Two lists in, one number out.
+
+35
+00:01:16.657 --> 00:01:17.710
+That's the whole recipe.
+
+36
+00:01:17.974 --> 00:01:19.028
+But what does five mean?
+
+37
+00:01:19.291 --> 00:01:21.574
+To see it, we need two more ideas: length,
+
+38
+00:01:21.574 --> 00:01:22.013
+and angle.
+
+39
+00:01:25.140 --> 00:01:25.725
+How long is a?
+
+40
+00:01:25.976 --> 00:01:27.564
+Its arrow is the long side of a right
+
+41
+00:01:27.564 --> 00:01:29.110
+triangle: three along, one up.
+
+42
+00:01:29.360 --> 00:01:31.324
+Pythagoras: the length is the square root
+
+43
+00:01:31.324 --> 00:01:32.745
+of three squared plus one squared.
+
+44
+00:01:32.996 --> 00:01:34.751
+The square root of ten, three point one
+
+45
+00:01:34.751 --> 00:01:35.085
+six two.
+
+46
+00:01:35.336 --> 00:01:37.132
+And three squared plus one squared is just
+
+47
+00:01:37.132 --> 00:01:39.054
+a dot a: a vector's length is the square
+
+48
+00:01:39.054 --> 00:01:40.559
+root of its dot product with itself.
+
+49
+00:01:40.809 --> 00:01:42.857
+b's length, the same way: the square root
+
+50
+00:01:42.857 --> 00:01:44.319
+of five, two point two three six.
+
+51
+00:01:45.171 --> 00:01:47.360
+The angle between the two arrows is
+
+52
+00:01:47.360 --> 00:01:48.515
+forty-five degrees.
+
+53
+00:01:48.880 --> 00:01:51.190
+The cosine of an angle is one at zero
+
+54
+00:01:51.190 --> 00:01:53.986
+degrees, zero at a right angle, and minus
+
+55
+00:01:53.986 --> 00:01:56.418
+one when the arrows point opposite ways.
+
+56
+00:01:56.783 --> 00:01:59.275
+The cosine of forty-five degrees is zero
+
+57
+00:01:59.275 --> 00:02:00.917
+point seven zero seven one.
+
+58
+00:02:01.937 --> 00:02:04.547
+Now a second way to get the dot product:
+
+59
+00:02:04.547 --> 00:02:07.043
+the length of a, times the length of b,
+
+60
+00:02:07.043 --> 00:02:09.199
+times the cosine of the angle between
+
+61
+00:02:09.199 --> 00:02:09.483
+them.
+
+62
+00:02:09.823 --> 00:02:12.263
+Three point one six two, times two point
+
+63
+00:02:12.263 --> 00:02:14.816
+two three six, times zero point seven zero
+
+64
+00:02:14.816 --> 00:02:16.008
+seven one: five.
+
+65
+00:02:16.348 --> 00:02:18.277
+The same five we got pair by pair.
+
+66
+00:02:18.789 --> 00:02:20.273
+Why do the two ways agree?
+
+67
+00:02:20.615 --> 00:02:22.840
+Drop b's shadow straight onto a's line.
+
+68
+00:02:23.182 --> 00:02:25.921
+Its length is b's length times the cosine:
+
+69
+00:02:25.921 --> 00:02:27.347
+one point five eight one.
+
+70
+00:02:28.279 --> 00:02:30.222
+Now turn the whole picture until a lies
+
+71
+00:02:30.222 --> 00:02:30.465
+flat.
+
+72
+00:02:30.756 --> 00:02:32.845
+Turning changes the entries, but not the
+
+73
+00:02:32.845 --> 00:02:34.934
+lengths, not the angle, and, you can
+
+74
+00:02:34.934 --> 00:02:36.343
+check, not the dot product.
+
+75
+00:02:36.634 --> 00:02:38.723
+Now a is three point one six two along and
+
+76
+00:02:38.723 --> 00:02:39.112
+zero up.
+
+77
+00:02:39.403 --> 00:02:41.687
+Pair by pair, the up parts meet a zero, so
+
+78
+00:02:41.687 --> 00:02:43.775
+a dot b is just a's length times b's along
+
+79
+00:02:43.775 --> 00:02:45.767
+part, and b's along part is its shadow.
+
+80
+00:02:49.780 --> 00:02:51.519
+Keep a fixed and swing b around.
+
+81
+00:02:51.845 --> 00:02:54.454
+Point b the same way as a, half as long:
+
+82
+00:02:54.454 --> 00:02:56.736
+three times one and a half plus one times
+
+83
+00:02:56.736 --> 00:02:57.551
+a half, five.
+
+84
+00:02:57.877 --> 00:03:00.160
+Turn b to a right angle: three minus
+
+85
+00:03:00.160 --> 00:03:00.921
+three, zero.
+
+86
+00:03:01.247 --> 00:03:02.605
+The pairs cancel exactly.
+
+87
+00:03:02.931 --> 00:03:05.214
+Point b the opposite way: minus five.
+
+88
+00:03:05.683 --> 00:03:08.236
+So the sign reads like agreement: positive
+
+89
+00:03:08.236 --> 00:03:10.628
+when the arrows lean the same way, zero at
+
+90
+00:03:10.628 --> 00:03:12.755
+right angles, negative when they lean
+
+91
+00:03:12.755 --> 00:03:13.074
+apart.
+
+92
+00:03:16.270 --> 00:03:17.849
+Look at two arrows we've met.
+
+93
+00:03:18.175 --> 00:03:20.026
+The short one along a scored five.
+
+94
+00:03:20.353 --> 00:03:22.639
+The longer one at forty-five degrees also
+
+95
+00:03:22.639 --> 00:03:23.293
+scored five.
+
+96
+00:03:23.619 --> 00:03:26.232
+The dot product mixes two things: how long
+
+97
+00:03:26.232 --> 00:03:28.573
+the arrows are, and which way they point.
+
+98
+00:03:29.125 --> 00:03:31.276
+To keep only the direction, divide the dot
+
+99
+00:03:31.276 --> 00:03:32.424
+product by both lengths.
+
+100
+00:03:32.710 --> 00:03:34.909
+That's the cosine similarity: the cosine
+
+101
+00:03:34.909 --> 00:03:36.152
+of the angle between them.
+
+102
+00:03:36.439 --> 00:03:38.686
+For the arrow at forty-five degrees: five
+
+103
+00:03:38.686 --> 00:03:40.550
+over three point one six two times two
+
+104
+00:03:40.550 --> 00:03:42.701
+point two three six, zero point seven zero
+
+105
+00:03:42.701 --> 00:03:43.179
+seven one.
+
+106
+00:03:43.466 --> 00:03:45.569
+For the short arrow along a: five over
+
+107
+00:03:45.569 --> 00:03:47.481
+three point one six two times one point
+
+108
+00:03:47.481 --> 00:03:49.059
+five eight one: exactly one.
+
+109
+00:03:50.189 --> 00:03:52.159
+Cosine similarity always lies between
+
+110
+00:03:52.159 --> 00:03:53.092
+minus one and one.
+
+111
+00:03:53.403 --> 00:03:54.595
+One: the same way.
+
+112
+00:03:54.906 --> 00:03:56.306
+Zero: at right angles.
+
+113
+00:03:56.617 --> 00:03:57.913
+Minus one: opposite.
+
+114
+00:03:58.224 --> 00:04:00.350
+Our forty-five degree arrow sits at zero
+
+115
+00:04:00.350 --> 00:04:01.180
+point seven one.
+
+116
+00:04:01.491 --> 00:04:03.357
+The model itself uses the plain dot
+
+117
+00:04:03.357 --> 00:04:05.949
+product, length and all; cosine similarity
+
+118
+00:04:05.949 --> 00:04:08.127
+is for us, to read how much two vectors
+
+119
+00:04:08.127 --> 00:04:08.438
+agree.
+
+120
+00:04:11.833 --> 00:04:13.913
+With three numbers the arrow lives in a
+
+121
+00:04:13.913 --> 00:04:16.202
+room instead of on a page, and past three
+
+122
+00:04:16.202 --> 00:04:17.450
+we can't draw it at all.
+
+123
+00:04:17.762 --> 00:04:19.634
+But the arithmetic never needed the
+
+124
+00:04:19.634 --> 00:04:20.050
+picture.
+
+125
+00:04:20.362 --> 00:04:22.754
+Pair by pair: two times one, minus one
+
+126
+00:04:22.754 --> 00:04:24.314
+times four, three times two.
+
+127
+00:04:24.626 --> 00:04:26.758
+Two, minus four, plus six: four.
+
+128
+00:04:27.070 --> 00:04:29.202
+Length is still Pythagoras, with three
+
+129
+00:04:29.202 --> 00:04:31.803
+squares: the root of fourteen, three point
+
+130
+00:04:31.803 --> 00:04:33.571
+seven four two, and the root of
+
+131
+00:04:33.571 --> 00:04:35.755
+twenty-one, four point five eight three.
+
+132
+00:04:36.067 --> 00:04:38.147
+Cosine similarity: four over their
+
+133
+00:04:38.147 --> 00:04:40.643
+product, zero point two three: they lean
+
+134
+00:04:40.643 --> 00:04:42.983
+the same way a little, about seventy-seven
+
+135
+00:04:42.983 --> 00:04:43.711
+degrees apart.
+
+136
+00:04:47.040 --> 00:04:48.990
+Now two real vectors from T128, our
+
+137
+00:04:48.990 --> 00:04:51.247
+transformer, on the worked slot that runs
+
+138
+00:04:51.247 --> 00:04:53.709
+through this whole module: validation song
+
+139
+00:04:53.709 --> 00:04:55.916
+zero zero one one b three c f, slot five
+
+140
+00:04:55.916 --> 00:04:58.122
+hundred and seventy-six, the downbeat of
+
+141
+00:04:58.122 --> 00:04:58.891
+bar thirty-six.
+
+142
+00:04:59.199 --> 00:05:01.251
+This is a vector of twenty-four numbers
+
+143
+00:05:01.251 --> 00:05:03.406
+the model made from slot five hundred and
+
+144
+00:05:03.406 --> 00:05:05.612
+seventy-six, called its query, in head
+
+145
+00:05:05.612 --> 00:05:06.843
+zero of the first block.
+
+146
+00:05:07.151 --> 00:05:09.357
+Part four point seven point five says what
+
+147
+00:05:09.357 --> 00:05:11.666
+a query is, and four point seven point six
+
+148
+00:05:11.666 --> 00:05:13.821
+what a head is and why it has twenty-four
+
+149
+00:05:13.821 --> 00:05:15.154
+numbers, not ninety-six.
+
+150
+00:05:15.462 --> 00:05:17.309
+And this one it made from slot five
+
+151
+00:05:17.309 --> 00:05:19.413
+hundred and seventy-three, three slots
+
+152
+00:05:19.413 --> 00:05:20.644
+earlier, called a key.
+
+153
+00:05:20.952 --> 00:05:23.260
+Multiply them pair by pair: twenty-four
+
+154
+00:05:23.260 --> 00:05:23.722
+products.
+
+155
+00:05:24.143 --> 00:05:26.408
+The biggest is entry fifteen, counting
+
+156
+00:05:26.408 --> 00:05:29.060
+from zero: two point eight five four times
+
+157
+00:05:29.060 --> 00:05:31.270
+six point seven eight eight, nineteen
+
+158
+00:05:31.270 --> 00:05:32.265
+point three seven.
+
+159
+00:05:32.596 --> 00:05:34.641
+Add all twenty-four, positives and
+
+160
+00:05:34.641 --> 00:05:36.961
+negatives: thirty-one point one nine.
+
+161
+00:05:37.473 --> 00:05:39.746
+Their lengths are seven point nine three
+
+162
+00:05:39.746 --> 00:05:42.074
+six and sixteen point two three, so the
+
+163
+00:05:42.074 --> 00:05:44.347
+cosine similarity is zero point two four.
+
+164
+00:05:44.680 --> 00:05:47.230
+They lean the same way a little; the dot
+
+165
+00:05:47.230 --> 00:05:49.614
+product is large partly because the key is
+
+166
+00:05:49.614 --> 00:05:49.891
+long.
+
+167
+00:05:51.554 --> 00:05:53.757
+Do the same against other slots' keys.
+
+168
+00:05:54.105 --> 00:05:55.845
+Against slot five hundred and
+
+169
+00:05:55.845 --> 00:05:58.164
+seventy-six's own key, minus fourteen
+
+170
+00:05:58.164 --> 00:05:59.208
+point seven seven.
+
+171
+00:05:59.556 --> 00:06:01.295
+Against slot five hundred and
+
+172
+00:06:01.295 --> 00:06:03.557
+seventy-five, one slot back, minus
+
+173
+00:06:03.557 --> 00:06:05.296
+forty-three point three eight.
+
+174
+00:06:05.937 --> 00:06:08.415
+In the next part, this number becomes how
+
+175
+00:06:08.415 --> 00:06:10.612
+much one slot is interested in another.
+
+176
+00:06:10.950 --> 00:06:13.429
+Here, slot five hundred and seventy-six's
+
+177
+00:06:13.429 --> 00:06:15.513
+query agrees far more with slot five
+
+178
+00:06:15.513 --> 00:06:17.766
+hundred and seventy-three than with its
+
+179
+00:06:17.766 --> 00:06:19.569
+own slot or the one just before.
+
+180
+00:06:21.138 --> 00:06:22.913
+Say it in one breath: a dot product
+
+181
+00:06:22.913 --> 00:06:24.732
+multiplies two vectors entry by entry and
+
+182
+00:06:24.732 --> 00:06:25.512
+adds the products.
+
+183
+00:06:25.772 --> 00:06:27.634
+It equals one length times the other times
+
+184
+00:06:27.634 --> 00:06:29.496
+the cosine of the angle between them, so
+
+185
+00:06:29.496 --> 00:06:31.445
+it is large when they agree, zero at right
+
+186
+00:06:31.445 --> 00:06:33.133
+angles, and negative when they point
+
+187
+00:06:33.133 --> 00:06:33.393
+apart.
+
+188
+00:06:33.653 --> 00:06:35.169
+This pairs with step one of lesson
+
+189
+00:06:35.169 --> 00:06:36.728
+seventeen in part two of the course
+
+190
+00:06:36.728 --> 00:06:37.767
+explainer, the scores.
+
+191
+00:06:38.027 --> 00:06:40.062
+Next, part four point seven point four:
+
+192
+00:06:40.062 --> 00:06:41.058
+attention, the maths.
+

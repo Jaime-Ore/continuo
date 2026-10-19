@@ -1,0 +1,1110 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.211
+Lesson five point seven.
+
+2
+00:00:01.506 --> 00:00:03.425
+How the battery's numbers are compared
+
+3
+00:00:03.425 --> 00:00:04.065
+across songs.
+
+4
+00:00:08.037 --> 00:00:10.295
+In lesson five point six every song got
+
+5
+00:00:10.295 --> 00:00:12.271
+one number: follow minus leak.
+
+6
+00:00:12.610 --> 00:00:14.981
+Here is that number for the real drummers
+
+7
+00:00:14.981 --> 00:00:17.352
+on all hundred and sixty-eight songs that
+
+8
+00:00:17.352 --> 00:00:19.328
+gave a reading, one dot per song.
+
+9
+00:00:19.878 --> 00:00:22.050
+To sum up a pile like this, the battery
+
+10
+00:00:22.050 --> 00:00:24.480
+takes the median: sort the songs and take
+
+11
+00:00:24.480 --> 00:00:25.256
+the middle one.
+
+12
+00:00:25.566 --> 00:00:27.738
+Half the songs are above it, half below.
+
+13
+00:00:28.048 --> 00:00:29.858
+Here it is plus point two two zero.
+
+14
+00:00:30.335 --> 00:00:33.077
+A few songs sit far out on their own: one
+
+15
+00:00:33.077 --> 00:00:35.702
+at minus point four two, one at plus point
+
+16
+00:00:35.702 --> 00:00:36.344
+nine seven.
+
+17
+00:00:36.694 --> 00:00:38.852
+Both are songs with a single section
+
+18
+00:00:38.852 --> 00:00:41.185
+change, so follow rests on one moment.
+
+19
+00:00:42.673 --> 00:00:44.550
+Why the middle and not the average?
+
+20
+00:00:44.872 --> 00:00:45.891
+Five made-up songs.
+
+21
+00:00:46.213 --> 00:00:48.036
+The median is plus point two five.
+
+22
+00:00:48.358 --> 00:00:50.878
+The mean, the plain average, is plus point
+
+23
+00:00:50.878 --> 00:00:51.522
+two one two.
+
+24
+00:00:52.026 --> 00:00:54.188
+Now one song goes wrong and scores plus
+
+25
+00:00:54.188 --> 00:00:55.052
+point nine five.
+
+26
+00:00:55.376 --> 00:00:57.484
+The mean jumps to plus point three two
+
+27
+00:00:57.484 --> 00:00:57.700
+two.
+
+28
+00:00:58.024 --> 00:01:00.402
+The median doesn't move: it only cares
+
+29
+00:01:00.402 --> 00:01:01.915
+which song is in the middle.
+
+30
+00:01:02.239 --> 00:01:04.131
+So one strange song can't drag the
+
+31
+00:01:04.131 --> 00:01:05.482
+battery's summary around.
+
+32
+00:01:08.860 --> 00:01:11.200
+Now compare two parts: the song's own
+
+33
+00:01:11.200 --> 00:01:13.322
+drums against a control, on the same
+
+34
+00:01:13.322 --> 00:01:13.649
+songs.
+
+35
+00:01:13.975 --> 00:01:15.554
+Here are three made-up songs.
+
+36
+00:01:15.880 --> 00:01:18.166
+As two piles, own and control overlap a
+
+37
+00:01:18.166 --> 00:01:20.832
+lot, because the songs themselves differ:
+
+38
+00:01:20.832 --> 00:01:23.063
+some are easy to follow, some are hard.
+
+39
+00:01:23.539 --> 00:01:25.713
+But join each song's own reading to its
+
+40
+00:01:25.713 --> 00:01:28.432
+control reading, and every line goes down:
+
+41
+00:01:28.432 --> 00:01:30.062
+on every song, own is ahead.
+
+42
+00:01:30.547 --> 00:01:32.063
+So subtract, song by song.
+
+43
+00:01:32.387 --> 00:01:34.714
+d i, the difference for song i, is the
+
+44
+00:01:34.714 --> 00:01:37.149
+metric on song i with its own drums, minus
+
+45
+00:01:37.149 --> 00:01:39.422
+the same metric on the same song with the
+
+46
+00:01:39.422 --> 00:01:39.855
+control.
+
+47
+00:01:40.180 --> 00:01:42.398
+The three differences sit close together
+
+48
+00:01:42.398 --> 00:01:43.426
+and all above zero.
+
+49
+00:01:43.751 --> 00:01:45.753
+The song-to-song spread that the two
+
+50
+00:01:45.753 --> 00:01:47.323
+readings share has cancelled.
+
+51
+00:01:48.773 --> 00:01:49.391
+A real case.
+
+52
+00:01:49.700 --> 00:01:51.913
+Two LSTM drummers, one trained on thirty
+
+53
+00:01:51.913 --> 00:01:54.126
+percent of the data, one on all of it,
+
+54
+00:01:54.126 --> 00:01:56.184
+scored on the same eighteen hundred and
+
+55
+00:01:56.184 --> 00:01:57.008
+forty-two songs.
+
+56
+00:01:57.317 --> 00:01:59.530
+A song that's hard for one is usually hard
+
+57
+00:01:59.530 --> 00:02:00.250
+for the other.
+
+58
+00:02:00.559 --> 00:02:02.669
+Compared song by song, with the paired
+
+59
+00:02:02.669 --> 00:02:04.779
+test of the next chapter, a difference
+
+60
+00:02:04.779 --> 00:02:06.838
+this consistent would almost never come
+
+61
+00:02:06.838 --> 00:02:09.051
+from luck: its p, a number the next
+
+62
+00:02:09.051 --> 00:02:10.492
+chapter explains, is tiny.
+
+63
+00:02:10.800 --> 00:02:12.653
+Thrown into two unrelated piles and
+
+64
+00:02:12.653 --> 00:02:14.609
+compared with a different test, the
+
+65
+00:02:14.609 --> 00:02:16.925
+Mann-Whitney U test, the same numbers give
+
+66
+00:02:16.925 --> 00:02:19.189
+a p millions of times larger, because the
+
+67
+00:02:19.189 --> 00:02:20.785
+song-to-song spread is left in.
+
+68
+00:02:24.250 --> 00:02:26.632
+Are these differences really above zero,
+
+69
+00:02:26.632 --> 00:02:28.183
+or could luck give the same?
+
+70
+00:02:28.516 --> 00:02:31.119
+Take the row five page's five songs: plus
+
+71
+00:02:31.119 --> 00:02:33.723
+point three one, plus point one two, minus
+
+72
+00:02:33.723 --> 00:02:36.271
+point zero two, plus point two five, plus
+
+73
+00:02:36.271 --> 00:02:37.158
+point four zero.
+
+74
+00:02:37.616 --> 00:02:40.205
+Step one: sort them by size, ignoring the
+
+75
+00:02:40.205 --> 00:02:40.470
+sign.
+
+76
+00:02:40.787 --> 00:02:42.213
+Step two: number them.
+
+77
+00:02:42.530 --> 00:02:44.855
+The smallest, point zero two, gets rank
+
+78
+00:02:44.855 --> 00:02:47.445
+one; the biggest, point four zero, rank
+
+79
+00:02:47.445 --> 00:02:47.709
+five.
+
+80
+00:02:48.347 --> 00:02:50.611
+Step three: add up the ranks of the
+
+81
+00:02:50.611 --> 00:02:51.771
+positive differences.
+
+82
+00:02:52.102 --> 00:02:54.588
+T plus, the sum, over songs where d i is
+
+83
+00:02:54.588 --> 00:02:57.239
+above zero, of each song's rank R i: two
+
+84
+00:02:57.239 --> 00:02:59.614
+plus three plus four plus five, fourteen.
+
+85
+00:02:59.945 --> 00:03:01.437
+The negatives get only one.
+
+86
+00:03:01.768 --> 00:03:04.088
+Big ranks on one side is what a real lean
+
+87
+00:03:04.088 --> 00:03:04.695
+looks like.
+
+88
+00:03:06.457 --> 00:03:07.719
+Now the null hypothesis.
+
+89
+00:03:08.035 --> 00:03:10.138
+Wilcoxon's null is that the differences
+
+90
+00:03:10.138 --> 00:03:12.609
+are spread evenly around zero: a negative
+
+91
+00:03:12.609 --> 00:03:14.817
+difference is as likely as a positive one
+
+92
+00:03:14.817 --> 00:03:15.711
+of the same size.
+
+93
+00:03:16.026 --> 00:03:18.234
+That's what you'd expect if the loop were
+
+94
+00:03:18.234 --> 00:03:18.918
+just as good.
+
+95
+00:03:19.233 --> 00:03:20.705
+So each sign is a coin flip.
+
+96
+00:03:21.021 --> 00:03:22.914
+Five coins give thirty-two patterns.
+
+97
+00:03:23.229 --> 00:03:25.122
+Here's T plus for every one of them.
+
+98
+00:03:25.531 --> 00:03:27.847
+Only two patterns reach fourteen or more.
+
+99
+00:03:28.186 --> 00:03:30.390
+Two more are as lopsided the other way.
+
+100
+00:03:30.729 --> 00:03:33.158
+So the p-value is four in thirty-two:
+
+101
+00:03:33.158 --> 00:03:34.232
+point one two five.
+
+102
+00:03:34.703 --> 00:03:36.832
+One time in eight, luck alone gives
+
+103
+00:03:36.832 --> 00:03:39.354
+something this lopsided or more, in either
+
+104
+00:03:39.354 --> 00:03:39.914
+direction.
+
+105
+00:03:40.250 --> 00:03:41.371
+That's what p means.
+
+106
+00:03:41.707 --> 00:03:44.005
+It is not the chance that the loop is as
+
+107
+00:03:44.005 --> 00:03:46.358
+good, and it says nothing about how big
+
+108
+00:03:46.358 --> 00:03:47.367
+the difference is.
+
+109
+00:03:47.703 --> 00:03:50.057
+And with only five songs it can never get
+
+110
+00:03:50.057 --> 00:03:52.578
+below point zero six two five, even if all
+
+111
+00:03:52.578 --> 00:03:53.587
+five are positive.
+
+112
+00:03:53.923 --> 00:03:56.165
+The code calls the same test, SciPy's
+
+113
+00:03:56.165 --> 00:03:58.350
+wilcoxon, on the list of differences.
+
+114
+00:03:58.686 --> 00:04:01.152
+The real runs have more than fifty songs,
+
+115
+00:04:01.152 --> 00:04:03.169
+and above fifty SciPy switches from
+
+116
+00:04:03.169 --> 00:04:05.018
+counting patterns exactly to its
+
+117
+00:04:05.018 --> 00:04:07.652
+asymptotic method: a normal approximation
+
+118
+00:04:07.652 --> 00:04:08.436
+to this chart.
+
+119
+00:04:11.807 --> 00:04:13.581
+A p-value says whether there's a
+
+120
+00:04:13.581 --> 00:04:14.979
+difference, not how big.
+
+121
+00:04:15.301 --> 00:04:17.559
+For that the battery gives an effect size.
+
+122
+00:04:17.882 --> 00:04:20.140
+Here are the real per-song differences,
+
+123
+00:04:20.140 --> 00:04:22.451
+own drums minus a stranger's drums, on a
+
+124
+00:04:22.451 --> 00:04:24.064
+hundred and fifty-eight songs.
+
+125
+00:04:24.649 --> 00:04:26.486
+The first effect size is the median
+
+126
+00:04:26.486 --> 00:04:28.730
+difference: plus point one eight eight.
+
+127
+00:04:29.036 --> 00:04:31.433
+The second is the win share: on a hundred
+
+128
+00:04:31.433 --> 00:04:33.575
+and thirty of the hundred and fifty-eight
+
+129
+00:04:33.575 --> 00:04:35.871
+songs, the green dots right of zero, own
+
+130
+00:04:35.871 --> 00:04:36.330
+is ahead.
+
+131
+00:04:36.636 --> 00:04:37.605
+Eighty-two percent.
+
+132
+00:04:37.911 --> 00:04:40.053
+Fifty percent would mean neither is ahead.
+
+133
+00:04:40.510 --> 00:04:43.048
+The p-value for this one is two point four
+
+134
+00:04:43.048 --> 00:04:44.879
+times ten to the minus sixteen.
+
+135
+00:04:45.233 --> 00:04:48.066
+So: a clear lean, of a useful size, on
+
+136
+00:04:48.066 --> 00:04:48.716
+most songs.
+
+137
+00:04:50.183 --> 00:04:50.811
+Now the trap.
+
+138
+00:04:51.100 --> 00:04:52.742
+Two LSTMs on eighteen hundred and
+
+139
+00:04:52.742 --> 00:04:53.515
+forty-two songs.
+
+140
+00:04:53.805 --> 00:04:55.785
+The median difference is plus point zero
+
+141
+00:04:55.785 --> 00:04:57.910
+two seven, and the first is ahead on only
+
+142
+00:04:57.910 --> 00:04:59.214
+fifty-six percent of songs.
+
+143
+00:04:59.504 --> 00:05:01.436
+Yet p is two point six times ten to the
+
+144
+00:05:01.436 --> 00:05:02.063
+minus twelve.
+
+145
+00:05:02.353 --> 00:05:04.382
+With that many songs, even a small lean
+
+146
+00:05:04.382 --> 00:05:05.058
+gets a tiny p.
+
+147
+00:05:05.348 --> 00:05:07.473
+A tiny p doesn't mean a big effect, which
+
+148
+00:05:07.473 --> 00:05:09.163
+is why every table shows all three.
+
+149
+00:05:12.643 --> 00:05:14.895
+The last question: if we had scored a
+
+150
+00:05:14.895 --> 00:05:17.198
+different set of songs, how far would the
+
+151
+00:05:17.198 --> 00:05:17.827
+median move?
+
+152
+00:05:18.141 --> 00:05:20.392
+We can't score more songs, so we pretend.
+
+153
+00:05:20.706 --> 00:05:22.329
+Put the songs we have in a bag.
+
+154
+00:05:22.849 --> 00:05:25.175
+Draw five songs from the bag, putting each
+
+155
+00:05:25.175 --> 00:05:27.397
+one back before the next draw, so a song
+
+156
+00:05:27.397 --> 00:05:29.567
+can come out twice and another not at all.
+
+157
+00:05:29.877 --> 00:05:30.704
+Take the median.
+
+158
+00:05:31.014 --> 00:05:32.306
+Do it again, and again.
+
+159
+00:05:32.616 --> 00:05:34.528
+Each draw gives a slightly different
+
+160
+00:05:34.528 --> 00:05:34.889
+median.
+
+161
+00:05:35.895 --> 00:05:38.191
+Now do it ten thousand times, with the
+
+162
+00:05:38.191 --> 00:05:40.487
+same seed the repo uses, and count the
+
+163
+00:05:40.487 --> 00:05:40.935
+medians.
+
+164
+00:05:41.271 --> 00:05:43.679
+With five songs the median can only be one
+
+165
+00:05:43.679 --> 00:05:45.919
+of the five values, so there are five
+
+166
+00:05:45.919 --> 00:05:46.199
+bars.
+
+167
+00:05:46.618 --> 00:05:48.825
+Cut off the lowest two and a half percent
+
+168
+00:05:48.825 --> 00:05:50.874
+and the highest two and a half percent.
+
+169
+00:05:51.190 --> 00:05:53.239
+What's left is the ninety-five percent
+
+170
+00:05:53.239 --> 00:05:55.709
+confidence interval: minus point zero two
+
+171
+00:05:55.709 --> 00:05:56.970
+to plus point four zero.
+
+172
+00:05:57.285 --> 00:05:58.178
+It includes zero.
+
+173
+00:05:58.494 --> 00:06:00.753
+Five songs can't rule out no difference,
+
+174
+00:06:00.753 --> 00:06:03.013
+which is what p of point one two five said
+
+175
+00:06:03.013 --> 00:06:03.223
+too.
+
+176
+00:06:03.705 --> 00:06:06.155
+With only five songs this is crude: the
+
+177
+00:06:06.155 --> 00:06:08.225
+interval is just the smallest and the
+
+178
+00:06:08.225 --> 00:06:08.987
+largest value.
+
+179
+00:06:09.314 --> 00:06:11.546
+The real tables bootstrap from a hundred
+
+180
+00:06:11.546 --> 00:06:13.561
+and fifty-eight songs up to eighteen
+
+181
+00:06:13.561 --> 00:06:15.903
+hundred and forty-two, where the medians
+
+182
+00:06:15.903 --> 00:06:18.190
+can land almost anywhere and the interval
+
+183
+00:06:18.190 --> 00:06:18.898
+is far finer.
+
+184
+00:06:20.413 --> 00:06:22.974
+Here is the repo's own version, from the
+
+185
+00:06:22.974 --> 00:06:25.712
+script that made the results tables: ten
+
+186
+00:06:25.712 --> 00:06:28.332
+thousand draws, seed two zero two six one
+
+187
+00:06:28.332 --> 00:06:29.106
+zero one six.
+
+188
+00:06:29.599 --> 00:06:31.856
+Draw ten thousand rows of song numbers,
+
+189
+00:06:31.856 --> 00:06:32.770
+with replacement.
+
+190
+00:06:33.092 --> 00:06:34.328
+Take each row's median.
+
+191
+00:06:34.651 --> 00:06:36.961
+Report the median of the real songs, not
+
+192
+00:06:36.961 --> 00:06:39.326
+of the draws, with the two and a half and
+
+193
+00:06:39.326 --> 00:06:41.637
+ninety-seven and a half percentiles around
+
+194
+00:06:41.637 --> 00:06:41.798
+it.
+
+195
+00:06:42.120 --> 00:06:44.108
+For a comparison, x is the list of
+
+196
+00:06:44.108 --> 00:06:45.237
+per-song differences.
+
+197
+00:06:48.700 --> 00:06:50.990
+Now the real tables, drawn as intervals
+
+198
+00:06:50.990 --> 00:06:51.699
+against zero.
+
+199
+00:06:52.026 --> 00:06:54.588
+First row: the real drummers on a hundred
+
+200
+00:06:54.588 --> 00:06:57.042
+and sixty-eight Rock songs, plus point two
+
+201
+00:06:57.042 --> 00:06:59.222
+two zero, interval plus point one six
+
+202
+00:06:59.222 --> 00:07:01.131
+eight to plus point two four three.
+
+203
+00:07:01.458 --> 00:07:03.911
+Clear of zero: real drummers follow the
+
+204
+00:07:03.911 --> 00:07:04.293
+guitar.
+
+205
+00:07:04.825 --> 00:07:07.622
+Own minus a stranger's drums: plus point
+
+206
+00:07:07.622 --> 00:07:10.176
+one eight eight, p two point four times
+
+207
+00:07:10.176 --> 00:07:12.425
+ten to the minus sixteen, ahead on
+
+208
+00:07:12.425 --> 00:07:13.581
+eighty-two percent.
+
+209
+00:07:13.945 --> 00:07:15.101
+Also clear of zero.
+
+210
+00:07:15.719 --> 00:07:17.931
+Own minus the density stand-in, a drummer
+
+211
+00:07:17.931 --> 00:07:19.842
+that only gets busier when the guitar
+
+212
+00:07:19.842 --> 00:07:22.205
+does: plus point zero two five, p point
+
+213
+00:07:22.205 --> 00:07:24.266
+zero nine, ahead on fifty-four percent.
+
+214
+00:07:24.568 --> 00:07:25.875
+Its interval crosses zero.
+
+215
+00:07:26.176 --> 00:07:28.539
+That reads as a tie: on this line the two
+
+216
+00:07:28.539 --> 00:07:29.545
+can't be told apart.
+
+217
+00:07:29.846 --> 00:07:32.159
+A tie isn't proof they're equal; it says
+
+218
+00:07:32.159 --> 00:07:33.768
+these songs can't separate them.
+
+219
+00:07:34.195 --> 00:07:36.239
+That gap is why the pattern line exists.
+
+220
+00:07:36.546 --> 00:07:38.283
+The stand-in scores zero on it by
+
+221
+00:07:38.283 --> 00:07:40.327
+construction, so beating the stand-in
+
+222
+00:07:40.327 --> 00:07:41.349
+there proves little.
+
+223
+00:07:41.655 --> 00:07:43.546
+The test that decides is own minus a
+
+224
+00:07:43.546 --> 00:07:45.998
+stranger's drums on the pattern line: plus
+
+225
+00:07:45.998 --> 00:07:48.298
+point one two nine, p one times ten to the
+
+226
+00:07:48.298 --> 00:07:50.444
+minus nine, on a hundred and twenty-two
+
+227
+00:07:50.444 --> 00:07:51.619
+songs, clear of zero.
+
+228
+00:07:53.040 --> 00:07:55.014
+Two habits for reading these tables.
+
+229
+00:07:55.342 --> 00:07:57.261
+First, always quote the song set.
+
+230
+00:07:57.590 --> 00:07:59.947
+The real drummers score plus point two two
+
+231
+00:07:59.947 --> 00:08:02.359
+zero on one set, plus point one five five
+
+232
+00:08:02.359 --> 00:08:04.826
+on another, plus point one three five on a
+
+233
+00:08:04.826 --> 00:08:05.155
+third.
+
+234
+00:08:05.484 --> 00:08:07.951
+Not a disagreement: three sets of songs.
+
+235
+00:08:08.389 --> 00:08:10.231
+Second, the interval and the p can
+
+236
+00:08:10.231 --> 00:08:10.679
+disagree.
+
+237
+00:08:10.978 --> 00:08:13.368
+Real drummers minus one LSTM: the interval
+
+238
+00:08:13.368 --> 00:08:15.409
+crosses zero, yet p is point zero zero
+
+239
+00:08:15.409 --> 00:08:15.608
+six.
+
+240
+00:08:15.907 --> 00:08:18.048
+The Wilcoxon test asks about the centre of
+
+241
+00:08:18.048 --> 00:08:20.189
+the differences, which isn't quite their
+
+242
+00:08:20.189 --> 00:08:22.379
+median, so a lopsided pile can split them.
+
+243
+00:08:22.678 --> 00:08:24.968
+The rule: quote the interval and the win
+
+244
+00:08:24.968 --> 00:08:26.960
+share beside the p, never the p alone.
+
+245
+00:08:30.407 --> 00:08:32.612
+The architecture table makes twenty-three
+
+246
+00:08:32.612 --> 00:08:34.239
+paired tests on the same songs.
+
+247
+00:08:34.554 --> 00:08:36.759
+Here are their p-values, smaller to the
+
+248
+00:08:36.759 --> 00:08:37.022
+left.
+
+249
+00:08:37.488 --> 00:08:39.348
+The usual bar is point zero five.
+
+250
+00:08:39.686 --> 00:08:41.828
+Seventeen of the twenty-three pass it.
+
+251
+00:08:42.166 --> 00:08:44.195
+But point zero five means that when
+
+252
+00:08:44.195 --> 00:08:46.618
+there's truly no difference, one test in
+
+253
+00:08:46.618 --> 00:08:48.252
+twenty passes by luck anyway.
+
+254
+00:08:48.590 --> 00:08:50.901
+Make twenty-three tests where none truly
+
+255
+00:08:50.901 --> 00:08:53.043
+differ, and about one lucky pass is
+
+256
+00:08:53.043 --> 00:08:53.550
+expected.
+
+257
+00:08:54.013 --> 00:08:56.300
+The Bonferroni correction divides the bar
+
+258
+00:08:56.300 --> 00:08:58.751
+by the number of tests: point zero five
+
+259
+00:08:58.751 --> 00:09:00.984
+over twenty-three, point zero zero two
+
+260
+00:09:00.984 --> 00:09:01.202
+two.
+
+261
+00:09:01.528 --> 00:09:03.816
+Five comparisons that passed no longer do.
+
+262
+00:09:04.143 --> 00:09:06.267
+The results document lists them, and
+
+263
+00:09:06.267 --> 00:09:08.826
+states that its tables are not corrected;
+
+264
+00:09:08.826 --> 00:09:10.406
+the report should say so too.
+
+265
+00:09:10.866 --> 00:09:13.282
+Two more caveats from the same document:
+
+266
+00:09:13.282 --> 00:09:15.646
+each epoch was picked on these same songs,
+
+267
+00:09:15.646 --> 00:09:17.905
+which flatters it, and the intervals are
+
+268
+00:09:17.905 --> 00:09:20.058
+over songs, not over repeated training
+
+269
+00:09:20.058 --> 00:09:20.321
+runs.
+
+270
+00:09:21.853 --> 00:09:24.300
+So: one number per song, summed up by the
+
+271
+00:09:24.300 --> 00:09:24.649
+median.
+
+272
+00:09:24.949 --> 00:09:26.297
+Compare parts song by song.
+
+273
+00:09:26.597 --> 00:09:28.394
+Give the median difference with its
+
+274
+00:09:28.394 --> 00:09:30.591
+bootstrap interval and the win share, and
+
+275
+00:09:30.591 --> 00:09:32.089
+the set of songs it came from.
+
+276
+00:09:32.389 --> 00:09:34.786
+The p-value says whether; the interval and
+
+277
+00:09:34.786 --> 00:09:36.134
+the win share say how much.
+

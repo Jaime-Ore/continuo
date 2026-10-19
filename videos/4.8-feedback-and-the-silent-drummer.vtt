@@ -1,0 +1,1130 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.081
+Part four point eight.
+
+2
+00:00:01.367 --> 00:00:03.469
+A drummer that hears what it just played,
+
+3
+00:00:03.469 --> 00:00:04.663
+and why ours fell silent.
+
+4
+00:00:08.590 --> 00:00:10.451
+A real drummer hears what they just
+
+5
+00:00:10.451 --> 00:00:10.813
+played.
+
+6
+00:00:11.123 --> 00:00:13.500
+That is how a groove holds: the next bar
+
+7
+00:00:13.500 --> 00:00:14.638
+leans on the last one.
+
+8
+00:00:14.948 --> 00:00:16.964
+Part four point oh named three options.
+
+9
+00:00:17.274 --> 00:00:19.496
+A: a fixed stretch of guitar in, no
+
+10
+00:00:19.496 --> 00:00:19.858
+memory.
+
+11
+00:00:20.168 --> 00:00:22.236
+B: a memory of the guitar it heard.
+
+12
+00:00:22.546 --> 00:00:25.131
+C: B, plus the drums it just played, fed
+
+13
+00:00:25.131 --> 00:00:25.544
+back in.
+
+14
+00:00:25.854 --> 00:00:27.612
+Every drummer we play is option B.
+
+15
+00:00:27.922 --> 00:00:30.196
+It remembers what it heard, never what it
+
+16
+00:00:30.196 --> 00:00:30.403
+did.
+
+17
+00:00:30.713 --> 00:00:32.419
+Option C adds that second memory.
+
+18
+00:00:32.729 --> 00:00:34.745
+Its name is output feedback, and the
+
+19
+00:00:34.745 --> 00:00:37.226
+contract wrote its risk beside it: trained
+
+20
+00:00:37.226 --> 00:00:38.880
+on real drums, run on its own.
+
+21
+00:00:42.247 --> 00:00:44.665
+In the code, option C is one function,
+
+22
+00:00:44.665 --> 00:00:47.140
+join feedback, called at the top of every
+
+23
+00:00:47.140 --> 00:00:47.478
+model.
+
+24
+00:00:47.815 --> 00:00:50.121
+An option B model gets the guitar's five
+
+25
+00:00:50.121 --> 00:00:51.246
+numbers as they are.
+
+26
+00:00:51.584 --> 00:00:53.777
+A feedback model with nothing fed back
+
+27
+00:00:53.777 --> 00:00:54.621
+refuses to run.
+
+28
+00:00:54.958 --> 00:00:57.264
+Otherwise it joins the nine drum hits of
+
+29
+00:00:57.264 --> 00:00:59.402
+slot t minus one onto the five guitar
+
+30
+00:00:59.402 --> 00:01:01.089
+numbers: fourteen inputs.
+
+31
+00:01:01.511 --> 00:01:02.790
+Only the first layer changes.
+
+32
+00:01:03.055 --> 00:01:04.953
+In the transformer, the input projection
+
+33
+00:01:04.953 --> 00:01:06.938
+reads fourteen numbers instead of five:
+
+34
+00:01:06.938 --> 00:01:08.747
+nine more inputs, each with ninety-six
+
+35
+00:01:08.747 --> 00:01:10.512
+weights, eight hundred and sixty-four.
+
+36
+00:01:10.777 --> 00:01:12.675
+So Rock C has two hundred and twenty-seven
+
+37
+00:01:12.675 --> 00:01:14.484
+thousand, seven hundred and twenty-one
+
+38
+00:01:14.484 --> 00:01:16.381
+parameters, against T one twenty-eight's
+
+39
+00:01:16.381 --> 00:01:18.367
+two hundred and twenty-six thousand, eight
+
+40
+00:01:18.367 --> 00:01:19.426
+hundred and fifty-seven.
+
+41
+00:01:22.717 --> 00:01:24.274
+Where do the nine come from?
+
+42
+00:01:24.608 --> 00:01:26.666
+In training, from the real drummer.
+
+43
+00:01:27.000 --> 00:01:29.448
+Take the real drums of a chunk, and slide
+
+44
+00:01:29.448 --> 00:01:32.007
+them one slot to the right: slot k reads
+
+45
+00:01:32.007 --> 00:01:34.176
+what the drummer played at k minus one.
+
+46
+00:01:34.510 --> 00:01:36.902
+A song's first slot reads zeros, and the
+
+47
+00:01:36.902 --> 00:01:39.183
+last slot of a chunk is carried into the
+
+48
+00:01:39.183 --> 00:01:39.461
+next.
+
+49
+00:01:39.795 --> 00:01:42.076
+Then each bit flips with probability one
+
+50
+00:01:42.076 --> 00:01:43.578
+in ten, in training only.
+
+51
+00:01:43.911 --> 00:01:46.582
+Part three point four did that arithmetic:
+
+52
+00:01:46.582 --> 00:01:48.751
+a slot arrives exactly as played about
+
+53
+00:01:48.751 --> 00:01:50.531
+thirty-nine percent of the time.
+
+54
+00:01:50.865 --> 00:01:53.035
+The validation loss gets the real slot
+
+55
+00:01:53.035 --> 00:01:54.203
+with no noise at all.
+
+56
+00:01:55.712 --> 00:01:57.773
+When it is scored, there is no real
+
+57
+00:01:57.773 --> 00:01:58.641
+drummer to copy.
+
+58
+00:01:58.966 --> 00:02:01.244
+render dot py's closed loop runs the song
+
+59
+00:02:01.244 --> 00:02:02.275
+one slot at a time.
+
+60
+00:02:02.600 --> 00:02:04.932
+The model reads one slot of guitar and the
+
+61
+00:02:04.932 --> 00:02:05.691
+previous hits.
+
+62
+00:02:06.017 --> 00:02:07.915
+A sigmoid turns each output into a
+
+63
+00:02:07.915 --> 00:02:10.193
+probability, and each voice's threshold
+
+64
+00:02:10.193 --> 00:02:12.634
+turns that into a hit or not; part four
+
+65
+00:02:12.634 --> 00:02:14.315
+point nine owns the thresholds.
+
+66
+00:02:14.640 --> 00:02:16.973
+Those hits become the next slot's previous
+
+67
+00:02:16.973 --> 00:02:19.359
+drums, starting from silence at slot zero.
+
+68
+00:02:19.684 --> 00:02:21.149
+That's closed-loop scoring.
+
+69
+00:02:21.474 --> 00:02:23.915
+The live loop is meant to be the same, one
+
+70
+00:02:23.915 --> 00:02:26.193
+call a slot, fed the hits that actually
+
+71
+00:02:26.193 --> 00:02:26.627
+sounded.
+
+72
+00:02:27.245 --> 00:02:29.810
+That is also why scoring is slower: the
+
+73
+00:02:29.810 --> 00:02:32.261
+fast pass that feeds a whole chunk at once
+
+74
+00:02:32.261 --> 00:02:34.769
+doesn't hold, because each slot needs the
+
+75
+00:02:34.769 --> 00:02:36.593
+hits decided at the slot before.
+
+76
+00:02:40.010 --> 00:02:41.641
+Here is the mismatch, built on eight
+
+77
+00:02:41.641 --> 00:02:42.227
+made-up slots.
+
+78
+00:02:42.478 --> 00:02:44.318
+The real drummer plays a kick, a hat, a
+
+79
+00:02:44.318 --> 00:02:44.946
+snare, a hat.
+
+80
+00:02:45.197 --> 00:02:46.912
+In training the model is handed that row
+
+81
+00:02:46.912 --> 00:02:48.794
+one slot late: at slot one it reads the
+
+82
+00:02:48.794 --> 00:02:49.003
+kick.
+
+83
+00:02:49.254 --> 00:02:51.053
+Now run it on its own, and say it misses
+
+84
+00:02:51.053 --> 00:02:51.722
+that first kick.
+
+85
+00:02:51.973 --> 00:02:53.562
+At slot one it reads silence, where
+
+86
+00:02:53.562 --> 00:02:55.026
+training always handed it the kick.
+
+87
+00:02:55.277 --> 00:02:57.118
+One wrong hit, and its input is a history
+
+88
+00:02:57.118 --> 00:02:58.289
+the real drummer never made.
+
+89
+00:02:58.781 --> 00:03:01.179
+And whatever it plays at slot one becomes
+
+90
+00:03:01.179 --> 00:03:03.577
+slot two's input, so a mistake does not
+
+91
+00:03:03.577 --> 00:03:04.548
+stay one mistake.
+
+92
+00:03:04.890 --> 00:03:07.574
+That's exposure bias: trained on the real
+
+93
+00:03:07.574 --> 00:03:09.458
+drummer's past, run on its own.
+
+94
+00:03:10.972 --> 00:03:13.085
+One number for how far apart the two
+
+95
+00:03:13.085 --> 00:03:13.714
+worlds are.
+
+96
+00:03:14.056 --> 00:03:16.398
+In training, even a silent bar of real
+
+97
+00:03:16.398 --> 00:03:18.168
+drums arrives with noise in it.
+
+98
+00:03:18.511 --> 00:03:20.910
+From three point four: a silent slot
+
+99
+00:03:20.910 --> 00:03:23.423
+arrives clean, all nine bits unflipped,
+
+100
+00:03:23.423 --> 00:03:25.251
+thirty-nine percent of the time.
+
+101
+00:03:25.593 --> 00:03:28.278
+A whole bar of sixteen clean slots: point
+
+102
+00:03:28.278 --> 00:03:30.791
+three eight seven to the sixteenth, about
+
+103
+00:03:30.791 --> 00:03:32.504
+two and a half in ten million.
+
+104
+00:03:32.847 --> 00:03:34.560
+About one bar in four million.
+
+105
+00:03:34.903 --> 00:03:37.473
+Closed loop from silence, the model is fed
+
+106
+00:03:37.473 --> 00:03:39.929
+exactly that clean silent bar, every bar.
+
+107
+00:03:43.297 --> 00:03:45.424
+The one option C drummer is Rock C: the
+
+108
+00:03:45.424 --> 00:03:47.551
+XMIDI Rock drummer's recipe, same songs,
+
+109
+00:03:47.551 --> 00:03:49.631
+settings and seed, with feedback switched
+
+110
+00:03:49.631 --> 00:03:49.773
+on.
+
+111
+00:03:50.056 --> 00:03:52.136
+Twelve epochs, each scored closed loop on
+
+112
+00:03:52.136 --> 00:03:54.074
+three hundred and twenty Rock validation
+
+113
+00:03:54.074 --> 00:03:54.358
+songs.
+
+114
+00:03:54.641 --> 00:03:56.579
+Eleven of the twelve play nothing at all.
+
+115
+00:03:56.863 --> 00:03:58.801
+Epoch four plays a snare on every single
+
+116
+00:03:58.801 --> 00:04:00.786
+slot, nearly seven times the real snare
+
+117
+00:04:00.786 --> 00:04:01.023
+rate.
+
+118
+00:04:01.306 --> 00:04:03.197
+That is the other way a loop fails, a
+
+119
+00:04:03.197 --> 00:04:03.575
+runaway.
+
+120
+00:04:03.859 --> 00:04:06.033
+Checked on one song: its snare threshold
+
+121
+00:04:06.033 --> 00:04:08.113
+is point zero one eight, at slot zero the
+
+122
+00:04:08.113 --> 00:04:10.051
+snare reads point zero two five, so it
+
+123
+00:04:10.051 --> 00:04:12.320
+fires, and from then on it feeds itself;
+
+124
+00:04:12.320 --> 00:04:14.211
+fed only zeros it stays near point zero
+
+125
+00:04:14.211 --> 00:04:14.636
+zero one.
+
+126
+00:04:14.920 --> 00:04:16.858
+So whether Rock C plays at all hinges on
+
+127
+00:04:16.858 --> 00:04:18.560
+slot zero's probability against its
+
+128
+00:04:18.560 --> 00:04:19.032
+threshold.
+
+129
+00:04:19.316 --> 00:04:21.254
+The battery's kit, follow and collapse
+
+130
+00:04:21.254 --> 00:04:22.389
+gates catch every epoch.
+
+131
+00:04:22.672 --> 00:04:23.523
+No eligible epoch.
+
+132
+00:04:25.046 --> 00:04:27.125
+Here is epoch eleven on one validation
+
+133
+00:04:27.125 --> 00:04:29.524
+song, eight bars from where the drums come
+
+134
+00:04:29.524 --> 00:04:31.070
+in, computed for this part.
+
+135
+00:04:31.390 --> 00:04:33.416
+The blue ticks are the real drummer's
+
+136
+00:04:33.416 --> 00:04:35.655
+kicks; the dashed line is the kick's
+
+137
+00:04:35.655 --> 00:04:37.627
+threshold, point three seven three.
+
+138
+00:04:37.947 --> 00:04:40.239
+Teacher-forced, handed the real previous
+
+139
+00:04:40.239 --> 00:04:42.425
+slot, the kick probability climbs past
+
+140
+00:04:42.425 --> 00:04:44.611
+point nine on most kicks after the first
+
+141
+00:04:44.611 --> 00:04:44.824
+bar.
+
+142
+00:04:45.144 --> 00:04:47.330
+It decodes twenty-four kicks against the
+
+143
+00:04:47.330 --> 00:04:49.675
+drummer's twenty-five, twenty-two of them
+
+144
+00:04:49.675 --> 00:04:50.475
+on a real kick.
+
+145
+00:04:50.795 --> 00:04:53.194
+Closed loop: the same model, the same
+
+146
+00:04:53.194 --> 00:04:55.593
+song, and the kick never passes point zero
+
+147
+00:04:55.593 --> 00:04:55.806
+one.
+
+148
+00:04:57.273 --> 00:04:59.221
+Over the whole of both songs:
+
+149
+00:04:59.221 --> 00:05:01.613
+teacher-forced it plays about as many hits
+
+150
+00:05:01.613 --> 00:05:03.950
+as the real drummer, eleven hundred and
+
+151
+00:05:03.950 --> 00:05:06.175
+seventy-five against eleven hundred and
+
+152
+00:05:06.175 --> 00:05:08.623
+fifty-three, and fourteen hundred and two
+
+153
+00:05:08.623 --> 00:05:10.515
+against twelve hundred and eighty.
+
+154
+00:05:10.849 --> 00:05:12.129
+Closed loop: zero.
+
+155
+00:05:12.462 --> 00:05:14.966
+Its highest kick, point zero nine three,
+
+156
+00:05:14.966 --> 00:05:17.136
+comes at slot zero, the same on both
+
+157
+00:05:17.136 --> 00:05:19.640
+songs, before any guitar has arrived;
+
+158
+00:05:19.640 --> 00:05:20.752
+after that it falls.
+
+159
+00:05:21.086 --> 00:05:23.367
+That matches the record's check on three
+
+160
+00:05:23.367 --> 00:05:25.760
+songs: at most point zero nine closed
+
+161
+00:05:25.760 --> 00:05:27.930
+loop, point nine nine teacher-forced.
+
+162
+00:05:31.273 --> 00:05:31.773
+Why silence?
+
+163
+00:05:32.022 --> 00:05:33.936
+The record's reading, and ours, is a cold
+
+164
+00:05:33.936 --> 00:05:35.933
+start: it learned to continue the drums it
+
+165
+00:05:35.933 --> 00:05:37.598
+is handed, not to start them from the
+
+166
+00:05:37.598 --> 00:05:37.889
+guitar.
+
+167
+00:05:38.139 --> 00:05:39.262
+Treat that as a hypothesis.
+
+168
+00:05:39.512 --> 00:05:41.384
+Evidence one: even teacher-forced, it
+
+169
+00:05:41.384 --> 00:05:42.549
+never sees the entry coming.
+
+170
+00:05:42.799 --> 00:05:44.504
+At the real drummer's first hit it gives
+
+171
+00:05:44.504 --> 00:05:46.252
+that drum point zero zero two five on one
+
+172
+00:05:46.252 --> 00:05:47.958
+song and point zero zero six four on the
+
+173
+00:05:47.958 --> 00:05:48.207
+other.
+
+174
+00:05:48.457 --> 00:05:50.163
+It joins in only after five, and after
+
+175
+00:05:50.163 --> 00:05:51.994
+twenty-one, real hits have been fed to it.
+
+176
+00:05:52.422 --> 00:05:54.344
+Evidence two is in the real drums
+
+177
+00:05:54.344 --> 00:05:54.966
+themselves.
+
+178
+00:05:55.305 --> 00:05:57.792
+On a hundred Rock validation songs, after
+
+179
+00:05:57.792 --> 00:06:00.053
+one silent slot the next slot has a hit
+
+180
+00:06:00.053 --> 00:06:02.710
+fifty-eight percent of the time: a gap in
+
+181
+00:06:02.710 --> 00:06:03.219
+a groove.
+
+182
+00:06:03.558 --> 00:06:05.706
+After a whole silent bar, under one
+
+183
+00:06:05.706 --> 00:06:06.158
+percent.
+
+184
+00:06:06.497 --> 00:06:08.872
+A model leaning on the drum history alone
+
+185
+00:06:08.872 --> 00:06:10.907
+learns that silence follows silence.
+
+186
+00:06:11.246 --> 00:06:13.450
+The guitar could tell it the drums are
+
+187
+00:06:13.450 --> 00:06:15.938
+coming, but on these songs its kick stays
+
+188
+00:06:15.938 --> 00:06:18.142
+far below its threshold of point three
+
+189
+00:06:18.142 --> 00:06:18.820
+seven three.
+
+190
+00:06:19.160 --> 00:06:21.421
+No first hit, so nothing to hear back.
+
+191
+00:06:21.760 --> 00:06:24.021
+Silence in, silence out: still a
+
+192
+00:06:24.021 --> 00:06:24.643
+hypothesis.
+
+193
+00:06:26.091 --> 00:06:28.220
+Evidence three, a probe on the same two
+
+194
+00:06:28.220 --> 00:06:30.552
+songs: feed it the real previous slot up
+
+195
+00:06:30.552 --> 00:06:32.833
+to slot one thousand and twenty-four, then
+
+196
+00:06:32.833 --> 00:06:33.188
+let go.
+
+197
+00:06:33.492 --> 00:06:35.621
+It keeps playing, about as many hits as
+
+198
+00:06:35.621 --> 00:06:36.229
+the drummer.
+
+199
+00:06:36.533 --> 00:06:38.662
+But every bar after that is an exact copy
+
+200
+00:06:38.662 --> 00:06:40.740
+of the bar before; the real drummer
+
+201
+00:06:40.740 --> 00:06:42.818
+repeats a bar forty-five and twenty-five
+
+202
+00:06:42.818 --> 00:06:43.832
+percent of the time.
+
+203
+00:06:44.136 --> 00:06:46.417
+Zero the guitar after the handover, and on
+
+204
+00:06:46.417 --> 00:06:48.445
+the first song not one of four thousand
+
+205
+00:06:48.445 --> 00:06:50.675
+six hundred and eight cells, one per slot
+
+206
+00:06:50.675 --> 00:06:51.740
+and voice, changes.
+
+207
+00:06:52.044 --> 00:06:54.021
+It is reading its own drums, not the
+
+208
+00:06:54.021 --> 00:06:54.375
+guitar.
+
+209
+00:06:54.679 --> 00:06:56.960
+What stays open: handed only the sparse
+
+210
+00:06:56.960 --> 00:06:59.140
+start of the second song, it fell silent
+
+211
+00:06:59.140 --> 00:06:59.444
+again.
+
+212
+00:06:59.748 --> 00:07:01.877
+Two songs; a diagnostic, not a run.
+
+213
+00:07:05.240 --> 00:07:07.115
+Rock C's validation loss is point zero
+
+214
+00:07:07.115 --> 00:07:07.837
+eight six zero.
+
+215
+00:07:08.125 --> 00:07:10.049
+The plain Rock drummer's, on the same
+
+216
+00:07:10.049 --> 00:07:12.020
+songs with the same seed, is point two
+
+217
+00:07:12.020 --> 00:07:12.694
+zero six five.
+
+218
+00:07:12.982 --> 00:07:13.704
+Less than half.
+
+219
+00:07:13.992 --> 00:07:15.387
+It means nothing for playing.
+
+220
+00:07:15.675 --> 00:07:17.695
+The validation pass hands Rock C the real
+
+221
+00:07:17.695 --> 00:07:19.570
+previous slot, so much of its job is
+
+222
+00:07:19.570 --> 00:07:21.205
+copying what the drummer just did.
+
+223
+00:07:21.494 --> 00:07:23.706
+Part three point four flagged this; here
+
+224
+00:07:23.706 --> 00:07:24.571
+is the size of it.
+
+225
+00:07:25.015 --> 00:07:27.522
+Same model, same song, a plain loss over
+
+226
+00:07:27.522 --> 00:07:30.086
+every slot: teacher-forced, point zero
+
+227
+00:07:30.086 --> 00:07:30.643
+three six.
+
+228
+00:07:30.978 --> 00:07:33.652
+The plain Rock drummer on that song: point
+
+229
+00:07:33.652 --> 00:07:34.321
+one one six.
+
+230
+00:07:34.656 --> 00:07:37.163
+Closed loop, Rock C: point five seven.
+
+231
+00:07:37.498 --> 00:07:39.838
+And a model that says point zero zero one
+
+232
+00:07:39.838 --> 00:07:42.290
+for every drum: point five seven seven.
+
+233
+00:07:42.625 --> 00:07:44.687
+The second song tells the same story.
+
+234
+00:07:45.021 --> 00:07:47.473
+Closed loop, Rock C does about as well as
+
+235
+00:07:47.473 --> 00:07:49.368
+saying almost never to everything.
+
+236
+00:07:49.702 --> 00:07:51.931
+The number to trust is the battery's,
+
+237
+00:07:51.931 --> 00:07:54.272
+scored closed loop, as three point five
+
+238
+00:07:54.272 --> 00:07:54.550
+said.
+
+239
+00:07:57.940 --> 00:07:58.757
+What comes next?
+
+240
+00:07:59.063 --> 00:08:01.257
+The record lists three attempts, Jaime's
+
+241
+00:08:01.257 --> 00:08:02.788
+call, and none has been run.
+
+242
+00:08:03.095 --> 00:08:05.136
+More flip noise, point three to point
+
+243
+00:08:05.136 --> 00:08:05.391
+five.
+
+244
+00:08:05.698 --> 00:08:08.198
+Scheduled sampling: in training, feed the
+
+245
+00:08:08.198 --> 00:08:10.342
+model its own decoded hits instead of the
+
+246
+00:08:10.342 --> 00:08:12.639
+real ones, for a share of slots that grows
+
+247
+00:08:12.639 --> 00:08:14.782
+as training goes on, so it practises on
+
+248
+00:08:14.782 --> 00:08:15.446
+its own past.
+
+249
+00:08:15.752 --> 00:08:18.099
+Or a warm start: a real first bar fed in
+
+250
+00:08:18.099 --> 00:08:18.355
+live.
+
+251
+00:08:18.661 --> 00:08:21.213
+Our probe is a caution, not a test: handed
+
+252
+00:08:21.213 --> 00:08:23.611
+real drums, the first song kept going, but
+
+253
+00:08:23.611 --> 00:08:25.806
+as a one-bar loop, and the second song's
+
+254
+00:08:25.806 --> 00:08:27.235
+sparse start was not enough.
+
+255
+00:08:27.541 --> 00:08:29.430
+The report plan cuts Rock C from the
+
+256
+00:08:29.430 --> 00:08:31.777
+results: one discussion paragraph and an
+
+257
+00:08:31.777 --> 00:08:32.594
+appendix figure.
+
+258
+00:08:34.027 --> 00:08:35.916
+And live, Rock C cannot run at all in this
+
+259
+00:08:35.916 --> 00:08:36.126
+tree.
+
+260
+00:08:36.378 --> 00:08:38.015
+The live Stepper's step takes the five
+
+261
+00:08:38.015 --> 00:08:39.820
+guitar numbers, and calls the model with
+
+262
+00:08:39.820 --> 00:08:41.625
+no previous hits, which a feedback model
+
+263
+00:08:41.625 --> 00:08:41.961
+refuses.
+
+264
+00:08:42.213 --> 00:08:43.976
+The option C branch has a step that takes
+
+265
+00:08:43.976 --> 00:08:45.823
+them; it was not merged into this tree.
+
+266
+00:08:46.075 --> 00:08:47.250
+That is finding thirty-four.
+
+267
+00:08:47.502 --> 00:08:49.181
+Wired in, we expect it would still be
+
+268
+00:08:49.181 --> 00:08:51.196
+silent, but that is an inference; it was
+
+269
+00:08:51.196 --> 00:08:51.825
+never run live.
+
+270
+00:08:53.310 --> 00:08:55.257
+Say it in one breath: option C feeds back
+
+271
+00:08:55.257 --> 00:08:57.245
+the drums it played: the real drummer's in
+
+272
+00:08:57.245 --> 00:08:58.571
+training, its own when scored.
+
+273
+00:08:58.820 --> 00:09:00.601
+From silence, epoch eleven never makes a
+
+274
+00:09:00.601 --> 00:09:02.051
+first hit, so it never hears one.
+
+275
+00:09:02.299 --> 00:09:04.081
+And its lower loss mostly measures copying
+
+276
+00:09:04.081 --> 00:09:05.033
+the slot it was handed.
+
+277
+00:09:05.282 --> 00:09:06.815
+This pairs with the option B against
+
+278
+00:09:06.815 --> 00:09:08.389
+option C trade-off in part two of the
+
+279
+00:09:08.389 --> 00:09:10.005
+course explainer, and the contract's
+
+280
+00:09:10.005 --> 00:09:10.543
+section five.
+
+281
+00:09:10.792 --> 00:09:12.863
+Next, part four point nine: the decoder,
+
+282
+00:09:12.863 --> 00:09:13.981
+from probabilities to hits.
+

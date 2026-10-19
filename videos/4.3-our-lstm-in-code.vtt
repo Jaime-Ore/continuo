@@ -1,0 +1,1022 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.512
+Part four point three.
+
+2
+00:00:01.913 --> 00:00:05.125
+Our LSTM in code: the lines of model dot p
+
+3
+00:00:05.125 --> 00:00:06.999
+y that are the LSTM drummer.
+
+4
+00:00:09.179 --> 00:00:11.141
+Four point two built the cell: a cell
+
+5
+00:00:11.141 --> 00:00:12.828
+state, three gates and a candidate.
+
+6
+00:00:13.102 --> 00:00:15.155
+Here is the whole model around it: five
+
+7
+00:00:15.155 --> 00:00:17.116
+inputs, two LSTM layers of a hundred and
+
+8
+00:00:17.116 --> 00:00:19.260
+twenty-eight, each carrying h and c, and a
+
+9
+00:00:19.260 --> 00:00:20.126
+head to nine drums.
+
+10
+00:00:20.400 --> 00:00:22.453
+We read the code, count its weights, run
+
+11
+00:00:22.453 --> 00:00:24.232
+the worked slot through it, read its
+
+12
+00:00:24.232 --> 00:00:25.646
+memory, and then run it live.
+
+13
+00:00:29.940 --> 00:00:32.320
+Line a hundred and two is the class; a
+
+14
+00:00:32.320 --> 00:00:34.863
+hundred and three says contract option B:
+
+15
+00:00:34.863 --> 00:00:37.297
+memory over the guitar, no feedback of its
+
+16
+00:00:37.297 --> 00:00:37.838
+own drums.
+
+17
+00:00:38.163 --> 00:00:40.327
+A hundred and five is why it is an LSTM.
+
+18
+00:00:40.651 --> 00:00:42.923
+The twelfth of September plan first named
+
+19
+00:00:42.923 --> 00:00:45.520
+a GRU, a gated recurrent unit: a lighter
+
+20
+00:00:45.520 --> 00:00:47.846
+gated loop with only h, no separate cell.
+
+21
+00:00:48.171 --> 00:00:49.199
+It was never built.
+
+22
+00:00:49.523 --> 00:00:51.741
+The plan was revised up because training
+
+23
+00:00:51.741 --> 00:00:54.176
+in chunks of sixteen windows, five hundred
+
+24
+00:00:54.176 --> 00:00:56.556
+and twelve slots, is about persistence,
+
+25
+00:00:56.556 --> 00:00:58.882
+and the LSTM's separate cell state is what
+
+26
+00:00:58.882 --> 00:00:59.532
+helps there.
+
+27
+00:00:59.856 --> 00:01:01.695
+Cheapness was the wrong criterion.
+
+28
+00:01:03.959 --> 00:01:06.373
+The defaults are L thirty-two's settings:
+
+29
+00:01:06.373 --> 00:01:08.376
+a hundred and twenty-eight wide, two
+
+30
+00:01:08.376 --> 00:01:10.379
+layers, dropout zero point one, no
+
+31
+00:01:10.379 --> 00:01:10.841
+feedback.
+
+32
+00:01:11.149 --> 00:01:13.357
+n in is five; fourteen under option C.
+
+33
+00:01:13.666 --> 00:01:16.079
+One call builds the whole recurrent part:
+
+34
+00:01:16.079 --> 00:01:18.288
+PyTorch's LSTM, five in, a hundred and
+
+35
+00:01:18.288 --> 00:01:20.650
+twenty-eight wide, two layers stacked, so
+
+36
+00:01:20.650 --> 00:01:22.191
+layer two reads layer one's h.
+
+37
+00:01:22.499 --> 00:01:24.348
+Four point two's equations, twice.
+
+38
+00:01:24.656 --> 00:01:27.122
+Batch first: the tensors are songs, then
+
+39
+00:01:27.122 --> 00:01:28.303
+slots, then features.
+
+40
+00:01:28.611 --> 00:01:30.871
+The dropout acts only between the layers,
+
+41
+00:01:30.871 --> 00:01:31.949
+and only in training.
+
+42
+00:01:32.258 --> 00:01:34.620
+And the head: a hundred and twenty-eight
+
+43
+00:01:34.620 --> 00:01:35.391
+to nine logits.
+
+44
+00:01:38.723 --> 00:01:39.406
+Count the weights.
+
+45
+00:01:39.634 --> 00:01:41.152
+Each matrix has five hundred and twelve
+
+46
+00:01:41.152 --> 00:01:42.633
+rows: four gates of a hundred and
+
+47
+00:01:42.633 --> 00:01:43.771
+twenty-eight units, stacked.
+
+48
+00:01:43.999 --> 00:01:45.707
+Layer one's input weights: five hundred
+
+49
+00:01:45.707 --> 00:01:47.225
+and twelve by five, two thousand five
+
+50
+00:01:47.225 --> 00:01:47.908
+hundred and sixty.
+
+51
+00:01:48.136 --> 00:01:50.033
+Its memory weights, on last slot's h: five
+
+52
+00:01:50.033 --> 00:01:51.400
+hundred and twelve by a hundred and
+
+53
+00:01:51.400 --> 00:01:52.956
+twenty-eight, sixty-five thousand five
+
+54
+00:01:52.956 --> 00:01:53.829
+hundred and thirty-six.
+
+55
+00:01:54.056 --> 00:01:55.499
+Two biases of five hundred and twelve.
+
+56
+00:01:55.726 --> 00:01:57.548
+Layer one: sixty-nine thousand one hundred
+
+57
+00:01:57.548 --> 00:01:57.966
+and twenty.
+
+58
+00:01:58.360 --> 00:02:00.368
+Layer two reads layer one's h, so its
+
+59
+00:02:00.368 --> 00:02:02.325
+input weights are as big as its memory
+
+60
+00:02:02.325 --> 00:02:02.727
+weights.
+
+61
+00:02:03.028 --> 00:02:05.387
+With its biases: a hundred and thirty-two
+
+62
+00:02:05.387 --> 00:02:06.592
+thousand and ninety-six.
+
+63
+00:02:06.893 --> 00:02:09.102
+The head: one thousand one hundred and
+
+64
+00:02:09.102 --> 00:02:09.604
+sixty-one.
+
+65
+00:02:09.905 --> 00:02:12.264
+Total: two hundred and two thousand three
+
+66
+00:02:12.264 --> 00:02:14.473
+hundred and seventy-seven, exactly what L
+
+67
+00:02:14.473 --> 00:02:15.979
+thirty-two's manifest records.
+
+68
+00:02:17.798 --> 00:02:20.223
+As one formula per layer: four gates,
+
+69
+00:02:20.223 --> 00:02:22.487
+times a hundred and twenty-eight units,
+
+70
+00:02:22.487 --> 00:02:24.697
+times what each unit reads, the inputs
+
+71
+00:02:24.697 --> 00:02:27.069
+plus last slot's h, plus two biases a row.
+
+72
+00:02:27.392 --> 00:02:29.817
+Layer one reads five numbers; layer two
+
+73
+00:02:29.817 --> 00:02:32.189
+reads a whole h, so it is nearly twice as
+
+74
+00:02:32.189 --> 00:02:32.405
+big.
+
+75
+00:02:36.690 --> 00:02:39.185
+init state makes the memory: zeros of
+
+76
+00:02:39.185 --> 00:02:41.621
+shape layers by songs by hidden, two by
+
+77
+00:02:41.621 --> 00:02:43.884
+one by a hundred and twenty-eight live.
+
+78
+00:02:44.232 --> 00:02:46.958
+That tensor is h, and a clone is c, so the
+
+79
+00:02:46.958 --> 00:02:47.945
+two are separate.
+
+80
+00:02:48.293 --> 00:02:51.019
+Two layers, times h and c, times a hundred
+
+81
+00:02:51.019 --> 00:02:53.746
+and twenty-eight: five hundred and twelve
+
+82
+00:02:53.746 --> 00:02:54.210
+numbers.
+
+83
+00:02:54.558 --> 00:02:56.357
+That is all the LSTM remembers.
+
+84
+00:02:56.705 --> 00:02:59.083
+Forward runs the LSTM over every slot it
+
+85
+00:02:59.083 --> 00:03:01.346
+is given, five hundred and twelve in
+
+86
+00:03:01.346 --> 00:03:03.725
+training or one live, carrying h and c
+
+87
+00:03:03.725 --> 00:03:05.813
+along and handing back the new pair.
+
+88
+00:03:06.161 --> 00:03:08.656
+Then the head turns each slot's top h into
+
+89
+00:03:08.656 --> 00:03:09.352
+nine logits.
+
+90
+00:03:11.683 --> 00:03:14.268
+detach state is three point four's cut:
+
+91
+00:03:14.268 --> 00:03:16.738
+values kept, gradient history dropped,
+
+92
+00:03:16.738 --> 00:03:17.772
+after every chunk.
+
+93
+00:03:18.117 --> 00:03:20.472
+state batch size reads the songs axis,
+
+94
+00:03:20.472 --> 00:03:21.909
+which the trainer checks.
+
+95
+00:03:22.253 --> 00:03:24.379
+n params counts every learned number.
+
+96
+00:03:26.872 --> 00:03:29.265
+describe is what the trainer writes into
+
+97
+00:03:29.265 --> 00:03:30.433
+each run's manifest.
+
+98
+00:03:30.783 --> 00:03:33.468
+Its state size is two, for h and c, times
+
+99
+00:03:33.468 --> 00:03:36.153
+layers, times hidden: five hundred and
+
+100
+00:03:36.153 --> 00:03:36.562
+twelve.
+
+101
+00:03:40.013 --> 00:03:42.493
+The worked slot: song zero zero one one b
+
+102
+00:03:42.493 --> 00:03:44.339
+three c f, slot five hundred and
+
+103
+00:03:44.339 --> 00:03:46.186
+seventy-six, the downbeat of bar
+
+104
+00:03:46.186 --> 00:03:46.766
+thirty-six.
+
+105
+00:03:47.083 --> 00:03:49.140
+The drummer played kick and closed hat.
+
+106
+00:03:49.457 --> 00:03:51.673
+With no input layer, the LSTM reads the
+
+107
+00:03:51.673 --> 00:03:54.100
+five numbers straight in: no onset, no
+
+108
+00:03:54.100 --> 00:03:56.368
+velocity, intensity zero point four four
+
+109
+00:03:56.368 --> 00:03:58.637
+one, the velocity flag one, tempo zero.
+
+110
+00:04:00.374 --> 00:04:02.533
+In layer one, the memory term, the weights
+
+111
+00:04:02.533 --> 00:04:04.094
+times last slot's h, has length
+
+112
+00:04:04.094 --> 00:04:06.298
+eighty-seven against the input term's ten;
+
+113
+00:04:06.298 --> 00:04:08.227
+however the two biases are split, it is
+
+114
+00:04:08.227 --> 00:04:10.432
+several times larger: here the past speaks
+
+115
+00:04:10.432 --> 00:04:11.534
+louder than the present.
+
+116
+00:04:11.810 --> 00:04:13.693
+Forty-four forget gates of a hundred and
+
+117
+00:04:13.693 --> 00:04:15.621
+twenty-eight are above zero point nine,
+
+118
+00:04:15.621 --> 00:04:17.734
+keeping; fifty-nine are below zero point
+
+119
+00:04:17.734 --> 00:04:18.698
+one, throwing away.
+
+120
+00:04:19.147 --> 00:04:20.876
+Layer two reads layer one's h.
+
+121
+00:04:21.221 --> 00:04:23.410
+Here the two terms are about equal,
+
+122
+00:04:23.410 --> 00:04:26.003
+fifty-five and forty-eight; thirty-nine
+
+123
+00:04:26.003 --> 00:04:28.192
+cells keep and thirty-five throw away.
+
+124
+00:04:29.973 --> 00:04:31.684
+The head gives nine logits, and the
+
+125
+00:04:31.684 --> 00:04:32.945
+sigmoids nine probabilities.
+
+126
+00:04:33.215 --> 00:04:34.115
+None reaches a half.
+
+127
+00:04:34.386 --> 00:04:35.916
+The white ticks are the decoder's
+
+128
+00:04:35.916 --> 00:04:37.897
+thresholds, the architecture scorer's for
+
+129
+00:04:37.897 --> 00:04:38.618
+this checkpoint.
+
+130
+00:04:38.888 --> 00:04:40.824
+Kick, at zero point three four, clears
+
+131
+00:04:40.824 --> 00:04:43.075
+zero point two eight; snare, at zero point
+
+132
+00:04:43.075 --> 00:04:45.101
+two two, clears zero point one eight;
+
+133
+00:04:45.101 --> 00:04:46.992
+closed hat, at zero point three zero,
+
+134
+00:04:46.992 --> 00:04:48.163
+clears zero point one two.
+
+135
+00:04:48.433 --> 00:04:49.333
+The rest fall short.
+
+136
+00:04:49.707 --> 00:04:51.898
+So L thirty-two plays kick, snare and
+
+137
+00:04:51.898 --> 00:04:54.308
+closed hat, where the drummer played kick
+
+138
+00:04:54.308 --> 00:04:56.499
+and closed hat: the snare is extra.
+
+139
+00:04:56.828 --> 00:04:58.964
+Across bar thirty-six it puts kick and
+
+140
+00:04:58.964 --> 00:05:01.429
+snare together on all four beats, and gets
+
+141
+00:05:01.429 --> 00:05:02.689
+every closed hat right.
+
+142
+00:05:03.018 --> 00:05:04.168
+One slot of one song.
+
+143
+00:05:07.783 --> 00:05:09.876
+How long does L thirty-two remember?
+
+144
+00:05:10.225 --> 00:05:12.492
+Read it off the forget gates as a time
+
+145
+00:05:12.492 --> 00:05:15.225
+constant: the slots until a value held in
+
+146
+00:05:15.225 --> 00:05:17.609
+a cell has shrunk to one over e, about
+
+147
+00:05:17.609 --> 00:05:18.829
+thirty-seven percent.
+
+148
+00:05:19.178 --> 00:05:21.794
+Picture a forget gate held at one value, f
+
+149
+00:05:21.794 --> 00:05:23.655
+bar, with nothing new written.
+
+150
+00:05:24.004 --> 00:05:26.504
+After k slots a held value is f bar to the
+
+151
+00:05:26.504 --> 00:05:26.620
+k.
+
+152
+00:05:26.969 --> 00:05:29.817
+Set that to one over e, and solve: tau is
+
+153
+00:05:29.817 --> 00:05:31.678
+minus one over the log of f bar.
+
+154
+00:05:32.027 --> 00:05:34.527
+For illustration, f bar of a half halves
+
+155
+00:05:34.527 --> 00:05:36.503
+the value each slot, and leaves
+
+156
+00:05:36.503 --> 00:05:38.945
+thirty-seven percent after one point four
+
+157
+00:05:38.945 --> 00:05:39.585
+four slots.
+
+158
+00:05:41.345 --> 00:05:43.503
+For L thirty-two, f bar is each unit's
+
+159
+00:05:43.503 --> 00:05:45.713
+forget gate averaged from slot sixty-four
+
+160
+00:05:45.713 --> 00:05:48.134
+on, leaving out the song's start, where a
+
+161
+00:05:48.134 --> 00:05:50.398
+few units' gates dip and drag a whole-song
+
+162
+00:05:50.398 --> 00:05:51.082
+average down.
+
+163
+00:05:51.398 --> 00:05:53.293
+Half of layer one's units have time
+
+164
+00:05:53.293 --> 00:05:55.240
+constants under zero point eight one
+
+165
+00:05:55.240 --> 00:05:57.609
+slots, half of layer two's under one point
+
+166
+00:05:57.609 --> 00:05:59.556
+five: about a fifth of a second.
+
+167
+00:05:59.872 --> 00:06:02.083
+Twenty-eight units of layer one and eight
+
+168
+00:06:02.083 --> 00:06:04.346
+of layer two pass sixty-four slots, four
+
+169
+00:06:04.346 --> 00:06:06.767
+bars; fourteen and two pass five hundred
+
+170
+00:06:06.767 --> 00:06:09.188
+and twelve, and the longest, about twelve
+
+171
+00:06:09.188 --> 00:06:11.399
+thousand slots, is longer than the song.
+
+172
+00:06:13.145 --> 00:06:15.021
+One long memory, and what it holds.
+
+173
+00:06:15.326 --> 00:06:17.759
+Layer one's unit seventy-eight: its forget
+
+174
+00:06:17.759 --> 00:06:19.889
+gate dips below zero point nine nine only
+
+175
+00:06:19.889 --> 00:06:21.816
+in the song's first thirty-four slots.
+
+176
+00:06:22.120 --> 00:06:24.249
+Its cell climbs about zero point nine for
+
+177
+00:06:24.249 --> 00:06:26.531
+each guitar onset it hears: two hundred
+
+178
+00:06:26.531 --> 00:06:28.407
+and forty-four after two hundred and
+
+179
+00:06:28.407 --> 00:06:30.283
+forty-nine onsets at the worked slot.
+
+180
+00:06:30.587 --> 00:06:31.449
+It counts onsets.
+
+181
+00:06:31.754 --> 00:06:33.630
+From slot sixty-four its forget gate
+
+182
+00:06:33.630 --> 00:06:35.810
+averages zero point nine nine nine nine,
+
+183
+00:06:35.810 --> 00:06:37.939
+and after slot one hundred the cell never
+
+184
+00:06:37.939 --> 00:06:40.069
+falls more than about three hundredths in
+
+185
+00:06:40.069 --> 00:06:40.424
+a slot.
+
+186
+00:06:40.728 --> 00:06:43.111
+So read the time constants as: most cells
+
+187
+00:06:43.111 --> 00:06:45.190
+forget within a slot or two, and a few
+
+188
+00:06:45.190 --> 00:06:47.320
+dozen hold for tens to thousands of slots.
+
+189
+00:06:47.624 --> 00:06:49.753
+An approximation, from one song and one
+
+190
+00:06:49.753 --> 00:06:50.311
+checkpoint.
+
+191
+00:06:54.707 --> 00:06:56.404
+Live, the loop calls the stepper once a
+
+192
+00:06:56.404 --> 00:06:56.606
+slot.
+
+193
+00:06:56.849 --> 00:06:58.546
+reset makes a fresh state at the start of
+
+194
+00:06:58.546 --> 00:06:59.759
+each segment, on a downbeat.
+
+195
+00:07:00.001 --> 00:07:01.739
+step copies the five numbers into a buffer
+
+196
+00:07:01.739 --> 00:07:02.709
+of one song, one slot.
+
+197
+00:07:02.952 --> 00:07:04.730
+Then the same forward as training, with C
+
+198
+00:07:04.730 --> 00:07:06.509
+equal to one, and the new h and c kept in
+
+199
+00:07:06.509 --> 00:07:07.843
+self dot state for the next call.
+
+200
+00:07:08.085 --> 00:07:09.257
+That line is the whole carry.
+
+201
+00:07:09.500 --> 00:07:11.278
+The sigmoid gives nine probabilities, and
+
+202
+00:07:11.278 --> 00:07:12.854
+each is compared with its threshold to
+
+203
+00:07:12.854 --> 00:07:14.552
+give the hits, returned with the step's
+
+204
+00:07:14.552 --> 00:07:14.754
+time.
+
+205
+00:07:16.165 --> 00:07:17.433
+How long does a step take?
+
+206
+00:07:17.726 --> 00:07:19.774
+Two measured numbers, both for the live
+
+207
+00:07:19.774 --> 00:07:21.823
+link's LSTM, an older checkpoint of the
+
+208
+00:07:21.823 --> 00:07:22.798
+same class and size.
+
+209
+00:07:23.091 --> 00:07:25.578
+Run warm, back to back, offline: a median
+
+210
+00:07:25.578 --> 00:07:27.578
+of zero point zero four one milliseconds.
+
+211
+00:07:27.870 --> 00:07:30.065
+In the real-time loop, where the core goes
+
+212
+00:07:30.065 --> 00:07:32.260
+cold between slots, twelve sessions give a
+
+213
+00:07:32.260 --> 00:07:34.064
+median of zero point six four, and
+
+214
+00:07:34.064 --> 00:07:36.064
+ninety-nine in a hundred under about one
+
+215
+00:07:36.064 --> 00:07:36.552
+point one.
+
+216
+00:07:36.844 --> 00:07:38.795
+But one step of the twelve hundred took
+
+217
+00:07:38.795 --> 00:07:40.502
+fifty-two milliseconds, past the
+
+218
+00:07:40.502 --> 00:07:42.258
+thirty-seven and a half millisecond
+
+219
+00:07:42.258 --> 00:07:44.355
+window; no note was late in that slot.
+
+220
+00:07:44.648 --> 00:07:46.989
+And the work never grows: five hundred and
+
+221
+00:07:46.989 --> 00:07:49.086
+twelve numbers of state at slot one and at
+
+222
+00:07:49.086 --> 00:07:50.013
+slot five thousand.
+
+223
+00:07:53.533 --> 00:07:54.959
+One honest note about training.
+
+224
+00:07:55.235 --> 00:07:57.120
+L one twenty-eight is the same class and
+
+225
+00:07:57.120 --> 00:07:59.281
+size; its run differs from L thirty-two's
+
+226
+00:07:59.281 --> 00:08:01.120
+only in the horizon, two thousand and
+
+227
+00:08:01.120 --> 00:08:03.051
+forty-eight slots instead of five hundred
+
+228
+00:08:03.051 --> 00:08:04.109
+and twelve slot chunks.
+
+229
+00:08:04.385 --> 00:08:06.086
+Both sat on the same loss plateau at
+
+230
+00:08:06.086 --> 00:08:06.362
+first.
+
+231
+00:08:06.638 --> 00:08:08.799
+L thirty-two left it at epoch four; L one
+
+232
+00:08:08.799 --> 00:08:11.006
+twenty-eight never did: the record says on
+
+233
+00:08:11.006 --> 00:08:12.064
+the plateau throughout.
+
+234
+00:08:12.340 --> 00:08:14.271
+Its probabilities are flat, the same at
+
+235
+00:08:14.271 --> 00:08:15.926
+every slot whatever the guitar does.
+
+236
+00:08:16.202 --> 00:08:18.271
+They sit right at the thresholds, so it is
+
+237
+00:08:18.271 --> 00:08:20.248
+silent at the worked slot and through bars
+
+238
+00:08:20.248 --> 00:08:22.179
+three to forty-four, while tiny wiggles
+
+239
+00:08:22.179 --> 00:08:24.111
+give closed-hat hits on eight hundred and
+
+240
+00:08:24.111 --> 00:08:25.674
+two of the song's slots elsewhere.
+
+241
+00:08:25.950 --> 00:08:28.157
+Why it stayed stuck is not measured; there
+
+242
+00:08:28.157 --> 00:08:29.031
+is one run of each.
+
+243
+00:08:29.306 --> 00:08:31.284
+A fact about one training run, not about
+
+244
+00:08:31.284 --> 00:08:31.697
+the LSTM.
+
+245
+00:08:33.340 --> 00:08:35.109
+Say it in one breath: CausalLSTM is
+
+246
+00:08:35.109 --> 00:08:36.921
+PyTorch's LSTM, two layers of a hundred
+
+247
+00:08:36.921 --> 00:08:38.776
+and twenty-eight, reading five numbers a
+
+248
+00:08:38.776 --> 00:08:40.675
+slot, with a head to nine drums: two
+
+249
+00:08:40.675 --> 00:08:42.616
+hundred and two thousand weights, and five
+
+250
+00:08:42.616 --> 00:08:44.428
+hundred and twelve numbers of memory, h
+
+251
+00:08:44.428 --> 00:08:46.068
+and c, carried one slot a call live.
+
+252
+00:08:46.327 --> 00:08:48.225
+This pairs with Inside the Drum LSTM, the
+
+253
+00:08:48.225 --> 00:08:50.081
+twenty-third of September explainer, and
+
+254
+00:08:50.081 --> 00:08:51.418
+the year explainer's row eight.
+
+255
+00:08:51.677 --> 00:08:53.791
+Next, four point four: state-space models.
+

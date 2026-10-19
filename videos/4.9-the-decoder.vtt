@@ -1,0 +1,914 @@
+WEBVTT
+
+1
+00:00:00.060 --> 00:00:00.848
+Four point nine.
+
+2
+00:00:01.144 --> 00:00:03.509
+The decoder: how nine probabilities become
+
+3
+00:00:03.509 --> 00:00:03.804
+drums.
+
+4
+00:00:07.737 --> 00:00:10.306
+Recap from four point seven point eleven:
+
+5
+00:00:10.306 --> 00:00:12.164
+each slot, the model gives nine
+
+6
+00:00:12.164 --> 00:00:13.804
+probabilities, one per drum.
+
+7
+00:00:14.132 --> 00:00:16.209
+The threshold decoder turns them into
+
+8
+00:00:16.209 --> 00:00:18.668
+hits: a drum plays when its probability
+
+9
+00:00:18.668 --> 00:00:19.871
+reaches its threshold.
+
+10
+00:00:20.199 --> 00:00:21.839
+How are the thresholds chosen?
+
+11
+00:00:23.289 --> 00:00:24.902
+The obvious choice is one half.
+
+12
+00:00:25.215 --> 00:00:27.453
+But recap three point two: our models
+
+13
+00:00:27.453 --> 00:00:29.744
+train on plain cross-entropy, so a drum's
+
+14
+00:00:29.744 --> 00:00:31.722
+best constant guess is how often it's
+
+15
+00:00:31.722 --> 00:00:32.086
+played.
+
+16
+00:00:32.398 --> 00:00:34.324
+The kick plays on sixteen and a half
+
+17
+00:00:34.324 --> 00:00:36.563
+percent of slots, the high tom on nought
+
+18
+00:00:36.563 --> 00:00:37.812
+point two eight percent.
+
+19
+00:00:38.124 --> 00:00:39.946
+Every drum sits far below one half.
+
+20
+00:00:41.808 --> 00:00:44.166
+Here's one half on a real model: T128, on
+
+21
+00:00:44.166 --> 00:00:46.138
+forty validation songs, where drummers
+
+22
+00:00:46.138 --> 00:00:47.534
+kicked twelve thousand times.
+
+23
+00:00:47.822 --> 00:00:49.939
+At one half, T128 kicks about fifty-seven
+
+24
+00:00:49.939 --> 00:00:52.201
+hundred times, under half, with two thirds
+
+25
+00:00:52.201 --> 00:00:54.221
+of the snares and just over half the hats.
+
+26
+00:00:54.510 --> 00:00:56.483
+The other six drums never play: its
+
+27
+00:00:56.483 --> 00:00:58.455
+highest crash is point four three, its
+
+28
+00:00:58.455 --> 00:01:00.139
+highest high tom under a hundredth.
+
+29
+00:01:00.549 --> 00:01:02.771
+So no single threshold works: each drum
+
+30
+00:01:02.771 --> 00:01:03.412
+gets its own.
+
+31
+00:01:06.857 --> 00:01:08.905
+The thresholds are fitted on forty
+
+32
+00:01:08.905 --> 00:01:11.420
+validation songs, numbers one hundred to
+
+33
+00:01:11.420 --> 00:01:14.170
+one thirty-nine, set aside, so no score or
+
+34
+00:01:14.170 --> 00:01:16.686
+listening clip is ever judged on the songs
+
+35
+00:01:16.686 --> 00:01:17.506
+that tuned it.
+
+36
+00:01:17.973 --> 00:01:18.697
+Take the kick.
+
+37
+00:01:19.008 --> 00:01:20.922
+Those songs have sixty-four thousand
+
+38
+00:01:20.922 --> 00:01:22.940
+slots, and drummers kicked on twelve
+
+39
+00:01:22.940 --> 00:01:24.234
+thousand and thirty-five.
+
+40
+00:01:24.544 --> 00:01:27.028
+That's its rate, r: eighteen point eight
+
+41
+00:01:27.028 --> 00:01:27.442
+percent.
+
+42
+00:01:28.901 --> 00:01:31.156
+Now sort the model's kick probability at
+
+43
+00:01:31.156 --> 00:01:32.696
+every slot, highest first.
+
+44
+00:01:33.026 --> 00:01:35.281
+A few thousand near point nine, then a
+
+45
+00:01:35.281 --> 00:01:36.711
+long slide towards nought.
+
+46
+00:01:37.159 --> 00:01:39.209
+Count twelve thousand and thirty-five
+
+47
+00:01:39.209 --> 00:01:40.234
+slots from the top.
+
+48
+00:01:40.558 --> 00:01:42.716
+The probability there, point two four
+
+49
+00:01:42.716 --> 00:01:44.712
+three six, is the kick's threshold.
+
+50
+00:01:45.036 --> 00:01:47.248
+Everything above it plays, so on these
+
+51
+00:01:47.248 --> 00:01:49.514
+songs the model kicks exactly as often as
+
+52
+00:01:49.514 --> 00:01:50.215
+the drummers.
+
+53
+00:01:50.747 --> 00:01:53.655
+As a rule: theta v, drum v's threshold, is
+
+54
+00:01:53.655 --> 00:01:56.341
+the quantile, Q, of its probabilities, at
+
+55
+00:01:56.341 --> 00:01:58.858
+one minus its rate: the value with that
+
+56
+00:01:58.858 --> 00:02:00.200
+share of slots below it.
+
+57
+00:02:00.536 --> 00:02:02.997
+For the kick, the quantile at point eight
+
+58
+00:02:02.997 --> 00:02:05.011
+one two is point two four three six.
+
+59
+00:02:05.457 --> 00:02:07.509
+It fixes how often each drum plays, not
+
+60
+00:02:07.509 --> 00:02:09.513
+where: that's still the model's job.
+
+61
+00:02:11.067 --> 00:02:12.430
+In code it's three lines.
+
+62
+00:02:12.757 --> 00:02:13.903
+The rate, per drum.
+
+63
+00:02:14.230 --> 00:02:16.739
+The threshold: the quantile at one minus
+
+64
+00:02:16.739 --> 00:02:17.229
+the rate.
+
+65
+00:02:17.557 --> 00:02:19.902
+For all nine drums, T128's: about a
+
+66
+00:02:19.902 --> 00:02:22.192
+quarter for the kick, under a hundredth
+
+67
+00:02:22.192 --> 00:02:23.119
+for the high tom.
+
+68
+00:02:23.751 --> 00:02:25.754
+Rerun today, it reproduces the live
+
+69
+00:02:25.754 --> 00:02:26.755
+thresholds exactly.
+
+70
+00:02:30.213 --> 00:02:31.217
+Now the high tom.
+
+71
+00:02:31.572 --> 00:02:33.993
+The forty songs have fifteen hundred and
+
+72
+00:02:33.993 --> 00:02:36.237
+thirty-eight real high toms, so its
+
+73
+00:02:36.237 --> 00:02:38.599
+threshold is point zero zero five seven.
+
+74
+00:02:39.088 --> 00:02:41.466
+But here the curve is nearly flat: that
+
+75
+00:02:41.466 --> 00:02:43.739
+slot and the next differ by a millionth,
+
+76
+00:02:43.739 --> 00:02:46.012
+and the top three thousand all sit between
+
+77
+00:02:46.012 --> 00:02:48.126
+point zero zero five and point zero one.
+
+78
+00:02:48.443 --> 00:02:50.610
+So the cut is fragile: lower it ten
+
+79
+00:02:50.610 --> 00:02:52.513
+percent and the kick plays thirteen
+
+80
+00:02:52.513 --> 00:02:54.574
+percent more, the high tom sixty-one
+
+81
+00:02:54.574 --> 00:02:55.261
+percent more.
+
+82
+00:02:57.017 --> 00:02:58.124
+And where do they land?
+
+83
+00:02:58.413 --> 00:03:00.147
+One song holds thirteen hundred and
+
+84
+00:03:00.147 --> 00:03:02.073
+forty-four of the high toms, and T128
+
+85
+00:03:02.073 --> 00:03:02.892
+plays none there.
+
+86
+00:03:03.181 --> 00:03:05.203
+It plays four hundred and seventy-five on
+
+87
+00:03:05.203 --> 00:03:06.022
+a song with none.
+
+88
+00:03:06.311 --> 00:03:08.478
+The total is exactly right, and not one is
+
+89
+00:03:08.478 --> 00:03:10.404
+in the right place: precision zero.
+
+90
+00:03:10.693 --> 00:03:12.716
+Precision is the share of a drum's played
+
+91
+00:03:12.716 --> 00:03:14.498
+hits where the drummer played it too.
+
+92
+00:03:16.268 --> 00:03:18.189
+This first showed up on the twelfth of
+
+93
+00:03:18.189 --> 00:03:20.208
+September: an early LSTM's high tom
+
+94
+00:03:20.208 --> 00:03:22.080
+threshold came out at point zero nine
+
+95
+00:03:22.080 --> 00:03:24.001
+nine, and over forty songs it played
+
+96
+00:03:24.001 --> 00:03:25.774
+almost six times too many high toms.
+
+97
+00:03:26.070 --> 00:03:28.434
+That was an average; Jaime's listen showed
+
+98
+00:03:28.434 --> 00:03:30.552
+it didn't explain the file he heard, and
+
+99
+00:03:30.552 --> 00:03:31.537
+that led to the fix.
+
+100
+00:03:31.833 --> 00:03:34.049
+The fix was a floor: no threshold below
+
+101
+00:03:34.049 --> 00:03:34.492
+one half.
+
+102
+00:03:34.946 --> 00:03:37.014
+The floor had a price, measured that day
+
+103
+00:03:37.014 --> 00:03:38.986
+with the following score from five point
+
+104
+00:03:38.986 --> 00:03:39.178
+six.
+
+105
+00:03:39.467 --> 00:03:41.535
+One checkpoint, an LSTM trained with pos
+
+106
+00:03:41.535 --> 00:03:43.603
+weight capped at fifty, reads plus point
+
+107
+00:03:43.603 --> 00:03:45.671
+one eight six with the floor, plus point
+
+108
+00:03:45.671 --> 00:03:46.729
+zero nine six without.
+
+109
+00:03:47.017 --> 00:03:49.037
+And the unweighted LSTM never reached one
+
+110
+00:03:49.037 --> 00:03:51.057
+half on any drum, so the floor silenced
+
+111
+00:03:51.057 --> 00:03:53.269
+it; without the floor it was the best of
+
+112
+00:03:53.269 --> 00:03:54.327
+the four losses tried.
+
+113
+00:03:57.890 --> 00:03:59.554
+So the record has three decoders.
+
+114
+00:03:59.857 --> 00:04:02.177
+Version one: rate matching with the half
+
+115
+00:04:02.177 --> 00:04:02.479
+floor.
+
+116
+00:04:02.782 --> 00:04:05.203
+Version one floor nought: the same without
+
+117
+00:04:05.203 --> 00:04:05.354
+it.
+
+118
+00:04:05.657 --> 00:04:07.876
+And version two, which changes two things.
+
+119
+00:04:08.178 --> 00:04:10.196
+It uses the velocity flag, the fourth
+
+120
+00:04:10.196 --> 00:04:12.617
+input: one when a song's guitar velocities
+
+121
+00:04:12.617 --> 00:04:14.836
+vary, nought when every note has the same
+
+122
+00:04:14.836 --> 00:04:15.037
+one.
+
+123
+00:04:15.509 --> 00:04:17.298
+First, version two fits separate
+
+124
+00:04:17.298 --> 00:04:19.292
+thresholds for each value of that flag.
+
+125
+00:04:19.599 --> 00:04:22.053
+Fitted on two hundred songs: a hundred and
+
+126
+00:04:22.053 --> 00:04:23.995
+sixty-three real, thirty-seven flat.
+
+127
+00:04:24.302 --> 00:04:26.500
+Thresholds fitted mostly on real songs had
+
+128
+00:04:26.500 --> 00:04:27.830
+over-played the flat ones.
+
+129
+00:04:28.136 --> 00:04:30.130
+For one LSTM, v1 with the half floor
+
+130
+00:04:30.130 --> 00:04:32.175
+played one point two one hits a slot on
+
+131
+00:04:32.175 --> 00:04:34.476
+flat songs; v2 as a whole, groups and
+
+132
+00:04:34.476 --> 00:04:36.572
+precision floor together, played point
+
+133
+00:04:36.572 --> 00:04:38.873
+five five, under the drummers' point seven
+
+134
+00:04:38.873 --> 00:04:39.179
+seven.
+
+135
+00:04:39.486 --> 00:04:41.736
+T128 shows the over-play too: under v1
+
+136
+00:04:41.736 --> 00:04:43.934
+floor nought it plays one and a half times
+
+137
+00:04:43.934 --> 00:04:46.183
+the drummers' hits on the flat songs, and
+
+138
+00:04:46.183 --> 00:04:48.228
+nearly thirty-seven times for the worst
+
+139
+00:04:48.228 --> 00:04:49.302
+drum, the high tom.
+
+140
+00:04:51.198 --> 00:04:52.722
+Second, the precision floor.
+
+141
+00:04:53.027 --> 00:04:54.652
+Here is T128's precision at its
+
+142
+00:04:54.652 --> 00:04:56.379
+rate-matched thresholds, on the
+
+143
+00:04:56.379 --> 00:04:57.395
+real-velocity songs.
+
+144
+00:04:57.700 --> 00:05:00.037
+The blue ticks are chance: a drum played
+
+145
+00:05:00.037 --> 00:05:01.814
+at random would score its own rate.
+
+146
+00:05:02.119 --> 00:05:04.405
+Kick, snare and closed hat are right about
+
+147
+00:05:04.405 --> 00:05:06.945
+half the time, the open hat a quarter: all
+
+148
+00:05:06.945 --> 00:05:08.113
+four clear one in five.
+
+149
+00:05:08.607 --> 00:05:10.908
+The other five fall short, so v2 raises
+
+150
+00:05:10.908 --> 00:05:13.374
+their thresholds until one in five is met,
+
+151
+00:05:13.374 --> 00:05:15.839
+or past the drum's highest probability, so
+
+152
+00:05:15.839 --> 00:05:16.661
+it never plays.
+
+153
+00:05:16.989 --> 00:05:19.455
+Toms are the hard part: the low and mid
+
+154
+00:05:19.455 --> 00:05:21.865
+toms are about four times chance, nowhere
+
+155
+00:05:21.865 --> 00:05:24.002
+near one in five, and no high tom is
+
+156
+00:05:24.002 --> 00:05:24.331
+right.
+
+157
+00:05:24.659 --> 00:05:26.851
+On v2's own two hundred songs, two go
+
+158
+00:05:26.851 --> 00:05:29.152
+silent and the mid tom plays twenty-three
+
+159
+00:05:29.152 --> 00:05:29.481
+times.
+
+160
+00:05:29.809 --> 00:05:32.165
+The crash is thirteen times chance, just
+
+161
+00:05:32.165 --> 00:05:34.302
+under the floor, and plays sixty-one
+
+162
+00:05:34.302 --> 00:05:36.657
+percent as many crashes as the drummers on
+
+163
+00:05:36.657 --> 00:05:37.315
+those songs.
+
+164
+00:05:37.644 --> 00:05:39.999
+On the September LSTMs, the toms were at
+
+165
+00:05:39.999 --> 00:05:42.300
+chance and the crash's precision was five
+
+166
+00:05:42.300 --> 00:05:42.739
+percent.
+
+167
+00:05:44.268 --> 00:05:46.211
+On those September LSTMs, v2's price was
+
+168
+00:05:46.211 --> 00:05:48.289
+the colour drums: the toms vanished from
+
+169
+00:05:48.289 --> 00:05:50.232
+every model, the crash and the ride from
+
+170
+00:05:50.232 --> 00:05:50.458
+most.
+
+171
+00:05:50.729 --> 00:05:52.717
+And it moved the ranking: under v2 the
+
+172
+00:05:52.717 --> 00:05:54.480
+LSTM trained on all the songs beat the
+
+173
+00:05:54.480 --> 00:05:56.287
+thirty percent one, the reverse of v1.
+
+174
+00:05:56.558 --> 00:05:58.366
+On the twenty-fourth of September Jaime
+
+175
+00:05:58.366 --> 00:06:00.263
+signed off v1 floor nought to pick epochs
+
+176
+00:06:00.263 --> 00:06:02.161
+and render the listening decks, with v2
+
+177
+00:06:02.161 --> 00:06:04.149
+scored beside it; live followed on the
+
+178
+00:06:04.149 --> 00:06:04.827
+twenty-seventh.
+
+179
+00:06:08.367 --> 00:06:10.868
+Live, one more step follows the decoder:
+
+180
+00:06:10.868 --> 00:06:12.744
+the crash rule from one point three.
+
+181
+00:06:13.056 --> 00:06:15.401
+It isn't learned, and it isn't part of any
+
+182
+00:06:15.401 --> 00:06:15.714
+model.
+
+183
+00:06:16.207 --> 00:06:18.614
+It makes a drummer's first downbeat a kick
+
+184
+00:06:18.614 --> 00:06:21.132
+and a crash, adds a crash at phrase starts
+
+185
+00:06:21.132 --> 00:06:23.427
+half the time, and one when the guitar
+
+186
+00:06:23.427 --> 00:06:25.162
+returns after a bar of silence.
+
+187
+00:06:25.584 --> 00:06:28.058
+So every score in topic five is the model
+
+188
+00:06:28.058 --> 00:06:30.061
+and its decoder, never the rule.
+
+189
+00:06:30.415 --> 00:06:33.066
+Live it's on by default, off in replays,
+
+190
+00:06:33.066 --> 00:06:35.540
+and each slot's log keeps the model's own
+
+191
+00:06:35.540 --> 00:06:36.071
+hits too.
+
+192
+00:06:39.777 --> 00:06:42.215
+Back to the worked slot: bar thirty-six's
+
+193
+00:06:42.215 --> 00:06:44.550
+downbeat, where the drummer plays kick and
+
+194
+00:06:44.550 --> 00:06:45.120
+closed hat.
+
+195
+00:06:45.432 --> 00:06:47.611
+Here are three architectures, each with
+
+196
+00:06:47.611 --> 00:06:49.375
+its own probabilities and its own
+
+197
+00:06:49.375 --> 00:06:49.945
+thresholds.
+
+198
+00:06:50.481 --> 00:06:53.375
+T128 and S128 play kick and closed hat, as
+
+199
+00:06:53.375 --> 00:06:54.404
+the drummer did.
+
+200
+00:06:54.790 --> 00:06:57.491
+L32 adds a snare: point two one nine
+
+201
+00:06:57.491 --> 00:06:59.420
+against point one eight three.
+
+202
+00:06:59.806 --> 00:07:02.700
+And the thresholds differ by model: the
+
+203
+00:07:02.700 --> 00:07:05.465
+closed hat needs point four one in S128,
+
+204
+00:07:05.465 --> 00:07:06.815
+point one two in L32.
+
+205
+00:07:08.345 --> 00:07:10.771
+T128's and S128's thresholds come from the
+
+206
+00:07:10.771 --> 00:07:11.956
+live thresholds file.
+
+207
+00:07:12.295 --> 00:07:14.947
+L32 isn't in it; its thresholds come from
+
+208
+00:07:14.947 --> 00:07:17.374
+the architecture scorer, the same recipe
+
+209
+00:07:17.374 --> 00:07:18.728
+on the same forty songs.
+
+210
+00:07:19.067 --> 00:07:21.211
+At a plain one half, L32 would play
+
+211
+00:07:21.211 --> 00:07:24.033
+nothing here; under v2, all three play the
+
+212
+00:07:24.033 --> 00:07:24.710
+same as now.
+
+213
+00:07:25.049 --> 00:07:26.516
+One slot, not a verdict.
+
+214
+00:07:28.307 --> 00:07:30.118
+So the decoder is part of the model.
+
+215
+00:07:30.420 --> 00:07:32.936
+One checkpoint, three decoders: plus point
+
+216
+00:07:32.936 --> 00:07:35.201
+one eight six, plus point zero nine six,
+
+217
+00:07:35.201 --> 00:07:36.610
+plus point one eight nought.
+
+218
+00:07:36.912 --> 00:07:39.076
+Every number should say which decoder made
+
+219
+00:07:39.076 --> 00:07:41.542
+it; since the twenty-fourth of September,
+
+220
+00:07:41.542 --> 00:07:43.605
+v1 floor nought unless it says otherwise.
+
+221
+00:07:43.998 --> 00:07:46.687
+In one breath: each drum's threshold makes
+
+222
+00:07:46.687 --> 00:07:48.928
+it play as often as real drummers do on
+
+223
+00:07:48.928 --> 00:07:51.449
+forty set-aside songs, and rare drums need
+
+224
+00:07:51.449 --> 00:07:52.289
+more than that.
+
+225
+00:07:52.625 --> 00:07:54.642
+This pairs with row six of the year
+
+226
+00:07:54.642 --> 00:07:55.202
+explainer.
+
+227
+00:07:55.539 --> 00:07:58.340
+Next, four point ten: comparing the models
+
+228
+00:07:58.340 --> 00:07:58.732
+fairly.
+

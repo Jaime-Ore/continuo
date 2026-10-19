@@ -1,0 +1,862 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.253
+Lesson five point two.
+
+2
+00:00:01.583 --> 00:00:03.953
+The nine numbers axis one reads from every
+
+3
+00:00:03.953 --> 00:00:04.339
+window.
+
+4
+00:00:08.313 --> 00:00:10.557
+Axis one never takes in a whole song at
+
+5
+00:00:10.557 --> 00:00:10.837
+once.
+
+6
+00:00:11.174 --> 00:00:13.922
+It cuts the drums into windows: two bars,
+
+7
+00:00:13.922 --> 00:00:16.334
+thirty-two sixteenth-note slots, by nine
+
+8
+00:00:16.334 --> 00:00:17.007
+drum voices.
+
+9
+00:00:17.344 --> 00:00:19.756
+Each hit is rounded to its nearest slot,
+
+10
+00:00:19.756 --> 00:00:22.055
+and whatever was lost in the rounding is
+
+11
+00:00:22.055 --> 00:00:22.897
+kept beside it.
+
+12
+00:00:23.447 --> 00:00:25.152
+Here's the window we'll measure.
+
+13
+00:00:25.471 --> 00:00:27.815
+Kick on beats one and three, snare on two
+
+14
+00:00:27.815 --> 00:00:29.946
+and four, closed hats on every eighth
+
+15
+00:00:29.946 --> 00:00:30.212
+note.
+
+16
+00:00:30.532 --> 00:00:32.609
+It's the battery's own test pattern,
+
+17
+00:00:32.609 --> 00:00:35.166
+straight rock: exactly the fixed loop from
+
+18
+00:00:35.166 --> 00:00:36.338
+lesson five point one.
+
+19
+00:00:36.895 --> 00:00:39.348
+Brightness is velocity: how hard each hit
+
+20
+00:00:39.348 --> 00:00:39.505
+is.
+
+21
+00:00:39.818 --> 00:00:42.010
+The pattern sets the kick at a hundred,
+
+22
+00:00:42.010 --> 00:00:44.255
+the snare at a hundred and ten, the hats
+
+23
+00:00:44.255 --> 00:00:46.082
+at seventy, out of a hundred and
+
+24
+00:00:46.082 --> 00:00:46.760
+twenty-seven.
+
+25
+00:00:47.074 --> 00:00:49.161
+Every hit sits exactly on its grid line.
+
+26
+00:00:49.685 --> 00:00:51.855
+The nine voices fall into three groups.
+
+27
+00:00:52.189 --> 00:00:53.079
+Low is the kick.
+
+28
+00:00:53.413 --> 00:00:55.416
+Mid is the snare and the three toms.
+
+29
+00:00:55.750 --> 00:00:58.143
+High is the hats, the crash and the ride.
+
+30
+00:00:58.477 --> 00:01:00.926
+From this one window, axis one takes nine
+
+31
+00:01:00.926 --> 00:01:01.371
+numbers.
+
+32
+00:01:04.480 --> 00:01:06.186
+The first four numbers are counts.
+
+33
+00:01:06.487 --> 00:01:08.544
+Density is simply how many hits a window
+
+34
+00:01:08.544 --> 00:01:08.845
+holds.
+
+35
+00:01:09.146 --> 00:01:11.504
+Take the hit grid, H: one where a voice
+
+36
+00:01:11.504 --> 00:01:13.110
+hits, nought where it doesn't.
+
+37
+00:01:13.411 --> 00:01:15.418
+Add it up over every voice, and every
+
+38
+00:01:15.418 --> 00:01:15.669
+slot.
+
+39
+00:01:16.109 --> 00:01:18.117
+Four kicks, four snares, sixteen hats:
+
+40
+00:01:18.117 --> 00:01:18.828
+twenty-four hits.
+
+41
+00:01:19.223 --> 00:01:21.732
+Then the same count inside each group, g:
+
+42
+00:01:21.732 --> 00:01:23.626
+low four, mid four, high sixteen.
+
+43
+00:01:23.934 --> 00:01:26.494
+That's numbers one to four: the total, and
+
+44
+00:01:26.494 --> 00:01:27.825
+the three group densities.
+
+45
+00:01:28.278 --> 00:01:30.619
+For scale, the middle eighty percent of
+
+46
+00:01:30.619 --> 00:01:32.626
+the human rock windows hold between
+
+47
+00:01:32.626 --> 00:01:34.299
+twenty-two and forty-six hits.
+
+48
+00:01:34.633 --> 00:01:37.086
+A model far busier than that, or one that
+
+49
+00:01:37.086 --> 00:01:39.484
+never touches a tom, shows up here first.
+
+50
+00:01:42.630 --> 00:01:44.395
+Shade the eight beats: the strong slots.
+
+51
+00:01:44.772 --> 00:01:46.903
+Number five is the share of all hits that
+
+52
+00:01:46.903 --> 00:01:47.664
+land on a beat.
+
+53
+00:01:47.968 --> 00:01:50.302
+Every kick and snare is on a beat: eight.
+
+54
+00:01:50.606 --> 00:01:52.382
+Half the hats are: eight more.
+
+55
+00:01:52.686 --> 00:01:55.020
+Sixteen out of twenty-four: nought point
+
+56
+00:01:55.020 --> 00:01:55.528
+six seven.
+
+57
+00:01:56.229 --> 00:01:58.606
+A warning for the report: the code calls
+
+58
+00:01:58.606 --> 00:02:00.827
+this weak-to-strong, but what it returns
+
+59
+00:02:00.827 --> 00:02:02.170
+is the share on the beats.
+
+60
+00:02:02.480 --> 00:02:04.649
+Describe what it computes, not its name.
+
+61
+00:02:05.624 --> 00:02:07.396
+Number six is backbeat presence.
+
+62
+00:02:07.728 --> 00:02:10.164
+Take the mid group's velocity: all the
+
+63
+00:02:10.164 --> 00:02:12.102
+snare and tom energy in the window.
+
+64
+00:02:12.434 --> 00:02:14.815
+Keep the part on beats two and four, and
+
+65
+00:02:14.815 --> 00:02:15.922
+divide by all of it.
+
+66
+00:02:16.623 --> 00:02:18.381
+Every snare here is on two or four, at
+
+67
+00:02:18.381 --> 00:02:20.354
+velocity a hundred and ten: nought point
+
+68
+00:02:20.354 --> 00:02:21.426
+eight six six of the top.
+
+69
+00:02:21.683 --> 00:02:22.541
+So it's exactly one.
+
+70
+00:02:22.798 --> 00:02:24.513
+In the funk test pattern, quiet ghost
+
+71
+00:02:24.513 --> 00:02:26.100
+snares off the beat bring it down to
+
+72
+00:02:26.100 --> 00:02:27.172
+nought point seven three.
+
+73
+00:02:27.429 --> 00:02:29.316
+Counting hits alone would give a half;
+
+74
+00:02:29.316 --> 00:02:30.988
+weighting by velocity lets quiet notes
+
+75
+00:02:30.988 --> 00:02:31.631
+count for less.
+
+76
+00:02:31.888 --> 00:02:33.604
+Toms count too, so a fill on the toms
+
+77
+00:02:33.604 --> 00:02:34.976
+between the backbeats lowers it.
+
+78
+00:02:36.164 --> 00:02:38.318
+Now scatter the same hits at random: the
+
+79
+00:02:38.318 --> 00:02:40.238
+battery's matched-density random pattern.
+
+80
+00:02:40.519 --> 00:02:42.767
+The four counts can't tell the difference:
+
+81
+00:02:42.767 --> 00:02:44.921
+still twenty-four, four, four and sixteen.
+
+82
+00:02:45.202 --> 00:02:46.981
+But the on-beat share falls to nought
+
+83
+00:02:46.981 --> 00:02:49.089
+point two nine, and backbeat presence to a
+
+84
+00:02:49.089 --> 00:02:51.149
+quarter: one snare of four landed on a
+
+85
+00:02:51.149 --> 00:02:51.945
+backbeat by luck.
+
+86
+00:02:52.226 --> 00:02:54.053
+That's why counts alone are not enough.
+
+87
+00:02:57.593 --> 00:03:00.087
+Number seven is syncopation: a note on a
+
+88
+00:03:00.087 --> 00:03:02.309
+weak spot, followed by silence where a
+
+89
+00:03:02.309 --> 00:03:03.718
+stronger one was expected.
+
+90
+00:03:04.044 --> 00:03:06.374
+The battery uses Longuet-Higgins and Lee's
+
+91
+00:03:06.374 --> 00:03:06.808
+measure.
+
+92
+00:03:07.689 --> 00:03:09.861
+First, squash all nine voices into one
+
+93
+00:03:09.861 --> 00:03:12.351
+line: a slot is on if anything hits there.
+
+94
+00:03:12.801 --> 00:03:14.917
+Each slot gets a metrical weight, how
+
+95
+00:03:14.917 --> 00:03:16.186
+strong it is in the bar.
+
+96
+00:03:16.504 --> 00:03:18.937
+Five on the downbeat, four on beat three,
+
+97
+00:03:18.937 --> 00:03:21.158
+three on beats two and four, two on the
+
+98
+00:03:21.158 --> 00:03:23.432
+other eighths, and one on the sixteenths
+
+99
+00:03:23.432 --> 00:03:24.014
+in between.
+
+100
+00:03:24.491 --> 00:03:25.095
+Now the rule.
+
+101
+00:03:25.374 --> 00:03:27.419
+For each hit, look one slot ahead, then
+
+102
+00:03:27.419 --> 00:03:27.605
+two.
+
+103
+00:03:27.884 --> 00:03:29.837
+If that slot is silent and heavier, the
+
+104
+00:03:29.837 --> 00:03:31.836
+hit was a push: add the difference in
+
+105
+00:03:31.836 --> 00:03:32.161
+weight.
+
+106
+00:03:32.440 --> 00:03:34.532
+Add up every hit in the window, and divide
+
+107
+00:03:34.532 --> 00:03:35.787
+by thirty, a fixed scale.
+
+108
+00:03:36.066 --> 00:03:37.972
+The bigger the gap between the weak note
+
+109
+00:03:37.972 --> 00:03:39.785
+and the strong silence after it, the
+
+110
+00:03:39.785 --> 00:03:40.622
+stronger the push.
+
+111
+00:03:41.083 --> 00:03:43.396
+In our window, take the hit on slot six,
+
+112
+00:03:43.396 --> 00:03:43.961
+weight two.
+
+113
+00:03:44.269 --> 00:03:46.120
+Slot seven is silent, but lighter.
+
+114
+00:03:46.428 --> 00:03:48.536
+Slot eight is heavier, but it's played.
+
+115
+00:03:48.844 --> 00:03:51.106
+Every eighth is played, so no hit finds a
+
+116
+00:03:51.106 --> 00:03:53.264
+heavier silence: syncopation is zero.
+
+117
+00:03:54.245 --> 00:03:56.161
+Now a different test pattern from the
+
+118
+00:03:56.161 --> 00:03:57.774
+battery: kick into silence.
+
+119
+00:03:58.076 --> 00:04:00.143
+A kick on slots nought and seven of each
+
+120
+00:04:00.143 --> 00:04:01.353
+bar, and nothing else.
+
+121
+00:04:01.776 --> 00:04:02.837
+Slot seven weighs one.
+
+122
+00:04:03.127 --> 00:04:05.346
+The next slot, eight, is beat three:
+
+123
+00:04:05.346 --> 00:04:06.601
+weight four, and silent.
+
+124
+00:04:06.890 --> 00:04:08.434
+Four minus one: plus three.
+
+125
+00:04:08.724 --> 00:04:09.785
+Same again in bar two.
+
+126
+00:04:10.075 --> 00:04:12.005
+The kicks on the downbeats find nothing
+
+127
+00:04:12.005 --> 00:04:12.391
+heavier.
+
+128
+00:04:12.680 --> 00:04:14.707
+Six, over thirty: nought point two.
+
+129
+00:04:15.581 --> 00:04:17.760
+That's why the rule looks two slots ahead.
+
+130
+00:04:18.072 --> 00:04:20.459
+Move the kick to slot six: slot seven is
+
+131
+00:04:20.459 --> 00:04:22.846
+lighter, so look on to slot eight, silent
+
+132
+00:04:22.846 --> 00:04:25.182
+and heavier: four minus two, plus two.
+
+133
+00:04:25.493 --> 00:04:28.088
+Twice, over thirty: nought point one three
+
+134
+00:04:28.088 --> 00:04:28.399
+three.
+
+135
+00:04:29.254 --> 00:04:31.147
+But put hats back on every eighth, and
+
+136
+00:04:31.147 --> 00:04:33.086
+slot eight is no longer silent: zero
+
+137
+00:04:33.086 --> 00:04:33.363
+again.
+
+138
+00:04:33.640 --> 00:04:35.671
+Axis one reads the whole kit as one line,
+
+139
+00:04:35.671 --> 00:04:37.564
+so it only counts a push the rest of the
+
+140
+00:04:37.564 --> 00:04:38.488
+kit leaves room for.
+
+141
+00:04:38.765 --> 00:04:40.796
+In the Groove reference, nearly two human
+
+142
+00:04:40.796 --> 00:04:42.412
+windows in three read exactly zero.
+
+143
+00:04:42.689 --> 00:04:44.720
+The scattered random pattern from before,
+
+144
+00:04:44.720 --> 00:04:46.659
+full of gaps on the beats, reads nought
+
+145
+00:04:46.659 --> 00:04:47.167
+point five.
+
+146
+00:04:50.450 --> 00:04:52.426
+The last two numbers are about feel.
+
+147
+00:04:52.756 --> 00:04:55.062
+Velocity spread is the standard deviation
+
+148
+00:04:55.062 --> 00:04:56.379
+of every hit's velocity.
+
+149
+00:04:56.709 --> 00:04:58.850
+Take each velocity's distance from the
+
+150
+00:04:58.850 --> 00:05:01.430
+mean, square it and average, then take the
+
+151
+00:05:01.430 --> 00:05:03.571
+square root, to get back to velocity
+
+152
+00:05:03.571 --> 00:05:03.901
+units.
+
+153
+00:05:04.318 --> 00:05:06.036
+In our window the mean velocity is
+
+154
+00:05:06.036 --> 00:05:07.165
+eighty-one point seven.
+
+155
+00:05:07.459 --> 00:05:09.324
+Kicks sit eighteen above it, snares
+
+156
+00:05:09.324 --> 00:05:11.287
+twenty-eight above, hats twelve below.
+
+157
+00:05:11.582 --> 00:05:13.447
+The spread comes out at sixteen point
+
+158
+00:05:13.447 --> 00:05:15.459
+seven five, which on the nought to one
+
+159
+00:05:15.459 --> 00:05:17.226
+scale is nought point one three two.
+
+160
+00:05:17.520 --> 00:05:19.287
+Squaring before averaging means the
+
+161
+00:05:19.287 --> 00:05:21.348
+snares, furthest from the mean, count
+
+162
+00:05:21.348 --> 00:05:21.594
+most.
+
+163
+00:05:22.403 --> 00:05:24.791
+Timing spread is the same calculation over
+
+164
+00:05:24.791 --> 00:05:27.457
+each hit's offset: how early or late it is
+
+165
+00:05:27.457 --> 00:05:29.901
+against its grid line, as a fraction of a
+
+166
+00:05:29.901 --> 00:05:30.179
+slot.
+
+167
+00:05:30.512 --> 00:05:32.956
+Every hit here is exactly on the grid, so
+
+168
+00:05:32.956 --> 00:05:33.511
+it's zero.
+
+169
+00:05:33.844 --> 00:05:36.177
+The battery's humanised test take, with
+
+170
+00:05:36.177 --> 00:05:38.565
+the snare pushed late on purpose and every
+
+171
+00:05:38.565 --> 00:05:40.898
+hit nudged at random, spreads by nought
+
+172
+00:05:40.898 --> 00:05:42.730
+point nought five five of a slot.
+
+173
+00:05:43.064 --> 00:05:45.452
+At its hundred and twelve beats per minute
+
+174
+00:05:45.452 --> 00:05:47.618
+a slot lasts a hundred and thirty-four
+
+175
+00:05:47.618 --> 00:05:49.728
+milliseconds, so that's about seven
+
+176
+00:05:49.728 --> 00:05:50.450
+milliseconds.
+
+177
+00:05:51.307 --> 00:05:52.170
+Here's the catch.
+
+178
+00:05:52.474 --> 00:05:54.148
+Our drum models output hits only.
+
+179
+00:05:54.452 --> 00:05:56.634
+The scoring code gives every model hit the
+
+180
+00:05:56.634 --> 00:05:58.663
+same velocity and no offset, so every
+
+181
+00:05:58.663 --> 00:06:00.895
+model window reads zero on both, whatever
+
+182
+00:06:00.895 --> 00:06:01.656
+the model does.
+
+183
+00:06:01.960 --> 00:06:04.090
+Under two percent of the human windows do.
+
+184
+00:06:04.395 --> 00:06:06.475
+So these two can only ever say not human.
+
+185
+00:06:06.779 --> 00:06:08.453
+They can't tell our models apart.
+
+186
+00:06:11.890 --> 00:06:14.291
+In the code the nine are one list, in the
+
+187
+00:06:14.291 --> 00:06:15.873
+distribution-matching module.
+
+188
+00:06:16.200 --> 00:06:18.437
+The human reference stores the same nine
+
+189
+00:06:18.437 --> 00:06:20.729
+numbers for each of its two thousand four
+
+190
+00:06:20.729 --> 00:06:22.366
+hundred and forty-one windows.
+
+191
+00:06:22.693 --> 00:06:25.257
+Note the code's names: weak to strong for
+
+192
+00:06:25.257 --> 00:06:27.658
+the on-beat share, and L H L flat for the
+
+193
+00:06:27.658 --> 00:06:28.313
+syncopation.
+
+194
+00:06:29.286 --> 00:06:31.576
+Here are all nine for our window, beside
+
+195
+00:06:31.576 --> 00:06:33.493
+the middle of the two thousand four
+
+196
+00:06:33.493 --> 00:06:35.676
+hundred and forty-one human rock windows.
+
+197
+00:06:36.081 --> 00:06:38.694
+It's sparser than most of the humans: only
+
+198
+00:06:38.694 --> 00:06:40.980
+about one human window in eight has fewer
+
+199
+00:06:40.980 --> 00:06:41.252
+hits.
+
+200
+00:06:41.578 --> 00:06:43.864
+It's more on the beat than nine in ten of
+
+201
+00:06:43.864 --> 00:06:44.137
+them.
+
+202
+00:06:44.463 --> 00:06:46.803
+And its velocity is flatter than more than
+
+203
+00:06:46.803 --> 00:06:47.892
+nine in ten of them.
+
+204
+00:06:48.219 --> 00:06:49.525
+A loop, not a drummer.
+
+205
+00:06:49.979 --> 00:06:51.467
+But one window says little.
+
+206
+00:06:51.797 --> 00:06:54.111
+Axis one compares the whole population of
+
+207
+00:06:54.111 --> 00:06:56.204
+a model's windows with the humans',
+
+208
+00:06:56.204 --> 00:06:57.251
+feature by feature.
+
+209
+00:06:57.582 --> 00:06:58.849
+That's the next lesson.
+
+210
+00:07:00.615 --> 00:07:03.051
+So every window becomes nine numbers: four
+
+211
+00:07:03.051 --> 00:07:05.437
+counts, two about placement, one about the
+
+212
+00:07:05.437 --> 00:07:07.822
+push, and two about feel, which our models
+
+213
+00:07:07.822 --> 00:07:08.381
+can't play.
+
+214
+00:07:08.685 --> 00:07:11.121
+Next: how a population of those numbers is
+
+215
+00:07:11.121 --> 00:07:12.441
+compared with the humans'.
+

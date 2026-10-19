@@ -1,0 +1,1154 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.138
+Lesson five point six.
+
+2
+00:00:01.441 --> 00:00:03.910
+Following, part two: did the drums change
+
+3
+00:00:03.910 --> 00:00:04.968
+where the guitar did?
+
+4
+00:00:08.907 --> 00:00:11.193
+In the last lesson the guitar alone found
+
+5
+00:00:11.193 --> 00:00:13.478
+the boundaries of this made-up song:
+
+6
+00:00:13.478 --> 00:00:14.730
+windows six and eleven.
+
+7
+00:00:15.230 --> 00:00:16.451
+Now give it a drummer.
+
+8
+00:00:16.784 --> 00:00:19.059
+Verse beat A for six windows, with one
+
+9
+00:00:19.059 --> 00:00:21.224
+ghost snare added in window three, a
+
+10
+00:00:21.224 --> 00:00:23.555
+chorus beat B for five, and back to the
+
+11
+00:00:23.555 --> 00:00:25.941
+verse beat for five, with the hi-hat now
+
+12
+00:00:25.941 --> 00:00:26.718
+on sixteenths.
+
+13
+00:00:27.051 --> 00:00:27.717
+Call that C.
+
+14
+00:00:28.243 --> 00:00:30.596
+Write delta of t for how much the drums
+
+15
+00:00:30.596 --> 00:00:32.185
+change going into window t.
+
+16
+00:00:32.538 --> 00:00:35.008
+It takes the Jaccard of two signatures in
+
+17
+00:00:35.008 --> 00:00:37.597
+a row, window t minus one and window t,
+
+18
+00:00:37.597 --> 00:00:39.891
+and turns it round: one minus the
+
+19
+00:00:39.891 --> 00:00:40.420
+likeness.
+
+20
+00:00:40.895 --> 00:00:43.143
+Zero means the two windows are identical.
+
+21
+00:00:43.472 --> 00:00:45.062
+One means they share nothing.
+
+22
+00:00:45.391 --> 00:00:47.859
+Window zero has nothing before it, so it's
+
+23
+00:00:47.859 --> 00:00:48.626
+never counted.
+
+24
+00:00:49.489 --> 00:00:51.945
+Into the chorus, at window six, you've met
+
+25
+00:00:51.945 --> 00:00:54.454
+this one already: fourteen bits shared out
+
+26
+00:00:54.454 --> 00:00:56.597
+of thirty, so the change is zero point
+
+27
+00:00:56.597 --> 00:00:57.485
+five three three.
+
+28
+00:00:58.018 --> 00:01:00.764
+Back to the verse at window eleven: still
+
+29
+00:01:00.764 --> 00:01:03.277
+fourteen shared, but now forty-six on in
+
+30
+00:01:03.277 --> 00:01:05.731
+either, because the sixteenth-note hats
+
+31
+00:01:05.731 --> 00:01:06.724
+add so many bits.
+
+32
+00:01:07.075 --> 00:01:08.477
+Zero point six nine six.
+
+33
+00:01:08.953 --> 00:01:11.520
+The ghost note costs a little twice: one
+
+34
+00:01:11.520 --> 00:01:13.920
+change of zero point zero four going in,
+
+35
+00:01:13.920 --> 00:01:15.203
+and another coming out.
+
+36
+00:01:15.538 --> 00:01:17.547
+Everywhere else the pattern repeats
+
+37
+00:01:17.547 --> 00:01:19.389
+exactly, so the change is zero.
+
+38
+00:01:23.587 --> 00:01:25.169
+Now split the changes in two.
+
+39
+00:01:25.497 --> 00:01:27.898
+The ones at the guitar's boundaries, B,
+
+40
+00:01:27.898 --> 00:01:30.081
+and every other transition, written B
+
+41
+00:01:30.081 --> 00:01:32.592
+complement: windows one to fifteen minus
+
+42
+00:01:32.592 --> 00:01:34.775
+the boundaries, since window zero has
+
+43
+00:01:34.775 --> 00:01:35.758
+nothing before it.
+
+44
+00:01:36.085 --> 00:01:36.849
+Thirteen here.
+
+45
+00:01:37.397 --> 00:01:39.679
+Follow is the average change at the
+
+46
+00:01:39.679 --> 00:01:42.532
+boundaries: zero point five three three
+
+47
+00:01:42.532 --> 00:01:45.385
+and zero point six nine six, so zero point
+
+48
+00:01:45.385 --> 00:01:46.526
+six one four five.
+
+49
+00:01:47.160 --> 00:01:49.326
+Leak is the average change everywhere
+
+50
+00:01:49.326 --> 00:01:51.890
+else: the two ghost-note changes spread
+
+51
+00:01:51.890 --> 00:01:54.455
+over thirteen transitions, zero point zero
+
+52
+00:01:54.455 --> 00:01:55.196
+zero six two.
+
+53
+00:01:55.538 --> 00:01:57.589
+Change that leaks out away from the
+
+54
+00:01:57.589 --> 00:01:59.128
+boundaries: fidgeting.
+
+55
+00:01:59.725 --> 00:02:02.591
+The score, F, is follow minus leak: plus
+
+56
+00:02:02.591 --> 00:02:04.426
+zero point six zero eight three.
+
+57
+00:02:04.770 --> 00:02:07.005
+Here the drummer changes a lot at both
+
+58
+00:02:07.005 --> 00:02:09.011
+boundaries and almost nowhere else.
+
+59
+00:02:09.456 --> 00:02:12.027
+Each average lies between zero and one, so
+
+60
+00:02:12.027 --> 00:02:13.970
+F runs from minus one to plus one.
+
+61
+00:02:14.312 --> 00:02:16.426
+Positive means more change where the
+
+62
+00:02:16.426 --> 00:02:17.283
+guitar changes.
+
+63
+00:02:17.626 --> 00:02:19.911
+Zero means the change has nothing to do
+
+64
+00:02:19.911 --> 00:02:22.368
+with the guitar, or there's no change at
+
+65
+00:02:22.368 --> 00:02:22.597
+all.
+
+66
+00:02:22.940 --> 00:02:25.396
+Negative means the drums change everywhere
+
+67
+00:02:25.396 --> 00:02:27.053
+except where the guitar does.
+
+68
+00:02:30.513 --> 00:02:32.598
+A measure is only worth trusting if it
+
+69
+00:02:32.598 --> 00:02:33.453
+can't be fooled.
+
+70
+00:02:33.774 --> 00:02:35.859
+So we built drummers to fool it, and
+
+71
+00:02:35.859 --> 00:02:37.837
+played them all over the same guitar.
+
+72
+00:02:38.157 --> 00:02:40.028
+The same guitar means the same two
+
+73
+00:02:40.028 --> 00:02:42.327
+boundaries every time; only the drums
+
+74
+00:02:42.327 --> 00:02:42.701
+change.
+
+75
+00:02:43.022 --> 00:02:45.374
+Our drummer first: plus zero point six
+
+76
+00:02:45.374 --> 00:02:46.283
+zero eight three.
+
+77
+00:02:46.768 --> 00:02:49.293
+The fixed loop plays the same two bars all
+
+78
+00:02:49.293 --> 00:02:49.586
+song.
+
+79
+00:02:49.939 --> 00:02:52.640
+It never changes, so follow is zero, leak
+
+80
+00:02:52.640 --> 00:02:54.577
+is zero, and F is exactly zero.
+
+81
+00:02:54.930 --> 00:02:57.396
+Not negative: a loop is simply blind.
+
+82
+00:02:57.944 --> 00:03:00.366
+Next, the song's own drum windows in a
+
+83
+00:03:00.366 --> 00:03:01.134
+random order.
+
+84
+00:03:01.488 --> 00:03:04.206
+Lots of change, but everywhere: follow
+
+85
+00:03:04.206 --> 00:03:06.627
+zero point four, leak zero point three
+
+86
+00:03:06.627 --> 00:03:08.400
+nine nine, and F about zero.
+
+87
+00:03:08.892 --> 00:03:10.793
+The sneaky one is a loop with one knob:
+
+88
+00:03:10.793 --> 00:03:12.441
+its hi-hat gets busier when the guitar
+
+89
+00:03:12.441 --> 00:03:12.948
+gets busier.
+
+90
+00:03:13.201 --> 00:03:14.933
+Eighths under the ten-note verse riff,
+
+91
+00:03:14.933 --> 00:03:16.623
+sixteenths under the sixteen-note strum.
+
+92
+00:03:16.877 --> 00:03:18.651
+It changes at both boundaries and nowhere
+
+93
+00:03:18.651 --> 00:03:20.679
+else: F is plus zero point four, with no
+
+94
+00:03:20.679 --> 00:03:21.186
+leak at all.
+
+95
+00:03:21.439 --> 00:03:22.453
+It looks like listening.
+
+96
+00:03:22.707 --> 00:03:24.650
+And it isn't causal: it reads the guitar
+
+97
+00:03:24.650 --> 00:03:26.551
+of the very window it's playing, so it can
+
+98
+00:03:26.551 --> 00:03:27.439
+switch right on time.
+
+99
+00:03:27.897 --> 00:03:30.489
+Last, our own drummer's part, played one
+
+100
+00:03:30.489 --> 00:03:31.180
+window late.
+
+101
+00:03:31.525 --> 00:03:33.943
+Exactly the right changes, a window too
+
+102
+00:03:33.943 --> 00:03:36.707
+late: follow drops to zero, both changes
+
+103
+00:03:36.707 --> 00:03:39.011
+are booked as leak, and F falls below
+
+104
+00:03:39.011 --> 00:03:41.256
+zero, minus zero point one zero zero
+
+105
+00:03:41.256 --> 00:03:41.602
+seven.
+
+106
+00:03:42.087 --> 00:03:44.196
+So the loop and the shuffle are caught.
+
+107
+00:03:44.520 --> 00:03:47.008
+Two are not: the density stand-in scores
+
+108
+00:03:47.008 --> 00:03:49.063
+well without placing a single note in
+
+109
+00:03:49.063 --> 00:03:51.497
+answer to the guitar, and the late drummer
+
+110
+00:03:51.497 --> 00:03:53.390
+scores badly for the right changes.
+
+111
+00:03:53.714 --> 00:03:55.932
+The next two chapters take them one at a
+
+112
+00:03:55.932 --> 00:03:56.202
+time.
+
+113
+00:03:59.730 --> 00:04:00.731
+First the stand-in.
+
+114
+00:04:01.047 --> 00:04:02.892
+What it really follows is busyness.
+
+115
+00:04:03.208 --> 00:04:05.738
+Write rho of w for a window's density: the
+
+116
+00:04:05.738 --> 00:04:08.109
+number of bits on in its signature, out of
+
+117
+00:04:08.109 --> 00:04:08.689
+ninety-six.
+
+118
+00:04:09.005 --> 00:04:11.271
+Our drummer's verse has twenty-four, the
+
+119
+00:04:11.271 --> 00:04:13.274
+chorus twenty, the last verse forty.
+
+120
+00:04:13.981 --> 00:04:16.334
+The density line asks the same question of
+
+121
+00:04:16.334 --> 00:04:18.961
+busyness: how much did the density jump at
+
+122
+00:04:18.961 --> 00:04:21.259
+the boundaries, against everywhere else?
+
+123
+00:04:21.588 --> 00:04:23.667
+Here, twelve bits at the boundaries
+
+124
+00:04:23.667 --> 00:04:26.075
+against zero point one five bits away:
+
+125
+00:04:26.075 --> 00:04:27.662
+plus eleven point eight five.
+
+126
+00:04:28.137 --> 00:04:30.216
+The pattern line sets busyness aside.
+
+127
+00:04:30.553 --> 00:04:32.631
+It computes F again, but only over
+
+128
+00:04:32.631 --> 00:04:34.710
+transitions where the density barely
+
+129
+00:04:34.710 --> 00:04:37.350
+moved: by epsilon, four bits, or less.
+
+130
+00:04:37.811 --> 00:04:40.303
+At window six the density moved by exactly
+
+131
+00:04:40.303 --> 00:04:40.593
+four.
+
+132
+00:04:40.941 --> 00:04:43.259
+The test is four or less, so it stays.
+
+133
+00:04:43.607 --> 00:04:46.099
+At window eleven it jumped by twenty, so
+
+134
+00:04:46.099 --> 00:04:47.374
+that change drops out.
+
+135
+00:04:48.114 --> 00:04:50.565
+Fourteen of fifteen transitions survive,
+
+136
+00:04:50.565 --> 00:04:52.787
+and our drummer still scores plus zero
+
+137
+00:04:52.787 --> 00:04:55.466
+point five two seven two: it moved things
+
+138
+00:04:55.466 --> 00:04:57.745
+around at a boundary where the busyness
+
+139
+00:04:57.745 --> 00:04:58.372
+held level.
+
+140
+00:04:59.379 --> 00:05:00.318
+Now the stand-in.
+
+141
+00:05:00.649 --> 00:05:02.914
+Its density goes twenty-four, forty,
+
+142
+00:05:02.914 --> 00:05:05.399
+twenty-four: both boundary changes jump
+
+143
+00:05:05.399 --> 00:05:06.117
+sixteen bits.
+
+144
+00:05:06.588 --> 00:05:07.954
+Both drop through the sieve.
+
+145
+00:05:08.246 --> 00:05:10.197
+Nothing is left at the boundaries, so
+
+146
+00:05:10.197 --> 00:05:12.441
+there's no reading: everything it scored
+
+147
+00:05:12.441 --> 00:05:13.075
+was busyness.
+
+148
+00:05:13.491 --> 00:05:15.685
+One honest caveat, written down before any
+
+149
+00:05:15.685 --> 00:05:16.465
+number was seen.
+
+150
+00:05:16.758 --> 00:05:18.708
+A stand-in like this can't score on the
+
+151
+00:05:18.708 --> 00:05:20.805
+pattern line by construction: on real
+
+152
+00:05:20.805 --> 00:05:22.414
+songs its median is exactly zero.
+
+153
+00:05:22.706 --> 00:05:24.315
+So its zero alone proves nothing.
+
+154
+00:05:24.608 --> 00:05:26.607
+The test that decides it is a song's own
+
+155
+00:05:26.607 --> 00:05:28.752
+drums against a stranger's drums, another
+
+156
+00:05:28.752 --> 00:05:30.751
+song's drums played under this guitar,
+
+157
+00:05:30.751 --> 00:05:31.824
+compared song by song.
+
+158
+00:05:32.116 --> 00:05:33.189
+That's in chapter six.
+
+159
+00:05:36.600 --> 00:05:38.114
+Look closely at a boundary.
+
+160
+00:05:38.451 --> 00:05:40.750
+The guitar changes right at the start of
+
+161
+00:05:40.750 --> 00:05:41.367
+window six.
+
+162
+00:05:41.704 --> 00:05:44.172
+To score in full, the drums of window six
+
+163
+00:05:44.172 --> 00:05:46.527
+as a whole must differ from window five's.
+
+164
+00:05:46.864 --> 00:05:49.163
+A change that starts partway into window
+
+165
+00:05:49.163 --> 00:05:50.733
+six is only partly credited.
+
+166
+00:05:51.193 --> 00:05:53.303
+So the metric rewards anticipating:
+
+167
+00:05:53.303 --> 00:05:55.464
+changing at the moment the guitar does,
+
+168
+00:05:55.464 --> 00:05:57.111
+which needs to know it's coming.
+
+169
+00:05:57.420 --> 00:05:58.552
+Our models are causal.
+
+170
+00:05:58.861 --> 00:06:00.919
+They only hear the change as window six
+
+171
+00:06:00.919 --> 00:06:03.080
+plays, so part of their answer lands in
+
+172
+00:06:03.080 --> 00:06:05.293
+window seven, and window seven is booked
+
+173
+00:06:05.293 --> 00:06:05.705
+as leak.
+
+174
+00:06:06.148 --> 00:06:08.679
+So there's a diagnostic beside the score,
+
+175
+00:06:08.679 --> 00:06:11.325
+lag one: the same contrast, one window
+
+176
+00:06:11.325 --> 00:06:11.670
+later.
+
+177
+00:06:12.016 --> 00:06:14.317
+It averages the change at each boundary
+
+178
+00:06:14.317 --> 00:06:16.675
+plus one, against everything away from
+
+179
+00:06:16.675 --> 00:06:16.963
+both.
+
+180
+00:06:17.475 --> 00:06:20.098
+Our late drummer scored minus zero point
+
+181
+00:06:20.098 --> 00:06:20.674
+one zero.
+
+182
+00:06:21.058 --> 00:06:23.746
+One window later it reads plus zero point
+
+183
+00:06:23.746 --> 00:06:26.817
+six zero seven: the lag-one line finds the
+
+184
+00:06:26.817 --> 00:06:28.801
+right changes, a window late.
+
+185
+00:06:29.805 --> 00:06:32.375
+On real songs, real drummers read zero on
+
+186
+00:06:32.375 --> 00:06:34.887
+lag one, in all three song sets where it
+
+187
+00:06:34.887 --> 00:06:37.516
+was measured: their changes land on the
+
+188
+00:06:37.516 --> 00:06:38.451
+boundary itself.
+
+189
+00:06:38.802 --> 00:06:41.080
+On the thirteenth of September we also
+
+190
+00:06:41.080 --> 00:06:43.534
+fitted a causal density-follower: it
+
+191
+00:06:43.534 --> 00:06:45.988
+follows only the guitar's busyness, and
+
+192
+00:06:45.988 --> 00:06:47.624
+hears it only as it happens.
+
+193
+00:06:47.974 --> 00:06:50.545
+Its F is about plus zero point zero five,
+
+194
+00:06:50.545 --> 00:06:52.882
+far below the eleven September stand-in.
+
+195
+00:06:53.232 --> 00:06:55.744
+It, and our causal drummers, read plus
+
+196
+00:06:55.744 --> 00:06:58.081
+zero point zero five to plus zero point
+
+197
+00:06:58.081 --> 00:07:00.886
+zero nine on lag one: part of their change
+
+198
+00:07:00.886 --> 00:07:02.054
+comes a window late.
+
+199
+00:07:02.584 --> 00:07:03.924
+Lag one is a diagnostic.
+
+200
+00:07:04.260 --> 00:07:06.605
+It's not in the battery and it changes no
+
+201
+00:07:06.605 --> 00:07:07.555
+published number.
+
+202
+00:07:07.890 --> 00:07:10.291
+But it means a lower F doesn't always mean
+
+203
+00:07:10.291 --> 00:07:11.129
+less listening.
+
+204
+00:07:11.464 --> 00:07:13.419
+It can mean reacting a window late.
+
+205
+00:07:16.873 --> 00:07:19.383
+Now real songs: a hundred and sixty-eight
+
+206
+00:07:19.383 --> 00:07:21.518
+Rock songs, the committed control run.
+
+207
+00:07:21.839 --> 00:07:24.188
+They were drawn from the whole Rock pool,
+
+208
+00:07:24.188 --> 00:07:25.790
+not only the validation songs.
+
+209
+00:07:26.110 --> 00:07:27.925
+Each dot is the median over songs.
+
+210
+00:07:28.246 --> 00:07:30.221
+The line through it is a ninety-five
+
+211
+00:07:30.221 --> 00:07:31.983
+percent interval for that median.
+
+212
+00:07:32.467 --> 00:07:34.725
+Real drummers: plus zero point two two.
+
+213
+00:07:35.033 --> 00:07:37.342
+Another song's drums under this guitar:
+
+214
+00:07:37.342 --> 00:07:37.599
+zero.
+
+215
+00:07:37.907 --> 00:07:38.933
+The loop: zero.
+
+216
+00:07:39.241 --> 00:07:40.524
+Shuffled bars: zero.
+
+217
+00:07:40.832 --> 00:07:43.244
+And the density stand-in: plus zero point
+
+218
+00:07:43.244 --> 00:07:45.297
+one seven, nearly level with the real
+
+219
+00:07:45.297 --> 00:07:45.759
+drummers.
+
+220
+00:07:46.185 --> 00:07:48.811
+Compared song by song, the real drums beat
+
+221
+00:07:48.811 --> 00:07:51.145
+the stranger's on eighty-two percent of
+
+222
+00:07:51.145 --> 00:07:51.496
+songs.
+
+223
+00:07:51.846 --> 00:07:54.355
+But against the stand-in, the difference
+
+224
+00:07:54.355 --> 00:07:56.864
+is plus zero point zero two five, p zero
+
+225
+00:07:56.864 --> 00:07:58.498
+point zero nine: a tie.
+
+226
+00:07:58.848 --> 00:08:00.015
+That's the loophole.
+
+227
+00:08:00.521 --> 00:08:02.627
+On the pattern line, real drummers keep
+
+228
+00:08:02.627 --> 00:08:04.131
+plus zero point zero nine one.
+
+229
+00:08:04.432 --> 00:08:06.337
+Every control here, the three-level
+
+230
+00:08:06.337 --> 00:08:08.243
+stand-in included, reads about zero.
+
+231
+00:08:08.543 --> 00:08:10.398
+Paired, the real drummers beat the
+
+232
+00:08:10.398 --> 00:08:12.504
+stand-in, p one point four times ten to
+
+233
+00:08:12.504 --> 00:08:14.510
+the minus eight, and, the test that
+
+234
+00:08:14.510 --> 00:08:16.816
+decides it, they beat the stranger too, p
+
+235
+00:08:16.816 --> 00:08:18.421
+one times ten to the minus nine.
+
+236
+00:08:19.689 --> 00:08:20.941
+One honest qualification.
+
+237
+00:08:21.242 --> 00:08:23.495
+On the thirteenth of September, the fitted
+
+238
+00:08:23.495 --> 00:08:25.649
+causal density-follower still scored about
+
+239
+00:08:25.649 --> 00:08:27.702
+plus zero point zero four on the pattern
+
+240
+00:08:27.702 --> 00:08:29.705
+line, roughly half the real drummers'.
+
+241
+00:08:30.006 --> 00:08:32.059
+As its busyness drifts, a hit can move
+
+242
+00:08:32.059 --> 00:08:33.561
+while the density stays level.
+
+243
+00:08:33.862 --> 00:08:36.015
+So the pattern line separates pattern from
+
+244
+00:08:36.015 --> 00:08:37.918
+busyness less cleanly than this table
+
+245
+00:08:37.918 --> 00:08:38.369
+suggests.
+
+246
+00:08:38.763 --> 00:08:41.479
+A detail for the report: each number is
+
+247
+00:08:41.479 --> 00:08:43.049
+its own median over songs.
+
+248
+00:08:43.411 --> 00:08:45.826
+Real drummers' median follow and median
+
+249
+00:08:45.826 --> 00:08:48.120
+leak don't subtract to their median F.
+
+250
+00:08:51.683 --> 00:08:53.648
+Now our models, on two hundred and
+
+251
+00:08:53.648 --> 00:08:55.240
+ninety-seven validation songs.
+
+252
+00:08:55.559 --> 00:08:56.462
+On the left, F.
+
+253
+00:08:56.780 --> 00:08:57.895
+On the right, leak.
+
+254
+00:08:58.214 --> 00:09:00.656
+Real drummers: plus zero point one three
+
+255
+00:09:00.656 --> 00:09:02.939
+five, with a leak of zero point one nine
+
+256
+00:09:02.939 --> 00:09:03.151
+two.
+
+257
+00:09:03.470 --> 00:09:05.275
+The shaded band is their interval.
+
+258
+00:09:05.756 --> 00:09:08.256
+The transformer: plus zero point one four
+
+259
+00:09:08.256 --> 00:09:10.385
+eight, inside the real drummers' band.
+
+260
+00:09:10.704 --> 00:09:13.045
+Song by song, that's a tie, and it gets
+
+261
+00:09:13.045 --> 00:09:15.386
+there with half their leak: zero point
+
+262
+00:09:15.386 --> 00:09:16.237
+zero nine seven.
+
+263
+00:09:16.701 --> 00:09:18.851
+The LSTM: plus zero point three five
+
+264
+00:09:18.851 --> 00:09:20.744
+seven, far above the real drummers.
+
+265
+00:09:21.051 --> 00:09:23.508
+But look at its leak: zero point two eight
+
+266
+00:09:23.508 --> 00:09:24.787
+five, the highest here.
+
+267
+00:09:25.094 --> 00:09:27.193
+It changes more at the boundaries, and
+
+268
+00:09:27.193 --> 00:09:28.472
+more everywhere else too.
+
+269
+00:09:28.779 --> 00:09:30.826
+A higher F isn't automatically a better
+
+270
+00:09:30.826 --> 00:09:31.235
+drummer.
+
+271
+00:09:31.543 --> 00:09:32.924
+Always read leak beside it.
+
+272
+00:09:33.393 --> 00:09:35.745
+And one caveat: each model's epoch was
+
+273
+00:09:35.745 --> 00:09:37.723
+picked on these same two hundred and
+
+274
+00:09:37.723 --> 00:09:40.129
+ninety-seven songs, so its score here is a
+
+275
+00:09:40.129 --> 00:09:41.092
+little optimistic.
+
+276
+00:09:42.655 --> 00:09:43.782
+One trap for the report.
+
+277
+00:09:44.064 --> 00:09:46.085
+You'll find four different numbers for the
+
+278
+00:09:46.085 --> 00:09:46.743
+real drummers.
+
+279
+00:09:47.143 --> 00:09:48.392
+They aren't in conflict.
+
+280
+00:09:48.704 --> 00:09:50.940
+Each is the median over a different set of
+
+281
+00:09:50.940 --> 00:09:52.917
+songs, so each is right for its set.
+
+282
+00:09:53.229 --> 00:09:55.361
+Always say which set a number comes from.
+
+283
+00:09:57.098 --> 00:09:59.392
+So: follow is change where the guitar
+
+284
+00:09:59.392 --> 00:10:01.793
+changes, leak is change everywhere else,
+
+285
+00:10:01.793 --> 00:10:03.073
+and F is the difference.
+
+286
+00:10:03.393 --> 00:10:05.634
+The guitar picks the moments, the drums
+
+287
+00:10:05.634 --> 00:10:08.034
+are judged at them, and a good score needs
+
+288
+00:10:08.034 --> 00:10:09.848
+both a high follow and a low leak.
+

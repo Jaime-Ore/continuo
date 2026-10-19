@@ -1,0 +1,802 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.142
+Lesson two point eight.
+
+2
+00:00:01.432 --> 00:00:03.270
+How a song on disk becomes a training
+
+3
+00:00:03.270 --> 00:00:03.560
+batch.
+
+4
+00:00:07.483 --> 00:00:09.713
+Lesson two point three put the notes of a
+
+5
+00:00:09.713 --> 00:00:10.510
+song on a grid.
+
+6
+00:00:10.829 --> 00:00:12.953
+This lesson follows a song from disk to
+
+7
+00:00:12.953 --> 00:00:13.484
+the model.
+
+8
+00:00:13.802 --> 00:00:15.661
+The store keeps every song's notes.
+
+9
+00:00:15.979 --> 00:00:18.316
+The cache keeps a fast, flat copy of what
+
+10
+00:00:18.316 --> 00:00:19.112
+training reads.
+
+11
+00:00:19.431 --> 00:00:21.555
+And the loader turns songs into batches.
+
+12
+00:00:21.873 --> 00:00:23.785
+The same three serve Lakh and XMIDI.
+
+13
+00:00:27.257 --> 00:00:29.389
+The store holds one line of text per song.
+
+14
+00:00:29.694 --> 00:00:31.826
+It keeps the file's ticks per beat, its
+
+15
+00:00:31.826 --> 00:00:33.857
+tempo map and its time signatures:
+
+16
+00:00:33.857 --> 00:00:35.177
+everything the grid needs.
+
+17
+00:00:35.482 --> 00:00:37.919
+Then three lists of notes: guitar, drums
+
+18
+00:00:37.919 --> 00:00:38.376
+and bass.
+
+19
+00:00:38.680 --> 00:00:40.813
+Each note is a time in seconds, a pitch
+
+20
+00:00:40.813 --> 00:00:41.574
+and a velocity.
+
+21
+00:00:41.879 --> 00:00:44.062
+Only note starts are kept, not note ends.
+
+22
+00:00:44.463 --> 00:00:45.993
+The lines are packed into sixteen
+
+23
+00:00:45.993 --> 00:00:47.974
+compressed shards, by the first character
+
+24
+00:00:47.974 --> 00:00:48.784
+of each song's id.
+
+25
+00:00:49.054 --> 00:00:50.809
+Lakh v3 holds fifty-two thousand seven
+
+26
+00:00:50.809 --> 00:00:52.610
+hundred and ninety-three songs, about
+
+27
+00:00:52.610 --> 00:00:54.050
+ninety-seven million drum notes.
+
+28
+00:00:54.320 --> 00:00:56.256
+XMIDI holds forty thousand six hundred and
+
+29
+00:00:56.256 --> 00:00:57.066
+ninety-four songs.
+
+30
+00:00:57.336 --> 00:00:59.407
+The windows aren't stored: they're built
+
+31
+00:00:59.407 --> 00:01:01.117
+from these lists every time a song is
+
+32
+00:01:01.117 --> 00:01:03.053
+read, with lesson two point three's grid.
+
+33
+00:01:06.517 --> 00:01:08.799
+Reading one song from the store on its own
+
+34
+00:01:08.799 --> 00:01:11.293
+takes about nine tenths of a second: open
+
+35
+00:01:11.293 --> 00:01:13.734
+a shard, find the line, parse it, build
+
+36
+00:01:13.734 --> 00:01:14.371
+the windows.
+
+37
+00:01:14.690 --> 00:01:16.282
+About nine kilobytes come out.
+
+38
+00:01:16.600 --> 00:01:18.723
+So the loader doesn't read songs one by
+
+39
+00:01:18.723 --> 00:01:20.634
+one: it sweeps each shard once.
+
+40
+00:01:20.952 --> 00:01:23.128
+Even so, decompressing and parsing the
+
+41
+00:01:23.128 --> 00:01:25.357
+forty-seven thousand training songs costs
+
+42
+00:01:25.357 --> 00:01:27.745
+about four minutes every epoch, before any
+
+43
+00:01:27.745 --> 00:01:28.647
+learning happens.
+
+44
+00:01:28.966 --> 00:01:31.354
+Both figures are reported in the code, not
+
+45
+00:01:31.354 --> 00:01:32.256
+re-measured here.
+
+46
+00:01:32.575 --> 00:01:34.698
+So the cache does that work once, and
+
+47
+00:01:34.698 --> 00:01:35.918
+writes the result flat.
+
+48
+00:01:36.897 --> 00:01:37.883
+Four bytes a slot.
+
+49
+00:01:38.211 --> 00:01:40.400
+One for the guitar onset, one for its
+
+50
+00:01:40.400 --> 00:01:42.754
+velocity, kept as the raw MIDI number so
+
+51
+00:01:42.754 --> 00:01:45.107
+nothing is lost in rounding, and two for
+
+52
+00:01:45.107 --> 00:01:47.953
+the drums: nine bits, one per drum, packed
+
+53
+00:01:47.953 --> 00:01:48.829
+into one number.
+
+54
+00:01:49.306 --> 00:01:51.813
+Twelve bytes a window: its tempo and its
+
+55
+00:01:51.813 --> 00:01:52.412
+bar number.
+
+56
+00:01:52.739 --> 00:01:54.973
+It stores the raw arrays, not the five
+
+57
+00:01:54.973 --> 00:01:57.371
+inputs from lesson one point two, because
+
+58
+00:01:57.371 --> 00:01:59.551
+the shift and the intensity's half-life
+
+59
+00:01:59.551 --> 00:02:01.458
+are settings that experiments vary.
+
+60
+00:02:01.785 --> 00:02:04.019
+Rebuilding the inputs takes microseconds.
+
+61
+00:02:04.481 --> 00:02:06.757
+For Lakh v3, that's eighty-nine million
+
+62
+00:02:06.757 --> 00:02:08.870
+slots and under four hundred megabytes.
+
+63
+00:02:09.195 --> 00:02:11.525
+And the cache carries a fingerprint of the
+
+64
+00:02:11.525 --> 00:02:11.850
+store.
+
+65
+00:02:12.175 --> 00:02:14.234
+If the store has changed since it was
+
+66
+00:02:14.234 --> 00:02:16.672
+built, the cache refuses to load, rather
+
+67
+00:02:16.672 --> 00:02:18.569
+than serve old data without anyone
+
+68
+00:02:18.569 --> 00:02:19.056
+noticing.
+
+69
+00:02:22.533 --> 00:02:25.085
+The loader starts from a small table: each
+
+70
+00:02:25.085 --> 00:02:27.051
+corpus names its store and its split.
+
+71
+00:02:27.370 --> 00:02:29.124
+Lakh's two versions, and XMIDI.
+
+72
+00:02:29.585 --> 00:02:32.237
+Every song sits on one side of the split:
+
+73
+00:02:32.237 --> 00:02:33.818
+train, validation or test.
+
+74
+00:02:34.156 --> 00:02:36.640
+Asking for the test side raises an error,
+
+75
+00:02:36.640 --> 00:02:38.897
+unless the loader was built with a flag
+
+76
+00:02:38.897 --> 00:02:40.252
+that says so on purpose.
+
+77
+00:02:40.590 --> 00:02:42.509
+Spending the test set has to be a
+
+78
+00:02:42.509 --> 00:02:43.356
+deliberate act.
+
+79
+00:02:44.027 --> 00:02:46.646
+A song list, like XMIDI's rock songs, can
+
+80
+00:02:46.646 --> 00:02:47.443
+narrow a side.
+
+81
+00:02:47.784 --> 00:02:50.175
+Every song on the list must already be on
+
+82
+00:02:50.175 --> 00:02:52.737
+that side, or the loader refuses, naming
+
+83
+00:02:52.737 --> 00:02:53.306
+the songs.
+
+84
+00:02:53.648 --> 00:02:55.754
+The genre lists are lesson two point
+
+85
+00:02:55.754 --> 00:02:56.096
+seven.
+
+86
+00:02:59.980 --> 00:03:01.798
+First, a tempo for every window.
+
+87
+00:03:02.118 --> 00:03:04.524
+Two bars of four four are eight beats, and
+
+88
+00:03:04.524 --> 00:03:05.914
+a minute is sixty seconds.
+
+89
+00:03:06.235 --> 00:03:08.373
+Divide by the time between one window's
+
+90
+00:03:08.373 --> 00:03:09.389
+start and the next.
+
+91
+00:03:09.839 --> 00:03:12.051
+In this real Lakh song every window starts
+
+92
+00:03:12.051 --> 00:03:14.468
+four seconds after the last: four hundred
+
+93
+00:03:14.468 --> 00:03:16.783
+and eighty over four, a hundred and twenty
+
+94
+00:03:16.783 --> 00:03:17.657
+beats per minute.
+
+95
+00:03:17.966 --> 00:03:19.355
+So its tempo input is zero.
+
+96
+00:03:19.663 --> 00:03:21.875
+Where two windows aren't neighbours, the
+
+97
+00:03:21.875 --> 00:03:23.830
+gap is filled from the nearest window.
+
+98
+00:03:24.271 --> 00:03:26.617
+A song with fewer than two windows has no
+
+99
+00:03:26.617 --> 00:03:28.962
+tempo, and neither does one whose tempo
+
+100
+00:03:28.962 --> 00:03:30.358
+map gives nothing usable.
+
+101
+00:03:30.693 --> 00:03:31.698
+Those are dropped.
+
+102
+00:03:32.033 --> 00:03:34.602
+In practice that's none: in both corpora
+
+103
+00:03:34.602 --> 00:03:36.556
+the shortest song has four windows.
+
+104
+00:03:38.124 --> 00:03:40.079
+Now the song's windows are laid end to
+
+105
+00:03:40.079 --> 00:03:40.280
+end.
+
+106
+00:03:40.581 --> 00:03:42.737
+x has one row per slot and five columns,
+
+107
+00:03:42.737 --> 00:03:44.742
+the five inputs of lesson one point two.
+
+108
+00:03:45.043 --> 00:03:47.349
+y has one row per slot and nine columns:
+
+109
+00:03:47.349 --> 00:03:49.355
+the drums, which is H from lesson two
+
+110
+00:03:49.355 --> 00:03:50.508
+point three, stacked.
+
+111
+00:03:50.809 --> 00:03:53.165
+T, the number of rows, is thirty-two times
+
+112
+00:03:53.165 --> 00:03:55.672
+the number of windows: here, seven hundred
+
+113
+00:03:55.672 --> 00:03:56.123
+and four.
+
+114
+00:03:56.597 --> 00:03:58.691
+The guitar's first notes come in slot
+
+115
+00:03:58.691 --> 00:03:58.966
+five.
+
+116
+00:03:59.297 --> 00:04:01.996
+x shows them one slot later, in slot six:
+
+117
+00:04:01.996 --> 00:04:04.255
+the one-slot shift, so the model never
+
+118
+00:04:04.255 --> 00:04:05.853
+hears the slot it's deciding.
+
+119
+00:04:06.183 --> 00:04:08.552
+Meanwhile y has the drummer's kick in slot
+
+120
+00:04:08.552 --> 00:04:11.141
+five: that's what the model must learn to
+
+121
+00:04:11.141 --> 00:04:11.417
+play.
+
+122
+00:04:14.897 --> 00:04:16.760
+Training doesn't take one song at a time.
+
+123
+00:04:17.033 --> 00:04:19.078
+The training songs are shuffled, taken two
+
+124
+00:04:19.078 --> 00:04:20.850
+hundred and fifty-six at a time, and
+
+125
+00:04:20.850 --> 00:04:22.895
+sorted by length, then cut into batches of
+
+126
+00:04:22.895 --> 00:04:24.486
+thirty-two songs of similar length.
+
+127
+00:04:24.759 --> 00:04:26.940
+Here's a real one: the very first batch of
+
+128
+00:04:26.940 --> 00:04:28.167
+the T one twenty-eight run.
+
+129
+00:04:28.440 --> 00:04:30.485
+Thirty-two songs, from a hundred and sixty
+
+130
+00:04:30.485 --> 00:04:32.485
+to nine hundred and ninety-two slots, one
+
+131
+00:04:32.485 --> 00:04:32.894
+row each.
+
+132
+00:04:33.285 --> 00:04:35.468
+The batch is walked forward in chunks of
+
+133
+00:04:35.468 --> 00:04:37.810
+five hundred and twelve slots: sixteen
+
+134
+00:04:37.810 --> 00:04:38.236
+windows.
+
+135
+00:04:38.556 --> 00:04:40.579
+Each chunk is one training step:
+
+136
+00:04:40.579 --> 00:04:42.549
+thirty-two songs by five hundred and
+
+137
+00:04:42.549 --> 00:04:44.625
+twelve slots, sixteen thousand three
+
+138
+00:04:44.625 --> 00:04:46.595
+hundred and eighty-four slots a step.
+
+139
+00:04:47.025 --> 00:04:48.791
+Songs end at different places.
+
+140
+00:04:49.144 --> 00:04:51.735
+Past its end, a song's row is padded with
+
+141
+00:04:51.735 --> 00:04:54.208
+zeros, and a mask marks which slots are
+
+142
+00:04:54.208 --> 00:04:56.740
+real: one for a real slot, zero for
+
+143
+00:04:56.740 --> 00:04:57.211
+padding.
+
+144
+00:04:57.723 --> 00:05:00.089
+So the loss is summed over the real slots
+
+145
+00:05:00.089 --> 00:05:02.286
+only and divided by how many there are.
+
+146
+00:05:02.624 --> 00:05:03.977
+Padding teaches nothing.
+
+147
+00:05:04.315 --> 00:05:06.681
+How the loss itself works is lesson three
+
+148
+00:05:06.681 --> 00:05:07.245
+point two.
+
+149
+00:05:07.920 --> 00:05:09.954
+In this batch's first chunk, fourteen
+
+150
+00:05:09.954 --> 00:05:12.090
+thousand eight hundred and forty-eight of
+
+151
+00:05:12.090 --> 00:05:14.074
+the sixteen thousand three hundred and
+
+152
+00:05:14.074 --> 00:05:16.312
+eighty-four slots are real: ninety-one
+
+153
+00:05:16.312 --> 00:05:16.719
+percent.
+
+154
+00:05:17.024 --> 00:05:19.058
+In the second, only six thousand nine
+
+155
+00:05:19.058 --> 00:05:20.279
+hundred and seventy-six.
+
+156
+00:05:20.584 --> 00:05:22.822
+Eight songs ended inside the first chunk,
+
+157
+00:05:22.822 --> 00:05:24.958
+so their rows in the second chunk are all
+
+158
+00:05:24.958 --> 00:05:25.365
+padding.
+
+159
+00:05:28.813 --> 00:05:30.743
+A song longer than one chunk is cut, but
+
+160
+00:05:30.743 --> 00:05:31.461
+its music isn't.
+
+161
+00:05:31.730 --> 00:05:33.525
+At a batch's first chunk, the model's
+
+162
+00:05:33.525 --> 00:05:34.244
+memory is reset.
+
+163
+00:05:34.513 --> 00:05:36.308
+At every later chunk it carries on from
+
+164
+00:05:36.308 --> 00:05:38.327
+where the last chunk stopped, so the model
+
+165
+00:05:38.327 --> 00:05:39.674
+hears the whole song in order.
+
+166
+00:05:39.943 --> 00:05:41.828
+But learning only looks back to the chunk
+
+167
+00:05:41.828 --> 00:05:43.488
+edge: the gradient is cut there.
+
+168
+00:05:43.758 --> 00:05:45.777
+That's truncated backpropagation, and it's
+
+169
+00:05:45.777 --> 00:05:46.854
+lesson three point four.
+
+170
+00:05:50.277 --> 00:05:52.176
+Here are the runs this machinery fed.
+
+171
+00:05:52.484 --> 00:05:54.692
+The T one twenty-eight transformer trained
+
+172
+00:05:54.692 --> 00:05:56.540
+on a fixed thirty percent of Lakh's
+
+173
+00:05:56.540 --> 00:05:58.696
+training side: fourteen thousand two
+
+174
+00:05:58.696 --> 00:06:00.750
+hundred and fifty-six songs, the same
+
+175
+00:06:00.750 --> 00:06:02.701
+songs every epoch, two thousand one
+
+176
+00:06:02.701 --> 00:06:04.343
+hundred and five steps an epoch.
+
+177
+00:06:04.651 --> 00:06:06.602
+The genre drummers trained on XMIDI's
+
+178
+00:06:06.602 --> 00:06:09.067
+lists: Rock, eight thousand five hundred
+
+179
+00:06:09.067 --> 00:06:11.171
+and sixty-one songs and one thousand and
+
+180
+00:06:11.171 --> 00:06:13.584
+sixteen steps; Jazz, five thousand five
+
+181
+00:06:13.584 --> 00:06:15.587
+hundred and ninety-eight songs and six
+
+182
+00:06:15.587 --> 00:06:18.051
+hundred and twenty-eight steps; Country,
+
+183
+00:06:18.051 --> 00:06:19.796
+eleven thousand three hundred and
+
+184
+00:06:19.796 --> 00:06:21.901
+sixty-eight songs and one thousand three
+
+185
+00:06:21.901 --> 00:06:23.339
+hundred and seventeen steps.
+
+186
+00:06:23.764 --> 00:06:25.663
+Fill is the share of a step's slots that
+
+187
+00:06:25.663 --> 00:06:27.886
+are real: seventy percent on Lakh, about
+
+188
+00:06:27.886 --> 00:06:29.599
+seventy-six to seventy-nine on XMIDI.
+
+189
+00:06:29.877 --> 00:06:31.729
+Validation loss uses up to four hundred
+
+190
+00:06:31.729 --> 00:06:33.582
+validation songs, walked the same way.
+
+191
+00:06:33.860 --> 00:06:35.620
+A few architecture runs walked longer
+
+192
+00:06:35.620 --> 00:06:37.565
+stretches with the same budget of sixteen
+
+193
+00:06:37.565 --> 00:06:39.371
+thousand three hundred and eighty-four
+
+194
+00:06:39.371 --> 00:06:41.455
+slots a step; that's horizon mode, in
+
+195
+00:06:41.455 --> 00:06:42.566
+lesson three point four.
+
+196
+00:06:44.165 --> 00:06:46.873
+Store, cache, loader: one song becomes x
+
+197
+00:06:46.873 --> 00:06:49.365
+and y, thirty-two songs make a batch, and
+
+198
+00:06:49.365 --> 00:06:51.640
+five hundred and twelve slots make a step.
+
+199
+00:06:51.965 --> 00:06:54.619
+Next, in topic three: what the model does
+
+200
+00:06:54.619 --> 00:06:55.160
+with them.
+

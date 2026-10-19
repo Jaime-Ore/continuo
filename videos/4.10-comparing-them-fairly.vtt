@@ -1,0 +1,914 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.119
+Lesson four point ten.
+
+2
+00:00:01.414 --> 00:00:03.327
+Before any result: what makes the
+
+3
+00:00:03.327 --> 00:00:05.534
+comparison of the drummers fair, and where
+
+4
+00:00:05.534 --> 00:00:05.976
+it isn't.
+
+5
+00:00:09.887 --> 00:00:12.062
+A comparison is fair when only the thing
+
+6
+00:00:12.062 --> 00:00:13.177
+being tested differs.
+
+7
+00:00:13.495 --> 00:00:16.254
+Here, as an illustration, two drummers: an
+
+8
+00:00:16.254 --> 00:00:17.475
+LSTM and a transformer.
+
+9
+00:00:17.793 --> 00:00:19.756
+The architecture is the one thing we
+
+10
+00:00:19.756 --> 00:00:20.128
+change.
+
+11
+00:00:20.446 --> 00:00:22.728
+Everything else is held the same: the
+
+12
+00:00:22.728 --> 00:00:25.275
+songs, the training recipe, the seed, and
+
+13
+00:00:25.275 --> 00:00:25.858
+the scorer.
+
+14
+00:00:26.322 --> 00:00:28.751
+Now suppose one more thing differs: only
+
+15
+00:00:28.751 --> 00:00:31.021
+the transformer is told where it is in the
+
+16
+00:00:31.021 --> 00:00:31.232
+bar.
+
+17
+00:00:31.549 --> 00:00:33.660
+If it then scores higher, is that the
+
+18
+00:00:33.660 --> 00:00:35.403
+architecture, or the bar phase?
+
+19
+00:00:35.719 --> 00:00:37.989
+These two runs can't split them: that
+
+20
+00:00:37.989 --> 00:00:40.154
+takes a run that changes only one of the
+
+21
+00:00:40.154 --> 00:00:40.365
+two.
+
+22
+00:00:40.682 --> 00:00:42.635
+That second difference is a confound.
+
+23
+00:00:43.111 --> 00:00:44.942
+Real comparisons always have some.
+
+24
+00:00:45.265 --> 00:00:47.472
+The honest job is to hold equal what you
+
+25
+00:00:47.472 --> 00:00:49.895
+can, list what you can't, and read every
+
+26
+00:00:49.895 --> 00:00:51.618
+number with that list beside it.
+
+27
+00:00:54.980 --> 00:00:57.020
+The architecture run trained six arms on
+
+28
+00:00:57.020 --> 00:00:58.861
+the twenty-fifth and twenty-sixth of
+
+29
+00:00:58.861 --> 00:00:59.359
+September.
+
+30
+00:00:59.657 --> 00:01:01.498
+Here's what it held equal, and the
+
+31
+00:01:01.498 --> 00:01:02.394
+evidence for each.
+
+32
+00:01:02.692 --> 00:01:04.832
+The same songs: fourteen thousand two
+
+33
+00:01:04.832 --> 00:01:07.021
+hundred and fifty-six training songs, and
+
+34
+00:01:07.021 --> 00:01:09.160
+the same four hundred validation songs for
+
+35
+00:01:09.160 --> 00:01:11.200
+the loss, by the list's fingerprint in
+
+36
+00:01:11.200 --> 00:01:12.046
+every run record.
+
+37
+00:01:12.345 --> 00:01:14.385
+The same recipe: one shared list of
+
+38
+00:01:14.385 --> 00:01:16.624
+settings in the chain script, the one from
+
+39
+00:01:16.624 --> 00:01:17.768
+lesson four point zero.
+
+40
+00:01:18.067 --> 00:01:19.510
+The same seeds and data plan.
+
+41
+00:01:19.808 --> 00:01:21.848
+A fixed shuffle seed picks the songs and
+
+42
+00:01:21.848 --> 00:01:23.938
+their order, so every arm on the thirty
+
+43
+00:01:23.938 --> 00:01:25.978
+percent songs saw the same real slots,
+
+44
+00:01:25.978 --> 00:01:28.068
+about twenty-four million an epoch, and
+
+45
+00:01:28.068 --> 00:01:30.108
+the step counts match one for one within
+
+46
+00:01:30.108 --> 00:01:31.053
+each training mode.
+
+47
+00:01:31.352 --> 00:01:33.392
+The other seed sets the random draws for
+
+48
+00:01:33.392 --> 00:01:35.033
+the starting weights and dropout.
+
+49
+00:01:35.332 --> 00:01:37.422
+It's the same number for every arm, but
+
+50
+00:01:37.422 --> 00:01:39.561
+different models have different weights,
+
+51
+00:01:39.561 --> 00:01:41.502
+so it doesn't give them the same start.
+
+52
+00:01:41.800 --> 00:01:43.492
+Sizes within about twelve percent.
+
+53
+00:01:43.791 --> 00:01:45.980
+One exception: S one twenty-eight full
+
+54
+00:01:45.980 --> 00:01:47.671
+trained on all the training songs.
+
+55
+00:01:49.067 --> 00:01:49.857
+Then the scoring.
+
+56
+00:01:50.136 --> 00:01:51.997
+Every epoch of every arm, seventy-two
+
+57
+00:01:51.997 --> 00:01:54.043
+checkpoints, was scored by the battery on
+
+58
+00:01:54.043 --> 00:01:55.811
+the same two hundred and ninety-seven
+
+59
+00:01:55.811 --> 00:01:57.764
+validation songs, with the same decoder.
+
+60
+00:01:58.043 --> 00:01:59.904
+Each model's thresholds were fitted the
+
+61
+00:01:59.904 --> 00:02:01.950
+same way, on forty calibration songs that
+
+62
+00:02:01.950 --> 00:02:02.741
+are never scored.
+
+63
+00:02:03.020 --> 00:02:05.020
+And the rule for picking one epoch per arm
+
+64
+00:02:05.020 --> 00:02:06.927
+was committed at two minutes past one in
+
+65
+00:02:06.927 --> 00:02:08.554
+the morning of the twenty-fifth of
+
+66
+00:02:08.554 --> 00:02:09.020
+September.
+
+67
+00:02:09.299 --> 00:02:11.066
+The first arm's scores were written a
+
+68
+00:02:11.066 --> 00:02:12.229
+quarter of an hour later.
+
+69
+00:02:12.508 --> 00:02:14.554
+Four gates, then the highest follow minus
+
+70
+00:02:14.554 --> 00:02:14.787
+leak.
+
+71
+00:02:15.066 --> 00:02:16.833
+Lesson three point five called this a
+
+72
+00:02:16.833 --> 00:02:17.763
+pre-registered rule.
+
+73
+00:02:18.042 --> 00:02:18.833
+Two honest notes.
+
+74
+00:02:19.112 --> 00:02:20.880
+It was a proposal, and Jaime hasn't
+
+75
+00:02:20.880 --> 00:02:21.438
+approved it.
+
+76
+00:02:21.717 --> 00:02:23.763
+And after blind listening, its picks were
+
+77
+00:02:23.763 --> 00:02:25.438
+set aside for choosing what we play.
+
+78
+00:02:28.777 --> 00:02:31.148
+Now what it could not hold equal, item by
+
+79
+00:02:31.148 --> 00:02:33.572
+item, each with its number in the report's
+
+80
+00:02:33.572 --> 00:02:34.057
+findings.
+
+81
+00:02:34.381 --> 00:02:36.482
+One: how far the gradient reaches.
+
+82
+00:02:36.805 --> 00:02:38.745
+Five hundred and twelve slots for L
+
+83
+00:02:38.745 --> 00:02:40.631
+thirty-two, S thirty-two and the
+
+84
+00:02:40.631 --> 00:02:43.163
+transformer; two thousand and forty-eight
+
+85
+00:02:43.163 --> 00:02:44.133
+for the long arms.
+
+86
+00:02:44.457 --> 00:02:46.989
+Two: only the transformer is told the bar
+
+87
+00:02:46.989 --> 00:02:47.312
+phase.
+
+88
+00:02:47.636 --> 00:02:48.767
+Three: clipping.
+
+89
+00:02:49.091 --> 00:02:51.461
+The same setting for all, but it bit only
+
+90
+00:02:51.461 --> 00:02:53.617
+on S4D: S one twenty-eight clipped
+
+91
+00:02:53.617 --> 00:02:55.772
+fifty-three to seventy-seven percent of
+
+92
+00:02:55.772 --> 00:02:57.227
+its steps from epoch three.
+
+93
+00:02:57.550 --> 00:02:59.813
+L thirty-two and the transformer, never.
+
+94
+00:03:00.290 --> 00:03:01.184
+Four: warm-up.
+
+95
+00:03:01.466 --> 00:03:03.488
+This one the run did hold, three hundred
+
+96
+00:03:03.488 --> 00:03:04.429
+steps for every arm.
+
+97
+00:03:04.711 --> 00:03:06.780
+The genre drummers had none, so comparing
+
+98
+00:03:06.780 --> 00:03:08.615
+one of them with the transformer isn't
+
+99
+00:03:08.615 --> 00:03:09.273
+like for like.
+
+100
+00:03:09.555 --> 00:03:11.672
+Five: L one twenty-eight never left its
+
+101
+00:03:11.672 --> 00:03:12.283
+loss plateau.
+
+102
+00:03:12.565 --> 00:03:14.682
+Its numbers describe a stuck run, not what
+
+103
+00:03:14.682 --> 00:03:16.516
+an LSTM can do over two thousand slots.
+
+104
+00:03:16.798 --> 00:03:18.068
+Six: one seed per arm.
+
+105
+00:03:18.480 --> 00:03:20.738
+Each arm trained once, so the intervals
+
+106
+00:03:20.738 --> 00:03:22.997
+cover the songs, not the training:
+
+107
+00:03:22.997 --> 00:03:24.718
+run-to-run noise isn't measured.
+
+108
+00:03:25.040 --> 00:03:27.299
+The one hint is a single LSTM recipe from
+
+109
+00:03:27.299 --> 00:03:29.772
+round two, an earlier round, trained with
+
+110
+00:03:29.772 --> 00:03:30.417
+three seeds.
+
+111
+00:03:30.740 --> 00:03:32.783
+Their picked epochs scored plus point
+
+112
+00:03:32.783 --> 00:03:34.988
+three seven nine, plus point three six
+
+113
+00:03:34.988 --> 00:03:37.246
+eight and plus point three seven three,
+
+114
+00:03:37.246 --> 00:03:39.451
+while the loss's epochs spread from plus
+
+115
+00:03:39.451 --> 00:03:41.656
+point three one nine to plus point three
+
+116
+00:03:41.656 --> 00:03:42.247
+seven nine.
+
+117
+00:03:42.570 --> 00:03:44.559
+Those picks were chosen on the songs
+
+118
+00:03:44.559 --> 00:03:46.818
+they're scored on, which squeezes their
+
+119
+00:03:46.818 --> 00:03:47.194
+spread.
+
+120
+00:03:47.517 --> 00:03:48.807
+A hint, not a measure.
+
+121
+00:03:49.288 --> 00:03:51.369
+Seven: the epochs were picked on the same
+
+122
+00:03:51.369 --> 00:03:53.272
+two hundred and ninety-seven songs they're
+
+123
+00:03:53.272 --> 00:03:54.954
+scored on, so the picks' scores are
+
+124
+00:03:54.954 --> 00:03:56.902
+optimistic, as in lesson three point five.
+
+125
+00:03:57.168 --> 00:03:59.204
+Eight: the transformer is twelve percent
+
+126
+00:03:59.204 --> 00:03:59.514
+larger.
+
+127
+00:03:59.780 --> 00:04:01.019
+Each of these is a confound.
+
+128
+00:04:01.285 --> 00:04:03.233
+No run changes one of them alone, so none
+
+129
+00:04:03.233 --> 00:04:05.092
+can be pulled apart from the architecture.
+
+130
+00:04:05.358 --> 00:04:07.173
+And with one seed per arm, how much is
+
+131
+00:04:07.173 --> 00:04:08.412
+noise isn't measured either.
+
+132
+00:04:11.817 --> 00:04:14.055
+From five point seven: pair the two
+
+133
+00:04:14.055 --> 00:04:16.456
+drummers song by song, take the median of
+
+134
+00:04:16.456 --> 00:04:18.803
+the differences, bootstrap the songs for
+
+135
+00:04:18.803 --> 00:04:21.259
+an interval, and give the win share beside
+
+136
+00:04:21.259 --> 00:04:21.587
+the p.
+
+137
+00:04:21.914 --> 00:04:23.497
+Here's one real row from the
+
+138
+00:04:23.497 --> 00:04:25.626
+confidence-interval tables: T one
+
+139
+00:04:25.626 --> 00:04:27.700
+twenty-eight at epoch ten minus S one
+
+140
+00:04:27.700 --> 00:04:29.938
+twenty-eight at epoch zero, the rule's
+
+141
+00:04:29.938 --> 00:04:31.084
+picks for those arms.
+
+142
+00:04:31.412 --> 00:04:33.649
+Follow minus leak, decoder v one floor
+
+143
+00:04:33.649 --> 00:04:36.051
+zero, on the two hundred and ninety-seven
+
+144
+00:04:36.051 --> 00:04:37.798
+validation songs with a reading.
+
+145
+00:04:38.125 --> 00:04:40.581
+Each dot is one song: the transformer's
+
+146
+00:04:40.581 --> 00:04:41.782
+score minus the S4D's.
+
+147
+00:04:42.110 --> 00:04:44.129
+Ochre where the transformer is ahead.
+
+148
+00:04:44.611 --> 00:04:46.890
+The median difference is plus point zero
+
+149
+00:04:46.890 --> 00:04:47.390
+one zero.
+
+150
+00:04:47.723 --> 00:04:49.780
+Zoomed in, the ninety-five percent
+
+151
+00:04:49.780 --> 00:04:52.058
+interval runs from minus point zero zero
+
+152
+00:04:52.058 --> 00:04:53.836
+six to plus point zero two five.
+
+153
+00:04:54.170 --> 00:04:54.948
+It holds zero.
+
+154
+00:04:55.281 --> 00:04:57.171
+The p is point two one, and the
+
+155
+00:04:57.171 --> 00:04:59.172
+transformer is ahead on fifty-three
+
+156
+00:04:59.172 --> 00:05:01.061
+percent of the songs, behind on
+
+157
+00:05:01.061 --> 00:05:01.728
+forty-seven.
+
+158
+00:05:02.201 --> 00:05:04.674
+So the reading: on these songs, under this
+
+159
+00:05:04.674 --> 00:05:06.750
+decoder, this line can't tell these two
+
+160
+00:05:06.750 --> 00:05:07.640
+checkpoints apart.
+
+161
+00:05:07.937 --> 00:05:10.162
+That isn't proof that they're equal; it
+
+162
+00:05:10.162 --> 00:05:11.843
+says the median gap here is small.
+
+163
+00:05:12.140 --> 00:05:14.513
+Pairing helped: the two drummers' per-song
+
+164
+00:05:14.513 --> 00:05:16.590
+scores correlate point seven, because a
+
+165
+00:05:16.590 --> 00:05:17.925
+hard song is hard for both.
+
+166
+00:05:19.432 --> 00:05:21.611
+And the row carries the list from before.
+
+167
+00:05:21.929 --> 00:05:23.896
+Both picks were chosen on these same
+
+168
+00:05:23.896 --> 00:05:24.214
+songs.
+
+169
+00:05:24.533 --> 00:05:26.765
+The transformer was told the bar phase,
+
+170
+00:05:26.765 --> 00:05:28.412
+and it's twelve percent larger.
+
+171
+00:05:28.731 --> 00:05:30.804
+S one twenty-eight's gradients reached
+
+172
+00:05:30.804 --> 00:05:32.079
+four times further back.
+
+173
+00:05:32.398 --> 00:05:34.576
+Its heavy clipping only started at epoch
+
+174
+00:05:34.576 --> 00:05:36.808
+three, so it doesn't ride on this epoch
+
+175
+00:05:36.808 --> 00:05:37.339
+zero pick.
+
+176
+00:05:37.658 --> 00:05:38.402
+Each ran once.
+
+177
+00:05:38.721 --> 00:05:40.687
+And the transformer we play is epoch
+
+178
+00:05:40.687 --> 00:05:42.228
+eleven, not this epoch ten.
+
+179
+00:05:42.547 --> 00:05:44.779
+So a number like this is a reading of two
+
+180
+00:05:44.779 --> 00:05:47.064
+checkpoints, on these songs, with this
+
+181
+00:05:47.064 --> 00:05:47.489
+decoder.
+
+182
+00:05:47.808 --> 00:05:49.933
+It isn't a reading of two architectures.
+
+183
+00:05:53.367 --> 00:05:55.112
+One more yardstick, in one line.
+
+184
+00:05:55.420 --> 00:05:57.679
+In the axis one scores, two random halves
+
+185
+00:05:57.679 --> 00:05:59.836
+of the human drummers overlap point eight
+
+186
+00:05:59.836 --> 00:06:01.992
+eight to point nine two, but the songs'
+
+187
+00:06:01.992 --> 00:06:04.200
+own drums reach only point seven one, on
+
+188
+00:06:04.200 --> 00:06:06.356
+the seven features a hit-only part can be
+
+189
+00:06:06.356 --> 00:06:06.870
+judged on.
+
+190
+00:06:07.178 --> 00:06:09.180
+So a model is fairly compared with the
+
+191
+00:06:09.180 --> 00:06:11.439
+real drums on its own songs, not with the
+
+192
+00:06:11.439 --> 00:06:11.799
+humans.
+
+193
+00:06:12.235 --> 00:06:14.166
+This lesson doesn't give the verdict.
+
+194
+00:06:14.479 --> 00:06:16.774
+The results, every arm and every epoch,
+
+195
+00:06:16.774 --> 00:06:18.078
+are lesson six point one.
+
+196
+00:06:18.391 --> 00:06:20.322
+And what the ear says, against the
+
+197
+00:06:20.322 --> 00:06:21.782
+battery, is six point two.
+
+198
+00:06:25.247 --> 00:06:26.069
+What we can say.
+
+199
+00:06:26.377 --> 00:06:28.586
+The arms trained on the same songs, with
+
+200
+00:06:28.586 --> 00:06:30.898
+the same recipe, seeds and data plan, at
+
+201
+00:06:30.898 --> 00:06:32.645
+sizes within about twelve percent.
+
+202
+00:06:32.954 --> 00:06:35.163
+Every epoch was scored by the same battery
+
+203
+00:06:35.163 --> 00:06:37.269
+on the same two hundred and ninety-seven
+
+204
+00:06:37.269 --> 00:06:39.119
+songs, with the same decoder rule.
+
+205
+00:06:39.427 --> 00:06:41.483
+And the selection rule was written down
+
+206
+00:06:41.483 --> 00:06:42.818
+before any arm was scored.
+
+207
+00:06:43.252 --> 00:06:44.094
+What we cannot say.
+
+208
+00:06:44.360 --> 00:06:46.089
+That a gap comes from the architecture
+
+209
+00:06:46.089 --> 00:06:48.128
+alone: the reach, the bar phase, the
+
+210
+00:06:48.128 --> 00:06:49.591
+clipping and the size differ too.
+
+211
+00:06:49.857 --> 00:06:51.718
+How much a result would move with another
+
+212
+00:06:51.718 --> 00:06:53.004
+seed: each arm ran once.
+
+213
+00:06:53.270 --> 00:06:55.132
+That the picked epochs' scores would hold
+
+214
+00:06:55.132 --> 00:06:57.215
+on fresh songs: they were picked on these.
+
+215
+00:06:57.481 --> 00:06:59.077
+And anything about an LSTM over two
+
+216
+00:06:59.077 --> 00:07:01.071
+thousand slots: that run never left its
+
+217
+00:07:01.071 --> 00:07:01.426
+plateau.
+
+218
+00:07:03.022 --> 00:07:05.191
+In one breath: the same songs, recipe,
+
+219
+00:07:05.191 --> 00:07:07.451
+seeds and scorer, and near-equal size; not
+
+220
+00:07:07.451 --> 00:07:09.575
+the same reach, bar phase or clipping, and
+
+221
+00:07:09.575 --> 00:07:11.564
+one run each; so read every gap as two
+
+222
+00:07:11.564 --> 00:07:13.508
+checkpoints, on these songs, with this
+
+223
+00:07:13.508 --> 00:07:13.869
+decoder.
+
+224
+00:07:14.140 --> 00:07:15.903
+This lesson pairs with row nine of the
+
+225
+00:07:15.903 --> 00:07:17.756
+year explainer, the results page Every
+
+226
+00:07:17.756 --> 00:07:19.202
+Epoch, Four Models, and the
+
+227
+00:07:19.202 --> 00:07:20.423
+confidence-interval tables.
+
+228
+00:07:20.694 --> 00:07:22.321
+Next, topic six: the results.
+

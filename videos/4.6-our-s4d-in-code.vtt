@@ -1,0 +1,910 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.134
+Part four point six.
+
+2
+00:00:01.462 --> 00:00:04.143
+Our S4D in code: the layer, the block and
+
+3
+00:00:04.143 --> 00:00:06.112
+the net, and why it is cheap live.
+
+4
+00:00:08.209 --> 00:00:10.079
+Four point four built the state-space
+
+5
+00:00:10.079 --> 00:00:12.490
+model, and four point five made it S4D: a
+
+6
+00:00:12.490 --> 00:00:14.310
+step size, one mode at a time, a
+
+7
+00:00:14.310 --> 00:00:15.688
+recurrence or a convolution.
+
+8
+00:00:15.983 --> 00:00:18.345
+Here is our code: a layer, a block and a
+
+9
+00:00:18.345 --> 00:00:19.525
+net, in model dot p y.
+
+10
+00:00:19.821 --> 00:00:21.936
+We read them with the worked slot, count
+
+11
+00:00:21.936 --> 00:00:24.150
+the weights, run it live, and end on one
+
+12
+00:00:24.150 --> 00:00:25.134
+fact about training.
+
+13
+00:00:29.380 --> 00:00:31.409
+The layer's docstring writes four point
+
+14
+00:00:31.409 --> 00:00:33.641
+five's recurrence for one channel: the
+
+15
+00:00:33.641 --> 00:00:35.924
+state s is Abar times the last state, plus
+
+16
+00:00:35.924 --> 00:00:38.156
+the input u; the output y is twice the
+
+17
+00:00:38.156 --> 00:00:40.337
+real part of the sum over modes of C prime
+
+18
+00:00:40.337 --> 00:00:41.352
+times s, plus D u.
+
+19
+00:00:41.656 --> 00:00:43.888
+Thirty-two complex modes per channel, and
+
+20
+00:00:43.888 --> 00:00:46.374
+a zero-order hold: Abar is e to the dt A,
+
+21
+00:00:46.374 --> 00:00:48.606
+C prime is C times Abar minus one, over A.
+
+22
+00:00:50.881 --> 00:00:52.686
+The parameters, for a hundred and
+
+23
+00:00:52.686 --> 00:00:54.791
+twenty-eight channels of thirty-two modes.
+
+24
+00:00:55.092 --> 00:00:57.599
+log dt: one step size per channel, kept as
+
+25
+00:00:57.599 --> 00:00:59.805
+its log, started between a thousandth and
+
+26
+00:00:59.805 --> 00:01:02.162
+a tenth; trained, block one's median is
+
+27
+00:01:02.162 --> 00:01:03.365
+zero point zero one two.
+
+28
+00:01:03.666 --> 00:01:05.972
+log A real: how fast each mode decays,
+
+29
+00:01:05.972 --> 00:01:06.875
+started at a half.
+
+30
+00:01:07.175 --> 00:01:09.632
+A imag: each mode's frequency, started at
+
+31
+00:01:09.632 --> 00:01:11.237
+pi times n, the S4D-Lin start.
+
+32
+00:01:11.537 --> 00:01:13.994
+C: one complex number per mode, stored as
+
+33
+00:01:13.994 --> 00:01:15.950
+pairs of float thirty-twos, real and
+
+34
+00:01:15.950 --> 00:01:17.855
+imaginary, and read back as complex
+
+35
+00:01:17.855 --> 00:01:19.560
+sixty-four at line one eighty-one.
+
+36
+00:01:19.860 --> 00:01:21.365
+And D, one skip per channel.
+
+37
+00:01:21.665 --> 00:01:24.022
+There is no B: the input enters each mode
+
+38
+00:01:24.022 --> 00:01:26.077
+with weight one, and the hold's factor
+
+39
+00:01:26.077 --> 00:01:26.930
+rides on C prime.
+
+40
+00:01:31.123 --> 00:01:33.102
+underscore disc turns the parameters into
+
+41
+00:01:33.102 --> 00:01:34.279
+what the recurrence uses.
+
+42
+00:01:34.562 --> 00:01:36.917
+dt is e to log dt, so always positive; A's
+
+43
+00:01:36.917 --> 00:01:38.849
+real part is minus e to log A real, so
+
+44
+00:01:38.849 --> 00:01:40.780
+always negative, and every mode decays.
+
+45
+00:01:41.063 --> 00:01:43.088
+Then dt A, and C prime by the zero-order
+
+46
+00:01:43.088 --> 00:01:43.324
+hold.
+
+47
+00:01:43.606 --> 00:01:45.020
+abar hands back e to the dt A.
+
+48
+00:01:45.302 --> 00:01:47.752
+Block one, channel thirty, mode zero: Abar
+
+49
+00:01:47.752 --> 00:01:49.589
+has size zero point nine nine nine two
+
+50
+00:01:49.589 --> 00:01:51.661
+five, a time constant of thirteen hundred
+
+51
+00:01:51.661 --> 00:01:52.651
+and thirty-two slots.
+
+52
+00:01:54.863 --> 00:01:57.316
+forward takes u, channels by slots, and s
+
+53
+00:01:57.316 --> 00:01:58.862
+zero, the state carried in.
+
+54
+00:01:59.182 --> 00:02:01.421
+A chunk of one slot goes straight to step.
+
+55
+00:02:01.741 --> 00:02:04.034
+Otherwise line one ninety-nine builds four
+
+56
+00:02:04.034 --> 00:02:06.327
+point five's kernel, twice the real part
+
+57
+00:02:06.327 --> 00:02:08.727
+of the sum of C prime times Abar to the l,
+
+58
+00:02:08.727 --> 00:02:09.793
+written with einsum.
+
+59
+00:02:10.113 --> 00:02:12.193
+Line two hundred convolves u with that
+
+60
+00:02:12.193 --> 00:02:13.153
+kernel by the FFT.
+
+61
+00:02:15.447 --> 00:02:17.246
+Then the term the docstring insists on.
+
+62
+00:02:17.523 --> 00:02:19.737
+The convolution sees only this chunk; this
+
+63
+00:02:19.737 --> 00:02:21.674
+adds what the state carried in still says.
+
+64
+00:02:21.951 --> 00:02:24.072
+Without it, the docstring says, the state
+
+65
+00:02:24.072 --> 00:02:25.779
+would look varied and change nothing.
+
+66
+00:02:26.055 --> 00:02:26.471
+Then D u.
+
+67
+00:02:26.747 --> 00:02:28.869
+At the worked slot, channel thirty, index
+
+68
+00:02:28.869 --> 00:02:30.714
+sixty-four of the chunk at five hundred
+
+69
+00:02:30.714 --> 00:02:32.789
+and twelve: convolution four point zero
+
+70
+00:02:32.789 --> 00:02:34.634
+one, carried state minus twelve point
+
+71
+00:02:34.634 --> 00:02:36.525
+eight four, D u minus eight point five
+
+72
+00:02:36.525 --> 00:02:36.802
+three.
+
+73
+00:02:37.079 --> 00:02:38.555
+Minus seventeen point three six.
+
+74
+00:02:38.831 --> 00:02:41.045
+Without the carried term: minus four point
+
+75
+00:02:41.045 --> 00:02:41.460
+five one.
+
+76
+00:02:41.737 --> 00:02:43.674
+Most of this number is memory from before
+
+77
+00:02:43.674 --> 00:02:44.135
+the chunk.
+
+78
+00:02:44.412 --> 00:02:46.534
+Last, the final state, handed to the next
+
+79
+00:02:46.534 --> 00:02:46.811
+chunk.
+
+80
+00:02:51.023 --> 00:02:53.310
+step is the recurrence itself, one slot.
+
+81
+00:02:53.636 --> 00:02:55.814
+Abar and C prime come from the cache if
+
+82
+00:02:55.814 --> 00:02:56.685
+prepare has run.
+
+83
+00:02:57.011 --> 00:02:59.570
+Line two sixteen: the state times Abar,
+
+84
+00:02:59.570 --> 00:02:59.951
+plus u.
+
+85
+00:03:00.277 --> 00:03:02.945
+Line two seventeen: read it out, plus D u.
+
+86
+00:03:03.271 --> 00:03:05.830
+Channel thirty, mode zero: the state is
+
+87
+00:03:05.830 --> 00:03:08.170
+turned and shrunk by Abar, and u, five
+
+88
+00:03:08.170 --> 00:03:10.348
+point seven six, is added to its real
+
+89
+00:03:10.348 --> 00:03:10.620
+part.
+
+90
+00:03:10.946 --> 00:03:13.178
+Mode zero reads out minus eighteen point
+
+91
+00:03:13.178 --> 00:03:15.791
+seven eight; all thirty-two modes, minus
+
+92
+00:03:15.791 --> 00:03:18.404
+eight point eight three; plus D u, minus
+
+93
+00:03:18.404 --> 00:03:19.819
+seventeen point three six.
+
+94
+00:03:20.146 --> 00:03:21.997
+The same number as the chunk path.
+
+95
+00:03:24.358 --> 00:03:26.616
+Live, Abar and C prime never change,
+
+96
+00:03:26.616 --> 00:03:28.874
+because the weights do not, so prepare
+
+97
+00:03:28.874 --> 00:03:30.801
+computes them once and caches them.
+
+98
+00:03:31.132 --> 00:03:33.500
+eval also clears that cache, so the live
+
+99
+00:03:33.500 --> 00:03:35.978
+stepper calls prepare right after eval;
+
+100
+00:03:35.978 --> 00:03:38.346
+training, or moving the model to another
+
+101
+00:03:38.346 --> 00:03:39.668
+device, clears it too.
+
+102
+00:03:43.880 --> 00:03:46.929
+A block, in its docstring: x, plus GLU of
+
+103
+00:03:46.929 --> 00:03:49.380
+a linear layer of dropout of GELU of S4D
+
+104
+00:03:49.380 --> 00:03:50.456
+of LayerNorm of x.
+
+105
+00:03:50.815 --> 00:03:53.685
+Its parts: a LayerNorm, the S4D layer,
+
+106
+00:03:53.685 --> 00:03:56.196
+dropout of zero point one, and a linear
+
+107
+00:03:56.196 --> 00:03:58.647
+layer from a hundred and twenty-eight to
+
+108
+00:03:58.647 --> 00:04:00.201
+two hundred and fifty-six.
+
+109
+00:04:02.178 --> 00:04:04.517
+Forward: normalise, four point seven point
+
+110
+00:04:04.517 --> 00:04:06.436
+nine, then the S4D layer of four point
+
+111
+00:04:06.436 --> 00:04:07.699
+five, with its own state.
+
+112
+00:04:07.979 --> 00:04:09.944
+Then GELU and dropout, four point seven
+
+113
+00:04:09.944 --> 00:04:10.412
+point ten.
+
+114
+00:04:10.693 --> 00:04:12.284
+GELU sends channel thirty's minus
+
+115
+00:04:12.284 --> 00:04:14.249
+seventeen to zero: that slow channel
+
+116
+00:04:14.249 --> 00:04:15.699
+passes nothing on at this slot.
+
+117
+00:04:15.980 --> 00:04:18.085
+Then the linear layer doubles the width, a
+
+118
+00:04:18.085 --> 00:04:20.144
+GLU halves it, and the result is added to
+
+119
+00:04:20.144 --> 00:04:20.237
+x.
+
+120
+00:04:21.601 --> 00:04:23.880
+A gated linear unit takes the two hundred
+
+121
+00:04:23.880 --> 00:04:26.321
+and fifty-six numbers as two halves, a and
+
+122
+00:04:26.321 --> 00:04:26.429
+b.
+
+123
+00:04:26.755 --> 00:04:28.924
+It squashes b with a sigmoid, between
+
+124
+00:04:28.924 --> 00:04:31.582
+nought and one, and multiplies: b decides
+
+125
+00:04:31.582 --> 00:04:33.047
+how much of a gets through.
+
+126
+00:04:33.372 --> 00:04:35.922
+For illustration, a of two: b of nought
+
+127
+00:04:35.922 --> 00:04:38.471
+passes one, b of four passes nearly two, b
+
+128
+00:04:38.471 --> 00:04:40.044
+of minus four almost nothing.
+
+129
+00:04:40.370 --> 00:04:43.136
+The worked slot, block one, entry four: a
+
+130
+00:04:43.136 --> 00:04:45.523
+is two point one two, b's sigmoid is zero
+
+131
+00:04:45.523 --> 00:04:47.801
+point one nine three, so the GLU passes
+
+132
+00:04:47.801 --> 00:04:48.886
+zero point four one.
+
+133
+00:04:49.211 --> 00:04:51.490
+Added to the block's input there, minus
+
+134
+00:04:51.490 --> 00:04:53.714
+zero point one one, the output is zero
+
+135
+00:04:53.714 --> 00:04:54.636
+point three zero.
+
+136
+00:04:58.997 --> 00:05:01.287
+The input layer maps the five numbers to a
+
+137
+00:05:01.287 --> 00:05:03.417
+hundred and twenty-eight, each slot's
+
+138
+00:05:03.417 --> 00:05:03.737
+token.
+
+139
+00:05:04.056 --> 00:05:05.867
+Four blocks, and a head to nine.
+
+140
+00:05:06.187 --> 00:05:08.850
+init state: one complex state per block, a
+
+141
+00:05:08.850 --> 00:05:10.927
+hundred and twenty-eight by thirty-two.
+
+142
+00:05:13.159 --> 00:05:15.485
+Forward: the input layer, each block with
+
+143
+00:05:15.485 --> 00:05:17.670
+its own state, the head; nine logits a
+
+144
+00:05:17.670 --> 00:05:19.664
+slot, and four states for the next call.
+
+145
+00:05:21.005 --> 00:05:21.944
+Count the weights.
+
+146
+00:05:22.258 --> 00:05:24.346
+The input layer: seven hundred and
+
+147
+00:05:24.346 --> 00:05:24.972
+sixty-eight.
+
+148
+00:05:25.285 --> 00:05:27.687
+Each block: LayerNorm, two hundred and
+
+149
+00:05:27.687 --> 00:05:30.192
+fifty-six; the S4D layer's log dt, log A
+
+150
+00:05:30.192 --> 00:05:32.594
+real, A imag, C and D, sixteen thousand
+
+151
+00:05:32.594 --> 00:05:34.838
+six hundred and forty; and the output
+
+152
+00:05:34.838 --> 00:05:36.666
+layer, thirty-three thousand and
+
+153
+00:05:36.666 --> 00:05:37.292
+twenty-four.
+
+154
+00:05:37.605 --> 00:05:39.746
+One block: forty-nine thousand nine
+
+155
+00:05:39.746 --> 00:05:40.737
+hundred and twenty.
+
+156
+00:05:41.051 --> 00:05:43.504
+Four blocks and the head: two hundred and
+
+157
+00:05:43.504 --> 00:05:45.801
+one thousand six hundred and nine, as the
+
+158
+00:05:45.801 --> 00:05:48.046
+manifest records, against the LSTM's two
+
+159
+00:05:48.046 --> 00:05:50.291
+hundred and two thousand three hundred and
+
+160
+00:05:50.291 --> 00:05:51.021
+seventy-seven.
+
+161
+00:05:52.863 --> 00:05:55.275
+The state: four blocks, a hundred and
+
+162
+00:05:55.275 --> 00:05:57.634
+twenty-eight channels, thirty-two complex
+
+163
+00:05:57.634 --> 00:06:00.153
+modes: sixteen thousand three hundred and
+
+164
+00:06:00.153 --> 00:06:02.405
+eighty-four complex numbers, thirty-two
+
+165
+00:06:02.405 --> 00:06:04.495
+thousand seven hundred and sixty-eight
+
+166
+00:06:04.495 --> 00:06:05.192
+real numbers.
+
+167
+00:06:05.514 --> 00:06:07.873
+Sixty-four times the LSTM's, and the same
+
+168
+00:06:07.873 --> 00:06:08.891
+size at every slot.
+
+169
+00:06:12.360 --> 00:06:14.283
+Four blocks on, the head and the sigmoids
+
+170
+00:06:14.283 --> 00:06:16.380
+give nine probabilities; the ticks are the
+
+171
+00:06:16.380 --> 00:06:17.516
+live decoder's thresholds.
+
+172
+00:06:17.779 --> 00:06:19.832
+Kick, at zero point eight two, clears zero
+
+173
+00:06:19.832 --> 00:06:22.017
+point two eight; closed hat, at zero point
+
+174
+00:06:22.017 --> 00:06:24.202
+six eight, clears zero point four one; the
+
+175
+00:06:24.202 --> 00:06:24.902
+rest fall short.
+
+176
+00:06:25.164 --> 00:06:26.955
+S one twenty-eight plays kick and closed
+
+177
+00:06:26.955 --> 00:06:28.266
+hat: exactly the drummer.
+
+178
+00:06:28.528 --> 00:06:30.364
+One slot of one song; four point ten
+
+179
+00:06:30.364 --> 00:06:31.238
+compares the models.
+
+180
+00:06:34.717 --> 00:06:37.005
+Live, the stepper runs this forward one
+
+181
+00:06:37.005 --> 00:06:39.348
+slot at a time, so every layer takes the
+
+182
+00:06:39.348 --> 00:06:41.528
+step path, with the cached Abar and C
+
+183
+00:06:41.528 --> 00:06:41.855
+prime.
+
+184
+00:06:42.182 --> 00:06:44.416
+Every step does the same work, at slot
+
+185
+00:06:44.416 --> 00:06:45.887
+five or slot five thousand.
+
+186
+00:06:46.214 --> 00:06:48.993
+Run warm, back to back, offline: a median
+
+187
+00:06:48.993 --> 00:06:51.282
+of zero point one four three milliseconds.
+
+188
+00:06:51.609 --> 00:06:54.061
+In the real-time loop, where the core goes
+
+189
+00:06:54.061 --> 00:06:56.349
+cold between slots, the logged sessions
+
+190
+00:06:56.349 --> 00:06:58.747
+give a median of about one point one, and
+
+191
+00:06:58.747 --> 00:07:00.981
+ninety-nine in a hundred under two point
+
+192
+00:07:00.981 --> 00:07:01.308
+eight.
+
+193
+00:07:01.635 --> 00:07:03.815
+Under eight percent of the thirty-seven
+
+194
+00:07:03.815 --> 00:07:05.940
+and a half millisecond decision window.
+
+195
+00:07:09.523 --> 00:07:10.774
+One fact about training.
+
+196
+00:07:11.086 --> 00:07:13.170
+Lesson three point three's clip: a
+
+197
+00:07:13.170 --> 00:07:15.410
+gradient longer than one is scaled back to
+
+198
+00:07:15.410 --> 00:07:15.983
+length one.
+
+199
+00:07:16.295 --> 00:07:18.640
+For the LSTM, L thirty-two, it never bit.
+
+200
+00:07:18.952 --> 00:07:21.140
+For S one twenty-eight it bit on three to
+
+201
+00:07:21.140 --> 00:07:23.380
+twelve percent of steps in the first three
+
+202
+00:07:23.380 --> 00:07:25.047
+epochs, then on fifty-four to
+
+203
+00:07:25.047 --> 00:07:27.027
+seventy-seven percent of each epoch's
+
+204
+00:07:27.027 --> 00:07:29.214
+steps: fifty-four percent of all its
+
+205
+00:07:29.214 --> 00:07:29.527
+steps.
+
+206
+00:07:29.840 --> 00:07:32.236
+So one setting, the same for every model,
+
+207
+00:07:32.236 --> 00:07:34.528
+acted on S4D and hardly on the others:
+
+208
+00:07:34.528 --> 00:07:36.299
+they did not train under the same
+
+209
+00:07:36.299 --> 00:07:37.081
+effective rule.
+
+210
+00:07:37.393 --> 00:07:39.268
+A fairness caveat, report finding
+
+211
+00:07:39.268 --> 00:07:39.841
+thirty-one.
+
+212
+00:07:40.154 --> 00:07:42.342
+How much it changed S4D's training is not
+
+213
+00:07:42.342 --> 00:07:42.811
+measured.
+
+214
+00:07:44.473 --> 00:07:46.807
+In one breath: S4DNet maps five numbers to
+
+215
+00:07:46.807 --> 00:07:48.751
+a hundred and twenty-eight, runs four
+
+216
+00:07:48.751 --> 00:07:50.404
+blocks of LayerNorm, a diagonal
+
+217
+00:07:50.404 --> 00:07:52.591
+state-space layer, GELU and a gated linear
+
+218
+00:07:52.591 --> 00:07:54.633
+unit with a residual add, and a head to
+
+219
+00:07:54.633 --> 00:07:56.869
+nine drums: two hundred and one thousand
+
+220
+00:07:56.869 --> 00:07:58.910
+weights, thirty-two thousand numbers of
+
+221
+00:07:58.910 --> 00:08:01.001
+state; a convolution plus the carried
+
+222
+00:08:01.001 --> 00:08:02.994
+state in training, one recurrence step
+
+223
+00:08:02.994 --> 00:08:03.237
+live.
+
+224
+00:08:03.528 --> 00:08:05.521
+This pairs with the year explainer's row
+
+225
+00:08:05.521 --> 00:08:07.563
+eight and the state-space research of the
+
+226
+00:08:07.563 --> 00:08:08.875
+twenty-fourth of September.
+
+227
+00:08:09.167 --> 00:08:11.452
+Next, four point seven: the transformer.
+

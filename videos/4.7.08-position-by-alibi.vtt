@@ -1,0 +1,738 @@
+WEBVTT
+
+1
+00:00:00.070 --> 00:00:01.629
+Four point seven point eight.
+
+2
+00:00:01.951 --> 00:00:04.101
+How attention is told how far back each
+
+3
+00:00:04.101 --> 00:00:04.478
+key is.
+
+4
+00:00:08.937 --> 00:00:11.299
+In four point seven point four, a score
+
+5
+00:00:11.299 --> 00:00:13.662
+was the query's dot product with a key,
+
+6
+00:00:13.662 --> 00:00:14.056
+scaled.
+
+7
+00:00:14.394 --> 00:00:16.756
+Here are four keys with made-up scores,
+
+8
+00:00:16.756 --> 00:00:18.219
+and their softmax weights.
+
+9
+00:00:18.707 --> 00:00:20.986
+Now shuffle the keys, each carrying its
+
+10
+00:00:20.986 --> 00:00:21.311
+value.
+
+11
+00:00:21.636 --> 00:00:23.698
+Every key keeps its weight, because
+
+12
+00:00:23.698 --> 00:00:25.759
+nothing in q dot k is the slot number.
+
+13
+00:00:26.084 --> 00:00:28.037
+The weighted sum comes out the same.
+
+14
+00:00:28.362 --> 00:00:30.858
+The score itself carries no position: it
+
+15
+00:00:30.858 --> 00:00:32.702
+cannot tell how far back a key is.
+
+16
+00:00:33.961 --> 00:00:36.273
+Here is the real thing: block one, head
+
+17
+00:00:36.273 --> 00:00:38.486
+zero at the worked slot, slot five hundred
+
+18
+00:00:38.486 --> 00:00:40.552
+and seventy-six of song zero zero one one
+
+19
+00:00:40.552 --> 00:00:42.716
+b three c f, with the distance term taken
+
+20
+00:00:42.716 --> 00:00:42.913
+out.
+
+21
+00:00:43.208 --> 00:00:45.372
+It still knows where in the bar a key is,
+
+22
+00:00:45.372 --> 00:00:47.437
+because the bar phase of four point seven
+
+23
+00:00:47.437 --> 00:00:49.749
+point two is in every key: all its weight
+
+24
+00:00:49.749 --> 00:00:51.913
+goes to position thirteen of the bar, one
+
+25
+00:00:51.913 --> 00:00:53.979
+spike per bar, back to the start of the
+
+26
+00:00:53.979 --> 00:00:54.224
+song.
+
+27
+00:00:54.520 --> 00:00:55.946
+But it cannot tell which bar.
+
+28
+00:00:56.241 --> 00:00:58.159
+The two silent bars at the start score
+
+29
+00:00:58.159 --> 00:01:00.077
+highest and take thirteen percent each.
+
+30
+00:01:00.372 --> 00:01:02.438
+The most recent position thirteen, slot
+
+31
+00:01:02.438 --> 00:01:04.553
+five seven three, three back, gets two
+
+32
+00:01:04.553 --> 00:01:04.946
+percent.
+
+33
+00:01:08.653 --> 00:01:10.154
+There are two common fixes.
+
+34
+00:01:10.487 --> 00:01:13.043
+The first, in Velardo's lesson seventeen,
+
+35
+00:01:13.043 --> 00:01:15.377
+adds a vector of sines and cosines of the
+
+36
+00:01:15.377 --> 00:01:17.489
+position to each token, a different
+
+37
+00:01:17.489 --> 00:01:19.378
+frequency in each pair of numbers.
+
+38
+00:01:19.712 --> 00:01:20.767
+The second is ours.
+
+39
+00:01:21.101 --> 00:01:22.990
+ALiBi leaves the tokens alone and
+
+40
+00:01:22.990 --> 00:01:25.269
+subtracts a penalty from each score that
+
+41
+00:01:25.269 --> 00:01:26.380
+grows with distance.
+
+42
+00:01:26.838 --> 00:01:28.005
+Here it is for key j.
+
+43
+00:01:28.339 --> 00:01:30.562
+First the content score from four point
+
+44
+00:01:30.562 --> 00:01:33.341
+seven point four: q dot k, over the square
+
+45
+00:01:33.341 --> 00:01:34.452
+root of twenty-four.
+
+46
+00:01:34.786 --> 00:01:37.454
+Then minus m h, the slope of head h: how
+
+47
+00:01:37.454 --> 00:01:39.232
+much one slot of distance costs.
+
+48
+00:01:39.566 --> 00:01:41.955
+Times t minus j, how many slots back the
+
+49
+00:01:41.955 --> 00:01:42.345
+key is.
+
+50
+00:01:42.785 --> 00:01:45.438
+The worked slot, block one, head zero, key
+
+51
+00:01:45.438 --> 00:01:47.766
+five seven three, three slots back:
+
+52
+00:01:47.766 --> 00:01:50.094
+content six point three six six, minus a
+
+53
+00:01:50.094 --> 00:01:52.476
+quarter times three, gives five point six
+
+54
+00:01:52.476 --> 00:01:52.909
+one six.
+
+55
+00:01:53.234 --> 00:01:55.562
+In the code this is the bias of four point
+
+56
+00:01:55.562 --> 00:01:58.214
+seven point seven: inside the band, minus
+
+57
+00:01:58.214 --> 00:02:00.217
+slope times distance, added before
+
+58
+00:02:00.217 --> 00:02:00.651
+softmax.
+
+59
+00:02:01.489 --> 00:02:02.930
+Why subtract a straight line?
+
+60
+00:02:03.227 --> 00:02:05.413
+Because softmax takes e to the score, and
+
+61
+00:02:05.413 --> 00:02:07.697
+e to a difference is a product: e to the
+
+62
+00:02:07.697 --> 00:02:09.783
+content score, times e to the minus m d.
+
+63
+00:02:10.081 --> 00:02:12.166
+So every slot further back multiplies the
+
+64
+00:02:12.166 --> 00:02:14.352
+weight by the same factor: point seven
+
+65
+00:02:14.352 --> 00:02:16.487
+eight for head zero, and point nine nine
+
+66
+00:02:16.487 --> 00:02:18.424
+six for head three, which fades very
+
+67
+00:02:18.424 --> 00:02:18.771
+slowly.
+
+68
+00:02:20.227 --> 00:02:22.792
+Same head, same keys, the distance term
+
+69
+00:02:22.792 --> 00:02:23.317
+put back.
+
+70
+00:02:23.667 --> 00:02:26.173
+The penalty for the older bars is so large
+
+71
+00:02:26.173 --> 00:02:28.738
+that slot five seven three, three back,
+
+72
+00:02:28.738 --> 00:02:30.312
+takes ninety-eight percent.
+
+73
+00:02:30.662 --> 00:02:32.528
+ALiBi chose the most recent bar.
+
+74
+00:02:36.013 --> 00:02:37.951
+The slopes come from one function, alibi
+
+75
+00:02:37.951 --> 00:02:38.266
+slopes.
+
+76
+00:02:38.537 --> 00:02:40.474
+Two to the minus eight times h plus one,
+
+77
+00:02:40.474 --> 00:02:42.502
+over four, for heads zero to three: a
+
+78
+00:02:42.502 --> 00:02:44.620
+quarter, a sixteenth, a sixty-fourth and a
+
+79
+00:02:44.620 --> 00:02:45.882
+two hundred and fifty-sixth.
+
+80
+00:02:46.152 --> 00:02:47.865
+These are the paper's slopes for four
+
+81
+00:02:47.865 --> 00:02:48.135
+heads.
+
+82
+00:02:48.405 --> 00:02:50.433
+They are fixed: stored as a buffer, a
+
+83
+00:02:50.433 --> 00:02:52.010
+tensor kept with the model but not
+
+84
+00:02:52.010 --> 00:02:53.903
+learned, so training never changes them.
+
+85
+00:02:54.906 --> 00:02:56.917
+Multiply each slope by a distance and you
+
+86
+00:02:56.917 --> 00:02:58.114
+have each head's penalty.
+
+87
+00:02:58.401 --> 00:03:00.460
+At one slot back, every penalty is small.
+
+88
+00:03:00.747 --> 00:03:03.284
+One bar back, sixteen slots: four, one, a
+
+89
+00:03:03.284 --> 00:03:04.577
+quarter, and a sixteenth.
+
+90
+00:03:04.864 --> 00:03:07.258
+Sixty-four back: sixteen, four, one, a
+
+91
+00:03:07.258 --> 00:03:07.641
+quarter.
+
+92
+00:03:07.928 --> 00:03:09.699
+Two hundred and fifty-six back:
+
+93
+00:03:09.699 --> 00:03:11.519
+sixty-four, sixteen, four and one.
+
+94
+00:03:11.961 --> 00:03:14.260
+Look at the fours: each head reaches a
+
+95
+00:03:14.260 --> 00:03:16.350
+penalty of four four times further back
+
+96
+00:03:16.350 --> 00:03:17.447
+than the head before.
+
+97
+00:03:17.761 --> 00:03:19.328
+That pattern is the next idea.
+
+98
+00:03:22.697 --> 00:03:24.426
+To compare heads, pick a rule.
+
+99
+00:03:24.750 --> 00:03:27.128
+Ours: a head's horizon is the distance
+
+100
+00:03:27.128 --> 00:03:28.803
+where its penalty reaches four.
+
+101
+00:03:29.128 --> 00:03:31.235
+There a key needs a content score four
+
+102
+00:03:31.235 --> 00:03:33.559
+higher just to tie with an equal key right
+
+103
+00:03:33.559 --> 00:03:35.883
+now; otherwise its weight is e to the
+
+104
+00:03:35.883 --> 00:03:38.152
+four, about fifty-five times, smaller.
+
+105
+00:03:38.641 --> 00:03:41.062
+Four divided by each slope: sixteen slots,
+
+106
+00:03:41.062 --> 00:03:42.998
+one bar, two seconds at a hundred and
+
+107
+00:03:42.998 --> 00:03:45.564
+twenty; sixty-four slots, four bars; two
+
+108
+00:03:45.564 --> 00:03:47.887
+hundred and fifty-six, sixteen bars; and
+
+109
+00:03:47.887 --> 00:03:49.969
+one thousand and twenty-four, sixty-four
+
+110
+00:03:49.969 --> 00:03:51.227
+bars, about two minutes.
+
+111
+00:03:51.518 --> 00:03:53.648
+Every horizon sits inside the band, which
+
+112
+00:03:53.648 --> 00:03:55.681
+reaches two thousand and forty-seven back.
+
+113
+00:03:56.200 --> 00:03:57.504
+Now the worked slot, block one.
+
+114
+00:03:57.740 --> 00:03:59.558
+Each head's heaviest key is a dot: three
+
+115
+00:03:59.558 --> 00:04:01.493
+back, five, fifteen and seventy-five, each
+
+116
+00:04:01.493 --> 00:04:02.441
+well inside its horizon.
+
+117
+00:04:02.678 --> 00:04:04.258
+And how much weight each head puts more
+
+118
+00:04:04.258 --> 00:04:06.154
+than sixty-four slots back: none, almost
+
+119
+00:04:06.154 --> 00:04:08.010
+none, thirty-eight percent, and eighty-one
+
+120
+00:04:08.010 --> 00:04:08.326
+percent.
+
+121
+00:04:08.564 --> 00:04:10.460
+Steep heads listen to the last bar; gentle
+
+122
+00:04:10.460 --> 00:04:12.237
+ones tens of seconds back: head three's
+
+123
+00:04:12.237 --> 00:04:13.896
+top keys sit about sixty to a hundred and
+
+124
+00:04:13.896 --> 00:04:14.607
+twenty slots back.
+
+125
+00:04:14.844 --> 00:04:15.713
+A head per time scale.
+
+126
+00:04:16.093 --> 00:04:18.241
+And at the band's far edge, two thousand
+
+127
+00:04:18.241 --> 00:04:20.340
+and forty-seven back, the penalties are
+
+128
+00:04:20.340 --> 00:04:22.488
+about five hundred and twelve, a hundred
+
+129
+00:04:22.488 --> 00:04:24.537
+and twenty-eight, thirty-two and eight.
+
+130
+00:04:24.837 --> 00:04:27.235
+Only head three can still hear that far: e
+
+131
+00:04:27.235 --> 00:04:29.584
+to the minus eight, three ten-thousandths,
+
+132
+00:04:29.584 --> 00:04:30.833
+against an equal key now.
+
+133
+00:04:34.273 --> 00:04:35.984
+The penalty depends on distance only.
+
+134
+00:04:36.262 --> 00:04:38.066
+A key three slots back costs head zero
+
+135
+00:04:38.066 --> 00:04:40.100
+exactly point seven five at slot ten, and
+
+136
+00:04:40.100 --> 00:04:41.904
+at slot one hundred thousand of a long
+
+137
+00:04:41.904 --> 00:04:42.367
+live take.
+
+138
+00:04:42.644 --> 00:04:44.401
+There is no table indexed by absolute
+
+139
+00:04:44.401 --> 00:04:46.390
+position, so there is nothing to run out
+
+140
+00:04:46.390 --> 00:04:48.240
+of, and the band keeps every distance
+
+141
+00:04:48.240 --> 00:04:49.859
+under two thousand and forty-eight.
+
+142
+00:04:50.136 --> 00:04:51.893
+The bias means the same in a training
+
+143
+00:04:51.893 --> 00:04:53.096
+chunk as in the live loop.
+
+144
+00:04:53.496 --> 00:04:55.852
+Compare a position added to the token:
+
+145
+00:04:55.852 --> 00:04:57.994
+slot one hundred thousand would carry a
+
+146
+00:04:57.994 --> 00:05:00.082
+position far past the longest training
+
+147
+00:05:00.082 --> 00:05:02.385
+songs, about fifty-four hundred slots by
+
+148
+00:05:02.385 --> 00:05:03.563
+the loader's own note.
+
+149
+00:05:03.884 --> 00:05:05.758
+What ALiBi cannot say is where the
+
+150
+00:05:05.758 --> 00:05:06.401
+downbeat is.
+
+151
+00:05:06.722 --> 00:05:09.239
+Distance is not place in the bar; that is
+
+152
+00:05:09.239 --> 00:05:11.381
+the bar phase of four point seven point
+
+153
+00:05:11.381 --> 00:05:11.595
+two.
+
+154
+00:05:15.090 --> 00:05:16.937
+A horizon is a default, not a wall.
+
+155
+00:05:17.236 --> 00:05:19.433
+Block two, head two, at the worked slot.
+
+156
+00:05:19.732 --> 00:05:21.679
+Slot seventy-six is five hundred slots
+
+157
+00:05:21.679 --> 00:05:23.876
+back, far past this head's horizon of two
+
+158
+00:05:23.876 --> 00:05:24.974
+hundred and fifty-six.
+
+159
+00:05:25.273 --> 00:05:27.270
+Its penalty is seven point eight one,
+
+160
+00:05:27.270 --> 00:05:29.416
+which alone would cut its weight about two
+
+161
+00:05:29.416 --> 00:05:30.814
+thousand five hundred times.
+
+162
+00:05:31.114 --> 00:05:33.010
+Slot five seven two is only four back.
+
+163
+00:05:33.533 --> 00:05:35.922
+But block two's scores are huge: up to
+
+164
+00:05:35.922 --> 00:05:37.659
+seven hundred and seventy-seven.
+
+165
+00:05:37.985 --> 00:05:40.265
+Slot seventy-six's content score leads by
+
+166
+00:05:40.265 --> 00:05:42.599
+ten point six, more than the penalty gap
+
+167
+00:05:42.599 --> 00:05:44.010
+of seven point seven five.
+
+168
+00:05:44.336 --> 00:05:46.453
+So it takes eighty-nine percent of the
+
+169
+00:05:46.453 --> 00:05:48.408
+weight from five hundred slots back.
+
+170
+00:05:48.733 --> 00:05:50.579
+The only wall is the band's minus
+
+171
+00:05:50.579 --> 00:05:51.068
+infinity.
+
+172
+00:05:53.727 --> 00:05:56.302
+Say it in one breath: ALiBi gives each
+
+173
+00:05:56.302 --> 00:05:58.585
+head a fixed slope and subtracts slope
+
+174
+00:05:58.585 --> 00:06:00.867
+times distance from every score before
+
+175
+00:06:00.867 --> 00:06:03.442
+softmax, so steep heads hear the last bar
+
+176
+00:06:03.442 --> 00:06:06.017
+and gentle ones tens of seconds back, and
+
+177
+00:06:06.017 --> 00:06:08.475
+the penalty means the same at slot ten as
+
+178
+00:06:08.475 --> 00:06:10.172
+at slot one hundred thousand.
+
+179
+00:06:10.523 --> 00:06:12.688
+It pairs with the course explainer's
+
+180
+00:06:12.688 --> 00:06:15.321
+attention visualiser, where you can switch
+
+181
+00:06:15.321 --> 00:06:17.838
+between no position, sinusoids and ALiBi
+
+182
+00:06:17.838 --> 00:06:20.588
+at our four slopes; with Velardo's lesson
+
+183
+00:06:20.588 --> 00:06:23.397
+seventeen; and with four point seven point
+
+184
+00:06:23.397 --> 00:06:24.626
+two, the bar phase.
+

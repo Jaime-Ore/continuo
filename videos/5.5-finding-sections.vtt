@@ -1,0 +1,1002 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.203
+Lesson five point five.
+
+2
+00:00:01.507 --> 00:00:03.833
+Following, part one: finding where the
+
+3
+00:00:03.833 --> 00:00:04.997
+guitar changes section.
+
+4
+00:00:08.950 --> 00:00:11.312
+Lesson five point four asked whether drum
+
+5
+00:00:11.312 --> 00:00:13.505
+hits land with guitar notes more often
+
+6
+00:00:13.505 --> 00:00:14.180
+than chance.
+
+7
+00:00:14.517 --> 00:00:16.823
+A fixed loop that never listens tied the
+
+8
+00:00:16.823 --> 00:00:19.354
+real drummers on that: on seven hundred
+
+9
+00:00:19.354 --> 00:00:21.716
+and seventy Rock songs, own drums minus
+
+10
+00:00:21.716 --> 00:00:23.178
+the loop came out at zero.
+
+11
+00:00:23.515 --> 00:00:24.303
+No difference.
+
+12
+00:00:24.738 --> 00:00:26.858
+So following asks about change instead.
+
+13
+00:00:27.184 --> 00:00:29.575
+When the guitar moves into a new section,
+
+14
+00:00:29.575 --> 00:00:32.021
+does the drum part change too, and does it
+
+15
+00:00:32.021 --> 00:00:34.032
+mostly stay put the rest of the time?
+
+16
+00:00:34.729 --> 00:00:36.113
+That needs two measurements.
+
+17
+00:00:36.410 --> 00:00:38.585
+Where the guitar changes section: this
+
+18
+00:00:38.585 --> 00:00:38.931
+lesson.
+
+19
+00:00:39.227 --> 00:00:41.155
+And how much the drums change from one
+
+20
+00:00:41.155 --> 00:00:43.577
+window, two bars, to the next: the next
+
+21
+00:00:43.577 --> 00:00:43.923
+lesson.
+
+22
+00:00:47.357 --> 00:00:49.847
+Everything here works on windows: two bars
+
+23
+00:00:49.847 --> 00:00:52.131
+of four-four, cut into sixteenth notes,
+
+24
+00:00:52.131 --> 00:00:53.635
+which makes thirty-two slots.
+
+25
+00:00:54.075 --> 00:00:56.623
+Here's one window of a made-up rock beat:
+
+26
+00:00:56.623 --> 00:00:58.899
+kick on one and three, snare on two and
+
+27
+00:00:58.899 --> 00:01:01.230
+four, closed hi-hat on every eighth note.
+
+28
+00:01:01.681 --> 00:01:03.841
+The battery files the nine drums into
+
+29
+00:01:03.841 --> 00:01:04.579
+three groups.
+
+30
+00:01:04.920 --> 00:01:05.829
+Low is the kick.
+
+31
+00:01:06.170 --> 00:01:08.216
+Mid is the snare and the three toms.
+
+32
+00:01:08.557 --> 00:01:10.886
+High is the hi-hats, the crash and the
+
+33
+00:01:10.886 --> 00:01:11.170
+ride.
+
+34
+00:01:11.847 --> 00:01:14.587
+Each group becomes one row of thirty-two:
+
+35
+00:01:14.587 --> 00:01:17.093
+a slot is on if any drum in the group hits
+
+36
+00:01:17.093 --> 00:01:17.268
+it.
+
+37
+00:01:17.618 --> 00:01:20.008
+Two cymbals in one slot still count once.
+
+38
+00:01:21.066 --> 00:01:23.768
+Lay the three rows end to end, low, mid,
+
+39
+00:01:23.768 --> 00:01:26.182
+high, and you have ninety-six on-or-off
+
+40
+00:01:26.182 --> 00:01:28.769
+bits: the window's signature, written
+
+41
+00:01:28.769 --> 00:01:29.401
+sigma of w.
+
+42
+00:01:29.918 --> 00:01:32.332
+This one has twenty-four bits on: four
+
+43
+00:01:32.332 --> 00:01:34.252
+kick, four snare, sixteen hats.
+
+44
+00:01:34.582 --> 00:01:36.282
+Only whether a drum hit counts.
+
+45
+00:01:36.612 --> 00:01:39.190
+How loud it was, and how far off the grid,
+
+46
+00:01:39.190 --> 00:01:39.849
+never enter.
+
+47
+00:01:40.489 --> 00:01:43.096
+The guitar gets a plainer fingerprint: one
+
+48
+00:01:43.096 --> 00:01:45.323
+row of thirty-two, a bit on wherever a
+
+49
+00:01:45.323 --> 00:01:45.974
+note starts.
+
+50
+00:01:46.300 --> 00:01:47.603
+This verse riff has ten.
+
+51
+00:01:51.097 --> 00:01:53.057
+To compare two windows, we count bits.
+
+52
+00:01:53.351 --> 00:01:55.508
+Here's the verse beat again, and a chorus
+
+53
+00:01:55.508 --> 00:01:57.909
+beat: a busier kick, and the hi-hat drops
+
+54
+00:01:57.909 --> 00:01:58.743
+to quarter notes.
+
+55
+00:01:59.235 --> 00:02:01.469
+Fourteen bits are on in both: two kicks,
+
+56
+00:02:01.469 --> 00:02:02.865
+four snares, and eight hats.
+
+57
+00:02:03.317 --> 00:02:05.804
+Thirty are on in either one: twenty-four
+
+58
+00:02:05.804 --> 00:02:07.913
+plus twenty, minus the fourteen we'd
+
+59
+00:02:07.913 --> 00:02:09.102
+otherwise count twice.
+
+60
+00:02:09.589 --> 00:02:11.852
+That ratio is the Jaccard similarity, J.
+
+61
+00:02:12.176 --> 00:02:14.332
+On top, the number of bits on in both
+
+62
+00:02:14.332 --> 00:02:14.763
+windows.
+
+63
+00:02:15.086 --> 00:02:17.134
+Underneath, the number on in either.
+
+64
+00:02:17.458 --> 00:02:19.937
+Here, fourteen over thirty: zero point
+
+65
+00:02:19.937 --> 00:02:20.745
+four six seven.
+
+66
+00:02:21.400 --> 00:02:23.906
+Turned round, one minus J says how much
+
+67
+00:02:23.906 --> 00:02:26.412
+changed: zero point five three three.
+
+68
+00:02:26.770 --> 00:02:28.978
+The next lesson uses exactly this to
+
+69
+00:02:28.978 --> 00:02:30.052
+measure the drums.
+
+70
+00:02:30.531 --> 00:02:32.804
+Notice what the ratio leaves out: the
+
+71
+00:02:32.804 --> 00:02:34.865
+sixty-six slots that are empty in both.
+
+72
+00:02:35.182 --> 00:02:36.663
+Most of a window is silence.
+
+73
+00:02:36.980 --> 00:02:39.200
+If shared silence counted as agreement,
+
+74
+00:02:39.200 --> 00:02:41.314
+any two sparse windows would look alike.
+
+75
+00:02:41.632 --> 00:02:44.169
+J runs from zero, nothing shared, to one,
+
+76
+00:02:44.169 --> 00:02:44.698
+identical.
+
+77
+00:02:45.015 --> 00:02:46.812
+Two empty windows score one, by
+
+78
+00:02:46.812 --> 00:02:47.393
+convention.
+
+79
+00:02:48.863 --> 00:02:51.052
+The guitar's rows use the same Jaccard.
+
+80
+00:02:51.389 --> 00:02:53.073
+The verse riff has ten onsets.
+
+81
+00:02:53.410 --> 00:02:55.767
+The chorus strums every eighth note:
+
+82
+00:02:55.767 --> 00:02:56.217
+sixteen.
+
+83
+00:02:56.683 --> 00:02:59.084
+Eight onsets are shared, and eighteen are
+
+84
+00:02:59.084 --> 00:03:01.649
+on in either: J is eight over eighteen,
+
+85
+00:03:01.649 --> 00:03:03.068
+zero point four four four.
+
+86
+00:03:03.396 --> 00:03:04.324
+Keep that number.
+
+87
+00:03:04.651 --> 00:03:05.415
+It comes back.
+
+88
+00:03:08.890 --> 00:03:11.397
+Now a whole made-up song, sixteen windows:
+
+89
+00:03:11.397 --> 00:03:13.403
+six of the verse riff, five of chorus
+
+90
+00:03:13.403 --> 00:03:15.459
+strumming, and five of the verse again.
+
+91
+00:03:15.909 --> 00:03:18.177
+Compare every window's guitar with every
+
+92
+00:03:18.177 --> 00:03:20.446
+other window's, and write each Jaccard
+
+93
+00:03:20.446 --> 00:03:22.327
+into a grid, sixteen by sixteen.
+
+94
+00:03:22.799 --> 00:03:26.035
+Row i, column j holds S i j: the Jaccard
+
+95
+00:03:26.035 --> 00:03:28.665
+of the guitar in window i and window j.
+
+96
+00:03:29.232 --> 00:03:31.027
+The diagonal is each window against
+
+97
+00:03:31.027 --> 00:03:32.373
+itself, so it's all ones.
+
+98
+00:03:32.783 --> 00:03:35.175
+And the grid is symmetric: window i
+
+99
+00:03:35.175 --> 00:03:37.333
+against j is the same as j against i.
+
+100
+00:03:37.859 --> 00:03:40.198
+Verse against verse is one, because the
+
+101
+00:03:40.198 --> 00:03:42.592
+riff repeats exactly, and chorus against
+
+102
+00:03:42.592 --> 00:03:43.594
+chorus is one too.
+
+103
+00:03:43.928 --> 00:03:46.099
+Verse against chorus is the zero point
+
+104
+00:03:46.099 --> 00:03:47.603
+four four four from before.
+
+105
+00:03:47.937 --> 00:03:50.052
+And the bright corners show the verse
+
+106
+00:03:50.052 --> 00:03:52.558
+coming back: windows zero to five match
+
+107
+00:03:52.558 --> 00:03:54.005
+windows eleven to fifteen.
+
+108
+00:03:54.469 --> 00:03:56.732
+In this made-up song every cell is one of
+
+109
+00:03:56.732 --> 00:03:57.593
+just two values.
+
+110
+00:03:57.917 --> 00:04:00.179
+Real songs are messier, but the squares
+
+111
+00:04:00.179 --> 00:04:02.656
+along the diagonal are what we look for:
+
+112
+00:04:02.656 --> 00:04:04.326
+they are the guitar's sections.
+
+113
+00:04:07.763 --> 00:04:09.760
+What does a section change look like in
+
+114
+00:04:09.760 --> 00:04:10.259
+this grid?
+
+115
+00:04:10.558 --> 00:04:12.804
+Take the change into the chorus, at window
+
+116
+00:04:12.804 --> 00:04:13.004
+six.
+
+117
+00:04:13.447 --> 00:04:15.709
+Just before it, four verse windows, all
+
+118
+00:04:15.709 --> 00:04:16.017
+alike.
+
+119
+00:04:16.326 --> 00:04:18.588
+Just after it, four chorus windows, all
+
+120
+00:04:18.588 --> 00:04:18.896
+alike.
+
+121
+00:04:19.205 --> 00:04:21.518
+Across it, verse against chorus: they
+
+122
+00:04:21.518 --> 00:04:21.878
+differ.
+
+123
+00:04:22.313 --> 00:04:24.369
+Two bright squares on the diagonal, two
+
+124
+00:04:24.369 --> 00:04:25.545
+dimmer ones beside them.
+
+125
+00:04:25.839 --> 00:04:27.259
+That's the pattern to detect.
+
+126
+00:04:28.567 --> 00:04:30.476
+A checkerboard of weights finds that
+
+127
+00:04:30.476 --> 00:04:30.889
+pattern.
+
+128
+00:04:31.198 --> 00:04:33.622
+It's Foote's kernel, after Jonathan Foote,
+
+129
+00:04:33.622 --> 00:04:35.634
+who proposed it for finding changes in
+
+130
+00:04:35.634 --> 00:04:36.769
+audio in two thousand.
+
+131
+00:04:37.078 --> 00:04:39.400
+Its half-width is k, four windows, so it
+
+132
+00:04:39.400 --> 00:04:41.618
+covers eight by eight, with the boundary
+
+133
+00:04:41.618 --> 00:04:42.598
+through the middle.
+
+134
+00:04:43.043 --> 00:04:45.309
+Each row and each column gets a weight, c
+
+135
+00:04:45.309 --> 00:04:45.566
+of u.
+
+136
+00:04:45.875 --> 00:04:48.244
+Here u counts windows from the boundary:
+
+137
+00:04:48.244 --> 00:04:50.561
+minus four to minus one before it, zero to
+
+138
+00:04:50.561 --> 00:04:51.179
+three after.
+
+139
+00:04:51.488 --> 00:04:53.651
+Window u's middle sits u plus a half from
+
+140
+00:04:53.651 --> 00:04:56.277
+the boundary: a half, one and a half, two
+
+141
+00:04:56.277 --> 00:04:57.874
+and a half, three and a half.
+
+142
+00:04:58.347 --> 00:05:00.598
+The sign is minus before the boundary and
+
+143
+00:05:00.598 --> 00:05:01.187
+plus after.
+
+144
+00:05:01.509 --> 00:05:03.706
+Then a bell-shaped taper, width k over
+
+145
+00:05:03.706 --> 00:05:06.117
+two, that is two windows, so the windows
+
+146
+00:05:06.117 --> 00:05:08.046
+nearest the boundary weigh the most.
+
+147
+00:05:08.481 --> 00:05:10.992
+Going outward the weights are zero point
+
+148
+00:05:10.992 --> 00:05:13.686
+nine seven, zero point seven five, zero
+
+149
+00:05:13.686 --> 00:05:16.381
+point four six and zero point two two, on
+
+150
+00:05:16.381 --> 00:05:16.993
+each side.
+
+151
+00:05:17.495 --> 00:05:20.048
+Each cell of the kernel is its row weight
+
+152
+00:05:20.048 --> 00:05:22.906
+times its column weight, divided by Z, the
+
+153
+00:05:22.906 --> 00:05:25.581
+total size of all sixty-four products, so
+
+154
+00:05:25.581 --> 00:05:27.040
+the sizes add up to one.
+
+155
+00:05:27.594 --> 00:05:29.190
+Before times before is plus.
+
+156
+00:05:29.532 --> 00:05:31.015
+After times after is plus.
+
+157
+00:05:31.357 --> 00:05:32.953
+Before times after is minus.
+
+158
+00:05:33.295 --> 00:05:34.663
+That's the checkerboard.
+
+159
+00:05:35.006 --> 00:05:37.514
+The biggest weights, zero point zero four
+
+160
+00:05:37.514 --> 00:05:38.768
+one, hug the centre.
+
+161
+00:05:39.110 --> 00:05:41.334
+The corners carry zero point zero zero
+
+162
+00:05:41.334 --> 00:05:41.562
+two.
+
+163
+00:05:42.018 --> 00:05:42.941
+Add every weight.
+
+164
+00:05:43.267 --> 00:05:45.547
+The plus cells sum to a half, the minus
+
+165
+00:05:45.547 --> 00:05:47.827
+cells to minus a half, and the total is
+
+166
+00:05:47.827 --> 00:05:48.532
+exactly zero.
+
+167
+00:05:49.024 --> 00:05:50.001
+That's deliberate.
+
+168
+00:05:50.327 --> 00:05:52.282
+Lay the kernel over a stretch where
+
+169
+00:05:52.282 --> 00:05:54.726
+nothing changes, all ones, and it scores
+
+170
+00:05:54.726 --> 00:05:55.432
+exactly zero.
+
+171
+00:05:55.758 --> 00:05:57.278
+It answers only to contrast.
+
+172
+00:05:57.739 --> 00:05:59.234
+One detail for the report.
+
+173
+00:05:59.579 --> 00:06:01.821
+The explainer page prints the taper at
+
+174
+00:06:01.821 --> 00:06:04.408
+whole-number offsets, which would give the
+
+175
+00:06:04.408 --> 00:06:06.075
+row at zero a weight of zero.
+
+176
+00:06:06.420 --> 00:06:08.834
+The code uses the half steps you see here.
+
+177
+00:06:13.140 --> 00:06:15.384
+Novelty, written nu of t, measures how
+
+178
+00:06:15.384 --> 00:06:17.366
+much window t looks like the start of
+
+179
+00:06:17.366 --> 00:06:18.097
+something new.
+
+180
+00:06:18.590 --> 00:06:21.086
+Lay the kernel on the grid, centred just
+
+181
+00:06:21.086 --> 00:06:23.582
+before window t, multiply each weight by
+
+182
+00:06:23.582 --> 00:06:26.021
+the similarity under it, and add up all
+
+183
+00:06:26.021 --> 00:06:27.182
+sixty-four products.
+
+184
+00:06:27.625 --> 00:06:29.770
+At window six the plus quarters lie on
+
+185
+00:06:29.770 --> 00:06:31.915
+verse against verse and chorus against
+
+186
+00:06:31.915 --> 00:06:34.555
+chorus: all ones, under weights that sum
+
+187
+00:06:34.555 --> 00:06:35.105
+to a half.
+
+188
+00:06:35.614 --> 00:06:38.103
+The minus quarters, minus a half in all,
+
+189
+00:06:38.103 --> 00:06:40.592
+lie on verse against chorus: zero point
+
+190
+00:06:40.592 --> 00:06:41.422
+four four four.
+
+191
+00:06:41.887 --> 00:06:44.481
+So nu of six is one minus zero point four
+
+192
+00:06:44.481 --> 00:06:47.506
+four four, over two: zero point two seven
+
+193
+00:06:47.506 --> 00:06:47.877
+eight.
+
+194
+00:06:48.403 --> 00:06:50.586
+That's the rule for any clean change,
+
+195
+00:06:50.586 --> 00:06:53.098
+where s is the similarity across it: one
+
+196
+00:06:53.098 --> 00:06:54.189
+minus s, over two.
+
+197
+00:06:54.517 --> 00:06:56.974
+If the two sections are the same, s is one
+
+198
+00:06:56.974 --> 00:06:58.448
+and there's no peak at all.
+
+199
+00:06:58.775 --> 00:07:01.123
+If they share nothing, s is zero and the
+
+200
+00:07:01.123 --> 00:07:02.815
+peak reaches its top, a half.
+
+201
+00:07:03.326 --> 00:07:05.616
+Now slide the kernel down the diagonal,
+
+202
+00:07:05.616 --> 00:07:08.015
+one window at a time, from window four to
+
+203
+00:07:08.015 --> 00:07:08.779
+window twelve.
+
+204
+00:07:09.656 --> 00:07:11.653
+Near the ends the kernel doesn't fit
+
+205
+00:07:11.653 --> 00:07:14.189
+inside the grid, so windows zero to three,
+
+206
+00:07:14.189 --> 00:07:16.132
+and thirteen to fifteen, get zero.
+
+207
+00:07:16.588 --> 00:07:18.943
+The curve peaks at window six and again at
+
+208
+00:07:18.943 --> 00:07:21.298
+window eleven, both zero point two seven
+
+209
+00:07:21.298 --> 00:07:21.627
+eight.
+
+210
+00:07:21.955 --> 00:07:24.529
+Between them, in the middle of the chorus,
+
+211
+00:07:24.529 --> 00:07:26.829
+it barely moves: zero point zero one.
+
+212
+00:07:31.037 --> 00:07:33.292
+Two rules turn the curve into boundaries.
+
+213
+00:07:33.622 --> 00:07:35.932
+First, a candidate must be a peak, at
+
+214
+00:07:35.932 --> 00:07:38.352
+least as high as both its neighbours, and
+
+215
+00:07:38.352 --> 00:07:40.607
+stand strictly above zero point one five.
+
+216
+00:07:41.123 --> 00:07:43.474
+The shoulders at zero point zero nine nine
+
+217
+00:07:43.474 --> 00:07:46.043
+aren't peaks: each has a taller neighbour.
+
+218
+00:07:46.371 --> 00:07:48.612
+In this song only windows six and eleven
+
+219
+00:07:48.612 --> 00:07:51.181
+are peaks, and both clear the line, so the
+
+220
+00:07:51.181 --> 00:07:52.875
+threshold removes nothing here.
+
+221
+00:07:53.339 --> 00:07:55.881
+Second, peaks are kept tallest first, and
+
+222
+00:07:55.881 --> 00:07:58.424
+never closer than k, four windows, so one
+
+223
+00:07:58.424 --> 00:08:00.083
+change can't be counted twice.
+
+224
+00:08:00.414 --> 00:08:02.681
+Six and eleven are five apart, so both
+
+225
+00:08:02.681 --> 00:08:02.957
+stay.
+
+226
+00:08:03.419 --> 00:08:05.887
+These are the boundaries, B: windows six
+
+227
+00:08:05.887 --> 00:08:08.200
+and eleven, each the first window of a new
+
+228
+00:08:08.200 --> 00:08:08.611
+section.
+
+229
+00:08:09.073 --> 00:08:11.256
+Notice who decided that: the guitar alone.
+
+230
+00:08:11.534 --> 00:08:12.974
+The drums were never looked at.
+
+231
+00:08:13.413 --> 00:08:15.574
+And the matrix compared every window with
+
+232
+00:08:15.574 --> 00:08:17.374
+every other, later ones included.
+
+233
+00:08:17.683 --> 00:08:19.895
+The detector sees the whole song before it
+
+234
+00:08:19.895 --> 00:08:20.769
+marks a boundary.
+
+235
+00:08:21.078 --> 00:08:23.135
+That's fine for scoring a finished song.
+
+236
+00:08:23.444 --> 00:08:25.759
+It matters in the next lesson, because our
+
+237
+00:08:25.759 --> 00:08:27.045
+drummers can't see ahead.
+
+238
+00:08:28.305 --> 00:08:30.466
+And when there's nothing to find, there's
+
+239
+00:08:30.466 --> 00:08:30.957
+no number.
+
+240
+00:08:31.252 --> 00:08:33.315
+A song shorter than ten windows, twenty
+
+241
+00:08:33.315 --> 00:08:35.574
+bars, or one with no peak above the line,
+
+242
+00:08:35.574 --> 00:08:37.489
+gets no reading, never a made-up one.
+
+243
+00:08:37.784 --> 00:08:39.994
+On the committed Rock check, fifty-five of
+
+244
+00:08:39.994 --> 00:08:42.106
+two hundred and twenty-three songs gave no
+
+245
+00:08:42.106 --> 00:08:43.580
+reading: about a quarter.
+
+246
+00:08:45.106 --> 00:08:47.622
+So: fingerprint each window, compare them
+
+247
+00:08:47.622 --> 00:08:49.881
+all by Jaccard, slide a checkerboard down
+
+248
+00:08:49.881 --> 00:08:51.934
+the diagonal, and keep the tall peaks.
+
+249
+00:08:52.242 --> 00:08:53.731
+The guitar picks the moments.
+
+250
+00:08:54.039 --> 00:08:56.298
+Next: how the drums are judged at them.
+

@@ -1,0 +1,798 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.147
+Lesson one point three.
+
+2
+00:00:01.435 --> 00:00:03.071
+The loop that runs the drums live.
+
+3
+00:00:07.007 --> 00:00:09.161
+The guitarist plays in real time, whenever
+
+4
+00:00:09.161 --> 00:00:09.639
+they like.
+
+5
+00:00:10.079 --> 00:00:12.556
+The laptop keeps its own clock: a grid of
+
+6
+00:00:12.556 --> 00:00:12.872
+slots.
+
+7
+00:00:13.189 --> 00:00:15.403
+The tall marks are downbeats, the first
+
+8
+00:00:15.403 --> 00:00:16.562
+sixteenth of each bar.
+
+9
+00:00:17.065 --> 00:00:19.829
+Slot t sounds at S t: the first downbeat,
+
+10
+00:00:19.829 --> 00:00:21.634
+S nought, plus t slot lengths.
+
+11
+00:00:21.973 --> 00:00:24.343
+By default the laptop starts at a hundred
+
+12
+00:00:24.343 --> 00:00:26.486
+beats per minute, so a slot lasts a
+
+13
+00:00:26.486 --> 00:00:28.235
+hundred and fifty milliseconds.
+
+14
+00:00:28.574 --> 00:00:30.774
+Its job is to fit the guitar onto this
+
+15
+00:00:30.774 --> 00:00:31.056
+grid.
+
+16
+00:00:34.570 --> 00:00:36.487
+First, when was the string actually
+
+17
+00:00:36.487 --> 00:00:36.890
+plucked?
+
+18
+00:00:37.193 --> 00:00:39.362
+The packet arrives a little later than the
+
+19
+00:00:39.362 --> 00:00:41.480
+pluck, so the laptop can't just use the
+
+20
+00:00:41.480 --> 00:00:42.287
+time it arrived.
+
+21
+00:00:42.732 --> 00:00:44.846
+If the board has sent a clock packet,
+
+22
+00:00:44.846 --> 00:00:47.066
+called SYNC, in the last second, that
+
+23
+00:00:47.066 --> 00:00:48.334
+lines the two clocks up.
+
+24
+00:00:48.651 --> 00:00:50.871
+Otherwise the laptop uses the board's own
+
+25
+00:00:50.871 --> 00:00:53.302
+stamp on each onset: it lines the clocks
+
+26
+00:00:53.302 --> 00:00:55.416
+up from the quickest packet in the last
+
+27
+00:00:55.416 --> 00:00:57.742
+twenty seconds, then takes off an assumed
+
+28
+00:00:57.742 --> 00:00:59.063
+twenty-millisecond delay.
+
+29
+00:00:59.380 --> 00:01:01.706
+If the board's clock looks wrong, it uses
+
+30
+00:01:01.706 --> 00:01:03.926
+the arrival time, minus the same twenty
+
+31
+00:01:03.926 --> 00:01:04.613
+milliseconds.
+
+32
+00:01:04.930 --> 00:01:07.202
+Any estimate more than a second before the
+
+33
+00:01:07.202 --> 00:01:09.052
+packet arrived, or more than two
+
+34
+00:01:09.052 --> 00:01:10.955
+milliseconds after, is thrown out.
+
+35
+00:01:12.718 --> 00:01:15.185
+Then the pluck is placed: how many slots
+
+36
+00:01:15.185 --> 00:01:17.492
+after the first downbeat, rounded to the
+
+37
+00:01:17.492 --> 00:01:19.476
+nearest whole slot, exactly as the
+
+38
+00:01:19.476 --> 00:01:20.442
+training data was.
+
+39
+00:01:20.763 --> 00:01:23.177
+A pluck one point three one seconds in, at
+
+40
+00:01:23.177 --> 00:01:25.591
+a hundred beats per minute, is eight point
+
+41
+00:01:25.591 --> 00:01:26.717
+seven three slots in.
+
+42
+00:01:27.039 --> 00:01:28.326
+So it goes in slot nine.
+
+43
+00:01:29.105 --> 00:01:31.536
+Each drum decision reads one guitar slot,
+
+44
+00:01:31.536 --> 00:01:32.310
+and closes it.
+
+45
+00:01:32.642 --> 00:01:34.742
+If a note turns up after its slot was
+
+46
+00:01:34.742 --> 00:01:37.284
+read, it moves to the next open slot, and
+
+47
+00:01:37.284 --> 00:01:38.113
+is marked late.
+
+48
+00:01:38.725 --> 00:01:40.625
+Late notes are counted on the page.
+
+49
+00:01:40.950 --> 00:01:43.176
+And if the board later takes a note back
+
+50
+00:01:43.176 --> 00:01:45.728
+as a false onset, with a VOID packet, it's
+
+51
+00:01:45.728 --> 00:01:48.062
+removed, if its slot hasn't been decided
+
+52
+00:01:48.062 --> 00:01:48.279
+yet.
+
+53
+00:01:51.730 --> 00:01:53.863
+To play along with the guitarist rather
+
+54
+00:01:53.863 --> 00:01:56.208
+than a click, the laptop can listen for a
+
+55
+00:01:56.208 --> 00:01:57.914
+count-in: four even strums.
+
+56
+00:01:58.234 --> 00:02:00.580
+Here is one, recorded with the fake board.
+
+57
+00:02:01.117 --> 00:02:03.052
+A straight line is fitted through the four
+
+58
+00:02:03.052 --> 00:02:05.258
+strums, the one that misses them least: a
+
+59
+00:02:05.258 --> 00:02:06.113
+least-squares line.
+
+60
+00:02:06.383 --> 00:02:08.634
+Its slope is the beat length, p: here just
+
+61
+00:02:08.634 --> 00:02:10.434
+under five hundred milliseconds, so a
+
+62
+00:02:10.434 --> 00:02:12.055
+hundred and twenty beats per minute.
+
+63
+00:02:12.325 --> 00:02:14.306
+The line's next point, one beat after the
+
+64
+00:02:14.306 --> 00:02:16.376
+fourth strum, becomes the first downbeat,
+
+65
+00:02:16.376 --> 00:02:17.637
+and the drums come in there.
+
+66
+00:02:18.054 --> 00:02:19.988
+A strum is any group of notes within
+
+67
+00:02:19.988 --> 00:02:22.131
+eighty milliseconds, so a chord counts
+
+68
+00:02:22.131 --> 00:02:22.392
+once.
+
+69
+00:02:22.706 --> 00:02:25.057
+The gaps must be even, each within fifteen
+
+70
+00:02:25.057 --> 00:02:27.305
+percent of the middle one, and the tempo
+
+71
+00:02:27.305 --> 00:02:29.395
+must be between sixty and a hundred and
+
+72
+00:02:29.395 --> 00:02:29.761
+eighty.
+
+73
+00:02:30.075 --> 00:02:31.590
+If not, it keeps listening.
+
+74
+00:02:32.081 --> 00:02:33.731
+This has run with the fake board.
+
+75
+00:02:34.031 --> 00:02:36.131
+It hasn't yet been tried with a guitarist.
+
+76
+00:02:39.550 --> 00:02:41.787
+The count-in fixes a tempo, but players
+
+77
+00:02:41.787 --> 00:02:42.107
+drift.
+
+78
+00:02:42.426 --> 00:02:44.397
+So the grid can follow the guitarist.
+
+79
+00:02:44.716 --> 00:02:46.953
+Picture the grid as a comb of eighth-note
+
+80
+00:02:46.953 --> 00:02:47.273
+lines.
+
+81
+00:02:47.593 --> 00:02:49.989
+Around each line is a gate, twelve percent
+
+82
+00:02:49.989 --> 00:02:52.120
+of a beat wide on each side: sixty
+
+83
+00:02:52.120 --> 00:02:54.090
+milliseconds at a hundred and twenty.
+
+84
+00:02:54.629 --> 00:02:56.690
+A strum lands twenty-five milliseconds
+
+85
+00:02:56.690 --> 00:02:57.588
+after beat eight.
+
+86
+00:02:57.905 --> 00:03:00.231
+Its error, e, is how far it is from the
+
+87
+00:03:00.231 --> 00:03:02.134
+nearest line: plus twenty-five
+
+88
+00:03:02.134 --> 00:03:04.353
+milliseconds, five hundredths of a beat.
+
+89
+00:03:04.670 --> 00:03:06.732
+That's inside the gate, so it's used.
+
+90
+00:03:07.178 --> 00:03:07.971
+Two things change.
+
+91
+00:03:08.236 --> 00:03:10.263
+The period, the time between beats, grows
+
+92
+00:03:10.263 --> 00:03:12.334
+by a twentieth of the error: five hundred
+
+93
+00:03:12.334 --> 00:03:14.053
+becomes five hundred and one point two
+
+94
+00:03:14.053 --> 00:03:15.992
+five milliseconds, a hundred and nineteen
+
+95
+00:03:15.992 --> 00:03:17.270
+point seven beats per minute.
+
+96
+00:03:17.534 --> 00:03:19.561
+And the phase, where the lines sit, moves
+
+97
+00:03:19.561 --> 00:03:21.633
+a fifth of the way toward the strum: five
+
+98
+00:03:21.633 --> 00:03:22.205
+milliseconds.
+
+99
+00:03:22.470 --> 00:03:24.409
+So one strum nudges the grid, rather than
+
+100
+00:03:24.409 --> 00:03:24.894
+yanking it.
+
+101
+00:03:25.290 --> 00:03:27.548
+A strum that lands far from any line, like
+
+102
+00:03:27.548 --> 00:03:29.655
+a sixteenth-note fill, is outside every
+
+103
+00:03:29.655 --> 00:03:30.809
+gate, and is ignored.
+
+104
+00:03:31.110 --> 00:03:33.167
+Each change to the period is also capped
+
+105
+00:03:33.167 --> 00:03:35.174
+at three percent, and the beat length
+
+106
+00:03:35.174 --> 00:03:36.930
+stays within twenty percent of the
+
+107
+00:03:36.930 --> 00:03:39.138
+count-in's: a hundred to a hundred and
+
+108
+00:03:39.138 --> 00:03:41.295
+fifty beats per minute after a count-in at
+
+109
+00:03:41.295 --> 00:03:42.349
+a hundred and twenty.
+
+110
+00:03:43.815 --> 00:03:45.468
+The tracker is a kind of phase-locked
+
+111
+00:03:45.468 --> 00:03:45.685
+loop.
+
+112
+00:03:45.946 --> 00:03:47.817
+Here it is on a simulated player, steady
+
+113
+00:03:47.817 --> 00:03:49.644
+at a hundred and sixteen beats per minute
+
+114
+00:03:49.644 --> 00:03:51.428
+after a count-in at a hundred and twenty.
+
+115
+00:03:51.689 --> 00:03:53.647
+At first each strum comes later and later,
+
+116
+00:03:53.647 --> 00:03:54.909
+up to forty-six milliseconds.
+
+117
+00:03:55.170 --> 00:03:57.084
+The grid's tempo eases down, overshoots a
+
+118
+00:03:57.084 --> 00:03:59.042
+little, and by strum twenty is within half
+
+119
+00:03:59.042 --> 00:04:00.564
+a beat per minute of a hundred and
+
+120
+00:04:00.564 --> 00:04:02.044
+sixteen, still creeping back up.
+
+121
+00:04:02.417 --> 00:04:04.598
+In a recorded fake-board take, twenty-six
+
+122
+00:04:04.598 --> 00:04:06.383
+of sixty-one strums passed the gate.
+
+123
+00:04:06.680 --> 00:04:08.712
+The constants were chosen by hand, not
+
+124
+00:04:08.712 --> 00:04:09.010
+tuned.
+
+125
+00:04:09.307 --> 00:04:11.438
+On replays of Sena's playing it put thirty
+
+126
+00:04:11.438 --> 00:04:13.570
+to thirty-nine percent of his notes within
+
+127
+00:04:13.570 --> 00:04:15.750
+twenty milliseconds of the lines, against
+
+128
+00:04:15.750 --> 00:04:17.783
+twenty-seven to thirty-three holding one
+
+129
+00:04:17.783 --> 00:04:18.080
+tempo.
+
+130
+00:04:18.377 --> 00:04:20.360
+It hasn't yet run live with a guitarist.
+
+131
+00:04:23.773 --> 00:04:25.923
+Now one slot, in the order the code does
+
+132
+00:04:25.923 --> 00:04:26.073
+it.
+
+133
+00:04:26.373 --> 00:04:28.323
+First the loop sleeps until the slot's
+
+134
+00:04:28.323 --> 00:04:30.573
+decision time, which the next lesson works
+
+135
+00:04:30.573 --> 00:04:30.773
+out.
+
+136
+00:04:31.294 --> 00:04:33.211
+If a new drummer was asked for and this is
+
+137
+00:04:33.211 --> 00:04:34.147
+a downbeat, switch.
+
+138
+00:04:34.515 --> 00:04:36.426
+If that starts a new segment, wipe the
+
+139
+00:04:36.426 --> 00:04:37.126
+model's memory.
+
+140
+00:04:37.545 --> 00:04:39.693
+Read the guitar's slot t minus one, and
+
+141
+00:04:39.693 --> 00:04:40.358
+mark it used.
+
+142
+00:04:40.756 --> 00:04:42.472
+Build the five numbers from lesson one
+
+143
+00:04:42.472 --> 00:04:42.912
+point two.
+
+144
+00:04:43.305 --> 00:04:45.325
+Step the model once: nine probabilities.
+
+145
+00:04:45.694 --> 00:04:47.815
+Compare each with its drum's threshold:
+
+146
+00:04:47.815 --> 00:04:48.711
+nine hits or rests.
+
+147
+00:04:49.086 --> 00:04:50.512
+Let the crash rule add a crash where it
+
+148
+00:04:50.512 --> 00:04:50.762
+should.
+
+149
+00:04:51.091 --> 00:04:52.186
+And step the bass, if it's on.
+
+150
+00:04:52.531 --> 00:04:54.717
+Then the hits are scheduled to sound at S
+
+151
+00:04:54.717 --> 00:04:57.006
+t, the slot is written to disk, and the
+
+152
+00:04:57.006 --> 00:04:57.683
+pages update.
+
+153
+00:04:57.995 --> 00:04:59.348
+All of that, every slot.
+
+154
+00:05:02.827 --> 00:05:04.054
+Here are eighteen bars of a take.
+
+155
+00:05:04.428 --> 00:05:06.192
+If you ask for a different drummer
+
+156
+00:05:06.192 --> 00:05:08.460
+mid-bar, it waits for the next downbeat,
+
+157
+00:05:08.460 --> 00:05:10.828
+and starts a new segment: fresh memory,
+
+158
+00:05:10.828 --> 00:05:13.045
+and its first slot hears silence, just as
+
+159
+00:05:13.045 --> 00:05:14.356
+every training song began.
+
+160
+00:05:14.807 --> 00:05:16.579
+On top of the model sits a small crash
+
+161
+00:05:16.579 --> 00:05:16.807
+rule.
+
+162
+00:05:17.079 --> 00:05:19.033
+A drummer's first downbeat is a kick and a
+
+163
+00:05:19.033 --> 00:05:21.169
+crash, and nothing else, because one model
+
+164
+00:05:21.169 --> 00:05:23.031
+fired all nine drums on a fresh start,
+
+165
+00:05:23.031 --> 00:05:24.258
+twelve times out of twelve.
+
+166
+00:05:24.531 --> 00:05:26.530
+Every eight bars, a kick and crash with a
+
+167
+00:05:26.530 --> 00:05:28.211
+coin flip: probability one half.
+
+168
+00:05:28.484 --> 00:05:30.301
+And when the guitar comes back after at
+
+169
+00:05:30.301 --> 00:05:32.392
+least a bar of silence, on the next beat,
+
+170
+00:05:32.392 --> 00:05:33.755
+with probability seven tenths.
+
+171
+00:05:34.144 --> 00:05:35.947
+The coin flips come from a random
+
+172
+00:05:35.947 --> 00:05:38.280
+generator started from a recorded number,
+
+173
+00:05:38.280 --> 00:05:40.295
+a seed, and they happen only at set
+
+174
+00:05:40.295 --> 00:05:42.787
+moments: every eight bars, and when the
+
+175
+00:05:42.787 --> 00:05:43.742
+guitar comes back.
+
+176
+00:05:44.060 --> 00:05:46.446
+So the same playing, the same switches and
+
+177
+00:05:46.446 --> 00:05:48.196
+the same seed give the same take.
+
+178
+00:05:51.657 --> 00:05:53.904
+Every take writes a session folder: the
+
+179
+00:05:53.904 --> 00:05:56.001
+settings, every packet as it arrived,
+
+180
+00:05:56.001 --> 00:05:58.348
+every slot's numbers and hits, the events,
+
+181
+00:05:58.348 --> 00:05:59.047
+and the sound.
+
+182
+00:05:59.536 --> 00:06:01.869
+Afterwards, the same model is run again
+
+183
+00:06:01.869 --> 00:06:04.369
+offline on the recorded numbers, and every
+
+184
+00:06:04.369 --> 00:06:06.591
+probability and every hit must come out
+
+185
+00:06:06.591 --> 00:06:07.757
+equal, bit for bit.
+
+186
+00:06:08.091 --> 00:06:09.313
+Not close: equal.
+
+187
+00:06:09.929 --> 00:06:12.255
+A tracked take: two thousand three hundred
+
+188
+00:06:12.255 --> 00:06:13.854
+and four cells, none different.
+
+189
+00:06:14.145 --> 00:06:16.179
+And offline, the genre drummers stepped
+
+190
+00:06:16.179 --> 00:06:18.263
+one slot at a time against whole chunks,
+
+191
+00:06:18.263 --> 00:06:20.491
+on two songs each: none of a hundred and
+
+192
+00:06:20.491 --> 00:06:22.042
+eleven thousand cells different.
+
+193
+00:06:22.333 --> 00:06:24.513
+One honest limit: the check re-runs the
+
+194
+00:06:24.513 --> 00:06:26.209
+model, not the crash rule on top.
+
+195
+00:06:27.832 --> 00:06:30.244
+So the loop places each pluck on the grid,
+
+196
+00:06:30.244 --> 00:06:32.817
+decides each slot, plays it, and logs it,
+
+197
+00:06:32.817 --> 00:06:33.942
+so it can be checked.
+
+198
+00:06:34.264 --> 00:06:36.676
+Next: exactly how much time all of that
+
+199
+00:06:36.676 --> 00:06:36.890
+has.
+

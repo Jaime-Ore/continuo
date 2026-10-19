@@ -1,0 +1,1330 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.089
+Lesson two point four.
+
+2
+00:00:01.375 --> 00:00:03.473
+Splitting Lakh by song, and measuring the
+
+3
+00:00:03.473 --> 00:00:04.284
+leak that's left.
+
+4
+00:00:08.197 --> 00:00:10.563
+A model learns from examples, and we need
+
+5
+00:00:10.563 --> 00:00:12.767
+to know how well it does on music it has
+
+6
+00:00:12.767 --> 00:00:13.359
+never seen.
+
+7
+00:00:13.681 --> 00:00:15.832
+So the songs are dealt into three piles
+
+8
+00:00:15.832 --> 00:00:17.284
+before anything is trained.
+
+9
+00:00:17.774 --> 00:00:19.917
+The training set: the songs the model
+
+10
+00:00:19.917 --> 00:00:20.515
+learns from.
+
+11
+00:00:20.814 --> 00:00:22.209
+Here eighteen of the twenty.
+
+12
+00:00:22.508 --> 00:00:24.700
+The validation set: songs held back to
+
+13
+00:00:24.700 --> 00:00:26.693
+choose settings, such as when to stop
+
+14
+00:00:26.693 --> 00:00:27.142
+training.
+
+15
+00:00:27.441 --> 00:00:29.932
+And the test set: held back until the end,
+
+16
+00:00:29.932 --> 00:00:31.975
+and read once, for the score we report.
+
+17
+00:00:32.611 --> 00:00:34.691
+Now suppose training song r is really
+
+18
+00:00:34.691 --> 00:00:37.264
+another transcription of test song t: the
+
+19
+00:00:37.264 --> 00:00:39.344
+same song, typed in by someone else.
+
+20
+00:00:39.673 --> 00:00:41.698
+Then the model has already heard the
+
+21
+00:00:41.698 --> 00:00:42.081
+answer.
+
+22
+00:00:42.410 --> 00:00:44.819
+Its test score measures memory, not music
+
+23
+00:00:44.819 --> 00:00:47.173
+it has never seen, and it reads too high.
+
+24
+00:00:47.501 --> 00:00:48.322
+That's leakage.
+
+25
+00:00:49.761 --> 00:00:51.027
+We've been here before.
+
+26
+00:00:51.358 --> 00:00:53.394
+In semester one, a random split of
+
+27
+00:00:53.394 --> 00:00:55.541
+GuitarSet let audio from one recording
+
+28
+00:00:55.541 --> 00:00:58.018
+session land on both sides, and the team's
+
+29
+00:00:58.018 --> 00:01:00.275
+random-split runs scored about seventeen
+
+30
+00:01:00.275 --> 00:01:02.477
+points higher on chords than the player
+
+31
+00:01:02.477 --> 00:01:02.807
+split.
+
+32
+00:01:03.137 --> 00:01:04.844
+The fix was to split by player.
+
+33
+00:01:05.174 --> 00:01:07.431
+This lesson is the same idea, for Lakh.
+
+34
+00:01:10.953 --> 00:01:13.363
+Lakh was scraped from the web, and popular
+
+35
+00:01:13.363 --> 00:01:15.397
+songs were typed in by many different
+
+36
+00:01:15.397 --> 00:01:15.772
+people.
+
+37
+00:01:16.093 --> 00:01:17.699
+Each person's file is its own
+
+38
+00:01:17.699 --> 00:01:20.001
+transcription, with its own name and its
+
+39
+00:01:20.001 --> 00:01:22.357
+own hash, so the same song turns up again
+
+40
+00:01:22.357 --> 00:01:22.892
+and again.
+
+41
+00:01:23.392 --> 00:01:25.627
+Lesson two point two's clean-up removed
+
+42
+00:01:25.627 --> 00:01:27.917
+files that are near copies of each other.
+
+43
+00:01:28.252 --> 00:01:30.487
+Different people's versions of one song
+
+44
+00:01:30.487 --> 00:01:32.107
+differ, so they survive it.
+
+45
+00:01:33.007 --> 00:01:35.332
+The first split dealt each file by its own
+
+46
+00:01:35.332 --> 00:01:35.602
+hash.
+
+47
+00:01:35.926 --> 00:01:38.197
+So two transcriptions land in training,
+
+48
+00:01:38.197 --> 00:01:40.576
+and the third in test: a test song the
+
+49
+00:01:40.576 --> 00:01:41.982
+model has already learned.
+
+50
+00:01:42.969 --> 00:01:43.733
+How bad was it?
+
+51
+00:01:44.039 --> 00:01:45.924
+On the sixth of September we counted.
+
+52
+00:01:46.229 --> 00:01:48.318
+Of the held-out files that match a known
+
+53
+00:01:48.318 --> 00:01:50.458
+recording, one thousand one hundred and
+
+54
+00:01:50.458 --> 00:01:52.445
+thirty-eight out of one thousand seven
+
+55
+00:01:52.445 --> 00:01:54.585
+hundred and twenty-eight had a sibling in
+
+56
+00:01:54.585 --> 00:01:57.031
+training: sixty-five point nine percent,
+
+57
+00:01:57.031 --> 00:01:57.693
+two in three.
+
+58
+00:01:58.149 --> 00:02:00.707
+And Colin Raffel, who built Lakh, had seen
+
+59
+00:02:00.707 --> 00:02:03.320
+exactly this: his thesis splits by song,
+
+60
+00:02:03.320 --> 00:02:03.973
+not by file.
+
+61
+00:02:07.500 --> 00:02:09.863
+To split by song we first need a rule for
+
+62
+00:02:09.863 --> 00:02:11.719
+when two files are the same song.
+
+63
+00:02:12.057 --> 00:02:13.463
+Two files, f i and f j.
+
+64
+00:02:13.801 --> 00:02:16.220
+The squiggle means: are the same song.
+
+65
+00:02:16.557 --> 00:02:18.751
+It holds if any one of three things is
+
+66
+00:02:18.751 --> 00:02:19.032
+true.
+
+67
+00:02:19.525 --> 00:02:21.529
+One: both are matched to the same
+
+68
+00:02:21.529 --> 00:02:23.637
+recording in the Million Song Dataset,
+
+69
+00:02:23.637 --> 00:02:25.847
+with Raffel's match confidence of at least
+
+70
+00:02:25.847 --> 00:02:26.207
+a half.
+
+71
+00:02:26.515 --> 00:02:28.828
+Two: the paths the file was found under
+
+72
+00:02:28.828 --> 00:02:30.833
+name the same artist and title, once
+
+73
+00:02:30.833 --> 00:02:32.837
+spelling, order and take numbers are
+
+74
+00:02:32.837 --> 00:02:35.202
+tidied, so Joel comma Billy, The Stranger
+
+75
+00:02:35.202 --> 00:02:37.463
+two, is the same key as Billy Joel, The
+
+76
+00:02:37.463 --> 00:02:37.926
+Stranger.
+
+77
+00:02:38.234 --> 00:02:40.804
+Three: the same title on its own, but only
+
+78
+00:02:40.804 --> 00:02:42.757
+if it's at least ten letters long and
+
+79
+00:02:42.757 --> 00:02:45.070
+shared by at most twenty files, so a title
+
+80
+00:02:45.070 --> 00:02:47.126
+like Yesterday can't swallow the corpus.
+
+81
+00:02:48.961 --> 00:02:50.779
+Here's why the rule needs care.
+
+82
+00:02:51.131 --> 00:02:53.067
+File A and file B match the same
+
+83
+00:02:53.067 --> 00:02:53.653
+recording.
+
+84
+00:02:54.005 --> 00:02:56.234
+File B and file C share an artist and
+
+85
+00:02:56.234 --> 00:02:56.586
+title.
+
+86
+00:02:56.938 --> 00:02:58.639
+A and C share nothing at all.
+
+87
+00:02:59.209 --> 00:03:00.458
+Union-find joins them.
+
+88
+00:03:00.798 --> 00:03:03.181
+Every file keeps a pointer to a parent,
+
+89
+00:03:03.181 --> 00:03:05.281
+and at the start each file points to
+
+90
+00:03:05.281 --> 00:03:07.153
+itself: three groups of one.
+
+91
+00:03:07.494 --> 00:03:09.820
+Find follows the pointers up to the file
+
+92
+00:03:09.820 --> 00:03:11.579
+at the top, the group's root.
+
+93
+00:03:12.173 --> 00:03:14.265
+Union of A and B finds both roots and
+
+94
+00:03:14.265 --> 00:03:16.797
+points one at the other: B now points to
+
+95
+00:03:16.797 --> 00:03:16.907
+A.
+
+96
+00:03:17.238 --> 00:03:19.660
+Union of B and C finds B's root, which is
+
+97
+00:03:19.660 --> 00:03:21.091
+A, so C points to A too.
+
+98
+00:03:21.422 --> 00:03:23.734
+Now find of C and find of A give the same
+
+99
+00:03:23.734 --> 00:03:24.009
+root.
+
+100
+00:03:24.339 --> 00:03:26.486
+One group, even though A and C never
+
+101
+00:03:26.486 --> 00:03:27.532
+matched each other.
+
+102
+00:03:27.992 --> 00:03:29.908
+And the whole group is dealt to one side,
+
+103
+00:03:29.908 --> 00:03:30.431
+never split.
+
+104
+00:03:33.840 --> 00:03:35.958
+The groups are put in order by a hash of
+
+105
+00:03:35.958 --> 00:03:38.438
+their name: a big number that looks random
+
+106
+00:03:38.438 --> 00:03:40.763
+but is the same every time, so the shuffle
+
+107
+00:03:40.763 --> 00:03:41.589
+repeats exactly.
+
+108
+00:03:41.899 --> 00:03:44.069
+Then each group in turn goes to whichever
+
+109
+00:03:44.069 --> 00:03:46.497
+side is furthest below its target: ninety
+
+110
+00:03:46.497 --> 00:03:48.667
+percent of the files for training, five
+
+111
+00:03:48.667 --> 00:03:50.320
+for validation, five for test.
+
+112
+00:03:50.726 --> 00:03:52.949
+Say training is just over its share and
+
+113
+00:03:52.949 --> 00:03:54.782
+validation is the furthest under.
+
+114
+00:03:55.116 --> 00:03:57.283
+Then the next group goes to validation.
+
+115
+00:03:57.786 --> 00:03:58.556
+One exception.
+
+116
+00:03:58.886 --> 00:04:01.031
+Covers and medleys chain popular songs
+
+117
+00:04:01.031 --> 00:04:03.231
+together into one group of six thousand
+
+118
+00:04:03.231 --> 00:04:05.706
+nine hundred and fifty-six files, thirteen
+
+119
+00:04:05.706 --> 00:04:06.916
+percent of the corpus.
+
+120
+00:04:07.246 --> 00:04:09.171
+Any group over one percent goes to
+
+121
+00:04:09.171 --> 00:04:09.666
+training.
+
+122
+00:04:09.996 --> 00:04:12.251
+No leak, but validation and test never
+
+123
+00:04:12.251 --> 00:04:13.956
+contain the most-covered songs.
+
+124
+00:04:15.395 --> 00:04:16.283
+The final counts.
+
+125
+00:04:16.597 --> 00:04:19.002
+Corpus version two: forty-seven thousand
+
+126
+00:04:19.002 --> 00:04:20.883
+five hundred and forty-two songs in
+
+127
+00:04:20.883 --> 00:04:23.236
+training, and two thousand six hundred and
+
+128
+00:04:23.236 --> 00:04:25.222
+forty-one each in validation and test.
+
+129
+00:04:25.536 --> 00:04:27.940
+Version three: forty-seven thousand five
+
+130
+00:04:27.940 --> 00:04:30.293
+hundred and nineteen, and two thousand six
+
+131
+00:04:30.293 --> 00:04:31.861
+hundred and thirty-seven each.
+
+132
+00:04:32.279 --> 00:04:34.675
+Version three was dealt to honour version
+
+133
+00:04:34.675 --> 00:04:37.014
+two's sides, so the fifty-two thousand
+
+134
+00:04:37.014 --> 00:04:39.353
+five hundred and fifty-two songs in both
+
+135
+00:04:39.353 --> 00:04:41.007
+sit on the same side in both.
+
+136
+00:04:41.571 --> 00:04:44.278
+And the split checks itself: no recording,
+
+137
+00:04:44.278 --> 00:04:46.498
+no artist and title key, no long title
+
+138
+00:04:46.498 --> 00:04:47.256
+crosses sides.
+
+139
+00:04:47.581 --> 00:04:48.989
+But that audit can't fail.
+
+140
+00:04:49.314 --> 00:04:51.372
+It tests the same three relations the
+
+141
+00:04:51.372 --> 00:04:53.592
+groups were built from, and groups are
+
+142
+00:04:53.592 --> 00:04:54.242
+dealt whole.
+
+143
+00:04:54.567 --> 00:04:56.895
+So zero was guaranteed before any data was
+
+144
+00:04:56.895 --> 00:04:57.166
+read.
+
+145
+00:04:58.686 --> 00:05:01.047
+Here's a real pair from version three.
+
+146
+00:05:01.420 --> 00:05:03.595
+A validation file found as w slash
+
+147
+00:05:03.595 --> 00:05:06.329
+wanderer three, and a training file found
+
+148
+00:05:06.329 --> 00:05:08.193
+as Status Quo, The Wanderer.
+
+149
+00:05:08.714 --> 00:05:10.926
+Neither matches a recording, and only one
+
+150
+00:05:10.926 --> 00:05:11.630
+has an artist.
+
+151
+00:05:11.931 --> 00:05:14.193
+Their titles agree, but wanderer has eight
+
+152
+00:05:14.193 --> 00:05:16.154
+letters, and a title alone needs ten.
+
+153
+00:05:16.455 --> 00:05:17.762
+So no relation joins them.
+
+154
+00:05:18.064 --> 00:05:20.225
+The split put one in validation and one in
+
+155
+00:05:20.225 --> 00:05:20.678
+training.
+
+156
+00:05:20.979 --> 00:05:22.136
+Are they the same song?
+
+157
+00:05:22.437 --> 00:05:23.644
+The split can't tell us.
+
+158
+00:05:23.945 --> 00:05:25.302
+We need a different signal.
+
+159
+00:05:28.670 --> 00:05:30.916
+The new signal is the melody, taken from
+
+160
+00:05:30.916 --> 00:05:31.491
+the guitar.
+
+161
+00:05:31.804 --> 00:05:34.103
+At each moment a guitar note starts, keep
+
+162
+00:05:34.103 --> 00:05:36.402
+the highest pitch: that's the top line.
+
+163
+00:05:36.715 --> 00:05:38.857
+Here are the validation file's first ten
+
+164
+00:05:38.857 --> 00:05:40.477
+notes, as MIDI pitch numbers.
+
+165
+00:05:41.032 --> 00:05:43.281
+Now subtract each pitch from the next.
+
+166
+00:05:43.636 --> 00:05:46.417
+p k is the k-th pitch; d k is the step to
+
+167
+00:05:46.417 --> 00:05:48.134
+the next one, the interval.
+
+168
+00:05:48.489 --> 00:05:51.152
+Zero, up seventeen, down fifteen, down
+
+169
+00:05:51.152 --> 00:05:52.217
+nine, and so on.
+
+170
+00:05:52.745 --> 00:05:53.497
+Why intervals?
+
+171
+00:05:53.820 --> 00:05:56.076
+Play the whole song five semitones higher
+
+172
+00:05:56.076 --> 00:05:58.063
+and every pitch changes, but every
+
+173
+00:05:58.063 --> 00:05:59.352
+interval stays the same.
+
+174
+00:05:59.675 --> 00:06:01.823
+So a transcription in another key still
+
+175
+00:06:01.823 --> 00:06:02.253
+matches.
+
+176
+00:06:03.488 --> 00:06:05.913
+Take six intervals in a row: a 6-gram.
+
+177
+00:06:06.251 --> 00:06:07.886
+Each 6-gram is hashed to one
+
+178
+00:06:07.886 --> 00:06:09.127
+sixty-four-bit number.
+
+179
+00:06:09.465 --> 00:06:11.439
+This song's first one becomes this.
+
+180
+00:06:11.777 --> 00:06:14.202
+The same six steps give the same number in
+
+181
+00:06:14.202 --> 00:06:14.710
+any song.
+
+182
+00:06:16.169 --> 00:06:17.733
+A whole song gives a lot of these.
+
+183
+00:06:18.009 --> 00:06:19.804
+The validation file's top line has one
+
+184
+00:06:19.804 --> 00:06:21.875
+thousand six hundred and forty-five notes,
+
+185
+00:06:21.875 --> 00:06:23.347
+so one thousand six hundred and
+
+186
+00:06:23.347 --> 00:06:25.372
+thirty-nine 6-grams, and one thousand and
+
+187
+00:06:25.372 --> 00:06:27.166
+seventy-five different hash numbers,
+
+188
+00:06:27.166 --> 00:06:28.133
+because riffs repeat.
+
+189
+00:06:28.409 --> 00:06:30.249
+Keep only the two hundred and fifty-six
+
+190
+00:06:30.249 --> 00:06:30.663
+smallest.
+
+191
+00:06:30.939 --> 00:06:33.194
+That's the sketch, Phi of f: a fixed-size
+
+192
+00:06:33.194 --> 00:06:34.483
+summary of the whole melody.
+
+193
+00:06:34.878 --> 00:06:35.581
+Why the smallest?
+
+194
+00:06:35.830 --> 00:06:37.691
+Every song uses the same hash, so a shared
+
+195
+00:06:37.691 --> 00:06:39.139
+figure has the same number in both.
+
+196
+00:06:39.387 --> 00:06:41.208
+If two songs share most of their 6-grams,
+
+197
+00:06:41.208 --> 00:06:42.904
+their two hundred and fifty-six smallest
+
+198
+00:06:42.904 --> 00:06:44.269
+numbers are mostly the same ones.
+
+199
+00:06:44.517 --> 00:06:46.255
+So comparing two small sketches stands in
+
+200
+00:06:46.255 --> 00:06:47.496
+for comparing the whole songs.
+
+201
+00:06:47.744 --> 00:06:49.440
+For our pair, the sketches give nought
+
+202
+00:06:49.440 --> 00:06:51.385
+point eight three five; all their 6-grams
+
+203
+00:06:51.385 --> 00:06:52.874
+give nought point eight three three.
+
+204
+00:06:53.122 --> 00:06:54.860
+Close enough, at a fraction of the cost.
+
+205
+00:06:58.097 --> 00:07:00.485
+To compare two sketches we use the Jaccard
+
+206
+00:07:00.485 --> 00:07:03.207
+similarity: the number of things in both,
+
+207
+00:07:03.207 --> 00:07:04.651
+over the number in either.
+
+208
+00:07:04.984 --> 00:07:07.484
+One for identical sets, zero for sets with
+
+209
+00:07:07.484 --> 00:07:08.483
+nothing in common.
+
+210
+00:07:08.955 --> 00:07:09.788
+Two made-up sets.
+
+211
+00:07:10.082 --> 00:07:11.895
+A is three, five, eight and nine.
+
+212
+00:07:12.189 --> 00:07:14.541
+B is five, eight, nine, twelve and twenty.
+
+213
+00:07:14.971 --> 00:07:16.624
+In both: five, eight and nine.
+
+214
+00:07:16.892 --> 00:07:17.160
+Three.
+
+215
+00:07:17.428 --> 00:07:19.661
+In either: three, five, eight, nine,
+
+216
+00:07:19.661 --> 00:07:20.421
+twelve, twenty.
+
+217
+00:07:20.689 --> 00:07:20.867
+Six.
+
+218
+00:07:21.135 --> 00:07:22.743
+So J is three over six: a half.
+
+219
+00:07:24.153 --> 00:07:26.383
+Dividing by the union matters: a long song
+
+220
+00:07:26.383 --> 00:07:28.380
+shares more figures by chance, so J asks
+
+221
+00:07:28.380 --> 00:07:30.237
+what fraction is shared, not how many.
+
+222
+00:07:30.516 --> 00:07:31.491
+Back to The Wanderer.
+
+223
+00:07:31.770 --> 00:07:33.488
+Of the two sketches' two hundred and
+
+224
+00:07:33.488 --> 00:07:35.253
+seventy-nine different numbers, two
+
+225
+00:07:35.253 --> 00:07:37.482
+hundred and thirty-three are in both: J is
+
+226
+00:07:37.482 --> 00:07:38.876
+nought point eight three five.
+
+227
+00:07:39.154 --> 00:07:41.151
+Against an unrelated training song, Long
+
+228
+00:07:41.151 --> 00:07:42.545
+Tall Sally, they share none.
+
+229
+00:07:42.947 --> 00:07:45.148
+So a held-out song and its best-matching
+
+230
+00:07:45.148 --> 00:07:47.241
+training song are called twins if they
+
+231
+00:07:47.241 --> 00:07:49.603
+share at least thirty-two sketch numbers,
+
+232
+00:07:49.603 --> 00:07:51.589
+because strangers can share a common
+
+233
+00:07:51.589 --> 00:07:54.005
+figure like a scale run, and J is at least
+
+234
+00:07:54.005 --> 00:07:56.421
+a half, so most of the melody is shared,
+
+235
+00:07:56.421 --> 00:07:57.440
+not a corner of it.
+
+236
+00:07:57.763 --> 00:07:59.105
+The Wanderer passes both.
+
+237
+00:08:02.523 --> 00:08:04.249
+Before trusting a detector, test it on
+
+238
+00:08:04.249 --> 00:08:05.596
+cases where you know the answer.
+
+239
+00:08:05.848 --> 00:08:07.826
+Four thousand random pairs of songs: none
+
+240
+00:08:07.826 --> 00:08:08.710
+passes the twin rule.
+
+241
+00:08:08.963 --> 00:08:09.636
+No false alarms.
+
+242
+00:08:09.889 --> 00:08:11.698
+Twenty-five twins it found were checked by
+
+243
+00:08:11.698 --> 00:08:13.550
+hand: twenty-four really were the same
+
+244
+00:08:13.550 --> 00:08:15.318
+song, things like Hey Joe and Money for
+
+245
+00:08:15.318 --> 00:08:15.655
+Nothing.
+
+246
+00:08:15.907 --> 00:08:17.801
+But on pairs we know are one song, because
+
+247
+00:08:17.801 --> 00:08:19.569
+they match the same recording, it finds
+
+248
+00:08:19.569 --> 00:08:21.337
+only about fifteen percent, measured at
+
+249
+00:08:21.337 --> 00:08:22.431
+thirty-two shared numbers.
+
+250
+00:08:22.759 --> 00:08:24.640
+So the detector is strict but nearly
+
+251
+00:08:24.640 --> 00:08:26.877
+blind: what it finds is real, and it
+
+252
+00:08:26.877 --> 00:08:27.894
+misses most of them.
+
+253
+00:08:29.368 --> 00:08:31.503
+Now search every held-out file against
+
+254
+00:08:31.503 --> 00:08:31.996
+training.
+
+255
+00:08:32.324 --> 00:08:34.350
+The grey bars are the old file-level
+
+256
+00:08:34.350 --> 00:08:36.485
+split, the ochre ones the song-level
+
+257
+00:08:36.485 --> 00:08:38.894
+split, from looser thresholds to stricter.
+
+258
+00:08:39.223 --> 00:08:41.467
+With at least eight shared numbers:
+
+259
+00:08:41.467 --> 00:08:43.767
+thirty-six point seven percent before the
+
+260
+00:08:43.767 --> 00:08:45.793
+fix, twenty-nine point seven after.
+
+261
+00:08:46.121 --> 00:08:48.202
+At sixteen, twenty-two then fifteen.
+
+262
+00:08:48.530 --> 00:08:51.158
+At thirty-two, sixteen then ten: the fix
+
+263
+00:08:51.158 --> 00:08:52.472
+cut it by about a third.
+
+264
+00:08:52.800 --> 00:08:55.428
+And at the full twin rule: five point nine
+
+265
+00:08:55.428 --> 00:08:57.837
+percent, three hundred and twelve of five
+
+266
+00:08:57.837 --> 00:08:59.808
+thousand two hundred and eighty-two
+
+267
+00:08:59.808 --> 00:09:00.630
+held-out files.
+
+268
+00:09:02.283 --> 00:09:04.588
+The detector finds only about one real
+
+269
+00:09:04.588 --> 00:09:07.187
+twin in seven, so five point nine percent
+
+270
+00:09:07.187 --> 00:09:08.192
+is a lower bound.
+
+271
+00:09:08.546 --> 00:09:11.028
+The true leak is higher, by how much we
+
+272
+00:09:11.028 --> 00:09:11.619
+can't say.
+
+273
+00:09:12.121 --> 00:09:14.304
+On the September genre-labelled scoring
+
+274
+00:09:14.304 --> 00:09:17.032
+set, the reported leak is lower: two point
+
+275
+00:09:17.032 --> 00:09:17.687
+two percent.
+
+276
+00:09:18.014 --> 00:09:19.597
+Genre scoring now uses XMIDI.
+
+277
+00:09:19.925 --> 00:09:20.961
+That's no accident.
+
+278
+00:09:21.289 --> 00:09:23.363
+A song gets a genre label through its
+
+279
+00:09:23.363 --> 00:09:25.764
+recording match, and a recording match is
+
+280
+00:09:25.764 --> 00:09:27.947
+exactly what relation one already joins.
+
+281
+00:09:28.274 --> 00:09:30.293
+Lesson two point five has the labels.
+
+282
+00:09:30.743 --> 00:09:32.936
+So the residual is stated beside every
+
+283
+00:09:32.936 --> 00:09:33.835
+held-out result.
+
+284
+00:09:34.172 --> 00:09:36.983
+And one naming note: this is data leakage,
+
+285
+00:09:36.983 --> 00:09:39.231
+not the leak score of lesson five point
+
+286
+00:09:39.231 --> 00:09:39.456
+six.
+
+287
+00:09:42.997 --> 00:09:44.585
+The first detector was written during a
+
+288
+00:09:44.585 --> 00:09:46.173
+review pass, and its script was never
+
+289
+00:09:46.173 --> 00:09:46.570
+committed.
+
+290
+00:09:46.809 --> 00:09:48.119
+Only the recipe was written down.
+
+291
+00:09:48.357 --> 00:09:50.065
+On the twelfth of September it was rebuilt
+
+292
+00:09:50.065 --> 00:09:50.740
+from that recipe.
+
+293
+00:09:50.978 --> 00:09:52.487
+The strict rule found two hundred and
+
+294
+00:09:52.487 --> 00:09:54.115
+fourteen of the two thousand six hundred
+
+295
+00:09:54.115 --> 00:09:55.743
+and thirty-seven validation songs with a
+
+296
+00:09:55.743 --> 00:09:57.490
+training twin: eight point one percent.
+
+297
+00:09:57.728 --> 00:09:59.396
+On validation alone, the first detector
+
+298
+00:09:59.396 --> 00:10:01.103
+had found a hundred and sixty-six, about
+
+299
+00:10:01.103 --> 00:10:01.738
+six point three.
+
+300
+00:10:02.111 --> 00:10:03.407
+Is that the same measurement?
+
+301
+00:10:03.675 --> 00:10:03.809
+No.
+
+302
+00:10:04.077 --> 00:10:05.908
+At the loose threshold the rebuild flags
+
+303
+00:10:05.908 --> 00:10:07.828
+seventy-nine and a half percent, against
+
+304
+00:10:07.828 --> 00:10:09.704
+twenty-nine point seven, and passes two
+
+305
+00:10:09.704 --> 00:10:11.625
+point two percent of random pairs, about
+
+306
+00:10:11.625 --> 00:10:12.518
+ten times the first.
+
+307
+00:10:12.786 --> 00:10:14.618
+The recipe left out how the top line and
+
+308
+00:10:14.618 --> 00:10:16.493
+the hash were made, so the rebuild is a
+
+309
+00:10:16.493 --> 00:10:17.253
+different sketch.
+
+310
+00:10:17.521 --> 00:10:19.531
+At the strict rule, both pass none of four
+
+311
+00:10:19.531 --> 00:10:20.513
+thousand random pairs.
+
+312
+00:10:21.595 --> 00:10:23.827
+Even the rebuild wandered at first: two
+
+313
+00:10:23.827 --> 00:10:26.060
+hundred and fourteen, then two hundred and
+
+314
+00:10:26.060 --> 00:10:27.995
+thirteen, until its tie-breaking was
+
+315
+00:10:27.995 --> 00:10:28.293
+fixed.
+
+316
+00:10:28.591 --> 00:10:30.824
+The lesson: a number is only as good as
+
+317
+00:10:30.824 --> 00:10:32.263
+the script you can run again.
+
+318
+00:10:32.560 --> 00:10:34.297
+The committed script is the number.
+
+319
+00:10:35.946 --> 00:10:38.190
+So: a file split of Lakh leaked two in
+
+320
+00:10:38.190 --> 00:10:39.924
+three identifiable held-out files.
+
+321
+00:10:40.230 --> 00:10:42.219
+Grouping files by song with union-find
+
+322
+00:10:42.219 --> 00:10:44.105
+closes the links we can see, and a
+
+323
+00:10:44.105 --> 00:10:46.247
+fingerprint the split never used measures
+
+324
+00:10:46.247 --> 00:10:48.440
+what's left: at least five point nine
+
+325
+00:10:48.440 --> 00:10:50.633
+percent by the first detector, and eight
+
+326
+00:10:50.633 --> 00:10:52.928
+point one percent by the committed script,
+
+327
+00:10:52.928 --> 00:10:55.070
+on the version three validation songs the
+
+328
+00:10:55.070 --> 00:10:56.548
+drummers are checked against.
+
+329
+00:10:56.854 --> 00:10:58.129
+Next, the genre labels.
+
+330
+00:10:58.435 --> 00:11:00.373
+And when XMIDI is split in lesson two
+
+331
+00:11:00.373 --> 00:11:02.158
+point seven, it reuses this same
+
+332
+00:11:02.158 --> 00:11:02.770
+fingerprint.
+

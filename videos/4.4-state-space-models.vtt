@@ -1,0 +1,1026 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.356
+Lesson four point four.
+
+2
+00:00:01.700 --> 00:00:04.447
+State-space models: the maths under S4D,
+
+3
+00:00:04.447 --> 00:00:06.107
+built up from a leaky bucket.
+
+4
+00:00:10.063 --> 00:00:12.244
+Start with a bucket of water with a small
+
+5
+00:00:12.244 --> 00:00:13.230
+hole in the bottom.
+
+6
+00:00:13.542 --> 00:00:16.034
+Water pours in from a tap: call the inflow
+
+7
+00:00:16.034 --> 00:00:17.280
+u, in litres a second.
+
+8
+00:00:17.591 --> 00:00:19.616
+Water leaks out of the hole, and the
+
+9
+00:00:19.616 --> 00:00:21.952
+fuller the bucket, the harder it pushes,
+
+10
+00:00:21.952 --> 00:00:23.665
+so the leak grows with the level.
+
+11
+00:00:23.977 --> 00:00:26.209
+Here, at any moment, it leaks half the
+
+12
+00:00:26.209 --> 00:00:28.494
+level's number in litres a second: two
+
+13
+00:00:28.494 --> 00:00:30.363
+litres in, one litre a second out.
+
+14
+00:00:30.674 --> 00:00:32.854
+The level, call it x, is the bucket's
+
+15
+00:00:32.854 --> 00:00:35.295
+state: one number that sums up everything
+
+16
+00:00:35.295 --> 00:00:37.475
+poured in so far, with the recent pours
+
+17
+00:00:37.475 --> 00:00:38.202
+counting most.
+
+18
+00:00:38.633 --> 00:00:39.783
+Write it as an equation.
+
+19
+00:00:40.070 --> 00:00:42.322
+On the left, x prime of t: how fast the
+
+20
+00:00:42.322 --> 00:00:44.383
+level is changing right now, in litres a
+
+21
+00:00:44.383 --> 00:00:44.718
+second.
+
+22
+00:00:45.006 --> 00:00:46.587
+The leak: a times the level.
+
+23
+00:00:46.874 --> 00:00:48.168
+The inflow: b times u.
+
+24
+00:00:48.456 --> 00:00:50.468
+Our bucket has a equal to minus a half,
+
+25
+00:00:50.468 --> 00:00:52.481
+the minus sign because the leak drains,
+
+26
+00:00:52.481 --> 00:00:54.637
+and b equal to one: all the tap's water
+
+27
+00:00:54.637 --> 00:00:55.595
+lands in the bucket.
+
+28
+00:00:56.083 --> 00:00:57.175
+Check it with a number.
+
+29
+00:00:57.460 --> 00:00:59.690
+Two litres in the bucket and the tap off:
+
+30
+00:00:59.690 --> 00:01:01.731
+x prime is minus a half times two, minus
+
+31
+00:01:01.731 --> 00:01:01.921
+one.
+
+32
+00:01:02.205 --> 00:01:03.914
+The level is falling at one litre a
+
+33
+00:01:03.914 --> 00:01:04.246
+second.
+
+34
+00:01:04.531 --> 00:01:06.762
+And time here runs smoothly: t can be any
+
+35
+00:01:06.762 --> 00:01:08.755
+number of seconds, not only whole steps.
+
+36
+00:01:09.040 --> 00:01:11.270
+Our drums live on slots; turning one into
+
+37
+00:01:11.270 --> 00:01:12.979
+the other is lesson four point five.
+
+38
+00:01:16.353 --> 00:01:18.720
+Turn the tap off and let the bucket drain
+
+39
+00:01:18.720 --> 00:01:19.622
+from two litres.
+
+40
+00:01:19.960 --> 00:01:22.553
+The level follows a curve: x of t equals
+
+41
+00:01:22.553 --> 00:01:24.469
+two times e to the minus a half t.
+
+42
+00:01:24.807 --> 00:01:26.949
+After one second, one point two one
+
+43
+00:01:26.949 --> 00:01:27.343
+litres.
+
+44
+00:01:27.681 --> 00:01:30.105
+After two seconds, zero point seven four.
+
+45
+00:01:30.443 --> 00:01:32.415
+After four, zero point two seven.
+
+46
+00:01:32.897 --> 00:01:33.156
+Why e?
+
+47
+00:01:33.414 --> 00:01:35.183
+The level's slope is always minus a half
+
+48
+00:01:35.183 --> 00:01:37.039
+times the level itself, and e to the a t
+
+49
+00:01:37.039 --> 00:01:38.592
+is the curve whose slope is a times
+
+50
+00:01:38.592 --> 00:01:38.894
+itself.
+
+51
+00:01:39.153 --> 00:01:41.051
+Look at two seconds: the level is zero
+
+52
+00:01:41.051 --> 00:01:42.864
+point seven four, which is thirty-seven
+
+53
+00:01:42.864 --> 00:01:43.511
+percent of two.
+
+54
+00:01:43.770 --> 00:01:45.625
+Every two seconds it falls to thirty-seven
+
+55
+00:01:45.625 --> 00:01:47.351
+percent, one over e, of what it was.
+
+56
+00:01:47.610 --> 00:01:49.594
+Two seconds is one over a half: the time
+
+57
+00:01:49.594 --> 00:01:49.983
+constant.
+
+58
+00:01:50.242 --> 00:01:52.097
+Lesson four point three used the same word
+
+59
+00:01:52.097 --> 00:01:52.658
+for the LSTM.
+
+60
+00:01:53.119 --> 00:01:55.172
+Leave the tap running at one litre a
+
+61
+00:01:55.172 --> 00:01:57.002
+second instead, starting empty.
+
+62
+00:01:57.335 --> 00:01:59.553
+The level climbs until the leak matches
+
+63
+00:01:59.553 --> 00:02:02.105
+the inflow: half of x equals one, so x
+
+64
+00:02:02.105 --> 00:02:02.937
+settles at two.
+
+65
+00:02:03.594 --> 00:02:05.937
+Now picture a cup poured in for every note
+
+66
+00:02:05.937 --> 00:02:07.027
+the guitarist plays.
+
+67
+00:02:07.354 --> 00:02:09.424
+The level tells you how much has been
+
+68
+00:02:09.424 --> 00:02:11.712
+played recently, and the last couple of
+
+69
+00:02:11.712 --> 00:02:12.748
+seconds count most.
+
+70
+00:02:13.075 --> 00:02:15.200
+That is the kind of memory this lesson
+
+71
+00:02:15.200 --> 00:02:15.581
+builds.
+
+72
+00:02:15.908 --> 00:02:18.251
+S4D's real inputs are not notes, as four
+
+73
+00:02:18.251 --> 00:02:19.177
+point five shows.
+
+74
+00:02:22.507 --> 00:02:23.946
+One number holds one time scale.
+
+75
+00:02:24.216 --> 00:02:25.836
+Take two buckets under the same tap.
+
+76
+00:02:26.106 --> 00:02:28.355
+One with a big hole: a equals minus two, a
+
+77
+00:02:28.355 --> 00:02:29.750
+time constant of half a second.
+
+78
+00:02:30.020 --> 00:02:31.999
+One with a tiny hole: a equals minus a
+
+79
+00:02:31.999 --> 00:02:33.799
+tenth, a time constant of ten seconds.
+
+80
+00:02:34.069 --> 00:02:35.823
+After one second the fast one has kept
+
+81
+00:02:35.823 --> 00:02:37.623
+fourteen percent, the slow one ninety
+
+82
+00:02:37.623 --> 00:02:37.983
+percent.
+
+83
+00:02:38.252 --> 00:02:40.277
+One remembers the last beat, the other the
+
+84
+00:02:40.277 --> 00:02:40.907
+last few bars.
+
+85
+00:02:41.300 --> 00:02:43.556
+Stack the two levels into a column and
+
+86
+00:02:43.556 --> 00:02:45.234
+write both equations at once.
+
+87
+00:02:45.581 --> 00:02:47.895
+The leak rates sit on the diagonal of a
+
+88
+00:02:47.895 --> 00:02:49.978
+square table of numbers, a matrix.
+
+89
+00:02:50.325 --> 00:02:52.524
+The column of ones says the tap feeds
+
+90
+00:02:52.524 --> 00:02:52.813
+both.
+
+91
+00:02:53.889 --> 00:02:55.870
+In general: x prime equals A x plus B u.
+
+92
+00:02:56.134 --> 00:02:58.026
+x is now N numbers, a column, N by one.
+
+93
+00:02:58.290 --> 00:02:59.699
+A is the state matrix, N by N.
+
+94
+00:02:59.963 --> 00:03:01.679
+On its diagonal, how fast each state
+
+95
+00:03:01.679 --> 00:03:03.703
+leaks; off the diagonal, how one state
+
+96
+00:03:03.703 --> 00:03:04.540
+pours into another.
+
+97
+00:03:04.804 --> 00:03:05.684
+Here those are zero.
+
+98
+00:03:05.948 --> 00:03:08.104
+B is the input matrix, N by one: how much
+
+99
+00:03:08.104 --> 00:03:09.601
+of the input goes into each state.
+
+100
+00:03:09.865 --> 00:03:11.801
+And u, the input, is one number at each
+
+101
+00:03:11.801 --> 00:03:12.725
+moment, one by one.
+
+102
+00:03:16.040 --> 00:03:17.330
+The state is kept inside.
+
+103
+00:03:17.639 --> 00:03:18.929
+To use it, read it out.
+
+104
+00:03:19.239 --> 00:03:21.354
+y, the output, is one number at each
+
+105
+00:03:21.354 --> 00:03:21.715
+moment.
+
+106
+00:03:22.025 --> 00:03:24.449
+C, the output matrix, one by N, says how
+
+107
+00:03:24.449 --> 00:03:25.842
+much of each state to read.
+
+108
+00:03:26.152 --> 00:03:28.525
+D is a skip: a single number that passes
+
+109
+00:03:28.525 --> 00:03:30.640
+the input straight through to the output.
+
+110
+00:03:31.090 --> 00:03:33.517
+For the two buckets: read the total, C
+
+111
+00:03:33.517 --> 00:03:35.891
+equals one, one, and no skip, D equals
+
+112
+00:03:35.891 --> 00:03:36.155
+zero.
+
+113
+00:03:36.472 --> 00:03:37.843
+y is the two levels added.
+
+114
+00:03:38.322 --> 00:03:40.449
+That's the whole thing: a state-space
+
+115
+00:03:40.449 --> 00:03:40.745
+model.
+
+116
+00:03:41.042 --> 00:03:43.218
+A state that sums up the past, a rule for
+
+117
+00:03:43.218 --> 00:03:45.395
+how it changes, A and B, and a rule for
+
+118
+00:03:45.395 --> 00:03:46.681
+reading it out, C and D.
+
+119
+00:03:46.977 --> 00:03:49.351
+It is linear: every term is a fixed number
+
+120
+00:03:49.351 --> 00:03:50.687
+times a state or the input.
+
+121
+00:03:50.983 --> 00:03:53.061
+Nothing is squashed, as the LSTM's tanh
+
+122
+00:03:53.061 --> 00:03:55.187
+squashes, and nothing is switched on and
+
+123
+00:03:55.187 --> 00:03:55.385
+off.
+
+124
+00:03:56.237 --> 00:03:57.764
+One name to keep straight.
+
+125
+00:03:58.117 --> 00:04:00.350
+Textbooks call the state x, as here.
+
+126
+00:04:00.703 --> 00:04:03.229
+In our code, x is the slot's five inputs.
+
+127
+00:04:03.582 --> 00:04:06.050
+The code calls the S4D state s, so from
+
+128
+00:04:06.050 --> 00:04:08.224
+four point five on, the state is s.
+
+129
+00:04:11.630 --> 00:04:13.733
+Now a different system: a mass on a
+
+130
+00:04:13.733 --> 00:04:16.093
+spring, with a damper, like a car's shock
+
+131
+00:04:16.093 --> 00:04:16.555
+absorber.
+
+132
+00:04:16.863 --> 00:04:19.274
+Pull it and let go: it bounces, and the
+
+133
+00:04:19.274 --> 00:04:20.146
+bounces die away.
+
+134
+00:04:20.454 --> 00:04:23.122
+It needs two states: where the mass is, p,
+
+135
+00:04:23.122 --> 00:04:24.712
+and how fast it is moving, v.
+
+136
+00:04:25.169 --> 00:04:27.258
+Its rules: position changes by the
+
+137
+00:04:27.258 --> 00:04:27.728
+velocity.
+
+138
+00:04:28.041 --> 00:04:30.077
+Velocity changes by the spring pulling
+
+139
+00:04:30.077 --> 00:04:32.531
+back, minus ten point one two times p, the
+
+140
+00:04:32.531 --> 00:04:34.829
+damper braking, minus v, and any push u.
+
+141
+00:04:35.142 --> 00:04:37.074
+As a matrix, A has numbers off the
+
+142
+00:04:37.074 --> 00:04:39.319
+diagonal: the two states push on each
+
+143
+00:04:39.319 --> 00:04:41.616
+other, so neither can be worked out alone.
+
+144
+00:04:42.377 --> 00:04:44.719
+Every matrix like this has a few rates of
+
+145
+00:04:44.719 --> 00:04:47.061
+its own, which say how the whole system
+
+146
+00:04:47.061 --> 00:04:47.507
+behaves.
+
+147
+00:04:47.841 --> 00:04:49.960
+For this spring they are not ordinary
+
+148
+00:04:49.960 --> 00:04:52.525
+numbers but complex numbers: points on a
+
+149
+00:04:52.525 --> 00:04:54.867
+plane, so many across and so many up,
+
+150
+00:04:54.867 --> 00:04:57.153
+written a plus b i, where i times i is
+
+151
+00:04:57.153 --> 00:04:57.711
+minus one.
+
+152
+00:04:58.046 --> 00:05:00.443
+This A's two rates are minus a half plus i
+
+153
+00:05:00.443 --> 00:05:02.339
+pi, and minus a half minus i pi.
+
+154
+00:05:02.674 --> 00:05:05.239
+The across part, minus a half, is a decay
+
+155
+00:05:05.239 --> 00:05:06.967
+rate, like the bucket's leak.
+
+156
+00:05:07.302 --> 00:05:10.146
+The up part, pi, is a frequency: how fast
+
+157
+00:05:10.146 --> 00:05:12.711
+it swings, in radians a second, where one
+
+158
+00:05:12.711 --> 00:05:14.272
+full turn is two pi radians.
+
+159
+00:05:15.131 --> 00:05:16.250
+Here is the useful part.
+
+160
+00:05:16.529 --> 00:05:18.254
+Measure the system along its own two
+
+161
+00:05:18.254 --> 00:05:19.886
+directions instead of position and
+
+162
+00:05:19.886 --> 00:05:21.890
+velocity, and A becomes diagonal, with
+
+163
+00:05:21.890 --> 00:05:23.382
+those two rates on the diagonal.
+
+164
+00:05:23.662 --> 00:05:25.713
+Two states again, each on its own, each
+
+165
+00:05:25.713 --> 00:05:27.624
+obeying x prime equals a x, now with a
+
+166
+00:05:27.624 --> 00:05:28.091
+complex a.
+
+167
+00:05:28.370 --> 00:05:30.422
+The two are mirror images, a plus b i and
+
+168
+00:05:30.422 --> 00:05:32.519
+a minus b i, which is why S4D keeps one of
+
+169
+00:05:32.519 --> 00:05:34.291
+each pair, as four point five shows.
+
+170
+00:05:37.563 --> 00:05:39.866
+Take one of those states alone: x prime
+
+171
+00:05:39.866 --> 00:05:42.065
+equals a x, with a equal to minus a half
+
+172
+00:05:42.065 --> 00:05:42.577
+plus i pi.
+
+173
+00:05:42.884 --> 00:05:45.186
+The answer has the bucket's shape: e to
+
+174
+00:05:45.186 --> 00:05:45.595
+the a t.
+
+175
+00:05:45.902 --> 00:05:47.079
+Split the power in two.
+
+176
+00:05:47.386 --> 00:05:49.433
+e to the minus a half t is the bucket's
+
+177
+00:05:49.433 --> 00:05:50.916
+decay: it sets the size.
+
+178
+00:05:51.223 --> 00:05:53.576
+e to the i pi t is a turn: a point going
+
+179
+00:05:53.576 --> 00:05:55.776
+round a circle, half a turn every second.
+
+180
+00:05:56.187 --> 00:05:58.138
+Together: a point that turns while it
+
+181
+00:05:58.138 --> 00:05:58.500
+shrinks.
+
+182
+00:05:58.772 --> 00:05:59.181
+A spiral.
+
+183
+00:05:59.453 --> 00:06:01.221
+At half a second it has made a quarter
+
+184
+00:06:01.221 --> 00:06:03.398
+turn: straight up, size zero point seven
+
+185
+00:06:03.398 --> 00:06:03.671
+eight.
+
+186
+00:06:03.943 --> 00:06:06.029
+At one second, half a turn: minus zero
+
+187
+00:06:06.029 --> 00:06:07.344
+point six one, on the left.
+
+188
+00:06:07.616 --> 00:06:09.884
+At two seconds, one full turn: back on the
+
+189
+00:06:09.884 --> 00:06:11.471
+right, at zero point three seven.
+
+190
+00:06:11.743 --> 00:06:13.421
+The same thirty-seven percent as the
+
+191
+00:06:13.421 --> 00:06:14.555
+bucket after two seconds.
+
+192
+00:06:14.958 --> 00:06:17.341
+Now watch only the across part, the real
+
+193
+00:06:17.341 --> 00:06:18.671
+part, as time goes on.
+
+194
+00:06:19.003 --> 00:06:21.497
+It swings back and forth and dies away:
+
+195
+00:06:21.497 --> 00:06:22.605
+the spring's bounce.
+
+196
+00:06:22.938 --> 00:06:25.155
+The size shrinks at the decay rate, a
+
+197
+00:06:25.155 --> 00:06:27.759
+half; it swings once every two seconds,
+
+198
+00:06:27.759 --> 00:06:29.256
+set by the frequency, pi.
+
+199
+00:06:30.523 --> 00:06:31.630
+This is not only a spring.
+
+200
+00:06:31.886 --> 00:06:33.631
+S4D starts each of its states at exactly
+
+201
+00:06:33.631 --> 00:06:35.632
+this kind of rate: minus a half plus i pi
+
+202
+00:06:35.632 --> 00:06:37.122
+n, for n from zero to thirty-one.
+
+203
+00:06:37.378 --> 00:06:39.166
+n equals zero has no turn: it is the
+
+204
+00:06:39.166 --> 00:06:39.464
+bucket.
+
+205
+00:06:39.719 --> 00:06:41.422
+n equals one is the spiral you just saw.
+
+206
+00:06:41.678 --> 00:06:43.423
+Higher n turn faster, up to thirty-one
+
+207
+00:06:43.423 --> 00:06:44.019
+times as fast.
+
+208
+00:06:44.275 --> 00:06:46.105
+How far round the spiral one slot of music
+
+209
+00:06:46.105 --> 00:06:48.106
+goes is set by a step size, and that, with
+
+210
+00:06:48.106 --> 00:06:49.980
+where training moved these rates, is four
+
+211
+00:06:49.980 --> 00:06:50.448
+point five.
+
+212
+00:06:53.797 --> 00:06:55.672
+So why build memory from something this
+
+213
+00:06:55.672 --> 00:06:56.000
+simple?
+
+214
+00:06:56.282 --> 00:06:57.782
+Because the forgetting is fixed.
+
+215
+00:06:58.064 --> 00:07:00.174
+Each state shrinks at its own rate, set by
+
+216
+00:07:00.174 --> 00:07:02.377
+A, whatever comes in, and nothing squashes
+
+217
+00:07:02.377 --> 00:07:04.394
+it, so a slow state really does keep its
+
+218
+00:07:04.394 --> 00:07:05.566
+contents for a long time.
+
+219
+00:07:05.847 --> 00:07:07.817
+And because the output is just a weighted
+
+220
+00:07:07.817 --> 00:07:09.739
+sum of past inputs, which is what lets
+
+221
+00:07:09.739 --> 00:07:11.521
+four point five compute every slot at
+
+222
+00:07:11.521 --> 00:07:11.755
+once.
+
+223
+00:07:12.112 --> 00:07:14.195
+But linear alone can't make decisions.
+
+224
+00:07:14.524 --> 00:07:16.662
+Lesson three point one showed that two
+
+225
+00:07:16.662 --> 00:07:19.020
+linear layers in a row are just one linear
+
+226
+00:07:19.020 --> 00:07:19.349
+layer.
+
+227
+00:07:19.678 --> 00:07:21.706
+The same holds here: a stack of
+
+228
+00:07:21.706 --> 00:07:23.899
+state-space models with nothing between
+
+229
+00:07:23.899 --> 00:07:25.873
+them would be one state-space model.
+
+230
+00:07:26.340 --> 00:07:27.656
+So S4D never stacks them bare.
+
+231
+00:07:27.919 --> 00:07:29.717
+Each block runs the state-space layer,
+
+232
+00:07:29.717 --> 00:07:31.516
+then a GELU, the smooth bend from four
+
+233
+00:07:31.516 --> 00:07:33.490
+point seven point ten, then a linear layer
+
+234
+00:07:33.490 --> 00:07:35.332
+with a gate called a GLU, which is four
+
+235
+00:07:35.332 --> 00:07:37.043
+point six's to explain, and adds the
+
+236
+00:07:37.043 --> 00:07:37.701
+result back on.
+
+237
+00:07:37.964 --> 00:07:39.981
+One way to read it: the linear part does
+
+238
+00:07:39.981 --> 00:07:41.999
+the remembering; the GELU's bend and the
+
+239
+00:07:41.999 --> 00:07:43.841
+GLU's gate decide what to do with what is
+
+240
+00:07:43.841 --> 00:07:44.324
+remembered.
+
+241
+00:07:44.587 --> 00:07:45.947
+Four of these blocks make S128.
+
+242
+00:07:47.329 --> 00:07:50.005
+Say it in one breath: a state-space model
+
+243
+00:07:50.005 --> 00:07:52.568
+keeps a state that leaks at fixed rates, x
+
+244
+00:07:52.568 --> 00:07:54.959
+prime equals A x plus B u, and reads it
+
+245
+00:07:54.959 --> 00:07:56.610
+out, y equals C x plus D u.
+
+246
+00:07:56.952 --> 00:07:59.059
+A complex rate is a decay rate and a
+
+247
+00:07:59.059 --> 00:08:00.824
+frequency together, a spiral.
+
+248
+00:08:01.166 --> 00:08:03.671
+The memory is linear, and the deciding is
+
+249
+00:08:03.671 --> 00:08:05.891
+left to the nonlinear blocks around it.
+
+250
+00:08:06.233 --> 00:08:08.454
+This pairs with section one of the SSM
+
+251
+00:08:08.454 --> 00:08:10.731
+research page from the twenty-fourth of
+
+252
+00:08:10.731 --> 00:08:13.237
+September, what an SSM is, next to your
+
+253
+00:08:13.237 --> 00:08:13.521
+LSTM.
+
+254
+00:08:13.863 --> 00:08:16.710
+Next, four point five: S4D, from seconds
+
+255
+00:08:16.710 --> 00:08:19.272
+to slots, and two ways to compute the same
+
+256
+00:08:19.272 --> 00:08:19.728
+numbers.
+

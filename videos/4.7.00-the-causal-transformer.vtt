@@ -1,0 +1,1154 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:02.138
+Part four point seven point zero.
+
+2
+00:00:02.520 --> 00:00:05.826
+Our main model, T128: the whole idea once,
+
+3
+00:00:05.826 --> 00:00:07.479
+before we open each piece.
+
+4
+00:00:11.510 --> 00:00:14.125
+Recap from the contract: every slot, five
+
+5
+00:00:14.125 --> 00:00:16.581
+numbers in, nine logits out, nothing from
+
+6
+00:00:16.581 --> 00:00:18.769
+the future, and a memory of the guitar.
+
+7
+00:00:19.089 --> 00:00:21.224
+So at the slot being decided now, how
+
+8
+00:00:21.224 --> 00:00:23.466
+should a model remember everything it has
+
+9
+00:00:23.466 --> 00:00:24.320
+heard before it?
+
+10
+00:00:24.809 --> 00:00:27.389
+One way, the LSTM's: carry a small state
+
+11
+00:00:27.389 --> 00:00:29.377
+forward, slot by slot, squeezing
+
+12
+00:00:29.377 --> 00:00:30.721
+everything heard into it.
+
+13
+00:00:31.043 --> 00:00:33.354
+Five hundred and twelve numbers, however
+
+14
+00:00:33.354 --> 00:00:34.106
+long the song.
+
+15
+00:00:34.428 --> 00:00:35.987
+Whatever doesn't fit is gone.
+
+16
+00:00:37.013 --> 00:00:39.360
+The other way, the transformer's: don't
+
+17
+00:00:39.360 --> 00:00:39.760
+squeeze.
+
+18
+00:00:40.060 --> 00:00:42.108
+Keep what was computed for every earlier
+
+19
+00:00:42.108 --> 00:00:44.456
+slot, and at each new slot, look back over
+
+20
+00:00:44.456 --> 00:00:46.354
+all of it and weigh how much each one
+
+21
+00:00:46.354 --> 00:00:47.253
+matters right now.
+
+22
+00:00:47.723 --> 00:00:48.758
+Ours is called T128.
+
+23
+00:00:49.069 --> 00:00:51.294
+It sees up to two thousand and forty-eight
+
+24
+00:00:51.294 --> 00:00:53.209
+slots, itself and two thousand and
+
+25
+00:00:53.209 --> 00:00:55.383
+forty-seven before it: a hundred and
+
+26
+00:00:55.383 --> 00:00:57.505
+twenty-eight bars, the one hundred and
+
+27
+00:00:57.505 --> 00:00:58.799
+twenty-eight in its name.
+
+28
+00:00:59.110 --> 00:01:01.387
+At a hundred and twenty beats per minute,
+
+29
+00:01:01.387 --> 00:01:03.612
+that's four minutes and sixteen seconds of
+
+30
+00:01:03.612 --> 00:01:03.923
+music.
+
+31
+00:01:07.380 --> 00:01:09.350
+Every part of this module follows one real
+
+32
+00:01:09.350 --> 00:01:10.632
+slot through the real model.
+
+33
+00:01:10.907 --> 00:01:12.922
+The song is a Lakh validation song, named
+
+34
+00:01:12.922 --> 00:01:15.167
+by its id, zero zero one one b three c f:
+
+35
+00:01:15.167 --> 00:01:17.045
+a hundred and twenty beats per minute,
+
+36
+00:01:17.045 --> 00:01:18.969
+fifteen hundred and four slots, a plain
+
+37
+00:01:18.969 --> 00:01:19.289
+groove.
+
+38
+00:01:19.564 --> 00:01:21.305
+Here are the sixteen slots before our
+
+39
+00:01:21.305 --> 00:01:23.503
+slot: the guitar onsets the model heard,
+
+40
+00:01:23.503 --> 00:01:25.381
+and the real drummer's kick, snare and
+
+41
+00:01:25.381 --> 00:01:25.885
+closed hat.
+
+42
+00:01:26.301 --> 00:01:28.882
+Our slot is five hundred and seventy-six:
+
+43
+00:01:28.882 --> 00:01:31.409
+bar thirty-six, its downbeat, seventy-two
+
+44
+00:01:31.409 --> 00:01:32.013
+seconds in.
+
+45
+00:01:32.342 --> 00:01:34.100
+What should the drums play here?
+
+46
+00:01:34.429 --> 00:01:36.626
+The real drummer played kick and closed
+
+47
+00:01:36.626 --> 00:01:36.845
+hat.
+
+48
+00:01:37.175 --> 00:01:39.152
+We'll see what T128 says at the end.
+
+49
+00:01:39.625 --> 00:01:42.081
+Its five inputs: no onset heard, so
+
+50
+00:01:42.081 --> 00:01:44.652
+velocity zero too; intensity zero point
+
+51
+00:01:44.652 --> 00:01:47.794
+four four one; the velocity flag, one; and
+
+52
+00:01:47.794 --> 00:01:50.251
+tempo zero, because a hundred and twenty
+
+53
+00:01:50.251 --> 00:01:51.222
+is the reference.
+
+54
+00:01:52.977 --> 00:01:54.946
+And this strip will sit at the top of
+
+55
+00:01:54.946 --> 00:01:55.516
+every part.
+
+56
+00:01:55.827 --> 00:01:57.952
+It's the path one slot takes through the
+
+57
+00:01:57.952 --> 00:01:59.144
+model, left to right.
+
+58
+00:01:59.455 --> 00:02:01.476
+Each part lights the stage it explains.
+
+59
+00:02:04.843 --> 00:02:07.147
+First, the five numbers go through one
+
+60
+00:02:07.147 --> 00:02:09.114
+learned layer that turns them into
+
+61
+00:02:09.114 --> 00:02:09.732
+ninety-six.
+
+62
+00:02:10.069 --> 00:02:12.148
+Ninety-six numbers for this one slot.
+
+63
+00:02:12.485 --> 00:02:15.182
+They aren't named features: training chose
+
+64
+00:02:15.182 --> 00:02:16.025
+what they mean.
+
+65
+00:02:16.362 --> 00:02:18.778
+Part four point seven point one opens this
+
+66
+00:02:18.778 --> 00:02:18.946
+up.
+
+67
+00:02:19.435 --> 00:02:21.865
+Then it adds ninety-six more from a small
+
+68
+00:02:21.865 --> 00:02:24.352
+learned table with sixteen rows, one for
+
+69
+00:02:24.352 --> 00:02:25.856
+each sixteenth of the bar.
+
+70
+00:02:26.204 --> 00:02:28.575
+Our slot is a downbeat, so it gets row
+
+71
+00:02:28.575 --> 00:02:28.865
+zero.
+
+72
+00:02:29.212 --> 00:02:31.583
+Part four point seven point two says why
+
+73
+00:02:31.583 --> 00:02:32.798
+the model needs this.
+
+74
+00:02:33.291 --> 00:02:35.630
+The sum is the slot's starting point:
+
+75
+00:02:35.630 --> 00:02:37.642
+ninety-six numbers that say what the
+
+76
+00:02:37.642 --> 00:02:39.764
+guitar did and where in the bar we are.
+
+77
+00:02:40.090 --> 00:02:42.266
+Everything after this works on lists of
+
+78
+00:02:42.266 --> 00:02:42.864
+ninety-six.
+
+79
+00:02:46.823 --> 00:02:47.778
+Now the main idea.
+
+80
+00:02:48.096 --> 00:02:50.324
+Every slot keeps what was computed for it.
+
+81
+00:02:50.642 --> 00:02:53.028
+The slot being decided asks a question:
+
+82
+00:02:53.028 --> 00:02:54.195
+what am I looking for?
+
+83
+00:02:54.513 --> 00:02:56.317
+Every earlier slot offers a short
+
+84
+00:02:56.317 --> 00:02:58.597
+description of itself, and has something
+
+85
+00:02:58.597 --> 00:03:00.082
+to hand over if it's chosen.
+
+86
+00:03:00.400 --> 00:03:02.469
+Part four point seven point five names
+
+87
+00:03:02.469 --> 00:03:03.105
+these three.
+
+88
+00:03:03.611 --> 00:03:05.407
+The question is compared with every
+
+89
+00:03:05.407 --> 00:03:06.006
+description.
+
+90
+00:03:06.305 --> 00:03:08.550
+A good match gets a big weight, a poor one
+
+91
+00:03:08.550 --> 00:03:10.746
+a small weight, and the weights add up to
+
+92
+00:03:10.746 --> 00:03:10.945
+one.
+
+93
+00:03:11.245 --> 00:03:13.390
+The answer is the blend: each earlier
+
+94
+00:03:13.390 --> 00:03:15.685
+slot's hand-over, times its weight, added
+
+95
+00:03:15.685 --> 00:03:15.835
+up.
+
+96
+00:03:16.134 --> 00:03:16.982
+That's attention.
+
+97
+00:03:17.945 --> 00:03:19.625
+Now the real model at our slot.
+
+98
+00:03:19.951 --> 00:03:22.281
+The model looks back several times side by
+
+99
+00:03:22.281 --> 00:03:24.558
+side; each of these is called a head.
+
+100
+00:03:24.883 --> 00:03:27.213
+In the first block, one head puts nought
+
+101
+00:03:27.213 --> 00:03:29.273
+point nine eight of its weight on one
+
+102
+00:03:29.273 --> 00:03:31.712
+slot: five hundred and seventy-three,
+
+103
+00:03:31.712 --> 00:03:32.633
+three slots back.
+
+104
+00:03:32.958 --> 00:03:33.663
+Why that one?
+
+105
+00:03:33.988 --> 00:03:36.319
+Its top three slots, five seven three,
+
+106
+00:03:36.319 --> 00:03:38.757
+five five seven and five four one, all sit
+
+107
+00:03:38.757 --> 00:03:40.980
+at the same place in the bar, position
+
+108
+00:03:40.980 --> 00:03:42.660
+thirteen, counting from zero.
+
+109
+00:03:42.985 --> 00:03:45.370
+It matches a position in the bar, and the
+
+110
+00:03:45.370 --> 00:03:47.483
+distance penalty picks the most recent
+
+111
+00:03:47.483 --> 00:03:47.700
+one.
+
+112
+00:03:48.771 --> 00:03:50.060
+Zoom out to the last four bars.
+
+113
+00:03:50.310 --> 00:03:52.180
+Another head, in the second block, looks
+
+114
+00:03:52.180 --> 00:03:53.926
+for something else: beat two of each
+
+115
+00:03:53.926 --> 00:03:54.425
+earlier bar.
+
+116
+00:03:54.675 --> 00:03:56.421
+Nought point four nine on the last one,
+
+117
+00:03:56.421 --> 00:03:58.375
+then point three one, point one one, point
+
+118
+00:03:58.375 --> 00:03:59.664
+oh six, fading with distance.
+
+119
+00:03:59.913 --> 00:04:01.617
+That's where the real snare plays, but
+
+120
+00:04:01.617 --> 00:04:03.364
+T128 never sees the drums, and in these
+
+121
+00:04:03.364 --> 00:04:04.652
+bars the guitar skips beat two.
+
+122
+00:04:04.902 --> 00:04:06.773
+It finds beat two by its place in the bar,
+
+123
+00:04:06.773 --> 00:04:07.812
+not by hearing the snare.
+
+124
+00:04:08.215 --> 00:04:09.973
+Four heads in each of two blocks, each
+
+125
+00:04:09.973 --> 00:04:11.087
+looking for its own thing.
+
+126
+00:04:11.345 --> 00:04:12.802
+Each head also pays a penalty for
+
+127
+00:04:12.802 --> 00:04:14.646
+distance, gentle in some heads and steep
+
+128
+00:04:14.646 --> 00:04:16.576
+in others, so some watch the last beat and
+
+129
+00:04:16.576 --> 00:04:17.433
+some the whole song.
+
+130
+00:04:17.690 --> 00:04:18.762
+It never sees the future.
+
+131
+00:04:19.020 --> 00:04:20.820
+And it sees itself and up to two thousand
+
+132
+00:04:20.820 --> 00:04:22.836
+and forty-seven earlier slots: here, at
+
+133
+00:04:22.836 --> 00:04:24.722
+slot five seven six, everything so far,
+
+134
+00:04:24.722 --> 00:04:26.309
+five hundred and seventy-seven slots
+
+135
+00:04:26.309 --> 00:04:27.037
+including itself.
+
+136
+00:04:30.980 --> 00:04:32.438
+Attention is one half of a block.
+
+137
+00:04:32.702 --> 00:04:34.558
+After it, a small network works on each
+
+138
+00:04:34.558 --> 00:04:36.501
+slot by itself, ninety-six numbers out to
+
+139
+00:04:36.501 --> 00:04:38.488
+three hundred and eighty-four and back:
+
+140
+00:04:38.488 --> 00:04:40.432
+attention mixes across slots, this thinks
+
+141
+00:04:40.432 --> 00:04:41.094
+about each one.
+
+142
+00:04:41.359 --> 00:04:43.258
+Each half's result is added onto what came
+
+143
+00:04:43.258 --> 00:04:44.848
+in, so each step only adjusts the
+
+144
+00:04:44.848 --> 00:04:45.688
+ninety-six numbers.
+
+145
+00:04:45.952 --> 00:04:47.719
+And before each half, the numbers are
+
+146
+00:04:47.719 --> 00:04:48.868
+rescaled to a steady size.
+
+147
+00:04:49.132 --> 00:04:49.795
+That's a block.
+
+148
+00:04:50.255 --> 00:04:52.540
+T128 has two blocks, one after the other.
+
+149
+00:04:52.859 --> 00:04:55.251
+Together with the rest, that's two hundred
+
+150
+00:04:55.251 --> 00:04:57.642
+and twenty-six thousand, eight hundred and
+
+151
+00:04:57.642 --> 00:05:00.033
+fifty-seven learned numbers, a hundred and
+
+152
+00:05:00.033 --> 00:05:01.628
+eleven thousand in each block.
+
+153
+00:05:01.946 --> 00:05:04.231
+Parts four point seven point nine and four
+
+154
+00:05:04.231 --> 00:05:06.198
+point seven point ten take the block
+
+155
+00:05:06.198 --> 00:05:06.516
+apart.
+
+156
+00:05:08.468 --> 00:05:10.653
+At the end, the ninety-six numbers are
+
+157
+00:05:10.653 --> 00:05:12.837
+rescaled once more, and one last layer
+
+158
+00:05:12.837 --> 00:05:15.182
+turns them into nine logits, one per drum.
+
+159
+00:05:15.501 --> 00:05:17.633
+A sigmoid turns each into a probability.
+
+160
+00:05:17.953 --> 00:05:20.350
+Each drum has its own threshold, the white
+
+161
+00:05:20.350 --> 00:05:22.482
+tick, set so that drum plays about as
+
+162
+00:05:22.482 --> 00:05:23.867
+often as real drummers do.
+
+163
+00:05:24.187 --> 00:05:26.158
+Lesson four point nine explains them.
+
+164
+00:05:26.624 --> 00:05:28.854
+At slot five seven six: kick nought point
+
+165
+00:05:28.854 --> 00:05:30.752
+nine oh, over its threshold of nought
+
+166
+00:05:30.752 --> 00:05:31.464
+point two four.
+
+167
+00:05:31.749 --> 00:05:33.742
+Closed hat nought point six seven, over
+
+168
+00:05:33.742 --> 00:05:34.833
+nought point three one.
+
+169
+00:05:35.118 --> 00:05:37.159
+Nothing else crosses; the crash comes
+
+170
+00:05:37.159 --> 00:05:39.104
+nearest, nought point one nine against
+
+171
+00:05:39.104 --> 00:05:40.101
+nought point two one.
+
+172
+00:05:40.385 --> 00:05:42.663
+So T128 plays kick and closed hat: exactly
+
+173
+00:05:42.663 --> 00:05:44.039
+what the real drummer played.
+
+174
+00:05:44.497 --> 00:05:46.743
+And a check: run the same song with the
+
+175
+00:05:46.743 --> 00:05:48.789
+guitar taken out, and at this slot the
+
+176
+00:05:48.789 --> 00:05:50.785
+kick drops to nought point oh seven and
+
+177
+00:05:50.785 --> 00:05:51.484
+nothing plays.
+
+178
+00:05:51.783 --> 00:05:53.979
+Here, hearing the guitar is what switches
+
+179
+00:05:53.979 --> 00:05:54.678
+the groove on.
+
+180
+00:05:58.170 --> 00:06:00.619
+The original transformer, from Vaswani and
+
+181
+00:06:00.619 --> 00:06:03.013
+colleagues in twenty seventeen, was built
+
+182
+00:06:03.013 --> 00:06:03.883
+for translation.
+
+183
+00:06:04.210 --> 00:06:06.713
+It had two halves: an encoder that reads
+
+184
+00:06:06.713 --> 00:06:09.270
+the whole input sentence, both ways, and a
+
+185
+00:06:09.270 --> 00:06:11.610
+decoder that writes the output one word at
+
+186
+00:06:11.610 --> 00:06:13.134
+a time, looking back only.
+
+187
+00:06:13.617 --> 00:06:16.463
+Live, there is no whole input to read: the
+
+188
+00:06:16.463 --> 00:06:18.398
+guitar arrives one slot at a time.
+
+189
+00:06:18.739 --> 00:06:21.187
+So ours keeps only the look-back-only kind
+
+190
+00:06:21.187 --> 00:06:21.699
+of block.
+
+191
+00:06:22.041 --> 00:06:23.065
+It's decoder-only.
+
+192
+00:06:23.599 --> 00:06:25.455
+Four differences from the general
+
+193
+00:06:25.455 --> 00:06:27.201
+transformer in Velardo's course.
+
+194
+00:06:27.528 --> 00:06:29.929
+No encoder, so no attention across to one.
+
+195
+00:06:30.256 --> 00:06:32.493
+Out come nine separate sigmoids, not a
+
+196
+00:06:32.493 --> 00:06:34.840
+softmax, the step that turns scores into
+
+197
+00:06:34.840 --> 00:06:37.186
+shares adding up to one, part four point
+
+198
+00:06:37.186 --> 00:06:39.641
+seven point four, used there to choose one
+
+199
+00:06:39.641 --> 00:06:41.824
+word from the vocabulary, the list of
+
+200
+00:06:41.824 --> 00:06:43.297
+every word the model knows.
+
+201
+00:06:43.625 --> 00:06:45.971
+Position comes from a distance penalty and
+
+202
+00:06:45.971 --> 00:06:48.372
+the bar table, not from sinusoids, sine
+
+203
+00:06:48.372 --> 00:06:50.500
+waves of different speeds added to the
+
+204
+00:06:50.500 --> 00:06:53.010
+input; part four point seven point eight
+
+205
+00:06:53.010 --> 00:06:53.774
+compares them.
+
+206
+00:06:54.101 --> 00:06:56.120
+And its own drums never come back in.
+
+207
+00:06:56.447 --> 00:06:58.793
+A language model feeds each word it writes
+
+208
+00:06:58.793 --> 00:07:01.358
+back in as the next input; ours reads the
+
+209
+00:07:01.358 --> 00:07:02.722
+next guitar slot instead.
+
+210
+00:07:03.049 --> 00:07:05.505
+GPT, the family of chat language models,
+
+211
+00:07:05.505 --> 00:07:06.323
+works that way.
+
+212
+00:07:06.651 --> 00:07:09.052
+So ours is not a GPT for drums: it's a
+
+213
+00:07:09.052 --> 00:07:11.452
+decoder-only transformer over the guitar,
+
+214
+00:07:11.452 --> 00:07:12.762
+without output feedback.
+
+215
+00:07:16.857 --> 00:07:18.936
+Live, the guitar arrives one slot at a
+
+216
+00:07:18.936 --> 00:07:19.189
+time.
+
+217
+00:07:19.493 --> 00:07:21.724
+So the model keeps, on a shelf, what it
+
+218
+00:07:21.724 --> 00:07:24.006
+computed for every earlier slot, up to two
+
+219
+00:07:24.006 --> 00:07:25.679
+thousand and forty-seven of them.
+
+220
+00:07:25.984 --> 00:07:28.215
+Each new slot computes only its own part,
+
+221
+00:07:28.215 --> 00:07:30.344
+looks back over the shelf, and joins it.
+
+222
+00:07:30.649 --> 00:07:32.778
+That shelf is the model's state: the
+
+223
+00:07:32.778 --> 00:07:33.082
+cache.
+
+224
+00:07:33.518 --> 00:07:35.320
+Measured offline, stepping warm on one
+
+225
+00:07:35.320 --> 00:07:37.078
+processor thread, a step takes nought
+
+226
+00:07:37.078 --> 00:07:38.880
+point two seven nine milliseconds at the
+
+227
+00:07:38.880 --> 00:07:39.188
+median.
+
+228
+00:07:39.451 --> 00:07:41.253
+In the live loop the median is one point
+
+229
+00:07:41.253 --> 00:07:43.055
+seven four, because the processor goes
+
+230
+00:07:43.055 --> 00:07:43.890
+cold between slots.
+
+231
+00:07:44.154 --> 00:07:45.736
+A slot at a hundred and twenty is a
+
+232
+00:07:45.736 --> 00:07:47.670
+hundred and twenty-five milliseconds, and
+
+233
+00:07:47.670 --> 00:07:49.164
+each decision must be made within
+
+234
+00:07:49.164 --> 00:07:50.219
+thirty-seven and a half.
+
+235
+00:07:50.483 --> 00:07:52.285
+Part four point seven point twelve opens
+
+236
+00:07:52.285 --> 00:07:52.724
+the cache.
+
+237
+00:07:53.942 --> 00:07:54.838
+Training is different.
+
+238
+00:07:55.083 --> 00:07:56.835
+Thirty-two songs at a time, in chunks of
+
+239
+00:07:56.835 --> 00:07:58.057
+five hundred and twelve slots.
+
+240
+00:07:58.301 --> 00:08:00.094
+Our slot, five seven six, is sixty-four
+
+241
+00:08:00.094 --> 00:08:01.235
+slots into the second chunk.
+
+242
+00:08:01.479 --> 00:08:03.149
+The shelf is carried from one chunk into
+
+243
+00:08:03.149 --> 00:08:04.983
+the next, so attention reaches back across
+
+244
+00:08:04.983 --> 00:08:05.349
+the edge.
+
+245
+00:08:05.594 --> 00:08:07.468
+In the scoring run, chunked the same way,
+
+246
+00:08:07.468 --> 00:08:09.016
+at our slot a head in block two takes
+
+247
+00:08:09.016 --> 00:08:10.768
+nought point eight nine of its weight from
+
+248
+00:08:10.768 --> 00:08:12.683
+slot seventy-six, five hundred slots back,
+
+249
+00:08:12.683 --> 00:08:13.498
+in the chunk before.
+
+250
+00:08:13.881 --> 00:08:16.079
+But the shelf is detached at each edge, so
+
+251
+00:08:16.079 --> 00:08:18.424
+the learning signal stops there: gradients
+
+252
+00:08:18.424 --> 00:08:20.328
+reach five hundred and twelve slots,
+
+253
+00:08:20.328 --> 00:08:22.233
+attention two thousand and forty-eight.
+
+254
+00:08:22.526 --> 00:08:24.724
+And run chunk by chunk, or slot by slot as
+
+255
+00:08:24.724 --> 00:08:26.629
+it is live, the model gives the same
+
+256
+00:08:26.629 --> 00:08:28.729
+answer: at our slot the two differ by
+
+257
+00:08:28.729 --> 00:08:29.560
+three millionths.
+
+258
+00:08:29.853 --> 00:08:31.953
+Part four point seven point thirteen shows
+
+259
+00:08:31.953 --> 00:08:32.148
+why.
+
+260
+00:08:36.100 --> 00:08:37.927
+Here's the route through the module.
+
+261
+00:08:38.231 --> 00:08:40.667
+First, how a slot becomes numbers: slots
+
+262
+00:08:40.667 --> 00:08:42.240
+as tokens, and the bar phase.
+
+263
+00:08:42.545 --> 00:08:44.778
+Then the heart of it, attention, in six
+
+264
+00:08:44.778 --> 00:08:46.859
+parts: dot products, the maths of
+
+265
+00:08:46.859 --> 00:08:49.294
+attention, queries, keys and values, four
+
+266
+00:08:49.294 --> 00:08:51.629
+heads, the causal band mask, and position
+
+267
+00:08:51.629 --> 00:08:52.086
+by ALiBi.
+
+268
+00:08:52.558 --> 00:08:55.010
+Then the rest of the block: residuals and
+
+269
+00:08:55.010 --> 00:08:56.993
+LayerNorm, feed-forward and dropout.
+
+270
+00:08:57.306 --> 00:08:58.506
+Then out to nine drums.
+
+271
+00:08:58.819 --> 00:09:01.376
+Then running it: live with the cache, and
+
+272
+00:09:01.376 --> 00:09:02.367
+training in chunks.
+
+273
+00:09:02.680 --> 00:09:04.872
+Then all of transformer dot py, line by
+
+274
+00:09:04.872 --> 00:09:07.272
+line, and last, explaining it yourself,
+
+275
+00:09:07.272 --> 00:09:08.785
+the way an examiner will ask.
+
+276
+00:09:10.552 --> 00:09:12.421
+Say it in one breath: each slot becomes
+
+277
+00:09:12.421 --> 00:09:14.374
+ninety-six numbers; it looks back over up
+
+278
+00:09:14.374 --> 00:09:16.035
+to two thousand and forty-seven earlier
+
+279
+00:09:16.035 --> 00:09:17.780
+slots and weighs them; two blocks of
+
+280
+00:09:17.780 --> 00:09:19.358
+attention and feed-forward; nine
+
+281
+00:09:19.358 --> 00:09:21.186
+probabilities out; a cache live, and
+
+282
+00:09:21.186 --> 00:09:21.976
+chunks in training.
+
+283
+00:09:22.225 --> 00:09:23.803
+This pairs with lessons seventeen and
+
+284
+00:09:23.803 --> 00:09:25.257
+eighteen in part two of the course
+
+285
+00:09:25.257 --> 00:09:27.002
+explainer, and the attention-over-slots
+
+286
+00:09:27.002 --> 00:09:28.248
+visualiser on the course page.
+
+287
+00:09:28.497 --> 00:09:30.408
+Next, part four point seven point one:
+
+288
+00:09:30.408 --> 00:09:31.073
+slots as tokens.
+

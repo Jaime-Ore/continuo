@@ -1,0 +1,1134 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.250
+Part four point two.
+
+2
+00:00:01.616 --> 00:00:04.239
+Inside one LSTM layer, one equation at a
+
+3
+00:00:04.239 --> 00:00:04.544
+time.
+
+4
+00:00:08.567 --> 00:00:10.255
+Part four point one ended on a problem.
+
+5
+00:00:10.514 --> 00:00:12.159
+A plain loop rewrites its whole state
+
+6
+00:00:12.159 --> 00:00:14.020
+every slot, through U and tanh, so its
+
+7
+00:00:14.020 --> 00:00:15.665
+memory fades and so does its gradient.
+
+8
+00:00:15.924 --> 00:00:17.785
+The LSTM, long short-term memory, from
+
+9
+00:00:17.785 --> 00:00:19.473
+Hochreiter and Schmidhuber in nineteen
+
+10
+00:00:19.473 --> 00:00:21.464
+ninety-seven, adds a second state, called
+
+11
+00:00:21.464 --> 00:00:21.551
+c.
+
+12
+00:00:21.810 --> 00:00:23.455
+Picture it as a conveyor belt running
+
+13
+00:00:23.455 --> 00:00:25.359
+along the top of the layer, from one slot
+
+14
+00:00:25.359 --> 00:00:26.787
+to the next: the cell state.
+
+15
+00:00:27.047 --> 00:00:28.735
+At each slot the belt passes one point
+
+16
+00:00:28.735 --> 00:00:30.336
+where every entry is multiplied by a
+
+17
+00:00:30.336 --> 00:00:32.414
+number from zero to one: how much of it to
+
+18
+00:00:32.414 --> 00:00:32.630
+keep.
+
+19
+00:00:32.890 --> 00:00:34.794
+That number is the forget gate, which was
+
+20
+00:00:34.794 --> 00:00:35.833
+added to the LSTM later.
+
+21
+00:00:36.093 --> 00:00:38.170
+Then a point where something new is added:
+
+22
+00:00:38.170 --> 00:00:38.776
+what to write.
+
+23
+00:00:39.036 --> 00:00:40.897
+And the layer shows a squashed view of the
+
+24
+00:00:40.897 --> 00:00:42.931
+belt as its hidden state, h, which goes on
+
+25
+00:00:42.931 --> 00:00:44.922
+to layer two, the head, and back into the
+
+26
+00:00:44.922 --> 00:00:45.917
+layer at the next slot.
+
+27
+00:00:46.353 --> 00:00:48.363
+Nothing else touches the belt: one
+
+28
+00:00:48.363 --> 00:00:49.368
+multiply, one add.
+
+29
+00:00:49.670 --> 00:00:51.881
+In layer one, every gate decides from two
+
+30
+00:00:51.881 --> 00:00:54.444
+things: the guitar it hears now, x t, and
+
+31
+00:00:54.444 --> 00:00:56.303
+what the layer showed last slot, h.
+
+32
+00:00:56.604 --> 00:00:58.615
+Layer two's gates read layer one's h in
+
+33
+00:00:58.615 --> 00:00:59.620
+place of the guitar.
+
+34
+00:00:59.921 --> 00:01:02.032
+In our model each layer has a hundred and
+
+35
+00:01:02.032 --> 00:01:04.092
+twenty-eight of these cells side by side.
+
+36
+00:01:07.423 --> 00:01:09.119
+The LSTM is built from one simple
+
+37
+00:01:09.119 --> 00:01:09.618
+operation.
+
+38
+00:01:09.917 --> 00:01:11.812
+Take two lists of the same length and
+
+39
+00:01:11.812 --> 00:01:14.106
+multiply them entry by entry: first with
+
+40
+00:01:14.106 --> 00:01:15.503
+first, second with second.
+
+41
+00:01:15.802 --> 00:01:18.046
+That's the elementwise product, written as
+
+42
+00:01:18.046 --> 00:01:18.944
+a dot in a circle.
+
+43
+00:01:19.243 --> 00:01:21.288
+Here, zero point nine times two is one
+
+44
+00:01:21.288 --> 00:01:23.632
+point eight; zero point one times five is
+
+45
+00:01:23.632 --> 00:01:25.976
+zero point five; one times minus three is
+
+46
+00:01:25.976 --> 00:01:26.574
+minus three.
+
+47
+00:01:27.019 --> 00:01:28.741
+When the first list is made of numbers
+
+48
+00:01:28.741 --> 00:01:30.685
+between zero and one, it acts like a gate.
+
+49
+00:01:30.950 --> 00:01:32.672
+Lesson three point two's sigmoid makes
+
+50
+00:01:32.672 --> 00:01:33.600
+exactly such numbers.
+
+51
+00:01:33.865 --> 00:01:35.720
+Multiplied entry by entry, a one lets a
+
+52
+00:01:35.720 --> 00:01:37.531
+value through, a zero blocks it, and
+
+53
+00:01:37.531 --> 00:01:39.121
+anything in between lets some of it
+
+54
+00:01:39.121 --> 00:01:39.474
+through.
+
+55
+00:01:39.739 --> 00:01:41.418
+And the gate is not fixed: it is
+
+56
+00:01:41.418 --> 00:01:43.273
+recomputed at every slot, from what the
+
+57
+00:01:43.273 --> 00:01:45.084
+layer hears and what it showed last slot.
+
+58
+00:01:48.400 --> 00:01:50.863
+The forget gate, f, in exactly the form
+
+59
+00:01:50.863 --> 00:01:51.871
+PyTorch writes it.
+
+60
+00:01:52.207 --> 00:01:53.607
+Build it from the inside.
+
+61
+00:01:53.943 --> 00:01:56.854
+First, what it hears: the input x t, times
+
+62
+00:01:56.854 --> 00:01:59.205
+a weight, W i f, plus a bias, b i f.
+
+63
+00:01:59.541 --> 00:02:01.949
+The little i f means from the input, for
+
+64
+00:02:01.949 --> 00:02:02.844
+the forget gate.
+
+65
+00:02:03.180 --> 00:02:05.812
+Then what the layer showed last slot: h t
+
+66
+00:02:05.812 --> 00:02:08.387
+minus one, times its own weight, W h f,
+
+67
+00:02:08.387 --> 00:02:09.451
+plus a second bias.
+
+68
+00:02:09.787 --> 00:02:12.138
+PyTorch keeps two biases, but they only
+
+69
+00:02:12.138 --> 00:02:14.378
+ever add together, so they act as one.
+
+70
+00:02:14.713 --> 00:02:17.345
+Then a sigmoid, sigma, squashes the sum to
+
+71
+00:02:17.345 --> 00:02:19.864
+between zero and one, one number for every
+
+72
+00:02:19.864 --> 00:02:20.144
+cell.
+
+73
+00:02:20.640 --> 00:02:22.945
+In layer one there are five inputs and a
+
+74
+00:02:22.945 --> 00:02:25.362
+hundred and twenty-eight cells, so W i f
+
+75
+00:02:25.362 --> 00:02:27.892
+is a hundred and twenty-eight by five, W h
+
+76
+00:02:27.892 --> 00:02:30.253
+f a hundred and twenty-eight by a hundred
+
+77
+00:02:30.253 --> 00:02:32.726
+and twenty-eight, and each bias a hundred
+
+78
+00:02:32.726 --> 00:02:33.963
+and twenty-eight long.
+
+79
+00:02:34.464 --> 00:02:35.456
+Now a toy, one cell.
+
+80
+00:02:35.726 --> 00:02:37.845
+The guitar plays an onset, so x is one;
+
+81
+00:02:37.845 --> 00:02:39.739
+last slot the cell showed zero point five
+
+82
+00:02:39.739 --> 00:02:40.325
+and held two.
+
+83
+00:02:40.596 --> 00:02:42.850
+Give the forget gate made-up weights: one,
+
+84
+00:02:42.850 --> 00:02:43.842
+a half, one, zero.
+
+85
+00:02:44.112 --> 00:02:45.871
+The sum is one plus a half plus a half
+
+86
+00:02:45.871 --> 00:02:46.637
+plus zero, two.
+
+87
+00:02:46.908 --> 00:02:48.756
+Sigmoid of two is zero point eight eight.
+
+88
+00:02:49.027 --> 00:02:50.875
+So the belt keeps zero point eight eight
+
+89
+00:02:50.875 --> 00:02:52.543
+of its two: one point seven six.
+
+90
+00:02:55.823 --> 00:02:57.829
+Two more pieces decide what goes onto the
+
+91
+00:02:57.829 --> 00:02:58.067
+belt.
+
+92
+00:02:58.354 --> 00:03:00.502
+The input gate, i, has the same shape as
+
+93
+00:03:00.502 --> 00:03:02.747
+the forget gate, with its own weights, and
+
+94
+00:03:02.747 --> 00:03:05.134
+a sigmoid: how much to write, from zero to
+
+95
+00:03:05.134 --> 00:03:05.325
+one.
+
+96
+00:03:05.611 --> 00:03:07.664
+The candidate, g, again the same shape
+
+97
+00:03:07.664 --> 00:03:09.956
+with its own weights, but with tanh: the
+
+98
+00:03:09.956 --> 00:03:11.962
+value that could be written, from minus
+
+99
+00:03:11.962 --> 00:03:12.487
+one to one.
+
+100
+00:03:12.931 --> 00:03:14.554
+Why the two different squashes?
+
+101
+00:03:14.869 --> 00:03:16.963
+The gates are fractions, so a sigmoid.
+
+102
+00:03:17.277 --> 00:03:19.581
+The candidate is a value, and a value may
+
+103
+00:03:19.581 --> 00:03:21.727
+need to go down as well as up, so tanh.
+
+104
+00:03:22.288 --> 00:03:23.317
+Back to the toy cell.
+
+105
+00:03:23.611 --> 00:03:25.964
+The input gate's sum comes to one; sigmoid
+
+106
+00:03:25.964 --> 00:03:28.121
+of one is zero point seven three one one,
+
+107
+00:03:28.121 --> 00:03:29.787
+lesson three point three's number.
+
+108
+00:03:30.081 --> 00:03:32.238
+The candidate's sum is one and a half;
+
+109
+00:03:32.238 --> 00:03:34.296
+tanh of one and a half is zero point nine
+
+110
+00:03:34.296 --> 00:03:36.355
+zero five one, lesson three point one's.
+
+111
+00:03:36.649 --> 00:03:38.560
+Their elementwise product is what gets
+
+112
+00:03:38.560 --> 00:03:40.374
+written: zero point six six two.
+
+113
+00:03:43.740 --> 00:03:46.023
+Now the belt's update, built from the two
+
+114
+00:03:46.023 --> 00:03:46.386
+halves.
+
+115
+00:03:46.698 --> 00:03:48.721
+What's kept: f times the old cell.
+
+116
+00:03:49.032 --> 00:03:50.900
+Plus what's written: i times g.
+
+117
+00:03:51.212 --> 00:03:52.613
+That's the new cell, c t.
+
+118
+00:03:52.924 --> 00:03:55.362
+For the toy: one point seven six two plus
+
+119
+00:03:55.362 --> 00:03:57.697
+zero point six six two, two point four two
+
+120
+00:03:57.697 --> 00:03:58.009
+three.
+
+121
+00:03:58.520 --> 00:04:00.060
+Last, what the layer shows.
+
+122
+00:04:00.378 --> 00:04:02.768
+The output gate, o, the same shape again
+
+123
+00:04:02.768 --> 00:04:05.157
+with its own weights and a sigmoid: how
+
+124
+00:04:05.157 --> 00:04:06.537
+much of each cell to show.
+
+125
+00:04:06.856 --> 00:04:09.245
+In the toy its sum is zero, and sigmoid of
+
+126
+00:04:09.245 --> 00:04:10.041
+zero is a half.
+
+127
+00:04:10.545 --> 00:04:13.176
+So the new h is the cell, squashed by tanh
+
+128
+00:04:13.176 --> 00:04:15.631
+into minus one to one, times the output
+
+129
+00:04:15.631 --> 00:04:15.924
+gate.
+
+130
+00:04:16.275 --> 00:04:18.613
+For the toy, a half times tanh of two
+
+131
+00:04:18.613 --> 00:04:21.186
+point four two three, which is zero point
+
+132
+00:04:21.186 --> 00:04:23.934
+nine eight four: zero point four nine two.
+
+133
+00:04:24.474 --> 00:04:27.224
+Forget, input, candidate, output, the new
+
+134
+00:04:27.224 --> 00:04:29.699
+cell and the new h: those six lines are
+
+135
+00:04:29.699 --> 00:04:32.119
+one whole LSTM step, exactly as PyTorch's
+
+136
+00:04:32.119 --> 00:04:33.659
+own documentation writes it.
+
+137
+00:04:33.989 --> 00:04:36.244
+Notice what never happens to the cell on
+
+138
+00:04:36.244 --> 00:04:38.939
+its way through: no weight multiplies it,
+
+139
+00:04:38.939 --> 00:04:40.259
+and no tanh squashes it.
+
+140
+00:04:40.589 --> 00:04:41.854
+Only a gate and an add.
+
+141
+00:04:45.247 --> 00:04:47.803
+Part four point one: going back one slot
+
+142
+00:04:47.803 --> 00:04:50.192
+in a plain loop multiplies the gradient by
+
+143
+00:04:50.192 --> 00:04:52.859
+U times the slope of tanh; in the toy that
+
+144
+00:04:52.859 --> 00:04:54.193
+factor was about a half.
+
+145
+00:04:54.526 --> 00:04:56.805
+Along the belt, c t is f times the old
+
+146
+00:04:56.805 --> 00:04:58.194
+cell plus what's written.
+
+147
+00:04:58.527 --> 00:05:00.750
+So going back one slot along the belt's
+
+148
+00:05:00.750 --> 00:05:03.139
+own, direct path multiplies the gradient
+
+149
+00:05:03.139 --> 00:05:03.695
+by just f.
+
+150
+00:05:04.029 --> 00:05:06.140
+The old cell also reaches the new one
+
+151
+00:05:06.140 --> 00:05:08.529
+through h and the gates, and those paths
+
+152
+00:05:08.529 --> 00:05:09.252
+still shrink.
+
+153
+00:05:09.585 --> 00:05:12.308
+No weight, no tanh slope: only the forget
+
+154
+00:05:12.308 --> 00:05:14.753
+gate, which the net sets slot by slot and
+
+155
+00:05:14.753 --> 00:05:15.753
+can hold near one.
+
+156
+00:05:16.247 --> 00:05:18.257
+Hold f at zero point nine nine for
+
+157
+00:05:18.257 --> 00:05:20.669
+sixty-four slots and half the gradient is
+
+158
+00:05:20.669 --> 00:05:22.966
+still there: zero point five three.
+
+159
+00:05:23.311 --> 00:05:25.665
+The plain loop's factor of a half leaves
+
+160
+00:05:25.665 --> 00:05:27.675
+five times ten to the minus twenty.
+
+161
+00:05:28.020 --> 00:05:30.432
+At f equal to one, it passes back whole.
+
+162
+00:05:30.947 --> 00:05:32.867
+But the fix only works where f stays near
+
+163
+00:05:32.867 --> 00:05:33.050
+one.
+
+164
+00:05:33.324 --> 00:05:35.473
+In L32's first layer, over the whole song,
+
+165
+00:05:35.473 --> 00:05:37.256
+thirty-nine percent of the forget-gate
+
+166
+00:05:37.256 --> 00:05:39.267
+values are below zero point one, and only
+
+167
+00:05:39.267 --> 00:05:41.233
+nineteen and a half percent are zero point
+
+168
+00:05:41.233 --> 00:05:42.102
+nine nine or above.
+
+169
+00:05:42.376 --> 00:05:43.930
+The median is zero point two five.
+
+170
+00:05:44.205 --> 00:05:46.216
+So most paths still shrink, and part four
+
+171
+00:05:46.216 --> 00:05:48.091
+point one's measured fall-off, about a
+
+172
+00:05:48.091 --> 00:05:49.782
+hundred times within a bar, stands.
+
+173
+00:05:53.077 --> 00:05:56.109
+Now the worked slot, in L32's first layer:
+
+174
+00:05:56.109 --> 00:05:58.656
+validation song zero zero one one b three
+
+175
+00:05:58.656 --> 00:06:01.324
+c f, slot five hundred and seventy-six,
+
+176
+00:06:01.324 --> 00:06:03.204
+the downbeat of bar thirty-six.
+
+177
+00:06:03.567 --> 00:06:05.872
+The guitar input has no onset at this
+
+178
+00:06:05.872 --> 00:06:06.175
+slot.
+
+179
+00:06:06.539 --> 00:06:08.904
+Of the hundred and twenty-eight forget
+
+180
+00:06:08.904 --> 00:06:11.390
+gates, forty-four are above zero point
+
+181
+00:06:11.390 --> 00:06:13.088
+nine: those cells keep.
+
+182
+00:06:13.452 --> 00:06:16.362
+Fifty-nine are below zero point one: those
+
+183
+00:06:16.362 --> 00:06:18.121
+throw almost everything away.
+
+184
+00:06:18.485 --> 00:06:20.789
+Forty-two input gates and thirty-nine
+
+185
+00:06:20.789 --> 00:06:23.033
+output gates are more than half open.
+
+186
+00:06:23.536 --> 00:06:25.265
+Two cells show the two extremes.
+
+187
+00:06:25.590 --> 00:06:26.941
+Unit seventy-eight holds.
+
+188
+00:06:27.265 --> 00:06:29.210
+Its cell came in at two hundred and
+
+189
+00:06:29.210 --> 00:06:30.399
+forty-four point five.
+
+190
+00:06:30.724 --> 00:06:32.885
+Its forget gate is zero point nine nine
+
+191
+00:06:32.885 --> 00:06:35.263
+nine nine eight, so it keeps all of it,
+
+192
+00:06:35.263 --> 00:06:37.587
+and its input gate is nearly shut, so it
+
+193
+00:06:37.587 --> 00:06:38.776
+writes almost nothing.
+
+194
+00:06:39.100 --> 00:06:41.424
+Out comes two hundred and forty-four point
+
+195
+00:06:41.424 --> 00:06:42.018
+five again.
+
+196
+00:06:42.343 --> 00:06:43.477
+Unit thirteen resets.
+
+197
+00:06:43.802 --> 00:06:46.180
+Its forget gate is six millionths, so its
+
+198
+00:06:46.180 --> 00:06:48.395
+old minus zero point nine five is thrown
+
+199
+00:06:48.395 --> 00:06:50.935
+away; its input gate is wide open and its
+
+200
+00:06:50.935 --> 00:06:53.097
+candidate near one, so it writes zero
+
+201
+00:06:53.097 --> 00:06:54.988
+point nine nine three in its place.
+
+202
+00:06:55.313 --> 00:06:57.474
+Its h flips from minus zero point seven
+
+203
+00:06:57.474 --> 00:06:59.312
+four to plus zero point seven six.
+
+204
+00:07:02.680 --> 00:07:04.907
+Follow unit seventy-eight's cell over the
+
+205
+00:07:04.907 --> 00:07:05.490
+whole song.
+
+206
+00:07:05.808 --> 00:07:08.459
+It climbs: thirty-one by slot one hundred,
+
+207
+00:07:08.459 --> 00:07:10.527
+a hundred and twenty-one by slot three
+
+208
+00:07:10.527 --> 00:07:12.859
+hundred, two hundred and forty-four and a
+
+209
+00:07:12.859 --> 00:07:15.139
+half at the worked slot, six hundred and
+
+210
+00:07:15.139 --> 00:07:16.942
+thirty-two by the end of the song.
+
+211
+00:07:17.393 --> 00:07:19.652
+At a slot where the guitar plays an onset,
+
+212
+00:07:19.652 --> 00:07:22.062
+the cell rises zero point nine on average;
+
+213
+00:07:22.062 --> 00:07:24.121
+at a slot without one, zero point zero
+
+214
+00:07:24.121 --> 00:07:24.422
+three.
+
+215
+00:07:24.723 --> 00:07:26.882
+By the worked slot the model has heard two
+
+216
+00:07:26.882 --> 00:07:28.941
+hundred and forty-nine onsets, and the
+
+217
+00:07:28.941 --> 00:07:31.050
+cell holds two hundred and forty-four and
+
+218
+00:07:31.050 --> 00:07:31.401
+a half.
+
+219
+00:07:31.702 --> 00:07:33.912
+A correlation, lesson five point seven,
+
+220
+00:07:33.912 --> 00:07:36.221
+can't settle it: on this song the number
+
+221
+00:07:36.221 --> 00:07:38.029
+of onsets heard so far rises almost
+
+222
+00:07:38.029 --> 00:07:40.238
+exactly with the slot number, so the cell
+
+223
+00:07:40.238 --> 00:07:41.544
+matches both equally well.
+
+224
+00:07:41.845 --> 00:07:44.255
+The evidence is that rise: zero point nine
+
+225
+00:07:44.255 --> 00:07:46.514
+at an onset, zero point zero three without
+
+226
+00:07:46.514 --> 00:07:46.715
+one.
+
+227
+00:07:47.016 --> 00:07:49.125
+So unit seventy-eight counts the guitar's
+
+228
+00:07:49.125 --> 00:07:49.477
+onsets.
+
+229
+00:07:49.778 --> 00:07:51.887
+That's an interpretation from one song,
+
+230
+00:07:51.887 --> 00:07:52.991
+not checked on others.
+
+231
+00:07:53.407 --> 00:07:55.055
+One consequence, by arithmetic.
+
+232
+00:07:55.354 --> 00:07:57.650
+The layer passes on h, not c, and tanh of
+
+233
+00:07:57.650 --> 00:07:59.797
+two hundred and forty-four is one, as is
+
+234
+00:07:59.797 --> 00:08:00.745
+tanh of thirty-one.
+
+235
+00:08:01.044 --> 00:08:03.241
+So this cell's h is just its output gate,
+
+236
+00:08:03.241 --> 00:08:05.587
+zero point nine nine: the rest of the net
+
+237
+00:08:05.587 --> 00:08:07.583
+sees that the count is large, not how
+
+238
+00:08:07.583 --> 00:08:07.883
+large.
+
+239
+00:08:08.182 --> 00:08:10.179
+Whether the drums use it at all has not
+
+240
+00:08:10.179 --> 00:08:10.878
+been measured.
+
+241
+00:08:14.217 --> 00:08:16.398
+Layer two runs the same six equations.
+
+242
+00:08:16.743 --> 00:08:19.269
+Its input is layer one's h, a hundred and
+
+243
+00:08:19.269 --> 00:08:21.507
+twenty-eight numbers, instead of the
+
+244
+00:08:21.507 --> 00:08:22.311
+guitar's five.
+
+245
+00:08:22.656 --> 00:08:25.009
+At the worked slot, thirty-nine of its
+
+246
+00:08:25.009 --> 00:08:27.478
+forget gates are above zero point nine and
+
+247
+00:08:27.478 --> 00:08:29.372
+thirty-five below zero point one.
+
+248
+00:08:29.887 --> 00:08:31.507
+How many parameters in one layer?
+
+249
+00:08:31.801 --> 00:08:32.341
+Count them.
+
+250
+00:08:32.636 --> 00:08:34.845
+Four gates, counting the candidate, each
+
+251
+00:08:34.845 --> 00:08:37.054
+with a hundred and twenty-eight cells, and
+
+252
+00:08:37.054 --> 00:08:39.115
+each cell has a weight for every input,
+
+253
+00:08:39.115 --> 00:08:40.931
+plus one for each of the hundred and
+
+254
+00:08:40.931 --> 00:08:42.208
+twenty-eight numbers of h.
+
+255
+00:08:42.502 --> 00:08:44.122
+Then two biases of a hundred and
+
+256
+00:08:44.122 --> 00:08:45.202
+twenty-eight per gate.
+
+257
+00:08:45.609 --> 00:08:47.629
+Layer one has five inputs: four times a
+
+258
+00:08:47.629 --> 00:08:49.470
+hundred and twenty-eight times a hundred
+
+259
+00:08:49.470 --> 00:08:51.355
+and thirty-three, plus one thousand and
+
+260
+00:08:51.355 --> 00:08:53.375
+twenty-four biases: sixty-nine thousand
+
+261
+00:08:53.375 --> 00:08:54.407
+one hundred and twenty.
+
+262
+00:08:54.677 --> 00:08:56.517
+Layer two has a hundred and twenty-eight
+
+263
+00:08:56.517 --> 00:08:58.627
+inputs: a hundred and thirty-two thousand
+
+264
+00:08:58.627 --> 00:08:59.300
+and ninety-six.
+
+265
+00:08:59.569 --> 00:09:01.410
+Part four point three adds the drum head
+
+266
+00:09:01.410 --> 00:09:03.250
+and builds the whole count, row by row.
+
+267
+00:09:04.626 --> 00:09:07.217
+Say it in one breath: an LSTM carries a
+
+268
+00:09:07.217 --> 00:09:09.347
+cell, c, beside its hidden state.
+
+269
+00:09:09.692 --> 00:09:11.995
+Each slot, gates between zero and one
+
+270
+00:09:11.995 --> 00:09:14.471
+decide how much of the cell to keep, how
+
+271
+00:09:14.471 --> 00:09:17.062
+much of a candidate to write, and how much
+
+272
+00:09:17.062 --> 00:09:17.522
+to show.
+
+273
+00:09:17.868 --> 00:09:20.170
+The cell is f times the old cell plus i
+
+274
+00:09:20.170 --> 00:09:22.704
+times g; h is o times tanh of the cell.
+
+275
+00:09:23.049 --> 00:09:25.179
+Going back along the cell's own path
+
+276
+00:09:25.179 --> 00:09:27.367
+multiplies the gradient by f, so it
+
+277
+00:09:27.367 --> 00:09:29.785
+survives where f stays near one, and in
+
+278
+00:09:29.785 --> 00:09:31.454
+L32 most forget gates do not.
+
+279
+00:09:31.800 --> 00:09:34.160
+This pairs with section four of the drum
+
+280
+00:09:34.160 --> 00:09:36.291
+LSTM explainer, one cell under the
+
+281
+00:09:36.291 --> 00:09:36.924
+microscope.
+
+282
+00:09:37.269 --> 00:09:40.033
+Next, part four point three: our LSTM in
+
+283
+00:09:40.033 --> 00:09:40.321
+code.
+

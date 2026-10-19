@@ -1,0 +1,734 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.736
+Lesson four point seven point two.
+
+2
+00:00:02.035 --> 00:00:03.981
+Telling the model where the bar starts.
+
+3
+00:00:07.907 --> 00:00:10.077
+In four point seven point one the slot
+
+4
+00:00:10.077 --> 00:00:11.523
+became ninety-six numbers.
+
+5
+00:00:11.857 --> 00:00:14.138
+Before they enter the first block, one
+
+6
+00:00:14.138 --> 00:00:15.307
+more vector is added.
+
+7
+00:00:15.641 --> 00:00:16.253
+Here's why.
+
+8
+00:00:16.760 --> 00:00:18.527
+Later, attention scores every earlier
+
+9
+00:00:18.527 --> 00:00:18.747
+slot.
+
+10
+00:00:19.012 --> 00:00:20.867
+Its sense of distance comes from ALiBi,
+
+11
+00:00:20.867 --> 00:00:22.722
+four point seven point eight, a box for
+
+12
+00:00:22.722 --> 00:00:24.666
+now: a penalty that grows with how far
+
+13
+00:00:24.666 --> 00:00:25.328
+back a slot is.
+
+14
+00:00:25.593 --> 00:00:27.536
+So our slot, five seventy-six, the slot
+
+15
+00:00:27.536 --> 00:00:29.479
+doing the looking, sees the earlier slots
+
+16
+00:00:29.479 --> 00:00:31.467
+it looks at as one back, two back, three
+
+17
+00:00:31.467 --> 00:00:32.262
+back, and so on.
+
+18
+00:00:32.527 --> 00:00:34.603
+A slot four later, at five eighty, on beat
+
+19
+00:00:34.603 --> 00:00:36.325
+two, sees exactly the same distances.
+
+20
+00:00:36.765 --> 00:00:38.604
+Distance says how far, not where.
+
+21
+00:00:38.919 --> 00:00:40.653
+Nothing in it marks the downbeat.
+
+22
+00:00:40.969 --> 00:00:43.280
+And drums care where: in this song the
+
+23
+00:00:43.280 --> 00:00:45.382
+kick lands on beat one and the snare on
+
+24
+00:00:45.382 --> 00:00:46.380
+beats two and four.
+
+25
+00:00:47.850 --> 00:00:50.067
+Nor can the model find the song's start by
+
+26
+00:00:50.067 --> 00:00:52.181
+looking back: past two thousand and
+
+27
+00:00:52.181 --> 00:00:54.399
+forty-eight slots, the first slot is out
+
+28
+00:00:54.399 --> 00:00:55.121
+of the window.
+
+29
+00:00:55.574 --> 00:00:56.630
+So the model is told.
+
+30
+00:00:56.932 --> 00:00:59.296
+It gets the bar phase: where in the bar a
+
+31
+00:00:59.296 --> 00:01:01.560
+slot sits, from zero, the downbeat, to
+
+32
+00:01:01.560 --> 00:01:01.962
+fifteen.
+
+33
+00:01:05.390 --> 00:01:07.974
+Start with the song slot counter, t: a
+
+34
+00:01:07.974 --> 00:01:10.277
+slot's number, counted from the song's
+
+35
+00:01:10.277 --> 00:01:11.625
+first slot, slot zero.
+
+36
+00:01:11.962 --> 00:01:14.153
+Modulo is the remainder after dividing.
+
+37
+00:01:14.719 --> 00:01:17.133
+Divide five hundred and seventy-six by
+
+38
+00:01:17.133 --> 00:01:20.353
+sixteen: thirty-six, exactly, with nothing
+
+39
+00:01:20.353 --> 00:01:20.972
+left over.
+
+40
+00:01:21.343 --> 00:01:24.191
+So five seventy-six mod sixteen is zero:
+
+41
+00:01:24.191 --> 00:01:26.296
+phase zero, the downbeat of bar
+
+42
+00:01:26.296 --> 00:01:26.977
+thirty-six.
+
+43
+00:01:27.449 --> 00:01:29.440
+Five eighty is thirty-six sixteens and
+
+44
+00:01:29.440 --> 00:01:31.432
+four more: phase four, beat two.
+
+45
+00:01:31.875 --> 00:01:34.337
+And five ninety-two, sixteen slots after
+
+46
+00:01:34.337 --> 00:01:37.201
+five seventy-six, is phase zero again: the
+
+47
+00:01:37.201 --> 00:01:38.002
+next bar line.
+
+48
+00:01:38.346 --> 00:01:41.038
+Like a clock with sixteen hours: count on
+
+49
+00:01:41.038 --> 00:01:43.386
+one slot at a time, and the hand comes
+
+50
+00:01:43.386 --> 00:01:45.161
+back to zero at every bar line.
+
+51
+00:01:46.746 --> 00:01:48.940
+In the code, line one twenty-one reads the
+
+52
+00:01:48.940 --> 00:01:51.183
+counter, t nought, from the model's state.
+
+53
+00:01:51.589 --> 00:01:53.939
+Line one twenty-two lists the slot numbers
+
+54
+00:01:53.939 --> 00:01:55.742
+of this call, from t nought on.
+
+55
+00:01:56.070 --> 00:01:58.310
+And line one twenty-three takes them mod
+
+56
+00:01:58.310 --> 00:02:00.879
+PHASE, sixteen, to pick a row of the phase
+
+57
+00:02:00.879 --> 00:02:02.901
+table, which is added to the input
+
+58
+00:02:02.901 --> 00:02:05.032
+projection from four point seven point
+
+59
+00:02:05.032 --> 00:02:05.251
+one.
+
+60
+00:02:05.753 --> 00:02:08.449
+For our slot: t is five seventy-six, mod
+
+61
+00:02:08.449 --> 00:02:10.696
+sixteen is zero, so it takes row zero.
+
+62
+00:02:14.193 --> 00:02:17.126
+The table is one line: self dot phase, an
+
+63
+00:02:17.126 --> 00:02:19.759
+n n dot Embedding of sixteen rows, each d
+
+64
+00:02:19.759 --> 00:02:21.434
+model, ninety-six, wide.
+
+65
+00:02:21.969 --> 00:02:24.666
+Here it is, the real one from T128:
+
+66
+00:02:24.666 --> 00:02:27.238
+sixteen rows, one for each step of the
+
+67
+00:02:27.238 --> 00:02:29.622
+bar, and ninety-six numbers in each.
+
+68
+00:02:30.109 --> 00:02:32.470
+Sixteen times ninety-six is one thousand
+
+69
+00:02:32.470 --> 00:02:34.715
+five hundred and thirty-six parameters.
+
+70
+00:02:35.061 --> 00:02:37.824
+Nothing is put in by hand: training learns
+
+71
+00:02:37.824 --> 00:02:39.494
+every row, like any weight.
+
+72
+00:02:39.965 --> 00:02:42.697
+Our slot is at phase zero, so it reads row
+
+73
+00:02:42.697 --> 00:02:43.001
+zero.
+
+74
+00:02:43.365 --> 00:02:45.915
+It starts one point one one, minus zero
+
+75
+00:02:45.915 --> 00:02:48.647
+point nine two, zero point five one, and
+
+76
+00:02:48.647 --> 00:02:49.801
+ninety more follow.
+
+77
+00:02:50.333 --> 00:02:52.788
+Reading a row is a lookup, not a sum: no
+
+78
+00:02:52.788 --> 00:02:54.527
+multiplying, just take row zero.
+
+79
+00:02:58.037 --> 00:03:00.243
+Here is the whole addition for our slot.
+
+80
+00:03:00.574 --> 00:03:02.946
+The projection from four point seven point
+
+81
+00:03:02.946 --> 00:03:05.538
+one, plus row zero of the table, gives the
+
+82
+00:03:05.538 --> 00:03:07.745
+ninety-six numbers that enter the first
+
+83
+00:03:07.745 --> 00:03:08.076
+block.
+
+84
+00:03:08.567 --> 00:03:09.551
+Entry by entry.
+
+85
+00:03:09.944 --> 00:03:13.027
+Entry zero: zero point six five four plus
+
+86
+00:03:13.027 --> 00:03:15.847
+one point one zero nine is one point seven
+
+87
+00:03:15.847 --> 00:03:16.503
+six three.
+
+88
+00:03:17.036 --> 00:03:18.919
+The other ninety-five are added the same
+
+89
+00:03:18.919 --> 00:03:20.250
+way, each with its partner.
+
+90
+00:03:21.763 --> 00:03:23.574
+Why add the two lists, rather than join
+
+91
+00:03:23.574 --> 00:03:24.264
+them end to end?
+
+92
+00:03:24.704 --> 00:03:26.992
+Joining would make each slot a hundred and
+
+93
+00:03:26.992 --> 00:03:29.333
+ninety-two numbers, and every layer after
+
+94
+00:03:29.333 --> 00:03:30.717
+it would have to be wider.
+
+95
+00:03:31.036 --> 00:03:33.005
+Adding keeps the width at ninety-six.
+
+96
+00:03:34.742 --> 00:03:37.069
+And adding gives up nothing a linear layer
+
+97
+00:03:37.069 --> 00:03:37.556
+could do.
+
+98
+00:03:37.881 --> 00:03:40.154
+Write the phase as a one-hot vector:
+
+99
+00:03:40.154 --> 00:03:42.536
+sixteen numbers, all zero except a one at
+
+100
+00:03:42.536 --> 00:03:43.077
+the phase.
+
+101
+00:03:43.521 --> 00:03:45.038
+The projection is W x plus b.
+
+102
+00:03:45.352 --> 00:03:47.653
+The table row is the table, turned on its
+
+103
+00:03:47.653 --> 00:03:50.268
+side, times that vector: the one picks out
+
+104
+00:03:50.268 --> 00:03:50.581
+row p.
+
+105
+00:03:50.895 --> 00:03:52.987
+So together they are exactly one linear
+
+106
+00:03:52.987 --> 00:03:55.445
+layer reading twenty-one inputs: the five
+
+107
+00:03:55.445 --> 00:03:57.171
+numbers and the sixteen switches.
+
+108
+00:03:57.484 --> 00:03:59.524
+On our slot the two ways give the same
+
+109
+00:03:59.524 --> 00:04:00.518
+ninety-six numbers.
+
+110
+00:04:02.239 --> 00:04:04.792
+One measured detail: on this slot, the
+
+111
+00:04:04.792 --> 00:04:06.734
+phase row is the bigger of the two.
+
+112
+00:04:07.067 --> 00:04:09.564
+Its size, the length that four point seven
+
+113
+00:04:09.564 --> 00:04:12.116
+point three defines, is eleven point one,
+
+114
+00:04:12.116 --> 00:04:14.446
+against six point zero for the projection.
+
+115
+00:04:17.933 --> 00:04:20.226
+The counter is part of the model's state,
+
+116
+00:04:20.226 --> 00:04:21.112
+beside the cache.
+
+117
+00:04:21.424 --> 00:04:23.769
+It starts at zero, and every call moves it
+
+118
+00:04:23.769 --> 00:04:25.541
+on by the number of slots it took.
+
+119
+00:04:26.259 --> 00:04:28.595
+In training and scoring, slots come in
+
+120
+00:04:28.595 --> 00:04:30.532
+chunks of five hundred and twelve.
+
+121
+00:04:30.874 --> 00:04:32.981
+The chunk that starts at five twelve
+
+122
+00:04:32.981 --> 00:04:34.804
+covers slots five twelve to ten
+
+123
+00:04:34.804 --> 00:04:36.969
+twenty-three, and our slot is index
+
+124
+00:04:36.969 --> 00:04:37.938
+sixty-four in it.
+
+125
+00:04:38.521 --> 00:04:41.143
+Live, slots come one call at a time, and
+
+126
+00:04:41.143 --> 00:04:43.532
+after five hundred and seventy-six calls
+
+127
+00:04:43.532 --> 00:04:45.572
+the counter reads five seventy-six.
+
+128
+00:04:46.081 --> 00:04:48.316
+Both give phase zero and the same row.
+
+129
+00:04:48.669 --> 00:04:50.904
+A check of chunk against slot by slot
+
+130
+00:04:50.904 --> 00:04:53.433
+confirms it: at this slot the outputs
+
+131
+00:04:53.433 --> 00:04:55.668
+agree to three point three millionths.
+
+132
+00:04:59.200 --> 00:05:01.593
+Live, the counter restarts at zero at the
+
+133
+00:05:01.593 --> 00:05:03.061
+first slot of each segment.
+
+134
+00:05:03.387 --> 00:05:05.998
+A segment always starts on a downbeat: the
+
+135
+00:05:05.998 --> 00:05:08.499
+first one, or a model switch, which waits
+
+136
+00:05:08.499 --> 00:05:09.424
+for the bar line.
+
+137
+00:05:10.125 --> 00:05:12.342
+The design is that the board says where
+
+138
+00:05:12.342 --> 00:05:13.228
+the bar line is.
+
+139
+00:05:13.561 --> 00:05:15.832
+Its SYNC message carries a beat position
+
+140
+00:05:15.832 --> 00:05:18.215
+and a bar position, and on the sync grid
+
+141
+00:05:18.215 --> 00:05:20.376
+the drums join at the board's next bar
+
+142
+00:05:20.376 --> 00:05:20.653
+line.
+
+143
+00:05:21.175 --> 00:05:23.447
+That path is built, and passed its tests
+
+144
+00:05:23.447 --> 00:05:24.504
+with the fake board.
+
+145
+00:05:24.821 --> 00:05:27.040
+On the real board, on the fourteenth of
+
+146
+00:05:27.040 --> 00:05:29.365
+October, SYNC carried a tempo of zero and
+
+147
+00:05:29.365 --> 00:05:31.638
+no lock flag, so it hasn't been used yet.
+
+148
+00:05:32.251 --> 00:05:34.307
+So today the bar line comes from the
+
+149
+00:05:34.307 --> 00:05:36.474
+laptop's count-in click, or from the
+
+150
+00:05:36.474 --> 00:05:38.307
+guitarist's four count-in strums.
+
+151
+00:05:41.777 --> 00:05:44.303
+This gives the transformer something the
+
+152
+00:05:44.303 --> 00:05:45.843
+other two arms don't get.
+
+153
+00:05:46.213 --> 00:05:48.801
+The LSTM and S4D are never told the phase.
+
+154
+00:05:49.170 --> 00:05:51.327
+They can only count from slot zero.
+
+155
+00:05:51.954 --> 00:05:54.206
+Counting can work in principle, because
+
+156
+00:05:54.206 --> 00:05:56.243
+slot zero is a bar line in every song.
+
+157
+00:05:56.565 --> 00:05:58.924
+A check on the twenty-sixth of September,
+
+158
+00:05:58.924 --> 00:06:01.283
+over three thousand training songs, found
+
+159
+00:06:01.283 --> 00:06:03.428
+ninety-eight point one percent start at
+
+160
+00:06:03.428 --> 00:06:05.787
+bar zero, the rest at a later bar line,
+
+161
+00:06:05.787 --> 00:06:07.663
+and any gaps come in whole two-bar
+
+162
+00:06:07.663 --> 00:06:08.092
+windows.
+
+163
+00:06:08.540 --> 00:06:10.886
+Whether they actually learn to count is a
+
+164
+00:06:10.886 --> 00:06:11.891
+separate question.
+
+165
+00:06:12.226 --> 00:06:14.739
+One reported check, on the twenty-third of
+
+166
+00:06:14.739 --> 00:06:17.253
+September, looked inside the ear-preferred
+
+167
+00:06:17.253 --> 00:06:19.598
+LSTM of the time on one song and found no
+
+168
+00:06:19.598 --> 00:06:22.056
+single cell tracking bar position: the
+
+169
+00:06:22.056 --> 00:06:24.290
+largest correlation was zero point zero
+
+170
+00:06:24.290 --> 00:06:24.625
+seven.
+
+171
+00:06:25.075 --> 00:06:27.371
+So on the results page this is a fairness
+
+172
+00:06:27.371 --> 00:06:29.995
+caveat: the transformer arm gets the phase
+
+173
+00:06:29.995 --> 00:06:30.597
+explicitly.
+
+174
+00:06:32.158 --> 00:06:34.426
+In one breath: attention knows how far
+
+175
+00:06:34.426 --> 00:06:35.920
+back, not where in the bar.
+
+176
+00:06:36.229 --> 00:06:38.239
+So slot t mod sixteen picks a row of a
+
+177
+00:06:38.239 --> 00:06:40.558
+learned sixteen by ninety-six table, added
+
+178
+00:06:40.558 --> 00:06:42.671
+to the token, the same in training and
+
+179
+00:06:42.671 --> 00:06:42.929
+live.
+
+180
+00:06:43.238 --> 00:06:45.248
+This pairs with part two of the course
+
+181
+00:06:45.248 --> 00:06:47.464
+explainer, on position, and the course
+
+182
+00:06:47.464 --> 00:06:48.907
+page's attention visualiser.
+
+183
+00:06:49.217 --> 00:06:50.299
+Next, dot products.
+

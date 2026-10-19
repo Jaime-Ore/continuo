@@ -1,0 +1,974 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.282
+Lesson two point two.
+
+2
+00:00:01.637 --> 00:00:03.943
+How a web crawl of MIDI files became a
+
+3
+00:00:03.943 --> 00:00:05.835
+corpus of guitar and drum songs.
+
+4
+00:00:09.843 --> 00:00:12.019
+Here's a real file from Lakh, one of the
+
+5
+00:00:12.019 --> 00:00:13.587
+samples we pulled out to study.
+
+6
+00:00:13.891 --> 00:00:15.915
+Its header says four hundred and eighty
+
+7
+00:00:15.915 --> 00:00:17.685
+ticks per beat, and seven tracks.
+
+8
+00:00:17.989 --> 00:00:20.367
+MIDI counts time in ticks: here a beat is
+
+9
+00:00:20.367 --> 00:00:22.593
+four hundred and eighty of them, so a bar
+
+10
+00:00:22.593 --> 00:00:24.516
+of four beats is nineteen hundred and
+
+11
+00:00:24.516 --> 00:00:24.870
+twenty.
+
+12
+00:00:25.301 --> 00:00:26.840
+A file is split into tracks.
+
+13
+00:00:27.170 --> 00:00:29.642
+Track zero holds no notes at all, only the
+
+14
+00:00:29.642 --> 00:00:32.115
+conductor's information: the tempo, a
+
+15
+00:00:32.115 --> 00:00:34.423
+hundred and forty beats per minute, and
+
+16
+00:00:34.423 --> 00:00:35.522
+the time signatures.
+
+17
+00:00:35.957 --> 00:00:38.110
+Tracks one to six hold the notes, and
+
+18
+00:00:38.110 --> 00:00:40.316
+every note names one of sixteen channels.
+
+19
+00:00:40.639 --> 00:00:43.062
+By convention channel ten is the drums:
+
+20
+00:00:43.062 --> 00:00:45.322
+there a note number names a drum, not a
+
+21
+00:00:45.322 --> 00:00:45.645
+pitch.
+
+22
+00:00:45.968 --> 00:00:48.283
+Code counts from zero, so the code calls
+
+23
+00:00:48.283 --> 00:00:49.144
+it channel nine.
+
+24
+00:00:49.590 --> 00:00:51.624
+On the other channels a program change
+
+25
+00:00:51.624 --> 00:00:53.867
+picks the sound: one of a hundred and
+
+26
+00:00:53.867 --> 00:00:55.850
+twenty-eight General MIDI instruments.
+
+27
+00:00:56.163 --> 00:00:58.353
+Numbers twenty-four to thirty-one are the
+
+28
+00:00:58.353 --> 00:01:00.492
+guitars, thirty-two to thirty-nine the
+
+29
+00:01:00.492 --> 00:01:00.857
+basses.
+
+30
+00:01:01.170 --> 00:01:03.622
+This file has three guitar tracks, a bass,
+
+31
+00:01:03.622 --> 00:01:05.552
+and a synth lead standing in for the
+
+32
+00:01:05.552 --> 00:01:05.917
+singer.
+
+33
+00:01:06.378 --> 00:01:07.556
+Now the notes themselves.
+
+34
+00:01:07.838 --> 00:01:09.817
+The first instruction in this file, one
+
+35
+00:01:09.817 --> 00:01:12.125
+point seven one four seconds in: note on,
+
+36
+00:01:12.125 --> 00:01:14.103
+channel nine, note thirty-six, a kick
+
+37
+00:01:14.103 --> 00:01:15.940
+drum, at velocity a hundred and four.
+
+38
+00:01:16.223 --> 00:01:18.248
+Velocity is how hard the note is struck,
+
+39
+00:01:18.248 --> 00:01:20.132
+from zero to a hundred and twenty-seven.
+
+40
+00:01:20.415 --> 00:01:22.346
+At the same moment the guitar plays note
+
+41
+00:01:22.346 --> 00:01:24.371
+forty-three, a low G, at a hundred and
+
+42
+00:01:24.371 --> 00:01:24.795
+fourteen.
+
+43
+00:01:25.184 --> 00:01:26.565
+A note off ends each note.
+
+44
+00:01:26.884 --> 00:01:29.115
+Our pipeline keeps only the starts, the
+
+45
+00:01:29.115 --> 00:01:31.665
+onsets: when, which note, and how hard.
+
+46
+00:01:31.984 --> 00:01:33.365
+Durations are thrown away.
+
+47
+00:01:37.347 --> 00:01:39.066
+Our code gives every track one of three
+
+48
+00:01:39.066 --> 00:01:40.398
+roles, and the rule is short.
+
+49
+00:01:40.656 --> 00:01:42.547
+Drums: anything on channel ten, plus
+
+50
+00:01:42.547 --> 00:01:44.309
+tracks whose name says they're drums and
+
+51
+00:01:44.309 --> 00:01:46.157
+whose notes sit, at least ninety percent
+
+52
+00:01:46.157 --> 00:01:47.748
+of them, on General MIDI drum keys.
+
+53
+00:01:48.005 --> 00:01:49.768
+Guitar: any channel playing program
+
+54
+00:01:49.768 --> 00:01:50.885
+twenty-four to thirty-one.
+
+55
+00:01:51.143 --> 00:01:52.733
+Bass: thirty-two to thirty-nine.
+
+56
+00:01:52.991 --> 00:01:54.839
+Everything else is dropped, so the synth
+
+57
+00:01:54.839 --> 00:01:55.269
+lead goes.
+
+58
+00:01:56.069 --> 00:01:58.318
+The three guitar tracks are merged into
+
+59
+00:01:58.318 --> 00:01:59.218
+one guitar part.
+
+60
+00:01:59.555 --> 00:02:02.029
+Fifty-six notes, plus two thousand, two
+
+61
+00:02:02.029 --> 00:02:04.278
+hundred and seventy-three, plus seven
+
+62
+00:02:04.278 --> 00:02:06.920
+hundred and forty-two: three thousand and
+
+63
+00:02:06.920 --> 00:02:08.382
+seventy-one guitar onsets.
+
+64
+00:02:08.878 --> 00:02:11.258
+The drums have one thousand, four hundred
+
+65
+00:02:11.258 --> 00:02:13.259
+and seventy-six hits, every one at
+
+66
+00:02:13.259 --> 00:02:15.964
+velocity a hundred and four: typed in, not
+
+67
+00:02:15.964 --> 00:02:16.343
+played.
+
+68
+00:02:16.667 --> 00:02:18.939
+The bass has six hundred and eighty-eight
+
+69
+00:02:18.939 --> 00:02:19.263
+notes.
+
+70
+00:02:22.727 --> 00:02:25.131
+Now the filter, run on the twenty-first of
+
+71
+00:02:25.131 --> 00:02:26.733
+August over the whole archive.
+
+72
+00:02:27.054 --> 00:02:29.190
+These are the counts for version two of
+
+73
+00:02:29.190 --> 00:02:29.778
+the corpus.
+
+74
+00:02:30.099 --> 00:02:32.342
+We start with a hundred and seventy-eight
+
+75
+00:02:32.342 --> 00:02:34.426
+thousand, five hundred and sixty-one
+
+76
+00:02:34.426 --> 00:02:34.746
+files.
+
+77
+00:02:35.303 --> 00:02:37.938
+Stage one: does the file parse at all,
+
+78
+00:02:37.938 --> 00:02:39.198
+with the mido library?
+
+79
+00:02:39.542 --> 00:02:41.546
+Four thousand and twenty-two don't.
+
+80
+00:02:41.890 --> 00:02:44.353
+Lakh's file names are already the MD5 hash
+
+81
+00:02:44.353 --> 00:02:46.587
+of each file's bytes, so a check for
+
+82
+00:02:46.587 --> 00:02:48.420
+identical files removes nothing.
+
+83
+00:02:48.914 --> 00:02:50.889
+Stage two is the de-duplication that
+
+84
+00:02:50.889 --> 00:02:51.316
+matters.
+
+85
+00:02:51.636 --> 00:02:53.664
+The same music saved with a different
+
+86
+00:02:53.664 --> 00:02:55.959
+header has a different hash, so we use a
+
+87
+00:02:55.959 --> 00:02:58.254
+published list of near-duplicates, found
+
+88
+00:02:58.254 --> 00:03:00.496
+by two similarity models that both had to
+
+89
+00:03:00.496 --> 00:03:02.258
+agree above zero point nine nine.
+
+90
+00:03:02.578 --> 00:03:04.873
+Thirty-seven thousand, eight hundred and
+
+91
+00:03:04.873 --> 00:03:05.994
+eighty-nine files go.
+
+92
+00:03:06.430 --> 00:03:08.910
+Stage three is the big cut: the file must
+
+93
+00:03:08.910 --> 00:03:10.968
+have a guitar part with at least fifty
+
+94
+00:03:10.968 --> 00:03:13.025
+notes, and a drum part with at least
+
+95
+00:03:13.025 --> 00:03:13.342
+fifty.
+
+96
+00:03:13.658 --> 00:03:16.191
+Over seventy-seven thousand files go here;
+
+97
+00:03:16.191 --> 00:03:18.565
+most have no declared guitar at all, and a
+
+98
+00:03:18.565 --> 00:03:20.940
+three-note guitar part is a mistake, not a
+
+99
+00:03:20.940 --> 00:03:21.203
+part.
+
+100
+00:03:21.661 --> 00:03:24.161
+Stage four: at least ninety-five percent
+
+101
+00:03:24.161 --> 00:03:26.498
+of the file's time must be in four four,
+
+102
+00:03:26.498 --> 00:03:28.780
+because the grid the models read is built
+
+103
+00:03:28.780 --> 00:03:29.758
+of four-beat bars.
+
+104
+00:03:30.085 --> 00:03:32.422
+Six thousand, two hundred and fifty-nine
+
+105
+00:03:32.422 --> 00:03:32.585
+go.
+
+106
+00:03:33.064 --> 00:03:35.136
+Stage five: a sane length, eight to a
+
+107
+00:03:35.136 --> 00:03:37.069
+thousand bars and twenty seconds to forty
+
+108
+00:03:37.069 --> 00:03:37.438
+minutes.
+
+109
+00:03:37.714 --> 00:03:39.694
+A tempo map that gives an absurd length is
+
+110
+00:03:39.694 --> 00:03:41.029
+a corrupt file, not a song.
+
+111
+00:03:41.305 --> 00:03:43.101
+A hundred and ninety-one go, leaving
+
+112
+00:03:43.101 --> 00:03:44.942
+fifty-two thousand, eight hundred and
+
+113
+00:03:44.942 --> 00:03:46.462
+twenty-four songs in version two.
+
+114
+00:03:46.738 --> 00:03:48.718
+Version three, in chapter six, ends at
+
+115
+00:03:48.718 --> 00:03:50.559
+fifty-two thousand, seven hundred and
+
+116
+00:03:50.559 --> 00:03:51.158
+ninety-three.
+
+117
+00:03:54.580 --> 00:03:56.875
+Stage three removed the most, so look at
+
+118
+00:03:56.875 --> 00:03:57.730
+what it removed.
+
+119
+00:03:58.050 --> 00:04:00.292
+Thirty-three thousand files had neither a
+
+120
+00:04:00.292 --> 00:04:02.854
+guitar nor drums: files without guitar are
+
+121
+00:04:02.854 --> 00:04:05.097
+mostly the orchestral, karaoke and easy
+
+122
+00:04:05.097 --> 00:04:06.431
+listening end of the web.
+
+123
+00:04:06.751 --> 00:04:09.100
+Eight thousand had a guitar but no drums,
+
+124
+00:04:09.100 --> 00:04:11.396
+and under two thousand had both, but too
+
+125
+00:04:11.396 --> 00:04:11.930
+few notes.
+
+126
+00:04:12.371 --> 00:04:14.789
+And thirty-three thousand, nine hundred
+
+127
+00:04:14.789 --> 00:04:17.034
+and forty-five files have drums but no
+
+128
+00:04:17.034 --> 00:04:17.955
+declared guitar.
+
+129
+00:04:18.300 --> 00:04:20.776
+A rock song whose guitar was typed in on a
+
+130
+00:04:20.776 --> 00:04:23.309
+piano or synth sound lands here, and only
+
+131
+00:04:23.309 --> 00:04:25.439
+listening could tell it apart from a
+
+132
+00:04:25.439 --> 00:04:26.245
+keyboard song.
+
+133
+00:04:26.739 --> 00:04:27.487
+One more gap.
+
+134
+00:04:27.833 --> 00:04:30.307
+A channel that never gets a program change
+
+135
+00:04:30.307 --> 00:04:32.897
+plays program zero, a piano, so a guitar
+
+136
+00:04:32.897 --> 00:04:35.084
+part left on the default is invisible.
+
+137
+00:04:35.429 --> 00:04:37.789
+A probe of four thousand files puts that
+
+138
+00:04:37.789 --> 00:04:40.148
+at roughly seven hundred and fifty files
+
+139
+00:04:40.148 --> 00:04:41.184
+across the corpus.
+
+140
+00:04:41.620 --> 00:04:43.451
+So the rule's errors lean one way.
+
+141
+00:04:43.774 --> 00:04:45.875
+It trusts the declared program, so a
+
+142
+00:04:45.875 --> 00:04:48.136
+mislabelled part can still slip in, but
+
+143
+00:04:48.136 --> 00:04:50.398
+the big losses are real guitar songs left
+
+144
+00:04:50.398 --> 00:04:50.614
+out.
+
+145
+00:04:50.937 --> 00:04:53.091
+With about fifty thousand songs left,
+
+146
+00:04:53.091 --> 00:04:55.407
+there was enough to keep only what we were
+
+147
+00:04:55.407 --> 00:04:56.107
+confident in.
+
+148
+00:04:59.660 --> 00:05:00.590
+Back to our file.
+
+149
+00:05:00.918 --> 00:05:03.160
+Stage four asks what share of the file's
+
+150
+00:05:03.160 --> 00:05:04.308
+time is in four four.
+
+151
+00:05:04.636 --> 00:05:06.824
+Count the ticks spent under a four four
+
+152
+00:05:06.824 --> 00:05:09.230
+signature, and divide by all the ticks in
+
+153
+00:05:09.230 --> 00:05:09.722
+the file.
+
+154
+00:05:10.383 --> 00:05:12.433
+Here's the whole file as one strip of
+
+155
+00:05:12.433 --> 00:05:12.757
+ticks.
+
+156
+00:05:13.081 --> 00:05:15.401
+It has eight bars in two four, each half
+
+157
+00:05:15.401 --> 00:05:16.857
+as long as a four four bar.
+
+158
+00:05:17.181 --> 00:05:19.231
+Together that's seven thousand, six
+
+159
+00:05:19.231 --> 00:05:20.580
+hundred and eighty ticks.
+
+160
+00:05:21.019 --> 00:05:23.520
+So a hundred and ninety-two thousand ticks
+
+161
+00:05:23.520 --> 00:05:26.138
+of a hundred and ninety-nine thousand, six
+
+162
+00:05:26.138 --> 00:05:28.873
+hundred and eighty are in four four: zero
+
+163
+00:05:28.873 --> 00:05:30.269
+point nine six one five.
+
+164
+00:05:30.618 --> 00:05:33.120
+Above zero point nine five, so it passes.
+
+165
+00:05:33.584 --> 00:05:35.877
+Why a share of time, with five percent to
+
+166
+00:05:35.877 --> 00:05:36.190
+spare?
+
+167
+00:05:36.503 --> 00:05:38.640
+A few short odd bars in a long song cost
+
+168
+00:05:38.640 --> 00:05:40.933
+little, so the rule keeps songs like this
+
+169
+00:05:40.933 --> 00:05:41.142
+one.
+
+170
+00:05:41.455 --> 00:05:43.800
+Four thousand, three hundred and fifty-six
+
+171
+00:05:43.800 --> 00:05:45.989
+of the final songs contain some bars that
+
+172
+00:05:45.989 --> 00:05:46.875
+aren't four four.
+
+173
+00:05:47.188 --> 00:05:49.377
+Lesson two point three shows how the grid
+
+174
+00:05:49.377 --> 00:05:50.211
+copes with them.
+
+175
+00:05:50.651 --> 00:05:53.238
+Stage five counts bars the simple way: all
+
+176
+00:05:53.238 --> 00:05:55.502
+the ticks, over four hundred and eighty
+
+177
+00:05:55.502 --> 00:05:57.119
+ticks a beat times four beats.
+
+178
+00:05:57.443 --> 00:05:59.868
+A hundred and four bars, and a hundred and
+
+179
+00:05:59.868 --> 00:06:00.893
+eighty-two seconds.
+
+180
+00:06:01.216 --> 00:06:03.480
+Well inside the limits, so this file is
+
+181
+00:06:03.480 --> 00:06:05.097
+one of the fifty-two thousand.
+
+182
+00:06:08.567 --> 00:06:10.317
+One rule had a second version.
+
+183
+00:06:10.667 --> 00:06:12.768
+Some files write a drum kit onto an
+
+184
+00:06:12.768 --> 00:06:15.336
+ordinary channel, not channel ten, so a
+
+185
+00:06:15.336 --> 00:06:17.786
+repair rule rescues tracks that look like
+
+186
+00:06:17.786 --> 00:06:18.137
+drums.
+
+187
+00:06:18.583 --> 00:06:20.352
+Version two rescued a track if its name
+
+188
+00:06:20.352 --> 00:06:22.120
+said drums and nine in ten of its notes
+
+189
+00:06:22.120 --> 00:06:24.109
+sat on drum keys, or if its pitches looked
+
+190
+00:06:24.109 --> 00:06:24.595
+like a kit.
+
+191
+00:06:24.860 --> 00:06:26.673
+An audit on the ninth of September found
+
+192
+00:06:26.673 --> 00:06:28.441
+the pitch test was letting in piano and
+
+193
+00:06:28.441 --> 00:06:30.651
+bass parts: of three thousand, six hundred
+
+194
+00:06:30.651 --> 00:06:32.287
+and sixteen tracks it rescued, one
+
+195
+00:06:32.287 --> 00:06:34.232
+thousand, nine hundred and thirty-six had
+
+196
+00:06:34.232 --> 00:06:36.000
+under a fifth of their notes on kick,
+
+197
+00:06:36.000 --> 00:06:36.928
+snare or hat pitches.
+
+198
+00:06:37.293 --> 00:06:39.219
+Why the pitch-range test failed: a bass
+
+199
+00:06:39.219 --> 00:06:40.888
+line in E major sits on notes forty,
+
+200
+00:06:40.888 --> 00:06:42.686
+forty-two, forty-four, forty-nine and
+
+201
+00:06:42.686 --> 00:06:44.398
+fifty-one, which General MIDI calls a
+
+202
+00:06:44.398 --> 00:06:46.239
+snare, two hi-hats, a crash and a ride.
+
+203
+00:06:46.495 --> 00:06:48.250
+A sharper test, the share of a track's
+
+204
+00:06:48.250 --> 00:06:50.348
+notes on kit pitches, does separate them:
+
+205
+00:06:50.348 --> 00:06:51.974
+at zero point eight it would win back
+
+206
+00:06:51.974 --> 00:06:53.644
+about five hundred and fifty-five real
+
+207
+00:06:53.644 --> 00:06:53.858
+kits.
+
+208
+00:06:54.114 --> 00:06:56.041
+It wasn't built; the choice was to stay
+
+209
+00:06:56.041 --> 00:06:56.426
+cautious.
+
+210
+00:06:57.321 --> 00:06:59.305
+Version three drops the pitch test.
+
+211
+00:06:59.645 --> 00:07:01.969
+A track is rescued only if its name says
+
+212
+00:07:01.969 --> 00:07:04.463
+drums, it isn't a General MIDI instrument
+
+213
+00:07:04.463 --> 00:07:07.014
+like steel drums, nine in ten of its notes
+
+214
+00:07:07.014 --> 00:07:09.394
+are on drum keys, and at least half are
+
+215
+00:07:09.394 --> 00:07:09.961
+kit notes.
+
+216
+00:07:10.401 --> 00:07:12.267
+The result: fifty-two thousand, eight
+
+217
+00:07:12.267 --> 00:07:13.802
+hundred and twenty-four songs became
+
+218
+00:07:13.802 --> 00:07:15.461
+fifty-two thousand, seven hundred and
+
+219
+00:07:15.461 --> 00:07:16.000
+ninety-three.
+
+220
+00:07:16.249 --> 00:07:18.073
+Two hundred and seventy-two left, and two
+
+221
+00:07:18.073 --> 00:07:19.732
+hundred and forty-one joined, where a
+
+222
+00:07:19.732 --> 00:07:21.266
+rescued drum track had really been a
+
+223
+00:07:21.266 --> 00:07:21.557
+guitar.
+
+224
+00:07:21.806 --> 00:07:23.589
+Songs with a rescued track fell from three
+
+225
+00:07:23.589 --> 00:07:25.372
+thousand, six hundred and thirty-four to
+
+226
+00:07:25.372 --> 00:07:27.197
+two hundred and forty-five, and the store
+
+227
+00:07:27.197 --> 00:07:28.773
+holds about a million fewer drum hits.
+
+228
+00:07:29.111 --> 00:07:29.896
+It had a price.
+
+229
+00:07:30.211 --> 00:07:32.306
+Eight hundred and ninety-five real kits
+
+230
+00:07:32.306 --> 00:07:34.192
+sat on other channels with blank or
+
+231
+00:07:34.192 --> 00:07:36.445
+unhelpful names, and version three loses
+
+232
+00:07:36.445 --> 00:07:39.012
+them: in the songs that stayed, toms fell
+
+233
+00:07:39.012 --> 00:07:41.422
+by fifty-five percent, crashes forty-six,
+
+234
+00:07:41.422 --> 00:07:42.417
+rides thirty-eight.
+
+235
+00:07:42.731 --> 00:07:43.936
+Both versions are kept.
+
+236
+00:07:44.250 --> 00:07:46.136
+The drummers train on version three.
+
+237
+00:07:47.713 --> 00:07:49.876
+Five stages: it parses, it isn't a
+
+238
+00:07:49.876 --> 00:07:52.193
+duplicate, it has a real guitar part and a
+
+239
+00:07:52.193 --> 00:07:54.356
+real drum part, it's nearly all in four
+
+240
+00:07:54.356 --> 00:07:55.953
+four, and it's a sane length.
+
+241
+00:07:56.262 --> 00:07:57.601
+What's left is the corpus.
+
+242
+00:07:57.910 --> 00:08:00.331
+Next, lesson two point three: how those
+
+243
+00:08:00.331 --> 00:08:02.494
+songs are put on the grid the models read.
+

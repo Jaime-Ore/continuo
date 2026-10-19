@@ -1,0 +1,638 @@
+WEBVTT
+
+1
+00:00:00.030 --> 00:00:01.828
+Lesson four point seven point one.
+
+2
+00:00:02.145 --> 00:00:03.573
+How a slot becomes a token.
+
+3
+00:00:07.540 --> 00:00:10.038
+A transformer reads a sequence of tokens,
+
+4
+00:00:10.038 --> 00:00:12.139
+and works out something for each one.
+
+5
+00:00:12.480 --> 00:00:14.864
+In a language model a token is a piece of
+
+6
+00:00:14.864 --> 00:00:15.262
+a word.
+
+7
+00:00:15.602 --> 00:00:17.930
+In ours, a token is one slot: one
+
+8
+00:00:17.930 --> 00:00:20.372
+sixteenth note of the grid from lesson one
+
+9
+00:00:20.372 --> 00:00:20.939
+point two.
+
+10
+00:00:21.449 --> 00:00:23.823
+In every part of this module we follow one
+
+11
+00:00:23.823 --> 00:00:25.920
+real slot: slot five hundred and
+
+12
+00:00:25.920 --> 00:00:28.183
+seventy-six of validation song zero zero
+
+13
+00:00:28.183 --> 00:00:30.391
+one one b three c f, at a hundred and
+
+14
+00:00:30.391 --> 00:00:31.716
+twenty beats per minute.
+
+15
+00:00:32.047 --> 00:00:34.531
+It's the first slot of bar thirty-six, the
+
+16
+00:00:34.531 --> 00:00:36.959
+downbeat, and the real drummer plays kick
+
+17
+00:00:36.959 --> 00:00:38.118
+and closed hat on it.
+
+18
+00:00:38.924 --> 00:00:41.236
+The model is handed five numbers for this
+
+19
+00:00:41.236 --> 00:00:43.823
+slot: the five inputs of lesson one point
+
+20
+00:00:43.823 --> 00:00:44.043
+two.
+
+21
+00:00:44.373 --> 00:00:45.915
+Onset and velocity are zero.
+
+22
+00:00:46.245 --> 00:00:48.667
+The model hears the guitar one slot late,
+
+23
+00:00:48.667 --> 00:00:51.089
+so these describe slot five seventy-five,
+
+24
+00:00:51.089 --> 00:00:52.685
+where the guitar didn't play.
+
+25
+00:00:53.016 --> 00:00:55.272
+Its note on five seventy-six reaches the
+
+26
+00:00:55.272 --> 00:00:56.814
+model at five seventy-seven.
+
+27
+00:00:57.281 --> 00:01:00.018
+Intensity is zero point four four one: the
+
+28
+00:01:00.018 --> 00:01:02.471
+running average of recent onsets, with a
+
+29
+00:01:02.471 --> 00:01:03.668
+half-life of one bar.
+
+30
+00:01:04.011 --> 00:01:06.349
+The velocity flag is one, because this
+
+31
+00:01:06.349 --> 00:01:08.459
+song's guitar velocities really vary.
+
+32
+00:01:08.801 --> 00:01:11.311
+And tempo is zero, because the song is at
+
+33
+00:01:11.311 --> 00:01:12.508
+a hundred and twenty.
+
+34
+00:01:16.057 --> 00:01:18.358
+Lesson three point one's linear layer
+
+35
+00:01:18.358 --> 00:01:21.203
+turns those five numbers into ninety-six:
+
+36
+00:01:21.203 --> 00:01:23.746
+multiply by a weight matrix, add a bias.
+
+37
+00:01:24.110 --> 00:01:26.713
+The code calls this layer inp, for input.
+
+38
+00:01:27.207 --> 00:01:28.945
+x is the slot's five numbers.
+
+39
+00:01:29.305 --> 00:01:31.883
+W in is the weight matrix: ninety-six
+
+40
+00:01:31.883 --> 00:01:34.642
+rows, one per output, and five columns,
+
+41
+00:01:34.642 --> 00:01:35.481
+one per input.
+
+42
+00:01:35.841 --> 00:01:38.479
+b in is ninety-six biases, one per output.
+
+43
+00:01:38.839 --> 00:01:41.297
+And the output comes out ninety-six long.
+
+44
+00:01:41.820 --> 00:01:44.566
+In the code it's one line: self dot inp,
+
+45
+00:01:44.566 --> 00:01:47.083
+an n n dot Linear from n in, five, to d
+
+46
+00:01:47.083 --> 00:01:48.227
+model, ninety-six.
+
+47
+00:01:48.658 --> 00:01:51.038
+Its parameters: ninety-six times five
+
+48
+00:01:51.038 --> 00:01:53.529
+weights, plus ninety-six biases: four
+
+49
+00:01:53.529 --> 00:01:55.909
+hundred and eighty plus ninety-six, five
+
+50
+00:01:55.909 --> 00:01:57.238
+hundred and seventy-six.
+
+51
+00:01:57.570 --> 00:01:59.452
+The same number as our slot, by
+
+52
+00:01:59.452 --> 00:02:00.116
+coincidence.
+
+53
+00:02:03.597 --> 00:02:06.534
+Here is the real W in, from T128 at epoch
+
+54
+00:02:06.534 --> 00:02:07.001
+eleven.
+
+55
+00:02:07.401 --> 00:02:10.005
+Each of its five columns is drawn as a
+
+56
+00:02:10.005 --> 00:02:13.209
+row: the ninety-six weights that one input
+
+57
+00:02:13.209 --> 00:02:13.876
+sends out.
+
+58
+00:02:14.277 --> 00:02:16.546
+Below it, the ninety-six biases.
+
+59
+00:02:17.091 --> 00:02:19.565
+For our slot three inputs are zero, so
+
+60
+00:02:19.565 --> 00:02:20.772
+their rows drop out.
+
+61
+00:02:21.134 --> 00:02:23.729
+What's left is the bias, plus zero point
+
+62
+00:02:23.729 --> 00:02:26.204
+four four one times the intensity row,
+
+63
+00:02:26.204 --> 00:02:28.799
+plus one times the flag row, vel is real.
+
+64
+00:02:29.317 --> 00:02:31.281
+Take entry zero, the first of the
+
+65
+00:02:31.281 --> 00:02:31.881
+ninety-six.
+
+66
+00:02:32.208 --> 00:02:34.445
+The bias there is zero point three three
+
+67
+00:02:34.445 --> 00:02:35.045
+nine three.
+
+68
+00:02:35.372 --> 00:02:37.554
+The intensity weight is zero point zero
+
+69
+00:02:37.554 --> 00:02:40.009
+six zero zero eight, times zero point four
+
+70
+00:02:40.009 --> 00:02:40.500
+four one.
+
+71
+00:02:40.827 --> 00:02:43.009
+The flag weight is zero point two eight
+
+72
+00:02:43.009 --> 00:02:44.264
+eight one, times one.
+
+73
+00:02:44.591 --> 00:02:47.100
+Add them: zero point six five three nine.
+
+74
+00:02:47.599 --> 00:02:49.800
+Do that for every entry and you have the
+
+75
+00:02:49.800 --> 00:02:52.484
+output: ninety-six new numbers, entry zero
+
+76
+00:02:52.484 --> 00:02:52.807
+first.
+
+77
+00:02:56.257 --> 00:02:58.711
+Here are those ninety-six numbers as bars:
+
+78
+00:02:58.711 --> 00:03:00.500
+ochre above the line, blue below.
+
+79
+00:03:00.970 --> 00:03:03.641
+The first six read zero point six five,
+
+80
+00:03:03.641 --> 00:03:06.439
+zero point one two, minus zero point zero
+
+81
+00:03:06.439 --> 00:03:09.237
+nine, minus zero point seven nine, zero
+
+82
+00:03:09.237 --> 00:03:11.909
+point one nine and zero point three eight.
+
+83
+00:03:12.290 --> 00:03:13.498
+Ninety more follow.
+
+84
+00:03:14.049 --> 00:03:15.762
+This list of ninety-six numbers is a
+
+85
+00:03:15.762 --> 00:03:18.216
+vector: for now, just a list of numbers;
+
+86
+00:03:18.216 --> 00:03:19.975
+four point seven point three makes it
+
+87
+00:03:19.975 --> 00:03:20.345
+precise.
+
+88
+00:03:20.623 --> 00:03:22.244
+It is the first half of the slot's
+
+89
+00:03:22.244 --> 00:03:24.466
+embedding: the list of numbers that stands
+
+90
+00:03:24.466 --> 00:03:25.901
+for the token inside the model.
+
+91
+00:03:26.179 --> 00:03:27.939
+In four point seven point two the bar
+
+92
+00:03:27.939 --> 00:03:29.976
+phase is added to it, and that sum, the
+
+93
+00:03:29.976 --> 00:03:32.013
+whole embedding, is what enters the first
+
+94
+00:03:32.013 --> 00:03:32.291
+block.
+
+95
+00:03:33.932 --> 00:03:36.132
+If you've watched Velardo's transformer
+
+96
+00:03:36.132 --> 00:03:38.607
+lessons: there, a word's embedding is
+
+97
+00:03:38.607 --> 00:03:40.862
+looked up in a table, one row for each
+
+98
+00:03:40.862 --> 00:03:42.127
+word of the vocabulary.
+
+99
+00:03:42.457 --> 00:03:43.667
+We have no vocabulary.
+
+100
+00:03:43.997 --> 00:03:46.197
+A slot is five measured numbers, so a
+
+101
+00:03:46.197 --> 00:03:48.012
+linear layer computes its vector.
+
+102
+00:03:48.461 --> 00:03:49.054
+One aside.
+
+103
+00:03:49.410 --> 00:03:51.901
+The feedback model of option C also reads
+
+104
+00:03:51.901 --> 00:03:54.510
+the nine drums of the slot before, so its
+
+105
+00:03:54.510 --> 00:03:56.942
+layer takes fourteen inputs, five plus
+
+106
+00:03:56.942 --> 00:03:57.238
+nine.
+
+107
+00:03:57.594 --> 00:03:59.196
+Four point eight covers it.
+
+108
+00:04:02.717 --> 00:04:05.185
+The ninety-six has a name: d, the model
+
+109
+00:04:05.185 --> 00:04:05.500
+width.
+
+110
+00:04:05.815 --> 00:04:07.915
+Every token is carried as d numbers all
+
+111
+00:04:07.915 --> 00:04:10.489
+the way through: from the tokens, through
+
+112
+00:04:10.489 --> 00:04:12.222
+both blocks, to the final norm.
+
+113
+00:04:12.669 --> 00:04:14.012
+Some steps widen it for a while.
+
+114
+00:04:14.264 --> 00:04:15.859
+Attention makes three lists, called
+
+115
+00:04:15.859 --> 00:04:17.579
+queries, keys and values in four point
+
+116
+00:04:17.579 --> 00:04:19.216
+seven point five: two hundred and
+
+117
+00:04:19.216 --> 00:04:20.727
+eighty-eight numbers, three times
+
+118
+00:04:20.727 --> 00:04:22.531
+ninety-six, and comes back to ninety-six.
+
+119
+00:04:22.783 --> 00:04:24.588
+The feed-forward goes out to three hundred
+
+120
+00:04:24.588 --> 00:04:26.182
+and eighty-four, and comes back too.
+
+121
+00:04:26.434 --> 00:04:28.448
+Only the head leaves it: ninety-six to the
+
+122
+00:04:28.448 --> 00:04:28.910
+nine drums.
+
+123
+00:04:29.162 --> 00:04:30.673
+And attention's four heads split it
+
+124
+00:04:30.673 --> 00:04:32.058
+evenly: four of twenty-four.
+
+125
+00:04:32.457 --> 00:04:34.683
+Ninety-six is a setting: the trainer's
+
+126
+00:04:34.683 --> 00:04:36.808
+default width for the transformer, with
+
+127
+00:04:36.808 --> 00:04:38.123
+two blocks and four heads.
+
+128
+00:04:41.587 --> 00:04:43.905
+Why spread five numbers over ninety-six?
+
+129
+00:04:44.253 --> 00:04:45.586
+Not to add information.
+
+130
+00:04:45.933 --> 00:04:48.310
+Right after this layer, the ninety-six
+
+131
+00:04:48.310 --> 00:04:50.570
+numbers are the bias plus a mix of the
+
+132
+00:04:50.570 --> 00:04:53.294
+same five columns, one per input, weighted
+
+133
+00:04:53.294 --> 00:04:54.859
+by the slot's five numbers.
+
+134
+00:04:55.307 --> 00:04:57.415
+So for now they hold exactly what the five
+
+135
+00:04:57.415 --> 00:04:57.660
+held.
+
+136
+00:04:57.954 --> 00:04:58.542
+Nothing new.
+
+137
+00:04:59.027 --> 00:05:00.643
+The width is room for later.
+
+138
+00:05:00.989 --> 00:05:03.297
+Attention adds what it found in earlier
+
+139
+00:05:03.297 --> 00:05:05.836
+slots into these same ninety-six numbers,
+
+140
+00:05:05.836 --> 00:05:08.202
+and the feed-forward adds its own output.
+
+141
+00:05:08.548 --> 00:05:10.799
+Four point seven point nine shows that
+
+142
+00:05:10.799 --> 00:05:11.491
+running sum.
+
+143
+00:05:11.967 --> 00:05:13.791
+And the ninety-six have no names.
+
+144
+00:05:14.123 --> 00:05:16.334
+Each of the five inputs was designed by
+
+145
+00:05:16.334 --> 00:05:16.610
+hand.
+
+146
+00:05:16.942 --> 00:05:19.319
+The ninety-six are whatever training found
+
+147
+00:05:19.319 --> 00:05:21.088
+useful for predicting the drums.
+
+148
+00:05:21.419 --> 00:05:23.796
+No entry means loudness or downbeat, and
+
+149
+00:05:23.796 --> 00:05:26.063
+nothing in the code ties an entry to one
+
+150
+00:05:26.063 --> 00:05:26.505
+meaning.
+
+151
+00:05:28.175 --> 00:05:30.165
+In one breath: a slot is a token.
+
+152
+00:05:30.479 --> 00:05:32.521
+Its five numbers go through one linear
+
+153
+00:05:32.521 --> 00:05:34.667
+layer, ninety-six by five weights plus
+
+154
+00:05:34.667 --> 00:05:36.604
+ninety-six biases, into ninety-six
+
+155
+00:05:36.604 --> 00:05:38.908
+numbers, the model width, with room for
+
+156
+00:05:38.908 --> 00:05:40.059
+what the model learns.
+
+157
+00:05:40.374 --> 00:05:42.415
+This pairs with part two of the course
+
+158
+00:05:42.415 --> 00:05:44.195
+explainer: a token is a slot.
+
+159
+00:05:44.509 --> 00:05:45.661
+Next, the bar phase.
+

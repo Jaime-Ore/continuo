@@ -1,0 +1,1126 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.082
+Lesson two point six.
+
+2
+00:00:01.380 --> 00:00:03.612
+Where the genre drummers' songs come from,
+
+3
+00:00:03.612 --> 00:00:04.852
+and what was thrown away.
+
+4
+00:00:08.780 --> 00:00:11.049
+XMIDI is a collection of a hundred and
+
+5
+00:00:11.049 --> 00:00:13.201
+eight thousand and twenty-three MIDI
+
+6
+00:00:13.201 --> 00:00:15.586
+files, from a twenty twenty-five paper
+
+7
+00:00:15.586 --> 00:00:16.400
+called XMusic.
+
+8
+00:00:16.749 --> 00:00:19.541
+Lesson two point one said why we added it:
+
+9
+00:00:19.541 --> 00:00:21.461
+every file carries a genre label.
+
+10
+00:00:21.943 --> 00:00:23.589
+The labels are in the file name.
+
+11
+00:00:23.897 --> 00:00:24.823
+Here's a real one.
+
+12
+00:00:25.132 --> 00:00:27.395
+After the word XMIDI comes an emotion:
+
+13
+00:00:27.395 --> 00:00:27.703
+angry.
+
+14
+00:00:28.012 --> 00:00:29.247
+Then a genre: rock.
+
+15
+00:00:29.555 --> 00:00:31.510
+Then an eight-character ID, and the
+
+16
+00:00:31.510 --> 00:00:32.024
+extension.
+
+17
+00:00:32.501 --> 00:00:35.017
+There are eleven emotions, and six genres:
+
+18
+00:00:35.017 --> 00:00:37.584
+rock, pop, country, jazz, classical, and
+
+19
+00:00:37.584 --> 00:00:39.345
+folk, which the file names spell
+
+20
+00:00:39.345 --> 00:00:39.949
+traditional.
+
+21
+00:00:40.251 --> 00:00:42.415
+Rock is the biggest, twenty-six thousand
+
+22
+00:00:42.415 --> 00:00:44.528
+seven hundred files; traditional the
+
+23
+00:00:44.528 --> 00:00:46.491
+smallest, three thousand six hundred.
+
+24
+00:00:46.793 --> 00:00:48.806
+How good these labels are is lesson two
+
+25
+00:00:48.806 --> 00:00:49.359
+point five.
+
+26
+00:00:53.257 --> 00:00:55.905
+One script, xmidi count, reads every file
+
+27
+00:00:55.905 --> 00:00:57.690
+once and writes one row for it.
+
+28
+00:00:58.035 --> 00:01:00.453
+Here is a real row, for that angry rock
+
+29
+00:01:00.453 --> 00:01:00.741
+file.
+
+30
+00:01:01.255 --> 00:01:03.980
+First, the md5 of the file's bytes: a
+
+31
+00:01:03.980 --> 00:01:05.978
+thirty-two character fingerprint.
+
+32
+00:01:06.341 --> 00:01:08.884
+Change one byte and it changes completely.
+
+33
+00:01:09.248 --> 00:01:11.791
+Lakh's files are named by their md5, so
+
+34
+00:01:11.791 --> 00:01:14.273
+this is how we ask whether a file is one
+
+35
+00:01:14.273 --> 00:01:15.242
+we already have.
+
+36
+00:01:15.762 --> 00:01:17.978
+Then the file is parsed with the parser of
+
+37
+00:01:17.978 --> 00:01:19.884
+our song store, the database every
+
+38
+00:01:19.884 --> 00:01:22.099
+training song is read from, which lesson
+
+39
+00:01:22.099 --> 00:01:23.388
+two point eight opens up.
+
+40
+00:01:23.697 --> 00:01:25.809
+So guitar, drums and bass mean exactly
+
+41
+00:01:25.809 --> 00:01:28.334
+what they mean for Lakh: the note counts,
+
+42
+00:01:28.334 --> 00:01:30.498
+the length in seconds and bars, and the
+
+43
+00:01:30.498 --> 00:01:32.353
+share of the song in four-four time.
+
+44
+00:01:32.819 --> 00:01:34.836
+From those, usable: yes or no.
+
+45
+00:01:35.163 --> 00:01:37.507
+The last two fields are the overlap checks
+
+46
+00:01:37.507 --> 00:01:39.742
+with Lakh, which chapter four explains.
+
+47
+00:01:41.210 --> 00:01:42.654
+Here is the rule in the code.
+
+48
+00:01:42.953 --> 00:01:45.095
+At least fifty guitar notes and fifty drum
+
+49
+00:01:45.095 --> 00:01:47.287
+notes, ninety-five percent of the song in
+
+50
+00:01:47.287 --> 00:01:49.528
+four-four, eight to a thousand bars, and
+
+51
+00:01:49.528 --> 00:01:51.122
+twenty seconds to forty minutes.
+
+52
+00:01:51.421 --> 00:01:53.613
+The numbers are copied from Lakh's chain,
+
+53
+00:01:53.613 --> 00:01:55.705
+so a usable XMIDI song means exactly what
+
+54
+00:01:55.705 --> 00:01:56.950
+a usable Lakh song means.
+
+55
+00:01:57.249 --> 00:01:59.241
+Lesson two point two teaches that chain.
+
+56
+00:02:02.680 --> 00:02:04.800
+Every file opens: a hundred and eight
+
+57
+00:02:04.800 --> 00:02:06.870
+thousand and twenty-three, and no parse
+
+58
+00:02:06.870 --> 00:02:07.314
+failures.
+
+59
+00:02:07.745 --> 00:02:10.167
+The big cut is the first: a guitar part
+
+60
+00:02:10.167 --> 00:02:11.512
+and a drum part together.
+
+61
+00:02:11.835 --> 00:02:14.095
+Thirty-five thousand files have no guitar
+
+62
+00:02:14.095 --> 00:02:16.517
+note at all, and fourteen thousand no drum
+
+63
+00:02:16.517 --> 00:02:16.786
+note.
+
+64
+00:02:17.109 --> 00:02:19.423
+Asking for fifty of each leaves sixty-five
+
+65
+00:02:19.423 --> 00:02:21.092
+thousand seven hundred and two.
+
+66
+00:02:21.630 --> 00:02:24.287
+The four-four rule removes nothing: every
+
+67
+00:02:24.287 --> 00:02:26.604
+XMIDI file reads as four-four from start
+
+68
+00:02:26.604 --> 00:02:27.000
+to end.
+
+69
+00:02:27.339 --> 00:02:28.922
+The length rule removes ten.
+
+70
+00:02:29.261 --> 00:02:31.296
+That leaves sixty-five thousand six
+
+71
+00:02:31.296 --> 00:02:33.331
+hundred and ninety-two usable files.
+
+72
+00:02:33.804 --> 00:02:35.879
+That's sixty-one percent of the files.
+
+73
+00:02:36.207 --> 00:02:37.463
+Lakh kept about thirty.
+
+74
+00:02:37.791 --> 00:02:40.139
+And sixty-two thousand of the usable files
+
+75
+00:02:40.139 --> 00:02:41.286
+have a bass part too.
+
+76
+00:02:44.773 --> 00:02:46.168
+Why look for Lakh inside XMIDI?
+
+77
+00:02:46.438 --> 00:02:47.338
+First, the bridge.
+
+78
+00:02:47.608 --> 00:02:49.677
+The Lakh transformer, T one twenty-eight,
+
+79
+00:02:49.677 --> 00:02:51.522
+is scored on XMIDI's validation songs as
+
+80
+00:02:51.522 --> 00:02:52.961
+the one drummer for every genre.
+
+81
+00:02:53.231 --> 00:02:55.256
+If one of those songs was in its training,
+
+82
+00:02:55.256 --> 00:02:56.920
+it would be scored as if it were new.
+
+83
+00:02:57.190 --> 00:02:59.215
+Second, the aim is that no song is in both
+
+84
+00:02:59.215 --> 00:02:59.575
+corpora.
+
+85
+00:02:59.844 --> 00:03:01.464
+That is achieved only as far as the
+
+86
+00:03:01.464 --> 00:03:03.444
+fingerprint sees, and only against Lakh's
+
+87
+00:03:03.444 --> 00:03:04.073
+training side.
+
+88
+00:03:04.507 --> 00:03:07.293
+The first check is the md5: is this exact
+
+89
+00:03:07.293 --> 00:03:08.893
+file in Lakh's usable list?
+
+90
+00:03:09.249 --> 00:03:09.901
+Not one is.
+
+91
+00:03:10.363 --> 00:03:12.092
+The second check looks for the same tune
+
+92
+00:03:12.092 --> 00:03:13.525
+under different bytes, with the
+
+93
+00:03:13.525 --> 00:03:15.169
+fingerprint from lesson two point four.
+
+94
+00:03:15.422 --> 00:03:17.362
+In short: take the guitar's highest note
+
+95
+00:03:17.362 --> 00:03:19.259
+at each moment, turn the melody into steps
+
+96
+00:03:19.259 --> 00:03:20.903
+between notes, hash every run of six
+
+97
+00:03:20.903 --> 00:03:22.505
+steps, and keep the two hundred and
+
+98
+00:03:22.505 --> 00:03:24.191
+fifty-six smallest hashes as the song's
+
+99
+00:03:24.191 --> 00:03:24.486
+sketch.
+
+100
+00:03:24.739 --> 00:03:26.341
+Two songs are twins if their sketches
+
+101
+00:03:26.341 --> 00:03:28.112
+share at least thirty-two hashes, and a
+
+102
+00:03:28.112 --> 00:03:29.250
+Jaccard of at least a half.
+
+103
+00:03:29.701 --> 00:03:32.201
+Each XMIDI song is checked against Lakh's
+
+104
+00:03:32.201 --> 00:03:34.878
+training side only, and not its validation
+
+105
+00:03:34.878 --> 00:03:35.593
+side either.
+
+106
+00:03:35.950 --> 00:03:37.794
+Lakh's test side is never read.
+
+107
+00:03:39.350 --> 00:03:41.779
+Jaccard asks: of all the distinct hashes
+
+108
+00:03:41.779 --> 00:03:43.998
+in the two sketches, what share do they
+
+109
+00:03:43.998 --> 00:03:44.790
+have in common?
+
+110
+00:03:45.107 --> 00:03:47.536
+On the bottom, A's hashes plus B's, minus
+
+111
+00:03:47.536 --> 00:03:49.860
+the shared ones, which were counted twice.
+
+112
+00:03:50.177 --> 00:03:52.553
+One means identical; zero means nothing
+
+113
+00:03:52.553 --> 00:03:52.923
+shared.
+
+114
+00:03:53.389 --> 00:03:55.752
+Here's a real one: an angry rock file
+
+115
+00:03:55.752 --> 00:03:58.005
+whose best match in Lakh's training side
+
+116
+00:03:58.005 --> 00:04:00.423
+shares a hundred and seven hashes, out of
+
+117
+00:04:00.423 --> 00:04:02.347
+a hundred and seven in each sketch.
+
+118
+00:04:02.677 --> 00:04:05.315
+Jaccard one: the same set of six-step runs
+
+119
+00:04:05.315 --> 00:04:06.249
+in both sketches.
+
+120
+00:04:06.681 --> 00:04:08.987
+In the code: the training song sharing the
+
+121
+00:04:08.987 --> 00:04:10.957
+most hashes is the best match, Jaccard
+
+122
+00:04:10.957 --> 00:04:12.782
+over the two sketches, and the rule.
+
+123
+00:04:14.209 --> 00:04:14.771
+The result.
+
+124
+00:04:15.078 --> 00:04:16.969
+Twenty-two thousand five hundred and
+
+125
+00:04:16.969 --> 00:04:19.321
+thirty-four usable files, a third, have a
+
+126
+00:04:19.321 --> 00:04:20.804
+twin in Lakh's training side.
+
+127
+00:04:21.110 --> 00:04:23.411
+The rest, forty-three thousand one hundred
+
+128
+00:04:23.411 --> 00:04:26.018
+and fifty-eight, are clean: usable, not a
+
+129
+00:04:26.018 --> 00:04:28.012
+Lakh file, and no Lakh training twin.
+
+130
+00:04:28.449 --> 00:04:30.279
+Thirteen thousand of those twins have
+
+131
+00:04:30.279 --> 00:04:31.193
+identical sketches.
+
+132
+00:04:31.482 --> 00:04:33.696
+Rock overlaps most: forty-one percent of
+
+133
+00:04:33.696 --> 00:04:34.514
+its usable files.
+
+134
+00:04:34.803 --> 00:04:36.921
+So no file is byte for byte the same, yet
+
+135
+00:04:36.921 --> 00:04:38.269
+a third carry the same tune.
+
+136
+00:04:38.558 --> 00:04:40.531
+The XMusic paper says its authors merged
+
+137
+00:04:40.531 --> 00:04:42.264
+every file's instrument tracks into
+
+138
+00:04:42.264 --> 00:04:44.190
+seventeen types, which rewrites every
+
+139
+00:04:44.190 --> 00:04:44.816
+file's bytes.
+
+140
+00:04:45.104 --> 00:04:47.271
+That may explain it; nobody has checked.
+
+141
+00:04:47.819 --> 00:04:50.075
+And the fingerprint only sees the guitar's
+
+142
+00:04:50.075 --> 00:04:52.435
+top line, so an unmeasured number of twins
+
+143
+00:04:52.435 --> 00:04:54.534
+it can't see are still in the clean set.
+
+144
+00:04:58.057 --> 00:04:58.812
+One more step.
+
+145
+00:04:59.136 --> 00:05:01.347
+Forty-three thousand clean files are not
+
+146
+00:05:01.347 --> 00:05:02.804
+forty-three thousand songs.
+
+147
+00:05:03.128 --> 00:05:05.286
+They are forty thousand six hundred and
+
+148
+00:05:05.286 --> 00:05:05.933
+ninety-four.
+
+149
+00:05:06.388 --> 00:05:08.746
+Two thousand one hundred and sixty-five of
+
+150
+00:05:08.746 --> 00:05:11.104
+them are stored more than once, byte for
+
+151
+00:05:11.104 --> 00:05:12.749
+byte, under different names.
+
+152
+00:05:13.079 --> 00:05:15.546
+Either XMIDI's de-duplication missed them,
+
+153
+00:05:15.546 --> 00:05:17.959
+or the track merge, described after it,
+
+154
+00:05:17.959 --> 00:05:20.208
+made different files identical; not
+
+155
+00:05:20.208 --> 00:05:20.647
+checked.
+
+156
+00:05:20.976 --> 00:05:23.389
+Mostly pairs; one file under ten names.
+
+157
+00:05:23.718 --> 00:05:25.966
+One md5 is one song, because the store
+
+158
+00:05:25.966 --> 00:05:26.569
+keys on it.
+
+159
+00:05:26.898 --> 00:05:29.366
+And some copies disagree: a hundred and
+
+160
+00:05:29.366 --> 00:05:31.450
+forty on the genre, six hundred and
+
+161
+00:05:31.450 --> 00:05:32.986
+seventy-four on the emotion.
+
+162
+00:05:33.315 --> 00:05:35.508
+Such a song stays in, but in no genre
+
+163
+00:05:35.508 --> 00:05:36.989
+list, or no emotion list.
+
+164
+00:05:38.422 --> 00:05:39.069
+Then the build.
+
+165
+00:05:39.328 --> 00:05:41.313
+The count's rows become the usable list:
+
+166
+00:05:41.313 --> 00:05:42.866
+one row per song, with its labels.
+
+167
+00:05:43.125 --> 00:05:44.679
+The clean files are packed into one
+
+168
+00:05:44.679 --> 00:05:46.664
+archive, each renamed by its md5, because
+
+169
+00:05:46.664 --> 00:05:48.433
+that is what the store's extractor looks
+
+170
+00:05:48.433 --> 00:05:48.605
+for.
+
+171
+00:05:48.864 --> 00:05:50.892
+And the extractor writes the store: forty
+
+172
+00:05:50.892 --> 00:05:52.489
+thousand six hundred and ninety-four
+
+173
+00:05:52.489 --> 00:05:54.474
+songs, not one parse failure, thirty-nine
+
+174
+00:05:54.474 --> 00:05:56.329
+thousand with a bass part, in four and a
+
+175
+00:05:56.329 --> 00:05:56.933
+third minutes.
+
+176
+00:05:57.311 --> 00:05:59.537
+Lakh's store took seven and three-quarter
+
+177
+00:05:59.537 --> 00:06:01.180
+minutes for fifty-two thousand.
+
+178
+00:06:01.498 --> 00:06:03.671
+The cache the loader reads from, which
+
+179
+00:06:03.671 --> 00:06:05.844
+lesson two point eight explains, drops
+
+180
+00:06:05.844 --> 00:06:06.533
+none of them.
+
+181
+00:06:08.124 --> 00:06:09.790
+Here are the forty thousand songs by
+
+182
+00:06:09.790 --> 00:06:10.060
+genre.
+
+183
+00:06:10.331 --> 00:06:12.222
+Country is the biggest, twelve thousand
+
+184
+00:06:12.222 --> 00:06:14.429
+six hundred; then pop, rock at nine and a
+
+185
+00:06:14.429 --> 00:06:16.320
+half thousand, and jazz at six thousand.
+
+186
+00:06:16.590 --> 00:06:18.347
+Classical and traditional are small,
+
+187
+00:06:18.347 --> 00:06:19.743
+because few of them have drums.
+
+188
+00:06:20.013 --> 00:06:21.724
+By emotion, exciting leads with ten
+
+189
+00:06:21.724 --> 00:06:23.661
+thousand; magnificent has under three
+
+190
+00:06:23.661 --> 00:06:24.021
+hundred.
+
+191
+00:06:24.291 --> 00:06:26.273
+Every song has one genre and one emotion,
+
+192
+00:06:26.273 --> 00:06:27.534
+unless its copies disagreed.
+
+193
+00:06:31.160 --> 00:06:32.644
+Back to our angry rock file.
+
+194
+00:06:32.962 --> 00:06:35.029
+Seventy-nine point six three bars, a
+
+195
+00:06:35.029 --> 00:06:36.407
+hundred and sixty seconds.
+
+196
+00:06:36.726 --> 00:06:39.482
+Four beats a bar, per second, times sixty:
+
+197
+00:06:39.482 --> 00:06:41.602
+a hundred and nineteen beats per minute.
+
+198
+00:06:42.055 --> 00:06:44.364
+When we checked a thousand XMIDI files,
+
+199
+00:06:44.364 --> 00:06:46.782
+each had been re-encoded the same way:
+
+200
+00:06:46.782 --> 00:06:49.200
+four hundred and eighty ticks a beat, one
+
+201
+00:06:49.200 --> 00:06:51.619
+time signature, one tempo event, and at
+
+202
+00:06:51.619 --> 00:06:53.817
+least eight in ten of them at a hundred
+
+203
+00:06:53.817 --> 00:06:54.532
+and nineteen.
+
+204
+00:06:54.861 --> 00:06:57.225
+Across the whole store, every song has a
+
+205
+00:06:57.225 --> 00:06:59.093
+single tempo from start to finish.
+
+206
+00:06:59.423 --> 00:07:01.402
+Thirty-six thousand six hundred and
+
+207
+00:07:01.402 --> 00:07:03.435
+eighty-one songs, ninety point one
+
+208
+00:07:03.435 --> 00:07:05.689
+percent, are at a hundred and nineteen.
+
+209
+00:07:06.019 --> 00:07:08.327
+The rest each carry one other fixed tempo.
+
+210
+00:07:08.657 --> 00:07:10.416
+The songs' real tempos are lost.
+
+211
+00:07:11.839 --> 00:07:14.536
+On one tempo axis: Lakh's songs keep their
+
+212
+00:07:14.536 --> 00:07:17.232
+real tempo maps; the middle eighty percent
+
+213
+00:07:17.232 --> 00:07:19.592
+of its windows run from eighty-three to a
+
+214
+00:07:19.592 --> 00:07:21.839
+hundred and sixty-four beats per minute.
+
+215
+00:07:22.176 --> 00:07:24.367
+XMIDI is one spike, at a hundred and
+
+216
+00:07:24.367 --> 00:07:24.872
+nineteen.
+
+217
+00:07:26.163 --> 00:07:28.316
+The model hears the tempo as its fifth
+
+218
+00:07:28.316 --> 00:07:29.199
+input, x four.
+
+219
+00:07:29.530 --> 00:07:31.738
+It's the tempo divided by a hundred and
+
+220
+00:07:31.738 --> 00:07:32.842
+twenty, minus one.
+
+221
+00:07:33.343 --> 00:07:34.104
+Why that shape?
+
+222
+00:07:34.409 --> 00:07:36.440
+It's zero at a hundred and twenty and a
+
+223
+00:07:36.440 --> 00:07:38.471
+half either side at sixty and a hundred
+
+224
+00:07:38.471 --> 00:07:40.705
+and eighty, so it stays small, like the
+
+225
+00:07:40.705 --> 00:07:41.366
+other inputs.
+
+226
+00:07:41.670 --> 00:07:43.854
+On Lakh it ranges from about minus a third
+
+227
+00:07:43.854 --> 00:07:44.666
+to plus a third.
+
+228
+00:07:44.971 --> 00:07:47.053
+On XMIDI, nine songs in ten read minus
+
+229
+00:07:47.053 --> 00:07:49.084
+zero point zero zero eight: almost
+
+230
+00:07:49.084 --> 00:07:50.658
+nothing, and always the same.
+
+231
+00:07:51.113 --> 00:07:52.330
+So what does that mean?
+
+232
+00:07:52.648 --> 00:07:54.871
+A model can't learn what an input does if
+
+233
+00:07:54.871 --> 00:07:56.141
+the input never changes.
+
+234
+00:07:56.458 --> 00:07:58.575
+The genre drummers haven't learned what
+
+235
+00:07:58.575 --> 00:07:59.157
+tempo does.
+
+236
+00:07:59.475 --> 00:08:01.856
+Live, the laptop tells them the tempo, a
+
+237
+00:08:01.856 --> 00:08:04.132
+hundred by default, minus zero point one
+
+238
+00:08:04.132 --> 00:08:04.449
+seven.
+
+239
+00:08:04.767 --> 00:08:06.989
+Only one XMIDI window in eighty is within
+
+240
+00:08:06.989 --> 00:08:08.577
+five beats per minute of that.
+
+241
+00:08:08.894 --> 00:08:10.905
+On Sena's replays, setting the Rock
+
+242
+00:08:10.905 --> 00:08:12.969
+drummer's tempo input to a hundred and
+
+243
+00:08:12.969 --> 00:08:15.086
+nineteen changed nothing, so it isn't
+
+244
+00:08:15.086 --> 00:08:15.827
+steering them.
+
+245
+00:08:16.144 --> 00:08:18.685
+For the report: say plainly that the tempo
+
+246
+00:08:18.685 --> 00:08:20.378
+input is near-constant on XMIDI.
+
+247
+00:08:20.696 --> 00:08:22.918
+The grid itself is counted in beats, so
+
+248
+00:08:22.918 --> 00:08:25.247
+it's untouched; lesson two point three
+
+249
+00:08:25.247 --> 00:08:25.776
+shows why.
+
+250
+00:08:29.257 --> 00:08:31.244
+Last, the feel, measured over every song
+
+251
+00:08:31.244 --> 00:08:31.906
+in both stores.
+
+252
+00:08:32.171 --> 00:08:34.069
+At the median, XMIDI's drums sit tighter
+
+253
+00:08:34.069 --> 00:08:36.056
+on the sixteenth grid: an offset of two
+
+254
+00:08:36.056 --> 00:08:38.043
+thousandths of a sixteenth, against eleven
+
+255
+00:08:38.043 --> 00:08:38.971
+thousandths for Lakh.
+
+256
+00:08:39.236 --> 00:08:41.090
+But the loosest tenth of XMIDI songs is a
+
+257
+00:08:41.090 --> 00:08:42.238
+little looser than Lakh's.
+
+258
+00:08:42.503 --> 00:08:44.313
+Thirty-seven percent of XMIDI songs land
+
+259
+00:08:44.313 --> 00:08:45.991
+every drum hit exactly on the grid,
+
+260
+00:08:45.991 --> 00:08:46.874
+against twenty-four.
+
+261
+00:08:47.139 --> 00:08:49.038
+Lesson two point three covers the grid and
+
+262
+00:08:49.038 --> 00:08:49.612
+micro-timing.
+
+263
+00:08:50.065 --> 00:08:52.517
+Velocity, how hard each note is hit, is
+
+264
+00:08:52.517 --> 00:08:55.191
+not flat: a median of twenty-two different
+
+265
+00:08:55.191 --> 00:08:57.196
+drum velocities per song, against
+
+266
+00:08:57.196 --> 00:08:59.703
+twenty-seven, and about one song in eleven
+
+267
+00:08:59.703 --> 00:09:02.043
+with two or fewer, against one in eight
+
+268
+00:09:02.043 --> 00:09:02.544
+for Lakh.
+
+269
+00:09:02.879 --> 00:09:05.274
+The guitar's velocity varies in eighty-six
+
+270
+00:09:05.274 --> 00:09:06.221
+percent of songs.
+
+271
+00:09:06.665 --> 00:09:09.316
+The verdict, as the check wrote it: usable
+
+272
+00:09:09.316 --> 00:09:11.702
+for a slot model of hits, not for tempo or
+
+273
+00:09:11.702 --> 00:09:11.967
+feel.
+
+274
+00:09:13.525 --> 00:09:15.388
+So from a hundred and eight thousand
+
+275
+00:09:15.388 --> 00:09:17.803
+files: forty-three thousand clean files,
+
+276
+00:09:17.803 --> 00:09:19.968
+forty thousand six hundred and ninety-four
+
+277
+00:09:19.968 --> 00:09:21.679
+songs, each with a single tempo.
+
+278
+00:09:21.981 --> 00:09:24.145
+None is a Lakh file, and none has a Lakh
+
+279
+00:09:24.145 --> 00:09:26.058
+training twin the fingerprint can see.
+
+280
+00:09:26.360 --> 00:09:28.876
+Next: how they're split, when there are no
+
+281
+00:09:28.876 --> 00:09:29.933
+song IDs to split by.
+

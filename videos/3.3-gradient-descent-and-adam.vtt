@@ -1,0 +1,1082 @@
+WEBVTT
+
+1
+00:00:00.040 --> 00:00:01.369
+Lesson three point three.
+
+2
+00:00:01.688 --> 00:00:04.081
+How the model uses its loss to get better,
+
+3
+00:00:04.081 --> 00:00:05.091
+one step at a time.
+
+4
+00:00:09.073 --> 00:00:10.730
+Lesson three point one built a weighted
+
+5
+00:00:10.730 --> 00:00:11.103
+sum, z.
+
+6
+00:00:11.352 --> 00:00:13.009
+Lesson three point two turned it into a
+
+7
+00:00:13.009 --> 00:00:14.790
+probability with the sigmoid, and scored
+
+8
+00:00:14.790 --> 00:00:16.489
+it with binary cross-entropy, the loss.
+
+9
+00:00:16.738 --> 00:00:18.809
+Here's a made-up case: one input, x equals
+
+10
+00:00:18.809 --> 00:00:20.798
+two, one weight, w equals a half, and the
+
+11
+00:00:20.798 --> 00:00:22.123
+answer is a hit, y equals one.
+
+12
+00:00:22.372 --> 00:00:24.402
+z is one, and sigma, the sigmoid, makes it
+
+13
+00:00:24.402 --> 00:00:26.266
+zero point seven three one, so the loss,
+
+14
+00:00:26.266 --> 00:00:28.130
+minus the log of that, is zero point three
+
+15
+00:00:28.130 --> 00:00:28.545
+one three.
+
+16
+00:00:28.935 --> 00:00:31.304
+Slide the weight and the loss changes:
+
+17
+00:00:31.304 --> 00:00:33.565
+this curve is the loss for every value of
+
+18
+00:00:33.565 --> 00:00:33.673
+w.
+
+19
+00:00:33.996 --> 00:00:34.912
+We sit at a half.
+
+20
+00:00:35.399 --> 00:00:37.368
+The line touching the curve there has a
+
+21
+00:00:37.368 --> 00:00:39.732
+slope of minus zero point five four: nudge
+
+22
+00:00:39.732 --> 00:00:41.799
+w up a little, and the loss drops about
+
+23
+00:00:41.799 --> 00:00:42.440
+half as much.
+
+24
+00:00:42.735 --> 00:00:44.163
+That slope is the derivative.
+
+25
+00:00:44.458 --> 00:00:46.920
+Its sign says which way is downhill: here,
+
+26
+00:00:46.920 --> 00:00:47.462
+a bigger w.
+
+27
+00:00:47.757 --> 00:00:48.939
+Its size says how steep.
+
+28
+00:00:49.234 --> 00:00:51.155
+Far to the right, where the model is
+
+29
+00:00:51.155 --> 00:00:53.173
+already sure, the curve is nearly flat.
+
+30
+00:00:54.270 --> 00:00:55.951
+Now the same slope by hand.
+
+31
+00:00:56.324 --> 00:00:59.001
+The curly d means a slope for one quantity
+
+32
+00:00:59.001 --> 00:01:00.994
+with everything else held still.
+
+33
+00:01:01.367 --> 00:01:04.169
+L depends on z only through p, so multiply
+
+34
+00:01:04.169 --> 00:01:07.157
+two slopes: L against p, and p against z.
+
+35
+00:01:07.530 --> 00:01:10.270
+For y equals one the loss is minus log p,
+
+36
+00:01:10.270 --> 00:01:12.262
+whose slope is minus one over p.
+
+37
+00:01:12.635 --> 00:01:15.188
+The sigmoid's slope is p times one minus
+
+38
+00:01:15.188 --> 00:01:15.312
+p.
+
+39
+00:01:15.686 --> 00:01:18.487
+Multiply, the p cancels, and what's left
+
+40
+00:01:18.487 --> 00:01:20.791
+is p minus one, which is p minus y.
+
+41
+00:01:21.164 --> 00:01:24.090
+With y equals zero the same steps give p:
+
+42
+00:01:24.090 --> 00:01:25.086
+p minus y again.
+
+43
+00:01:25.752 --> 00:01:27.658
+z is w times x, so one more link
+
+44
+00:01:27.658 --> 00:01:29.945
+multiplies by x: the error times the
+
+45
+00:01:29.945 --> 00:01:30.271
+input.
+
+46
+00:01:30.598 --> 00:01:32.776
+Zero point seven three one minus one,
+
+47
+00:01:32.776 --> 00:01:35.172
+times two: minus zero point five three
+
+48
+00:01:35.172 --> 00:01:37.568
+eight, the slope of the line on the curve.
+
+49
+00:01:37.895 --> 00:01:40.127
+So a confident right answer barely moves
+
+50
+00:01:40.127 --> 00:01:42.469
+the weight, and an input of zero doesn't
+
+51
+00:01:42.469 --> 00:01:43.285
+move it at all.
+
+52
+00:01:43.769 --> 00:01:46.002
+The gradient points uphill, so step the
+
+53
+00:01:46.002 --> 00:01:48.342
+other way: w minus eta times the slope.
+
+54
+00:01:48.661 --> 00:01:49.991
+Eta is the learning rate.
+
+55
+00:01:50.310 --> 00:01:52.703
+With eta at zero point one, w goes to zero
+
+56
+00:01:52.703 --> 00:01:54.989
+point five five four, and the loss falls
+
+57
+00:01:54.989 --> 00:01:56.532
+to zero point two eight five.
+
+58
+00:01:56.851 --> 00:01:59.403
+That's gradient descent: find the slope,
+
+59
+00:01:59.403 --> 00:02:00.680
+step downhill, repeat.
+
+60
+00:02:04.123 --> 00:02:06.453
+A real model has a slope for every weight,
+
+61
+00:02:06.453 --> 00:02:08.731
+and the list of them all is the gradient,
+
+62
+00:02:08.731 --> 00:02:10.750
+written nabla L, with an upside-down
+
+63
+00:02:10.750 --> 00:02:11.216
+triangle.
+
+64
+00:02:11.526 --> 00:02:13.597
+Our transformer drummer has two hundred
+
+65
+00:02:13.597 --> 00:02:15.771
+and twenty-six thousand eight hundred and
+
+66
+00:02:15.771 --> 00:02:17.790
+fifty-seven parameters, so that many
+
+67
+00:02:17.790 --> 00:02:18.153
+slopes.
+
+68
+00:02:18.556 --> 00:02:20.563
+The forward pass runs left to right:
+
+69
+00:02:20.563 --> 00:02:22.809
+guitar features in, through the layers, to
+
+70
+00:02:22.809 --> 00:02:24.100
+nine logits, to the loss.
+
+71
+00:02:24.387 --> 00:02:25.486
+The gradient runs back.
+
+72
+00:02:25.773 --> 00:02:27.828
+The loss hands each logit its p minus y,
+
+73
+00:02:27.828 --> 00:02:29.739
+and each layer going back multiplies in
+
+74
+00:02:29.739 --> 00:02:31.986
+its own slope: the chain rule, one link
+
+75
+00:02:31.986 --> 00:02:33.706
+per layer, just as we did by hand.
+
+76
+00:02:33.993 --> 00:02:35.857
+Doing that from the loss back to every
+
+77
+00:02:35.857 --> 00:02:37.099
+weight is backpropagation.
+
+78
+00:02:37.531 --> 00:02:40.224
+In our training loss, every real slot and
+
+79
+00:02:40.224 --> 00:02:42.673
+every drum hands its logit p minus y,
+
+80
+00:02:42.673 --> 00:02:44.264
+averaged over all of them.
+
+81
+00:02:45.826 --> 00:02:47.602
+Here's the training step in our code.
+
+82
+00:02:47.890 --> 00:02:49.426
+Clear the last step's gradients.
+
+83
+00:02:49.714 --> 00:02:50.819
+Then loss dot backward.
+
+84
+00:02:51.107 --> 00:02:53.027
+PyTorch recorded every operation of the
+
+85
+00:02:53.027 --> 00:02:55.139
+forward pass, and backward runs the chain
+
+86
+00:02:55.139 --> 00:02:57.203
+rule back through that record: that's
+
+87
+00:02:57.203 --> 00:02:57.635
+autograd.
+
+88
+00:02:57.923 --> 00:03:00.180
+The next line caps the gradient's length:
+
+89
+00:03:00.180 --> 00:03:00.852
+chapter seven.
+
+90
+00:03:01.140 --> 00:03:03.204
+And opt dot step changes the weights:
+
+91
+00:03:03.204 --> 00:03:03.828
+chapter five.
+
+92
+00:03:07.333 --> 00:03:08.457
+How big should eta be?
+
+93
+00:03:08.764 --> 00:03:10.910
+Take a made-up loss shaped like a bowl,
+
+94
+00:03:10.910 --> 00:03:13.107
+lowest at one and a half, and three runs
+
+95
+00:03:13.107 --> 00:03:14.487
+that start at minus a half.
+
+96
+00:03:14.949 --> 00:03:17.154
+Too small, and eight steps barely move it.
+
+97
+00:03:17.454 --> 00:03:19.609
+About right, and it's near the bottom in
+
+98
+00:03:19.609 --> 00:03:19.909
+three.
+
+99
+00:03:20.210 --> 00:03:22.214
+Too big, and each step jumps past the
+
+100
+00:03:22.214 --> 00:03:24.569
+bottom, higher than before: it diverges.
+
+101
+00:03:25.103 --> 00:03:27.446
+Ours is zero point zero zero one, the
+
+102
+00:03:27.446 --> 00:03:29.906
+trainer's default, in every run on file.
+
+103
+00:03:30.258 --> 00:03:33.011
+With Adam, in chapter five, that's roughly
+
+104
+00:03:33.011 --> 00:03:35.061
+how far each weight moves per step.
+
+105
+00:03:38.557 --> 00:03:40.375
+Lesson two point eight put the songs in
+
+106
+00:03:40.375 --> 00:03:42.103
+batches of thirty-two and walked each
+
+107
+00:03:42.103 --> 00:03:43.921
+batch forward in chunks of five hundred
+
+108
+00:03:43.921 --> 00:03:44.694
+and twelve slots.
+
+109
+00:03:44.967 --> 00:03:46.831
+Each block here is one chunk: up to
+
+110
+00:03:46.831 --> 00:03:48.422
+sixteen thousand three hundred and
+
+111
+00:03:48.422 --> 00:03:49.241
+eighty-four slots.
+
+112
+00:03:49.513 --> 00:03:51.423
+Average the loss over a chunk, take one
+
+113
+00:03:51.423 --> 00:03:53.651
+gradient, change the weights once: that's
+
+114
+00:03:53.651 --> 00:03:54.060
+one step.
+
+115
+00:03:54.333 --> 00:03:56.151
+One pass over every training song is an
+
+116
+00:03:56.151 --> 00:03:56.424
+epoch.
+
+117
+00:03:56.925 --> 00:03:59.111
+T one twenty-eight trained on fourteen
+
+118
+00:03:59.111 --> 00:04:01.579
+thousand two hundred and fifty-six songs,
+
+119
+00:04:01.579 --> 00:04:03.990
+and a batch of songs took about four point
+
+120
+00:04:03.990 --> 00:04:06.345
+seven chunks, so four point seven steps.
+
+121
+00:04:06.681 --> 00:04:08.868
+So an epoch was about two thousand one
+
+122
+00:04:08.868 --> 00:04:11.223
+hundred steps, shifting a little as the
+
+123
+00:04:11.223 --> 00:04:12.737
+shuffle regroups the songs.
+
+124
+00:04:13.073 --> 00:04:15.316
+Twelve epochs made twenty-five thousand
+
+125
+00:04:15.316 --> 00:04:17.279
+three hundred and fifty-nine steps.
+
+126
+00:04:17.615 --> 00:04:20.138
+Rock took a thousand and sixteen an epoch,
+
+127
+00:04:20.138 --> 00:04:21.820
+and Country ran twenty epochs.
+
+128
+00:04:22.157 --> 00:04:24.456
+Each step's gradient is an estimate from
+
+129
+00:04:24.456 --> 00:04:26.418
+one chunk: noisy, but cheap.
+
+130
+00:04:29.933 --> 00:04:31.432
+Plain descent's step grows with the
+
+131
+00:04:31.432 --> 00:04:33.139
+gradient, so some weights leap, some
+
+132
+00:04:33.139 --> 00:04:34.804
+crawl, and one noisy step can shove a
+
+133
+00:04:34.804 --> 00:04:35.678
+weight the wrong way.
+
+134
+00:04:35.928 --> 00:04:37.718
+Adam, our optimiser, keeps two running
+
+135
+00:04:37.718 --> 00:04:38.800
+averages for every weight.
+
+136
+00:04:39.050 --> 00:04:41.173
+The first, m, is momentum: nine tenths of
+
+137
+00:04:41.173 --> 00:04:43.088
+the old m, a number called beta one, plus
+
+138
+00:04:43.088 --> 00:04:44.878
+a tenth of the new gradient, roughly the
+
+139
+00:04:44.878 --> 00:04:46.627
+last ten steps, which smooths the noise.
+
+140
+00:04:46.876 --> 00:04:48.708
+For the toy's first step, m is a tenth of
+
+141
+00:04:48.708 --> 00:04:50.124
+minus zero point five three eight.
+
+142
+00:04:50.499 --> 00:04:53.252
+The second, v, keeps beta two, zero point
+
+143
+00:04:53.252 --> 00:04:55.775
+nine nine nine, of its old value, so it
+
+144
+00:04:55.775 --> 00:04:58.242
+averages the squared gradient over roughly
+
+145
+00:04:58.242 --> 00:05:00.765
+the last thousand steps: this weight's
+
+146
+00:05:00.765 --> 00:05:01.913
+usual gradient size.
+
+147
+00:05:02.257 --> 00:05:04.838
+Here, a thousandth of zero point two eight
+
+148
+00:05:04.838 --> 00:05:05.125
+nine.
+
+149
+00:05:05.615 --> 00:05:07.881
+Both start at zero, so early on they're
+
+150
+00:05:07.881 --> 00:05:10.254
+too small, and dividing by one minus beta
+
+151
+00:05:10.254 --> 00:05:12.735
+one, or beta two, to the power t corrects
+
+152
+00:05:12.735 --> 00:05:13.004
+that.
+
+153
+00:05:13.328 --> 00:05:15.647
+At step one it gives back the gradient and
+
+154
+00:05:15.647 --> 00:05:16.241
+its square.
+
+155
+00:05:16.564 --> 00:05:18.776
+By the end of T one twenty-eight's first
+
+156
+00:05:18.776 --> 00:05:21.041
+epoch the second divisor had reached zero
+
+157
+00:05:21.041 --> 00:05:22.012
+point eight eight.
+
+158
+00:05:22.457 --> 00:05:24.234
+The step divides the momentum by the
+
+159
+00:05:24.234 --> 00:05:26.347
+square root of the scale; epsilon only
+
+160
+00:05:26.347 --> 00:05:27.596
+prevents a divide by zero.
+
+161
+00:05:27.884 --> 00:05:29.997
+For the toy that ratio is minus one, so w
+
+162
+00:05:29.997 --> 00:05:32.062
+moves by exactly eta, to zero point five
+
+163
+00:05:32.062 --> 00:05:33.935
+zero one, just as PyTorch's own Adam
+
+164
+00:05:33.935 --> 00:05:34.223
+gives.
+
+165
+00:05:34.511 --> 00:05:36.192
+So each weight's step is about eta
+
+166
+00:05:36.192 --> 00:05:38.161
+whatever the size of its gradient, and
+
+167
+00:05:38.161 --> 00:05:40.130
+shorter when its gradients keep flipping
+
+168
+00:05:40.130 --> 00:05:40.370
+sign.
+
+169
+00:05:40.658 --> 00:05:42.387
+Our betas and epsilon are PyTorch's
+
+170
+00:05:42.387 --> 00:05:42.819
+defaults.
+
+171
+00:05:44.315 --> 00:05:46.455
+Set a weight decay and the trainer uses
+
+172
+00:05:46.455 --> 00:05:48.702
+AdamW instead, which also shrinks every
+
+173
+00:05:48.702 --> 00:05:51.055
+weight a little each step, apart from the
+
+174
+00:05:51.055 --> 00:05:51.537
+gradient.
+
+175
+00:05:51.858 --> 00:05:54.158
+Apart from two tests in round two, every
+
+176
+00:05:54.158 --> 00:05:56.084
+run had it at zero: plain Adam.
+
+177
+00:05:56.405 --> 00:05:58.599
+Those two tests put a small decay on the
+
+178
+00:05:58.599 --> 00:06:00.846
+LSTM, and the build log says it changed
+
+179
+00:06:00.846 --> 00:06:01.274
+nothing.
+
+180
+00:06:04.797 --> 00:06:06.813
+Before every step the trainer sets the
+
+181
+00:06:06.813 --> 00:06:08.519
+learning rate from this function.
+
+182
+00:06:08.830 --> 00:06:10.950
+With a warm-up of S steps it climbs in a
+
+183
+00:06:10.950 --> 00:06:13.276
+straight line to the full rate, then stays
+
+184
+00:06:13.276 --> 00:06:13.586
+there.
+
+185
+00:06:14.015 --> 00:06:16.200
+With three hundred steps, step zero runs
+
+186
+00:06:16.200 --> 00:06:18.487
+at a three-hundredth of the rate, step one
+
+187
+00:06:18.487 --> 00:06:20.519
+forty-nine at half, and from step two
+
+188
+00:06:20.519 --> 00:06:22.145
+ninety-nine on, the full rate.
+
+189
+00:06:22.450 --> 00:06:24.889
+The usual reason: the weights start random
+
+190
+00:06:24.889 --> 00:06:26.972
+and Adam's averages have seen only a few
+
+191
+00:06:26.972 --> 00:06:29.056
+gradients, so the first steps are kept
+
+192
+00:06:29.056 --> 00:06:29.360
+small.
+
+193
+00:06:30.792 --> 00:06:32.743
+The architecture run used three hundred
+
+194
+00:06:32.743 --> 00:06:35.134
+steps, T one twenty-eight included: about
+
+195
+00:06:35.134 --> 00:06:36.500
+one percent of its training.
+
+196
+00:06:36.793 --> 00:06:38.793
+The genre drummers and the bass runs had
+
+197
+00:06:38.793 --> 00:06:39.037
+none.
+
+198
+00:06:39.329 --> 00:06:41.525
+Their plan asked for the same warm-up, but
+
+199
+00:06:41.525 --> 00:06:43.574
+the night's launch settings left the flag
+
+200
+00:06:43.574 --> 00:06:43.769
+out.
+
+201
+00:06:44.062 --> 00:06:45.720
+Whether that mattered hasn't been
+
+202
+00:06:45.720 --> 00:06:47.769
+measured; it's a line for the report.
+
+203
+00:06:51.240 --> 00:06:52.473
+Now the line we skipped.
+
+204
+00:06:52.781 --> 00:06:54.733
+Picture two weights whose gradient is
+
+205
+00:06:54.733 --> 00:06:56.274
+three and four: an arrow.
+
+206
+00:06:56.582 --> 00:06:58.740
+Its length, the gradient norm, is the
+
+207
+00:06:58.740 --> 00:07:01.000
+square root of the sum of the squares:
+
+208
+00:07:01.000 --> 00:07:01.257
+five.
+
+209
+00:07:01.565 --> 00:07:03.671
+For a real model the sum runs over every
+
+210
+00:07:03.671 --> 00:07:04.442
+weight at once.
+
+211
+00:07:04.865 --> 00:07:07.383
+Clipping caps that length: if the gradient
+
+212
+00:07:07.383 --> 00:07:09.692
+is longer than one, scale the whole arrow
+
+213
+00:07:09.692 --> 00:07:12.001
+down to length one, keeping its direction.
+
+214
+00:07:12.315 --> 00:07:14.676
+Three, four becomes zero point six, zero
+
+215
+00:07:14.676 --> 00:07:15.306
+point eight.
+
+216
+00:07:15.621 --> 00:07:17.510
+Shorter than one, it's left alone.
+
+217
+00:07:17.973 --> 00:07:20.199
+Our step clips at one and keeps the length
+
+218
+00:07:20.199 --> 00:07:22.424
+from before clipping; each epoch logs
+
+219
+00:07:22.424 --> 00:07:24.546
+their median and the share of steps over
+
+220
+00:07:24.546 --> 00:07:24.753
+one.
+
+221
+00:07:26.258 --> 00:07:28.030
+Here are the real logs from the
+
+222
+00:07:28.030 --> 00:07:30.355
+architecture run, on an axis where each
+
+223
+00:07:30.355 --> 00:07:31.850
+step is ten times the last.
+
+224
+00:07:32.183 --> 00:07:34.397
+The transformer's median fell from zero
+
+225
+00:07:34.397 --> 00:07:36.889
+point one to zero point zero four, and the
+
+226
+00:07:36.889 --> 00:07:38.772
+LSTM with the same reach as S one
+
+227
+00:07:38.772 --> 00:07:41.263
+twenty-eight, L one twenty-eight, stayed
+
+228
+00:07:41.263 --> 00:07:43.423
+between about zero point one three and
+
+229
+00:07:43.423 --> 00:07:45.914
+zero point one five: far below the clip.
+
+230
+00:07:46.247 --> 00:07:48.738
+The S four D model's grew instead: zero
+
+231
+00:07:48.738 --> 00:07:51.064
+point two nine in the first epoch, then
+
+232
+00:07:51.064 --> 00:07:53.445
+between two and a half and two point seven
+
+233
+00:07:53.445 --> 00:07:55.106
+from epoch four to epoch nine.
+
+234
+00:07:55.587 --> 00:07:57.970
+L one twenty-eight had one step clipped in
+
+235
+00:07:57.970 --> 00:08:00.187
+twelve epochs, and T one twenty-eight
+
+236
+00:08:00.187 --> 00:08:02.570
+none, while S one twenty-eight had three
+
+237
+00:08:02.570 --> 00:08:04.510
+percent of its first epoch's steps
+
+238
+00:08:04.510 --> 00:08:06.727
+clipped, and seventy-seven percent by
+
+239
+00:08:06.727 --> 00:08:07.337
+epoch nine.
+
+240
+00:08:07.669 --> 00:08:10.053
+S thirty-two reached sixty-four percent in
+
+241
+00:08:10.053 --> 00:08:10.884
+its last epoch.
+
+242
+00:08:12.362 --> 00:08:14.625
+So in the architecture run one setting,
+
+243
+00:08:14.625 --> 00:08:17.051
+the same for every arm, only ever bit on S
+
+244
+00:08:17.051 --> 00:08:19.637
+four D: the arms did not train under quite
+
+245
+00:08:19.637 --> 00:08:20.392
+the same rule.
+
+246
+00:08:20.715 --> 00:08:23.033
+The logged norms are how we know; the
+
+247
+00:08:23.033 --> 00:08:24.919
+trainer's docstring calls them the
+
+248
+00:08:24.919 --> 00:08:26.751
+evidence the fairness claim needs.
+
+249
+00:08:27.075 --> 00:08:28.799
+It also calls clipping a hidden
+
+250
+00:08:28.799 --> 00:08:29.769
+learning-rate cut.
+
+251
+00:08:30.093 --> 00:08:32.518
+Under Adam that's too simple, because Adam
+
+252
+00:08:32.518 --> 00:08:34.781
+already divides each step by the weight's
+
+253
+00:08:34.781 --> 00:08:37.206
+usual gradient size; the real effect is
+
+254
+00:08:37.206 --> 00:08:39.093
+subtler, and still to be checked.
+
+255
+00:08:39.416 --> 00:08:41.572
+How much it changed S four D's training
+
+256
+00:08:41.572 --> 00:08:43.943
+hasn't been measured: a caveat for the
+
+257
+00:08:43.943 --> 00:08:45.129
+report, not a cause.
+
+258
+00:08:46.672 --> 00:08:48.687
+So: the gradient is the slope of the loss
+
+259
+00:08:48.687 --> 00:08:50.403
+for every weight, and each step moves
+
+260
+00:08:50.403 --> 00:08:50.874
+against it.
+
+261
+00:08:51.132 --> 00:08:53.019
+Adam gives each weight its own step size,
+
+262
+00:08:53.019 --> 00:08:53.919
+and warm-up eases in.
+
+263
+00:08:54.176 --> 00:08:56.020
+Clipping caps the gradient's length, and
+
+264
+00:08:56.020 --> 00:08:57.779
+in the architecture run the log shows it
+
+265
+00:08:57.779 --> 00:08:58.679
+bit only on S four D.
+
+266
+00:08:58.936 --> 00:09:00.780
+This pairs with the training recipe in the
+
+267
+00:09:00.780 --> 00:09:01.509
+course explainer.
+
+268
+00:09:01.767 --> 00:09:03.868
+Next, lesson three point four: training a
+
+269
+00:09:03.868 --> 00:09:05.540
+model that carries its state through a
+
+270
+00:09:05.540 --> 00:09:05.755
+song.
+
