@@ -82,15 +82,16 @@ h1 {
 .start .m { font-size: 13px; color: var(--ink-muted); }
 
 /* the featured playlist (topic 0): the first thing a visitor sees */
-.feat { padding: 44px 0 0; }
+.feat { margin-top: 40px; padding: 28px 24px 24px; border: 1px solid var(--lead); border-radius: 18px;
+  background: color-mix(in srgb, var(--lead) 7%, transparent); }
 .feat-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 6px; }
-.feat h2 { font: 600 clamp(26px, 3.8vw, 34px)/1.12 var(--font-display); letter-spacing: var(--track-display); margin: 0; }
+.feat h2 { font: 600 clamp(30px, 4.6vw, 42px)/1.1 var(--font-display); letter-spacing: var(--track-display); margin: 0; }
 .feat-meta { font-size: 13px; color: var(--ink-muted); }
 .feat-lede { font-size: 15px; color: var(--ink-muted); max-width: 70ch; margin: 0 0 18px; }
 .feat .grid { grid-template-columns: 1fr; }
 @media (min-width: 560px) { .feat .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 900px) { .feat .grid { grid-template-columns: repeat(5, 1fr); } }
-.card.feat-card { padding: 0 0 14px; }
+.card.feat-card { padding: 0 0 14px; border-color: color-mix(in srgb, var(--lead) 45%, transparent); }
 .card.feat-card .poster { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #201d18; border-bottom: 1px solid var(--line); }
 .card.feat-card .card-top, .card.feat-card h4, .card.feat-card p { padding: 0 14px; }
 .card.feat-card .card-top { padding-top: 10px; }
@@ -207,8 +208,7 @@ footer { margin: 72px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--lin
   <nav class="start" id="start" aria-label="Start here"></nav>
   <section class="feat" id="featured"></section>
   <div class="study-head" id="study-head"><h2>The study lessons</h2>
-    <p>Longer narrated lessons made for the team while writing the report: the data, how the models learn, the
-      three architectures, and the battery of tests. Every number comes from the project's own code and runs.</p></div>
+    <p>You can learn about every part of the generative system with the explainer videos below!</p></div>
   <div id="topics"></div>
   <footer>Animated with ManimGX and narrated with Kokoro text to speech. Every number on screen comes from the
     project's own code and runs. Subtitles are under CC in the player.</footer>
@@ -290,8 +290,7 @@ footer { margin: 72px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--lin
     const secs = SEQ.reduce((a, l) => a + l.seconds, 0);
     const built = TOPICS.filter(t => t.lessons.length).length;
     $("stats").innerHTML = [
-      [SEQ.length, "lessons"], [(secs / 3600).toFixed(1), "hours"], [built, "topics so far"],
-      [SEQ.filter(l => prog[l.id]?.done).length, "watched"],
+      [SEQ.length, "lessons"], [(secs / 3600).toFixed(1), "hours"], [built, "topics"],
     ].map(([b, s]) => `<li><b>${b}</b><span>${s}</span></li>`).join("");
 
     const last = store.get("last", null);
