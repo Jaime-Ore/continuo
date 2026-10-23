@@ -97,6 +97,16 @@ h1 {
 .card.feat-card .card-top { padding-top: 10px; }
 .card.feat-card .play { position: absolute; left: 10px; top: 10px; width: 34px; height: 34px; border-radius: 50%; background: rgba(32, 29, 24, .8); border: 1px solid rgba(179, 173, 160, .4); }
 .card.feat-card .play::after { content: ""; position: absolute; left: 13px; top: 10px; border-style: solid; border-width: 7px 0 7px 11px; border-color: transparent transparent transparent #f2efe8; }
+/* the demos: Sena playing with the system, inline players */
+.demos { padding: 44px 0 0; }
+.demos h2 { font: 600 clamp(26px, 3.8vw, 34px)/1.12 var(--font-display); letter-spacing: var(--track-display); margin: 0 0 6px; }
+.demos .feat-lede { margin-bottom: 18px; }
+.demos .grid { grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 760px) { .demos .grid { grid-template-columns: repeat(2, 1fr); } }
+.card.demo { padding: 0 0 14px; }
+.demo video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #201d18; border-bottom: 1px solid var(--line); }
+.demo .card-top, .demo h4, .demo p { padding: 0 14px; }
+.demo .card-top { padding-top: 10px; }
 .study-head { margin: 64px 0 0; padding-top: 28px; border-top: 2px solid var(--line); }
 .study-head h2 { font: 600 clamp(22px, 3vw, 28px)/1.15 var(--font-display); margin: 0 0 6px; }
 .study-head p { font-size: 15px; color: var(--ink-muted); max-width: 70ch; margin: 0; }
@@ -207,6 +217,33 @@ footer { margin: 72px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--lin
   </section>
   <nav class="start" id="start" aria-label="Start here"></nav>
   <section class="feat" id="featured"></section>
+  <section class="demos" id="demos">
+    <h2>Demos</h2>
+    <p class="feat-lede">Sena plays four songs and Continuo plays drums and bass along with him, live, in the lab on 23 October 2026. In three of them the live screen, recorded at the same moment, sits beside him: the notes the FPGA hears on each string, and the drums and bass the models play.</p>
+    <div class="grid">
+      <div class="card demo">
+        <video controls playsinline preload="none" poster="videos/demos/acdc.jpg" src="videos/demos/acdc.mp4"></video>
+        <div class="card-top"><span class="card-id">AC/DC</span><span>3:10</span></div>
+        <h4>Highway to Hell</h4><p>Phone video beside the live screen</p></div>
+      <div class="card demo">
+        <video controls playsinline preload="none" poster="videos/demos/arctic-monkeys.jpg" src="videos/demos/arctic-monkeys.mp4"></video>
+        <div class="card-top"><span class="card-id">Arctic Monkeys</span><span>4:09</span></div>
+        <h4>Do I Wanna Know?</h4><p>Phone video beside the live screen</p></div>
+      <div class="card demo">
+        <video controls playsinline preload="none" poster="videos/demos/bill-withers.jpg" src="videos/demos/bill-withers.mp4"></video>
+        <div class="card-top"><span class="card-id">Bill Withers</span><span>3:38</span></div>
+        <h4>Ain't No Sunshine</h4><p>Phone video beside the live screen</p></div>
+      <div class="card demo">
+        <video controls playsinline preload="none" poster="videos/demos/nirvana.jpg" src="videos/demos/nirvana.mp4"></video>
+        <div class="card-top"><span class="card-id">Nirvana</span><span>3:43</span></div>
+        <h4>About a Girl</h4><p>Phone video (the screen was not recording yet)</p></div>
+    </div>
+    <script>
+      // one demo plays at a time
+      document.querySelectorAll(".demo video").forEach(v => v.addEventListener("play", () =>
+        document.querySelectorAll(".demo video").forEach(o => { if (o !== v) o.pause(); })));
+    </script>
+  </section>
   <div class="study-head" id="study-head"><h2>The study lessons</h2>
     <p>You can learn about every part of the generative system with the explainer videos below!</p></div>
   <div id="topics"></div>
